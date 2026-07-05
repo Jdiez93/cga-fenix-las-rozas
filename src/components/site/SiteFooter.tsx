@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+// Using plain anchors for routes not yet created
 import {
   Phone,
   Mail,
@@ -51,7 +51,7 @@ export function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Col 1 — Brand */}
           <div>
-            <Link to="/" className="inline-flex items-center gap-3 group">
+            <a href="/" className="inline-flex items-center gap-3 group">
               <div className="rounded-full bg-white p-1 shrink-0">
                 <img
                   src={logoAsset.url}
@@ -65,7 +65,7 @@ export function SiteFooter() {
                   Las Rozas
                 </div>
               </div>
-            </Link>
+            </a>
             <p className="mt-5 text-sm leading-relaxed text-carbon-foreground/70">
               Club deportivo de gimnasia artística en Las Rozas de Madrid. Formamos gimnastas
               con pasión, disciplina y espíritu de superación desde la base hasta la
@@ -95,13 +95,13 @@ export function SiteFooter() {
             <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-y-2.5">
               {QUICK_LINKS.map((l) => (
                 <li key={l.to}>
-                  <Link
-                    to={l.to}
+                  <a
+                    href={l.to}
                     className="group inline-flex items-center gap-2 text-sm text-carbon-foreground/70 hover:text-primary transition-colors"
                   >
                     <span className="h-px w-3 bg-primary/60 group-hover:w-5 transition-all" />
                     {l.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -172,9 +172,9 @@ export function SiteFooter() {
             © {year} <span className="font-semibold text-carbon-foreground/80">CGA Fénix Las Rozas</span>. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-5">
-            <Link to="/aviso-legal" className="hover:text-primary transition-colors">
+            <a href="/aviso-legal" className="hover:text-primary transition-colors">
               Aviso Legal
-            </Link>
+            </a>
             <button
               onClick={scrollTop}
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 hover:bg-gradient-fire hover:text-primary-foreground hover:border-transparent transition-all"

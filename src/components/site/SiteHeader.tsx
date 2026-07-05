@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+// Using plain anchors for routes not yet created
 import { Menu, X, Phone, Mail, ChevronDown, Facebook, Instagram, Twitter } from "lucide-react";
 import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
 import { cn } from "@/lib/utils";
@@ -110,7 +110,7 @@ export function SiteHeader() {
             )}
           >
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group min-w-0">
+            <a href="/" className="flex items-center gap-3 group min-w-0">
               <img
                 src={logoAsset.url}
                 alt="CGA Fénix Las Rozas"
@@ -127,7 +127,7 @@ export function SiteHeader() {
                   Las Rozas · Gimnasia Artística
                 </span>
               </div>
-            </Link>
+            </a>
 
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center justify-center gap-1">
@@ -139,12 +139,12 @@ export function SiteHeader() {
                   onMouseLeave={() => setOpenMenu(null)}
                 >
                   {item.to ? (
-                    <Link
-                      to={item.to}
+                    <a
+                      href={item.to}
                       className="px-3 py-2 text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-primary transition-colors"
                     >
                       {item.label}
-                    </Link>
+                    </a>
                   ) : (
                     <button
                       className="inline-flex items-center gap-1 px-3 py-2 text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-primary transition-colors"
@@ -173,13 +173,13 @@ export function SiteHeader() {
                         <div className="h-1 bg-gradient-fire" />
                         <div className="py-2">
                           {item.children.map((c) => (
-                            <Link
+                            <a
                               key={c.to}
-                              to={c.to}
+                              href={c.to}
                               className="block px-4 py-2.5 text-sm text-popover-foreground/85 hover:bg-accent hover:text-primary transition-colors"
                             >
                               {c.label}
-                            </Link>
+                            </a>
                           ))}
                         </div>
                       </div>
@@ -191,12 +191,12 @@ export function SiteHeader() {
 
             {/* CTA + mobile toggle */}
             <div className="flex items-center gap-2 justify-end">
-              <Link
-                to="/preinscripcion"
+              <a
+                href="/preinscripcion"
                 className="hidden sm:inline-flex items-center rounded-full px-5 py-2.5 text-sm font-bold uppercase tracking-wide bg-gradient-fire text-primary-foreground shadow-[var(--shadow-elegant)] hover:scale-[1.03] active:scale-[0.98] transition-transform"
               >
                 Preinscripción
-              </Link>
+              </a>
               <button
                 type="button"
                 aria-label="Abrir menú"
@@ -245,13 +245,13 @@ export function SiteHeader() {
               ))}
             </nav>
 
-            <Link
-              to="/preinscripcion"
+            <a
+              href="/preinscripcion"
               onClick={() => setMobileOpen(false)}
               className="mt-8 flex items-center justify-center rounded-full py-3.5 text-sm font-bold uppercase tracking-wider bg-gradient-fire text-primary-foreground shadow-[var(--shadow-elegant)]"
             >
               Preinscripción
-            </Link>
+            </a>
 
             <div className="mt-8 pt-6 border-t border-border space-y-3 text-sm text-muted-foreground">
               <a href="tel:+34000000000" className="flex items-center gap-2">
@@ -319,27 +319,27 @@ function MobileNavItem({
             <div className="overflow-hidden">
               <div className="pb-3 pl-3 flex flex-col gap-1 border-l-2 border-primary/40">
                 {item.children.map((c) => (
-                  <Link
+                  <a
                     key={c.to}
-                    to={c.to}
+                    href={c.to}
                     onClick={onNavigate}
                     className="py-2 pl-3 text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     {c.label}
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
           </div>
         </>
       ) : (
-        <Link
-          to={item.to!}
+        <a
+          href={item.to!}
           onClick={onNavigate}
           className="block py-3 text-base font-bold uppercase tracking-wide hover:text-primary transition-colors"
         >
           {item.label}
-        </Link>
+        </a>
       )}
     </div>
   );
