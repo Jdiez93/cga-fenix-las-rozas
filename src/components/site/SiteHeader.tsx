@@ -116,7 +116,7 @@ export function SiteHeader() {
                 alt="CGA Fénix Las Rozas"
                 className={cn(
                   "shrink-0 transition-all duration-300 object-contain",
-                  scrolled ? "h-10 w-10" : "h-12 w-12"
+                  scrolled ? "h-12 w-12" : "h-16 w-16"
                 )}
               />
               <div className="hidden sm:flex flex-col leading-tight min-w-0">
