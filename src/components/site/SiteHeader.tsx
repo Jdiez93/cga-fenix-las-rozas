@@ -102,11 +102,11 @@ export function SiteHeader() {
             : "bg-background border-b border-transparent"
         )}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div
             className={cn(
-              "grid grid-cols-[auto_1fr_auto] items-center gap-4 transition-all duration-300",
-              scrolled ? "h-16" : "h-20"
+              "grid grid-cols-[auto_1fr_auto] items-center gap-6 transition-all duration-300",
+              scrolled ? "h-20" : "h-28"
             )}
           >
             {/* Logo */}
