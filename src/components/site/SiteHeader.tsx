@@ -65,11 +65,11 @@ export function SiteHeader() {
         <div className="mx-auto max-w-7xl px-6 py-2 flex items-center justify-between">
           <div className="flex items-center gap-5">
             <a
-              href="tel:+34000000000"
+              href="tel:+34679980626"
               className="inline-flex items-center gap-1.5 hover:text-primary transition-colors"
             >
               <Phone className="h-3.5 w-3.5" />
-              <span>+34 000 000 000</span>
+              <span>679 98 06 26</span>
             </a>
             <a
               href="mailto:info@cgafenixlasrozas.es"
