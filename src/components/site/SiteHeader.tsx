@@ -65,11 +65,11 @@ export function SiteHeader() {
         <div className="mx-auto max-w-7xl px-6 py-2 flex items-center justify-between">
           <div className="flex items-center gap-5">
             <a
-              href="tel:+34000000000"
+              href="tel:+34679980626"
               className="inline-flex items-center gap-1.5 hover:text-primary transition-colors"
             >
               <Phone className="h-3.5 w-3.5" />
-              <span>+34 000 000 000</span>
+              <span>679 98 06 26</span>
             </a>
             <a
               href="mailto:info@cgafenixlasrozas.es"
@@ -102,11 +102,11 @@ export function SiteHeader() {
             : "bg-background border-b border-transparent"
         )}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div
             className={cn(
-              "grid grid-cols-[auto_1fr_auto] items-center gap-4 transition-all duration-300",
-              scrolled ? "h-16" : "h-20"
+              "grid grid-cols-[auto_1fr_auto] items-center gap-6 transition-all duration-300",
+              scrolled ? "h-20" : "h-28"
             )}
           >
             {/* Logo */}
@@ -116,7 +116,7 @@ export function SiteHeader() {
                 alt="CGA Fénix Las Rozas"
                 className={cn(
                   "shrink-0 transition-all duration-300 object-contain",
-                  scrolled ? "h-10 w-10" : "h-12 w-12"
+                  scrolled ? "h-12 w-12" : "h-16 w-16"
                 )}
               />
               <div className="hidden sm:flex flex-col leading-tight min-w-0">
@@ -130,7 +130,7 @@ export function SiteHeader() {
             </a>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center justify-center gap-1">
+            <nav className="hidden lg:flex items-center justify-center gap-2 xl:gap-4">
               {NAV.map((item) => (
                 <div
                   key={item.label}
@@ -141,13 +141,13 @@ export function SiteHeader() {
                   {item.to ? (
                     <a
                       href={item.to}
-                      className="px-3 py-2 text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-primary transition-colors"
+                      className="px-3 py-3 text-[13px] font-bold uppercase tracking-[0.08em] text-foreground/85 hover:text-primary transition-colors"
                     >
                       {item.label}
                     </a>
                   ) : (
                     <button
-                      className="inline-flex items-center gap-1 px-3 py-2 text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-primary transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-3 text-[13px] font-bold uppercase tracking-[0.08em] text-foreground/85 hover:text-primary transition-colors"
                       aria-expanded={openMenu === item.label}
                     >
                       {item.label}
@@ -190,10 +190,22 @@ export function SiteHeader() {
             </nav>
 
             {/* CTA + mobile toggle */}
-            <div className="flex items-center gap-2 justify-end">
+            <div className="flex items-center gap-3 sm:gap-4 justify-end">
+              <a
+                href="tel:+34679980626"
+                className="hidden xl:inline-flex items-center gap-2 text-sm font-bold text-foreground hover:text-primary transition-colors"
+              >
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground">
+                  <Phone className="h-4 w-4" />
+                </span>
+                <span className="leading-tight flex flex-col">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Llámanos</span>
+                  <span>679 98 06 26</span>
+                </span>
+              </a>
               <a
                 href="/preinscripcion"
-                className="hidden sm:inline-flex items-center rounded-full px-5 py-2.5 text-sm font-bold uppercase tracking-wide bg-gradient-fire text-primary-foreground shadow-[var(--shadow-elegant)] hover:scale-[1.03] active:scale-[0.98] transition-transform"
+                className="hidden sm:inline-flex items-center rounded-full px-6 py-3 text-[13px] font-black uppercase tracking-[0.1em] bg-primary text-primary-foreground shadow-[var(--shadow-elegant)] hover:scale-[1.03] active:scale-[0.98] transition-transform"
               >
                 Preinscripción
               </a>
@@ -248,14 +260,14 @@ export function SiteHeader() {
             <a
               href="/preinscripcion"
               onClick={() => setMobileOpen(false)}
-              className="mt-8 flex items-center justify-center rounded-full py-3.5 text-sm font-bold uppercase tracking-wider bg-gradient-fire text-primary-foreground shadow-[var(--shadow-elegant)]"
+              className="mt-8 flex items-center justify-center rounded-full py-3.5 text-sm font-black uppercase tracking-[0.1em] bg-primary text-primary-foreground shadow-[var(--shadow-elegant)]"
             >
               Preinscripción
             </a>
 
             <div className="mt-8 pt-6 border-t border-border space-y-3 text-sm text-muted-foreground">
-              <a href="tel:+34000000000" className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-primary" /> +34 000 000 000
+              <a href="tel:+34679980626" className="flex items-center gap-2">
+                <Phone className="h-4 w-4 text-primary" /> 679 98 06 26
               </a>
               <a href="mailto:info@cgafenixlasrozas.es" className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-primary" /> info@cgafenixlasrozas.es
