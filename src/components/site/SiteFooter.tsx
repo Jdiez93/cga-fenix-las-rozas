@@ -40,7 +40,7 @@ export function SiteFooter() {
       />
 
       <div className="relative mx-auto max-w-7xl px-6 pt-16 pb-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
           {/* Col 1 — Brand */}
           <div>
             <a href="/" className="inline-flex items-center gap-3 group">
@@ -48,22 +48,22 @@ export function SiteFooter() {
                 <img
                   src={logoAsset.url}
                   alt="CGA Fénix Las Rozas"
-                  className="h-12 w-12 rounded-full object-contain"
+                  className="h-14 w-14 rounded-full object-contain"
                 />
               </div>
               <div className="leading-tight">
-                <div className="font-black uppercase tracking-tight">CGA Fénix</div>
+                <div className="font-black uppercase tracking-tight text-lg">CGA Fénix</div>
                 <div className="text-[11px] uppercase tracking-[0.18em] text-carbon-foreground/60">
                   Las Rozas
                 </div>
               </div>
             </a>
-            <p className="mt-5 text-sm leading-relaxed text-carbon-foreground/70">
+            <p className="mt-6 text-sm leading-relaxed text-carbon-foreground/70 max-w-sm">
               Club deportivo de gimnasia artística en Las Rozas de Madrid. Formamos gimnastas
               con pasión, disciplina y espíritu de superación desde la base hasta la
               competición.
             </p>
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-7 flex items-center gap-3">
               {[
                 { Icon: Instagram, label: "Instagram" },
                 { Icon: Facebook, label: "Facebook" },
@@ -73,7 +73,7 @@ export function SiteFooter() {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-carbon-foreground/80 hover:bg-gradient-fire hover:text-primary-foreground hover:border-transparent hover:scale-105 transition-all"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-carbon-foreground/80 hover:bg-primary hover:text-primary-foreground hover:border-transparent hover:scale-105 transition-all"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -84,7 +84,7 @@ export function SiteFooter() {
           {/* Col 2 — Quick links */}
           <div>
             <FooterHeading>Enlaces rápidos</FooterHeading>
-            <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-y-2.5">
+            <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-y-2.5">
               {QUICK_LINKS.map((l) => (
                 <li key={l.to}>
                   <a
@@ -123,11 +123,11 @@ export function SiteFooter() {
               </li>
               <li>
                 <a
-                  href="tel:+34000000000"
+                  href="tel:+34679980626"
                   className="flex items-center gap-3 text-carbon-foreground/75 hover:text-primary transition-colors"
                 >
                   <Phone className="h-4 w-4 text-primary shrink-0" />
-                  +34 000 000 000
+                  679 98 06 26
                 </a>
               </li>
               <li>
@@ -141,22 +141,8 @@ export function SiteFooter() {
               </li>
             </ul>
           </div>
-
-          {/* Col 4 — Social + sponsors */}
-          <div>
-            <FooterHeading>Nuestros patrocinadores</FooterHeading>
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              {SPONSORS.map((s) => (
-                <div
-                  key={s}
-                  className="grid h-16 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-[11px] font-semibold uppercase tracking-wider text-carbon-foreground/60 hover:bg-white/[0.08] hover:text-carbon-foreground transition-colors"
-                >
-                  {s}
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
+
 
         {/* Bottom bar */}
         <div className="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-carbon-foreground/60">
