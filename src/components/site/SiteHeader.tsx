@@ -260,14 +260,14 @@ export function SiteHeader() {
             <a
               href="/preinscripcion"
               onClick={() => setMobileOpen(false)}
-              className="mt-8 flex items-center justify-center rounded-full py-3.5 text-sm font-bold uppercase tracking-wider bg-gradient-fire text-primary-foreground shadow-[var(--shadow-elegant)]"
+              className="mt-8 flex items-center justify-center rounded-full py-3.5 text-sm font-black uppercase tracking-[0.1em] bg-primary text-primary-foreground shadow-[var(--shadow-elegant)]"
             >
               Preinscripción
             </a>
 
             <div className="mt-8 pt-6 border-t border-border space-y-3 text-sm text-muted-foreground">
-              <a href="tel:+34000000000" className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-primary" /> +34 000 000 000
+              <a href="tel:+34679980626" className="flex items-center gap-2">
+                <Phone className="h-4 w-4 text-primary" /> 679 98 06 26
               </a>
               <a href="mailto:info@cgafenixlasrozas.es" className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-primary" /> info@cgafenixlasrozas.es
