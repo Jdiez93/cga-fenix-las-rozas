@@ -1,24 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <section className="mx-auto max-w-7xl px-6 py-24 sm:py-32">
+      <div className="max-w-3xl">
+        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3 py-1 text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground">
+          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+          Club de Gimnasia Artística
+        </span>
+        <h1 className="mt-6 text-4xl sm:text-6xl font-black uppercase leading-[0.95] tracking-tight">
+          CGA <span className="text-gradient-fire">Fénix</span>
+          <br />
+          Las Rozas
+        </h1>
+        <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
+          Rediseño en curso — por ahora hemos renovado el <strong>Header</strong> y el{" "}
+          <strong>Footer</strong>. Desplázate para ver el pie de página y prueba el menú
+          en mobile.
+        </p>
+      </div>
+      <div className="mt-16 h-[60vh] rounded-2xl border border-dashed border-border grid place-items-center text-muted-foreground text-sm">
+        Contenido del body / hero pendiente
+      </div>
+    </section>
   );
 }
