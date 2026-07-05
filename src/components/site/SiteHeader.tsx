@@ -130,7 +130,7 @@ export function SiteHeader() {
             </a>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center justify-center gap-1">
+            <nav className="hidden lg:flex items-center justify-center gap-2 xl:gap-4">
               {NAV.map((item) => (
                 <div
                   key={item.label}
@@ -141,13 +141,13 @@ export function SiteHeader() {
                   {item.to ? (
                     <a
                       href={item.to}
-                      className="px-3 py-2 text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-primary transition-colors"
+                      className="px-3 py-3 text-[13px] font-bold uppercase tracking-[0.08em] text-foreground/85 hover:text-primary transition-colors"
                     >
                       {item.label}
                     </a>
                   ) : (
                     <button
-                      className="inline-flex items-center gap-1 px-3 py-2 text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-primary transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-3 text-[13px] font-bold uppercase tracking-[0.08em] text-foreground/85 hover:text-primary transition-colors"
                       aria-expanded={openMenu === item.label}
                     >
                       {item.label}
