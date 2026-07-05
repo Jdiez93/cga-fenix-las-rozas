@@ -190,10 +190,22 @@ export function SiteHeader() {
             </nav>
 
             {/* CTA + mobile toggle */}
-            <div className="flex items-center gap-2 justify-end">
+            <div className="flex items-center gap-3 sm:gap-4 justify-end">
+              <a
+                href="tel:+34679980626"
+                className="hidden xl:inline-flex items-center gap-2 text-sm font-bold text-foreground hover:text-primary transition-colors"
+              >
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground">
+                  <Phone className="h-4 w-4" />
+                </span>
+                <span className="leading-tight flex flex-col">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Llámanos</span>
+                  <span>679 98 06 26</span>
+                </span>
+              </a>
               <a
                 href="/preinscripcion"
-                className="hidden sm:inline-flex items-center rounded-full px-5 py-2.5 text-sm font-bold uppercase tracking-wide bg-gradient-fire text-primary-foreground shadow-[var(--shadow-elegant)] hover:scale-[1.03] active:scale-[0.98] transition-transform"
+                className="hidden sm:inline-flex items-center rounded-full px-6 py-3 text-[13px] font-black uppercase tracking-[0.1em] bg-primary text-primary-foreground shadow-[var(--shadow-elegant)] hover:scale-[1.03] active:scale-[0.98] transition-transform"
               >
                 Preinscripción
               </a>
