@@ -22,14 +22,6 @@ const QUICK_LINKS = [
   { label: "Contacta", to: "/contacto" },
 ];
 
-const SPONSORS = [
-  "Las Rozas",
-  "Entremontes",
-  "Ayto.",
-  "Federación",
-  "Sponsor 5",
-  "Sponsor 6",
-];
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
