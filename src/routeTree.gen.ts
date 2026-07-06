@@ -9,38 +9,208 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PreinscripcionRouteImport } from './routes/preinscripcion'
+import { Route as MediosRouteImport } from './routes/medios'
+import { Route as EquiposRouteImport } from './routes/equipos'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as AvisoLegalRouteImport } from './routes/aviso-legal'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as QuienesSomosEquipoTecnicoRouteImport } from './routes/quienes-somos.equipo-tecnico'
+import { Route as GaleriaVideosRouteImport } from './routes/galeria.videos'
+import { Route as GaleriaFotosRouteImport } from './routes/galeria.fotos'
+import { Route as ConocenosLogrosRouteImport } from './routes/conocenos.logros'
+import { Route as ConocenosHistoriaRouteImport } from './routes/conocenos.historia'
 
+const PreinscripcionRoute = PreinscripcionRouteImport.update({
+  id: '/preinscripcion',
+  path: '/preinscripcion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MediosRoute = MediosRouteImport.update({
+  id: '/medios',
+  path: '/medios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquiposRoute = EquiposRouteImport.update({
+  id: '/equipos',
+  path: '/equipos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AvisoLegalRoute = AvisoLegalRouteImport.update({
+  id: '/aviso-legal',
+  path: '/aviso-legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuienesSomosEquipoTecnicoRoute =
+  QuienesSomosEquipoTecnicoRouteImport.update({
+    id: '/quienes-somos/equipo-tecnico',
+    path: '/quienes-somos/equipo-tecnico',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GaleriaVideosRoute = GaleriaVideosRouteImport.update({
+  id: '/galeria/videos',
+  path: '/galeria/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GaleriaFotosRoute = GaleriaFotosRouteImport.update({
+  id: '/galeria/fotos',
+  path: '/galeria/fotos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConocenosLogrosRoute = ConocenosLogrosRouteImport.update({
+  id: '/conocenos/logros',
+  path: '/conocenos/logros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConocenosHistoriaRoute = ConocenosHistoriaRouteImport.update({
+  id: '/conocenos/historia',
+  path: '/conocenos/historia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aviso-legal': typeof AvisoLegalRoute
+  '/contacto': typeof ContactoRoute
+  '/equipos': typeof EquiposRoute
+  '/medios': typeof MediosRoute
+  '/preinscripcion': typeof PreinscripcionRoute
+  '/conocenos/historia': typeof ConocenosHistoriaRoute
+  '/conocenos/logros': typeof ConocenosLogrosRoute
+  '/galeria/fotos': typeof GaleriaFotosRoute
+  '/galeria/videos': typeof GaleriaVideosRoute
+  '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aviso-legal': typeof AvisoLegalRoute
+  '/contacto': typeof ContactoRoute
+  '/equipos': typeof EquiposRoute
+  '/medios': typeof MediosRoute
+  '/preinscripcion': typeof PreinscripcionRoute
+  '/conocenos/historia': typeof ConocenosHistoriaRoute
+  '/conocenos/logros': typeof ConocenosLogrosRoute
+  '/galeria/fotos': typeof GaleriaFotosRoute
+  '/galeria/videos': typeof GaleriaVideosRoute
+  '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aviso-legal': typeof AvisoLegalRoute
+  '/contacto': typeof ContactoRoute
+  '/equipos': typeof EquiposRoute
+  '/medios': typeof MediosRoute
+  '/preinscripcion': typeof PreinscripcionRoute
+  '/conocenos/historia': typeof ConocenosHistoriaRoute
+  '/conocenos/logros': typeof ConocenosLogrosRoute
+  '/galeria/fotos': typeof GaleriaFotosRoute
+  '/galeria/videos': typeof GaleriaVideosRoute
+  '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/aviso-legal'
+    | '/contacto'
+    | '/equipos'
+    | '/medios'
+    | '/preinscripcion'
+    | '/conocenos/historia'
+    | '/conocenos/logros'
+    | '/galeria/fotos'
+    | '/galeria/videos'
+    | '/quienes-somos/equipo-tecnico'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/aviso-legal'
+    | '/contacto'
+    | '/equipos'
+    | '/medios'
+    | '/preinscripcion'
+    | '/conocenos/historia'
+    | '/conocenos/logros'
+    | '/galeria/fotos'
+    | '/galeria/videos'
+    | '/quienes-somos/equipo-tecnico'
+  id:
+    | '__root__'
+    | '/'
+    | '/aviso-legal'
+    | '/contacto'
+    | '/equipos'
+    | '/medios'
+    | '/preinscripcion'
+    | '/conocenos/historia'
+    | '/conocenos/logros'
+    | '/galeria/fotos'
+    | '/galeria/videos'
+    | '/quienes-somos/equipo-tecnico'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AvisoLegalRoute: typeof AvisoLegalRoute
+  ContactoRoute: typeof ContactoRoute
+  EquiposRoute: typeof EquiposRoute
+  MediosRoute: typeof MediosRoute
+  PreinscripcionRoute: typeof PreinscripcionRoute
+  ConocenosHistoriaRoute: typeof ConocenosHistoriaRoute
+  ConocenosLogrosRoute: typeof ConocenosLogrosRoute
+  GaleriaFotosRoute: typeof GaleriaFotosRoute
+  GaleriaVideosRoute: typeof GaleriaVideosRoute
+  QuienesSomosEquipoTecnicoRoute: typeof QuienesSomosEquipoTecnicoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/preinscripcion': {
+      id: '/preinscripcion'
+      path: '/preinscripcion'
+      fullPath: '/preinscripcion'
+      preLoaderRoute: typeof PreinscripcionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/medios': {
+      id: '/medios'
+      path: '/medios'
+      fullPath: '/medios'
+      preLoaderRoute: typeof MediosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipos': {
+      id: '/equipos'
+      path: '/equipos'
+      fullPath: '/equipos'
+      preLoaderRoute: typeof EquiposRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aviso-legal': {
+      id: '/aviso-legal'
+      path: '/aviso-legal'
+      fullPath: '/aviso-legal'
+      preLoaderRoute: typeof AvisoLegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +218,56 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quienes-somos/equipo-tecnico': {
+      id: '/quienes-somos/equipo-tecnico'
+      path: '/quienes-somos/equipo-tecnico'
+      fullPath: '/quienes-somos/equipo-tecnico'
+      preLoaderRoute: typeof QuienesSomosEquipoTecnicoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galeria/videos': {
+      id: '/galeria/videos'
+      path: '/galeria/videos'
+      fullPath: '/galeria/videos'
+      preLoaderRoute: typeof GaleriaVideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galeria/fotos': {
+      id: '/galeria/fotos'
+      path: '/galeria/fotos'
+      fullPath: '/galeria/fotos'
+      preLoaderRoute: typeof GaleriaFotosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conocenos/logros': {
+      id: '/conocenos/logros'
+      path: '/conocenos/logros'
+      fullPath: '/conocenos/logros'
+      preLoaderRoute: typeof ConocenosLogrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conocenos/historia': {
+      id: '/conocenos/historia'
+      path: '/conocenos/historia'
+      fullPath: '/conocenos/historia'
+      preLoaderRoute: typeof ConocenosHistoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AvisoLegalRoute: AvisoLegalRoute,
+  ContactoRoute: ContactoRoute,
+  EquiposRoute: EquiposRoute,
+  MediosRoute: MediosRoute,
+  PreinscripcionRoute: PreinscripcionRoute,
+  ConocenosHistoriaRoute: ConocenosHistoriaRoute,
+  ConocenosLogrosRoute: ConocenosLogrosRoute,
+  GaleriaFotosRoute: GaleriaFotosRoute,
+  GaleriaVideosRoute: GaleriaVideosRoute,
+  QuienesSomosEquipoTecnicoRoute: QuienesSomosEquipoTecnicoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

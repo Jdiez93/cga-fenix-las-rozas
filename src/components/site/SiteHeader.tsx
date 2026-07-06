@@ -102,11 +102,11 @@ export function SiteHeader() {
             : "bg-background border-b border-transparent"
         )}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div
             className={cn(
-              "grid grid-cols-[auto_1fr_auto] items-center gap-6 transition-all duration-300",
-              scrolled ? "h-20" : "h-28"
+              "grid grid-cols-[auto_1fr_auto] items-center gap-4 transition-all duration-300",
+              scrolled ? "h-[72px]" : "h-[88px]"
             )}
           >
             {/* Logo */}
@@ -115,22 +115,22 @@ export function SiteHeader() {
                 src={logoAsset.url}
                 alt="CGA Fénix Las Rozas"
                 className={cn(
-                  "shrink-0 transition-all duration-300 object-contain",
-                  scrolled ? "h-12 w-12" : "h-16 w-16"
+                  "shrink-0 transition-all duration-300 object-contain rounded-full",
+                  scrolled ? "h-11 w-11" : "h-14 w-14"
                 )}
               />
-              <div className="hidden sm:flex flex-col leading-tight min-w-0">
-                <span className="font-black text-sm sm:text-base tracking-tight uppercase truncate">
+              <div className="hidden sm:flex flex-col leading-none min-w-0">
+                <span className="font-black text-lg xl:text-xl tracking-tight uppercase truncate">
                   CGA Fénix
                 </span>
-                <span className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-[0.15em] truncate">
-                  Las Rozas · Gimnasia Artística
+                <span className="mt-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.22em] truncate">
+                  Las Rozas
                 </span>
               </div>
             </a>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center justify-center gap-2 xl:gap-4">
+            <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1">
               {NAV.map((item) => (
                 <div
                   key={item.label}
@@ -141,19 +141,19 @@ export function SiteHeader() {
                   {item.to ? (
                     <a
                       href={item.to}
-                      className="px-3 py-3 text-[13px] font-bold uppercase tracking-[0.08em] text-foreground/85 hover:text-primary transition-colors"
+                      className="whitespace-nowrap px-2.5 xl:px-3 py-2 text-[11.5px] xl:text-[12.5px] font-bold uppercase tracking-[0.06em] text-foreground/85 hover:text-primary transition-colors"
                     >
                       {item.label}
                     </a>
                   ) : (
                     <button
-                      className="inline-flex items-center gap-1.5 px-3 py-3 text-[13px] font-bold uppercase tracking-[0.08em] text-foreground/85 hover:text-primary transition-colors"
+                      className="inline-flex items-center gap-1 whitespace-nowrap px-2.5 xl:px-3 py-2 text-[11.5px] xl:text-[12.5px] font-bold uppercase tracking-[0.06em] text-foreground/85 hover:text-primary transition-colors"
                       aria-expanded={openMenu === item.label}
                     >
                       {item.label}
                       <ChevronDown
                         className={cn(
-                          "h-3.5 w-3.5 transition-transform duration-200",
+                          "h-3 w-3 transition-transform duration-200",
                           openMenu === item.label && "rotate-180"
                         )}
                       />
@@ -190,22 +190,20 @@ export function SiteHeader() {
             </nav>
 
             {/* CTA + mobile toggle */}
-            <div className="flex items-center gap-3 sm:gap-4 justify-end">
+            <div className="flex items-center gap-2 sm:gap-3 justify-end">
               <a
                 href="tel:+34679980626"
-                className="hidden xl:inline-flex items-center gap-2 text-sm font-bold text-foreground hover:text-primary transition-colors"
+                aria-label="Llámanos al 679 98 06 26"
+                className="hidden md:inline-flex lg:hidden xl:inline-flex items-center gap-2 text-[12px] font-bold text-foreground hover:text-primary transition-colors"
               >
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground">
-                  <Phone className="h-4 w-4" />
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-primary text-primary-foreground">
+                  <Phone className="h-3.5 w-3.5" />
                 </span>
-                <span className="leading-tight flex flex-col">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Llámanos</span>
-                  <span>679 98 06 26</span>
-                </span>
+                <span className="hidden xl:inline whitespace-nowrap">679 98 06 26</span>
               </a>
               <a
                 href="/preinscripcion"
-                className="hidden sm:inline-flex items-center rounded-full px-6 py-3 text-[13px] font-black uppercase tracking-[0.1em] bg-primary text-primary-foreground shadow-[var(--shadow-elegant)] hover:scale-[1.03] active:scale-[0.98] transition-transform"
+                className="hidden sm:inline-flex items-center rounded-full px-4 xl:px-5 py-2.5 text-[11.5px] xl:text-[12px] font-black uppercase tracking-[0.08em] bg-primary text-primary-foreground shadow-[var(--shadow-elegant)] hover:scale-[1.03] active:scale-[0.98] transition-transform whitespace-nowrap"
               >
                 Preinscripción
               </a>
