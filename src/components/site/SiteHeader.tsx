@@ -106,7 +106,7 @@ export function SiteHeader() {
           <div
             className={cn(
               "grid grid-cols-[auto_1fr_auto] items-center gap-4 transition-all duration-300",
-              scrolled ? "h-18" : "h-22"
+              scrolled ? "h-[72px]" : "h-[88px]"
             )}
           >
             {/* Logo */}
