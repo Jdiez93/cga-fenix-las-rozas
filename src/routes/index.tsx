@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Sparkles, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
 import mainLogo from "@/assets/sponsors/main.png.asset.json";
 import geniosLogo from "@/assets/sponsors/genios.png.asset.json";
@@ -128,9 +128,51 @@ function Mission() {
   );
 }
 
-/* ---------------- SPONSORS MARQUEE (con logos reales) ---------------- */
+/* ---------------- SPONSORS CAROUSEL ---------------- */
 function SponsorsMarquee() {
-  const loop = [...SPONSORS, ...SPONSORS, ...SPONSORS];
+  const [perView, setPerView] = useState(1);
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Responsive items per view
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      if (w >= 1024) setPerView(3);
+      else if (w >= 640) setPerView(2);
+      else setPerView(1);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const totalPages = Math.max(1, SPONSORS.length - perView + 1);
+
+  useEffect(() => {
+    if (index > totalPages - 1) setIndex(0);
+  }, [totalPages, index]);
+
+  const next = useCallback(
+    () => setIndex((i) => (i + 1) % totalPages),
+    [totalPages]
+  );
+  const prev = useCallback(
+    () => setIndex((i) => (i - 1 + totalPages) % totalPages),
+    [totalPages]
+  );
+
+  // Autoplay
+  useEffect(() => {
+    if (paused || totalPages <= 1) return;
+    const id = window.setInterval(next, 3500);
+    return () => window.clearInterval(id);
+  }, [paused, next, totalPages]);
+
+  const slideWidth = 100 / perView;
+  const translate = -(index * slideWidth);
+
   return (
     <section className="relative border-t border-border bg-muted/40 py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 text-center">
@@ -151,54 +193,92 @@ function SponsorsMarquee() {
       </div>
 
       <div
-        className="group relative mt-14 overflow-hidden"
-        style={{
-          maskImage:
-            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
-        }}
+        className="relative mx-auto mt-14 max-w-6xl px-4 sm:px-14"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={() => setPaused(false)}
       >
-        <div className="flex w-max animate-marquee gap-6 group-hover:[animation-play-state:paused]">
-          {loop.map((s, i) => (
-            <a
-              key={`${s.name}-${i}`}
-              href={s.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/card relative flex h-36 w-64 shrink-0 flex-col items-center justify-center overflow-hidden rounded-2xl border border-border bg-card px-6 py-4 transition-all duration-500 hover:-translate-y-2 hover:border-primary hover:shadow-elegant"
-            >
-              {/* Corner glow */}
-              <div className="pointer-events-none absolute -top-10 -right-10 h-24 w-24 rounded-full bg-primary/0 blur-2xl transition-all duration-500 group-hover/card:bg-primary/40" />
+        {/* Arrows */}
+        <button
+          type="button"
+          aria-label="Anterior patrocinador"
+          onClick={prev}
+          className="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/95 p-3 text-foreground shadow-md backdrop-blur transition-all hover:scale-110 hover:border-primary hover:bg-primary hover:text-primary-foreground sm:inline-flex"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          aria-label="Siguiente patrocinador"
+          onClick={next}
+          className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/95 p-3 text-foreground shadow-md backdrop-blur transition-all hover:scale-110 hover:border-primary hover:bg-primary hover:text-primary-foreground sm:inline-flex"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
 
+        {/* Viewport */}
+        <div ref={containerRef} className="overflow-hidden">
+          <div
+            className="flex transition-transform duration-700 ease-out"
+            style={{ transform: `translateX(${translate}%)` }}
+          >
+            {SPONSORS.map((s) => (
               <div
-                className={`flex h-16 w-full items-center justify-center rounded-lg ${
-                  s.dark ? "bg-carbon px-3" : ""
-                }`}
+                key={s.name}
+                className="shrink-0 px-3"
+                style={{ width: `${slideWidth}%` }}
               >
-                <img
-                  src={s.logo}
-                  alt={s.name}
-                  className="max-h-full max-w-full object-contain grayscale opacity-80 transition-all duration-500 group-hover/card:grayscale-0 group-hover/card:opacity-100"
-                  loading="lazy"
-                />
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/card relative flex h-44 w-full flex-col items-center justify-center overflow-hidden rounded-2xl border border-border bg-card px-6 py-5 transition-all duration-500 hover:-translate-y-2 hover:border-primary hover:shadow-elegant"
+                >
+                  <div className="pointer-events-none absolute -top-10 -right-10 h-24 w-24 rounded-full bg-primary/0 blur-2xl transition-all duration-500 group-hover/card:bg-primary/40" />
+
+                  <div
+                    className={`flex h-20 w-full items-center justify-center rounded-lg ${
+                      s.dark ? "bg-carbon px-3" : ""
+                    }`}
+                  >
+                    <img
+                      src={s.logo}
+                      alt={s.name}
+                      className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover/card:scale-110"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <span className="relative mt-4 text-[10px] uppercase tracking-[0.22em] text-muted-foreground transition-colors group-hover/card:text-foreground">
+                    {s.tag}
+                  </span>
+
+                  <span className="absolute inset-x-6 bottom-3 h-[2px] origin-left scale-x-0 bg-primary transition-transform duration-500 group-hover/card:scale-x-100" />
+                </a>
               </div>
+            ))}
+          </div>
+        </div>
 
-              <span className="relative mt-3 text-[10px] uppercase tracking-[0.22em] text-muted-foreground transition-colors group-hover/card:text-foreground">
-                {s.tag}
-              </span>
-
-              {/* Bottom line reveal */}
-              <span className="absolute inset-x-6 bottom-3 h-[2px] origin-left scale-x-0 bg-primary transition-transform duration-500 group-hover/card:scale-x-100" />
-            </a>
+        {/* Dots */}
+        <div className="mt-8 flex items-center justify-center gap-2">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Ir al slide ${i + 1}`}
+              aria-current={i === index}
+              onClick={() => setIndex(i)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                i === index
+                  ? "w-8 bg-primary"
+                  : "w-2 bg-border hover:bg-muted-foreground"
+              }`}
+            />
           ))}
         </div>
       </div>
-
-      {/* Small legend / marquee hint */}
-      <p className="mt-8 text-center text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-        Pasa el ratón para pausar
-      </p>
     </section>
   );
 }
