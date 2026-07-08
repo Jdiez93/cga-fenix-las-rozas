@@ -4,8 +4,6 @@ import {
   Mail,
   MapPin,
   Clock,
-  Instagram,
-  Facebook,
   Navigation,
   ArrowRight,
 } from "lucide-react";
@@ -151,27 +149,6 @@ function ContactoPage() {
               </a>
             </div>
 
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-muted-foreground">Síguenos:</span>
-              <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="grid h-9 w-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-              >
-                <Instagram className="h-4 w-4" />
-              </a>
-              <a
-                href="https://www.facebook.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="grid h-9 w-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-              >
-                <Facebook className="h-4 w-4" />
-              </a>
-            </div>
           </div>
 
           {/* Right: map */}
