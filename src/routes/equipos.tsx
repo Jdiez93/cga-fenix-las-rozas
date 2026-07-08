@@ -324,3 +324,41 @@ function StatCard({
     </div>
   );
 }
+
+const GYMNAST_EMOJIS = ["🤸‍♀️", "🤸", "🤾‍♀️", "🧘‍♀️", "⭐", "✨", "🤸‍♂️", "💫"];
+
+function FloatingGymnasts() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-visible">
+      {GYMNAST_EMOJIS.map((emoji, i) => {
+        const total = GYMNAST_EMOJIS.length;
+        const angle = (i / total) * 360;
+        const delay = (i / total) * 6;
+        return (
+          <div
+            key={i}
+            className="absolute left-1/2 top-1/2 h-0 w-0"
+            style={{
+              transform: `rotate(${angle}deg)`,
+              animation: `orbit 14s linear infinite`,
+              animationDelay: `-${delay}s`,
+            }}
+          >
+            <span
+              className="absolute -translate-x-1/2 -translate-y-1/2 text-xl opacity-70 drop-shadow-sm md:text-2xl"
+              style={{
+                top: "calc(-50% - 14px)",
+                left: 0,
+                animation: `counter-orbit 14s linear infinite, float-bob 3s ease-in-out infinite`,
+                animationDelay: `-${delay}s, ${delay * 0.3}s`,
+              }}
+            >
+              {emoji}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
