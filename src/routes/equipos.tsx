@@ -189,19 +189,16 @@ function EquiposPage() {
 
           {/* Content panel */}
           <div className="min-w-0">
-            <div className="relative">
-              {/* Animated gradient border glow */}
+            <div className="relative overflow-hidden rounded-2xl p-[2px]">
+              {/* Animated rotating border */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute -inset-[2px] rounded-2xl opacity-60 blur-[6px] transition-opacity"
+                className="absolute inset-0"
                 style={{
-                  background: `conic-gradient(from 0deg, ${activeTeam.color}00, ${activeTeam.color}cc, ${activeTeam.color}00, ${activeTeam.color}88, ${activeTeam.color}00)`,
-                  animation: "spin-slow 8s linear infinite",
+                  background: `conic-gradient(from 0deg, ${activeTeam.color}, ${activeTeam.color}30, ${activeTeam.color})`,
+                  animation: "spin-slow 3s linear infinite",
                 }}
               />
-
-              {/* Floating gymnast emojis around the border */}
-              <FloatingGymnasts key={activeTeam.id} />
 
               <AnimatePresence mode="wait">
                 <motion.div
