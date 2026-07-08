@@ -58,7 +58,7 @@ function Mission() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-4xl px-6 py-24 text-center sm:py-32 lg:py-40">
+      <div className="relative mx-auto max-w-4xl px-6 py-20 text-center sm:py-24 lg:py-28">
         <RevealOnScroll>
           {/* Logo emblem */}
           <div className="mx-auto mb-10 flex items-center justify-center">
@@ -174,7 +174,7 @@ function SponsorsMarquee() {
   const translate = -(index * slideWidth);
 
   return (
-    <section className="relative border-t border-border bg-muted/40 py-20 sm:py-24">
+    <section className="relative border-t border-border bg-muted/40 py-10 sm:py-14">
       <div className="mx-auto max-w-7xl px-6 text-center">
         <RevealOnScroll>
           <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.3em] text-primary">
@@ -193,7 +193,7 @@ function SponsorsMarquee() {
       </div>
 
       <div
-        className="relative mx-auto mt-14 max-w-6xl px-4 sm:px-14"
+        className="relative mx-auto mt-8 max-w-6xl px-4 sm:px-14"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onFocusCapture={() => setPaused(true)}
@@ -233,7 +233,7 @@ function SponsorsMarquee() {
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/card relative flex h-44 w-full flex-col items-center justify-center overflow-hidden rounded-2xl border border-border bg-card px-6 py-5 transition-all duration-500 hover:-translate-y-2 hover:border-primary hover:shadow-elegant"
+                  className="group/card relative flex h-36 w-full flex-col items-center justify-center overflow-hidden rounded-2xl border border-border bg-card px-6 py-4 transition-all duration-500 hover:-translate-y-2 hover:border-primary hover:shadow-elegant"
                 >
                   <div className="pointer-events-none absolute -top-10 -right-10 h-24 w-24 rounded-full bg-primary/0 blur-2xl transition-all duration-500 group-hover/card:bg-primary/40" />
 
