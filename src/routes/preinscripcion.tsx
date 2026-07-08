@@ -862,14 +862,24 @@ function SuccessCard({
         <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-black uppercase tracking-[0.15em] text-primary">
           Referencia · {ref}
         </div>
-        <div className="mt-8 rounded-2xl border border-border bg-muted/40 p-5 text-left text-sm text-muted-foreground">
+        <div className="mt-8 rounded-2xl border-2 border-primary/30 bg-muted/40 p-5 text-left text-sm text-muted-foreground">
           <p className="font-bold text-foreground mb-1">Próximo paso: matrícula</p>
           <p>
             Realiza la transferencia (65 € nuevos · 30 € antiguos) indicando{" "}
             <strong className="text-foreground">Nombre + Apellidos</strong> del gimnasta a la
             cuenta:
           </p>
-          <p className="mt-2 font-mono text-foreground">ES57 0081 0357 4200 0209 9917</p>
+          <div className="mt-3 flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/10 p-3">
+            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+            <p className="text-[11px] font-black uppercase tracking-wider text-destructive">
+              Debes abonar la tasa para tener la plaza reservada
+            </p>
+          </div>
+          <div className="mt-3 rounded-lg bg-primary/10 border border-primary/20 px-3 py-2.5 text-center">
+            <p className="font-mono text-sm font-black text-foreground tracking-wide">
+              ES57 0081 0357 4200 0209 9917
+            </p>
+          </div>
         </div>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button
