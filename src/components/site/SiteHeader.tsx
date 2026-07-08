@@ -119,7 +119,7 @@ export function SiteHeader() {
                   scrolled ? "h-11 w-11" : "h-14 w-14"
                 )}
               />
-              <span className="hidden sm:inline font-black text-base lg:text-lg tracking-tight uppercase whitespace-nowrap">
+              <span className="hidden sm:inline font-black text-[11px] lg:text-xs tracking-tight uppercase whitespace-nowrap">
                 CGA Fénix Las Rozas
               </span>
             </a>
