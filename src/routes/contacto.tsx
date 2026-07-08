@@ -4,8 +4,6 @@ import {
   Mail,
   MapPin,
   Clock,
-  Instagram,
-  Facebook,
   Navigation,
   ArrowRight,
 } from "lucide-react";
