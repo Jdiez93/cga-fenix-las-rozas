@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Flame, Sparkles, Users, GraduationCap, Scale, ImageIcon, Shield } from "lucide-react";
+import { Flame, Sparkles, Users, GraduationCap, Scale, ImageIcon } from "lucide-react";
+import escudoAsset from "@/assets/escudo-fenix.png.asset.json";
 
 export const Route = createFileRoute("/conocenos/historia")({
   head: () => ({
@@ -178,13 +179,12 @@ function HistoriaPage() {
             className="relative"
           >
             <div className="absolute -inset-6 rounded-full bg-primary/20 blur-3xl" />
-            <div className="relative aspect-square w-full max-w-sm mx-auto rounded-2xl border border-dashed border-primary/50 bg-carbon-2 p-6">
-              <div className="flex h-full items-center justify-center">
-                <Shield className="h-24 w-24 text-primary/60" />
-              </div>
-              <span className="absolute bottom-3 left-1/2 -translate-x-1/2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                Escudo · imagen próximamente
-              </span>
+            <div className="relative aspect-square w-full max-w-sm mx-auto rounded-2xl border border-primary/50 bg-carbon-2 p-6">
+              <img
+                src={escudoAsset.url}
+                alt="Escudo CGA Fénix Las Rozas"
+                className="h-full w-full object-contain drop-shadow-2xl"
+              />
             </div>
           </motion.div>
           <motion.div
