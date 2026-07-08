@@ -95,13 +95,13 @@ const TEAMS: Team[] = [
 
 const contentVariants = {
   hidden: { opacity: 0, x: 30 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" as const } },
   exit: { opacity: 0, x: -20, transition: { duration: 0.25 } },
 };
 
 const tabIndicatorVariants = {
   initial: { scaleY: 0, opacity: 0 },
-  animate: { scaleY: 1, opacity: 1, transition: { duration: 0.3, ease: "easeOut" } },
+  animate: { scaleY: 1, opacity: 1, transition: { duration: 0.3, ease: "easeOut" as const } },
 };
 
 function EquiposPage() {
