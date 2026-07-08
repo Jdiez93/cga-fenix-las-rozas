@@ -187,16 +187,6 @@ export function SiteHeader() {
             {/* CTA + mobile toggle */}
             <div className="flex items-center gap-2 sm:gap-3 justify-end">
               <a
-                href="tel:+34679980626"
-                aria-label="Llámanos al 679 98 06 26"
-                className="hidden md:inline-flex lg:hidden xl:inline-flex items-center gap-2 text-[12px] font-bold text-foreground hover:text-primary transition-colors"
-              >
-                <span className="grid h-8 w-8 place-items-center rounded-full bg-primary text-primary-foreground">
-                  <Phone className="h-3.5 w-3.5" />
-                </span>
-                <span className="hidden xl:inline whitespace-nowrap">679 98 06 26</span>
-              </a>
-              <a
                 href="/preinscripcion"
                 className="hidden sm:inline-flex items-center rounded-full px-4 xl:px-5 py-2.5 text-[11.5px] xl:text-[12px] font-black uppercase tracking-[0.08em] bg-primary text-primary-foreground shadow-[var(--shadow-elegant)] hover:scale-[1.03] active:scale-[0.98] transition-transform whitespace-nowrap"
               >
