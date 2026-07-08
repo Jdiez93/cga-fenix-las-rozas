@@ -207,7 +207,7 @@ function EquiposPage() {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="relative rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8"
+                  className="relative rounded-[14px] bg-card p-6 shadow-sm md:p-8"
                 >
                   {/* Header card */}
                   <div className="mb-6 flex items-start gap-4">
@@ -322,35 +322,5 @@ function StatCard({
   );
 }
 
-const CORNER_GYMNASTS = [
-  { emoji: "🤸‍♀️", pos: "-top-5 -left-5", delay: "0s" },
-  { emoji: "✨", pos: "-top-4 -right-4", delay: "0.6s" },
-  { emoji: "🤸‍♂️", pos: "-bottom-5 -right-5", delay: "1.2s" },
-  { emoji: "⭐", pos: "-bottom-4 -left-4", delay: "1.8s" },
-];
-
-const EDGE_GYMNASTS = [
-  { emoji: "💫", pos: "top-1/3 -left-6", delay: "0.4s" },
-  { emoji: "🤾‍♀️", pos: "top-2/3 -right-6", delay: "1.4s" },
-];
-
-function FloatingGymnasts() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-visible">
-      {[...CORNER_GYMNASTS, ...EDGE_GYMNASTS].map((g, i) => (
-        <span
-          key={i}
-          className={`absolute ${g.pos} text-2xl drop-shadow-md md:text-3xl`}
-          style={{
-            animation: `float-bob 3.6s ease-in-out infinite, wiggle 4s ease-in-out infinite`,
-            animationDelay: `${g.delay}, ${g.delay}`,
-          }}
-        >
-          {g.emoji}
-        </span>
-      ))}
-    </div>
-  );
-}
 
 
