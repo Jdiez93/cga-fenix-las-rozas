@@ -4,6 +4,7 @@ import { z } from "zod";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import {
+  AlertTriangle,
   ArrowLeft,
   ArrowRight,
   CalendarIcon,
@@ -416,16 +417,40 @@ function PreinscripcionPage() {
 
         {/* Info sidebar */}
         <aside className="space-y-4 lg:sticky lg:top-24 self-start">
-          <InfoCard
-            icon={Euro}
-            title="Matrícula 26·27"
-            items={[
-              { label: "Nuevos alumnos", value: "65 €" },
-              { label: "Antiguos alumnos", value: "30 €" },
-            ]}
-            footer="Transferencia con NOMBRE + APELLIDOS del gimnasta"
-            code="ES57 0081 0357 4200 0209 9917"
-          />
+          <div className="rounded-2xl border-2 border-primary/40 bg-card p-5 shadow-[0_8px_30px_-10px_color-mix(in_oklab,var(--primary)_25%,transparent)]">
+            <div className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary">
+                <Euro className="h-4 w-4" />
+              </div>
+              <p className="text-xs font-black uppercase tracking-[0.15em] text-foreground">Matrícula 26·27</p>
+            </div>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li className="flex items-center justify-between gap-3">
+                <span className="text-muted-foreground">Nuevos alumnos</span>
+                <span className="font-black text-foreground">65 €</span>
+              </li>
+              <li className="flex items-center justify-between gap-3">
+                <span className="text-muted-foreground">Antiguos alumnos</span>
+                <span className="font-black text-foreground">30 €</span>
+              </li>
+            </ul>
+            <div className="mt-4 flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/10 p-3">
+              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+              <div>
+                <p className="text-[11px] font-black uppercase tracking-wider text-destructive">
+                  Transferencia con NOMBRE + APELLIDOS del gimnasta
+                </p>
+                <p className="mt-1 text-[11px] font-semibold text-destructive">
+                  Debes abonar la tasa para tener la plaza reservada
+                </p>
+              </div>
+            </div>
+            <div className="mt-3 rounded-lg bg-primary/10 border border-primary/20 px-3 py-2.5 text-center">
+              <p className="font-mono text-sm font-black text-foreground tracking-wide">
+                ES57 0081 0357 4200 0209 9917
+              </p>
+            </div>
+          </div>
           <InfoCard
             icon={ClipboardList}
             title="Cuotas mensuales"
@@ -837,14 +862,24 @@ function SuccessCard({
         <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-black uppercase tracking-[0.15em] text-primary">
           Referencia · {ref}
         </div>
-        <div className="mt-8 rounded-2xl border border-border bg-muted/40 p-5 text-left text-sm text-muted-foreground">
+        <div className="mt-8 rounded-2xl border-2 border-primary/30 bg-muted/40 p-5 text-left text-sm text-muted-foreground">
           <p className="font-bold text-foreground mb-1">Próximo paso: matrícula</p>
           <p>
             Realiza la transferencia (65 € nuevos · 30 € antiguos) indicando{" "}
             <strong className="text-foreground">Nombre + Apellidos</strong> del gimnasta a la
             cuenta:
           </p>
-          <p className="mt-2 font-mono text-foreground">ES57 0081 0357 4200 0209 9917</p>
+          <div className="mt-3 flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/10 p-3">
+            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+            <p className="text-[11px] font-black uppercase tracking-wider text-destructive">
+              Debes abonar la tasa para tener la plaza reservada
+            </p>
+          </div>
+          <div className="mt-3 rounded-lg bg-primary/10 border border-primary/20 px-3 py-2.5 text-center">
+            <p className="font-mono text-sm font-black text-foreground tracking-wide">
+              ES57 0081 0357 4200 0209 9917
+            </p>
+          </div>
         </div>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button
