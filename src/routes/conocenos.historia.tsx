@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Flame, Sparkles, Users, GraduationCap, Scale, ImageIcon } from "lucide-react";
+import { Flame, Sparkles, Users, GraduationCap, Scale, ImageIcon, Shield } from "lucide-react";
 import escudoAsset from "@/assets/escudo-fenix.png.asset.json";
 
 export const Route = createFileRoute("/conocenos/historia")({
@@ -56,7 +56,7 @@ function SectionHeading({
     <div className="mb-8 flex flex-col gap-3">
       <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-primary-foreground/90">
         <Icon className="h-3.5 w-3.5 text-primary" />
-        <span className="text-foreground/80">{kicker}</span>
+        <span className="text-primary">{kicker}</span>
       </div>
       <h2 className="text-3xl font-black leading-tight text-foreground sm:text-4xl md:text-5xl">
         {title}
@@ -172,20 +172,17 @@ function HistoriaPage() {
       <section className="border-y border-border bg-carbon text-carbon-foreground">
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-[1fr_1.2fr] md:items-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, type: "spring" }}
-            className="relative"
+            className="relative max-w-xs mx-auto cursor-pointer"
           >
-            <div className="absolute -inset-6 rounded-full bg-primary/20 blur-3xl" />
-            <div className="relative aspect-square w-full max-w-sm mx-auto rounded-2xl border border-primary/50 bg-carbon-2 p-6">
-              <img
-                src={escudoAsset.url}
-                alt="Escudo CGA Fénix Las Rozas"
-                className="h-full w-full object-contain drop-shadow-2xl"
-              />
-            </div>
+            <img
+              src={escudoAsset.url}
+              alt="Escudo CGA Fénix Las Rozas"
+              className="w-full h-auto object-contain drop-shadow-2xl transition-all duration-500 hover:scale-105 hover:-rotate-2 hover:drop-shadow-[0_0_30px_rgba(255,140,0,0.45)]"
+            />
           </motion.div>
           <motion.div
             initial="hidden"
@@ -194,7 +191,7 @@ function HistoriaPage() {
             variants={fadeUp}
             transition={{ duration: 0.6 }}
           >
-            <SectionHeading kicker="Símbolo" title="Nuestro escudo" icon={Flame} />
+            <SectionHeading kicker="Escudo" title="Nuestro escudo" icon={Shield} />
             <div className="space-y-4 text-[15px] leading-relaxed text-carbon-foreground/85">
               <p>
                 El escudo de CGA Fénix Las Rozas simboliza el nacimiento del club y la pasión que
