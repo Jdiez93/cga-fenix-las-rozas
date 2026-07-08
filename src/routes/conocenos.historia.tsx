@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Flame, Sparkles, Users, GraduationCap, Scale, ImageIcon } from "lucide-react";
+import escudoAsset from "@/assets/escudo-fenix.png.asset.json";
 
 export const Route = createFileRoute("/conocenos/historia")({
   head: () => ({
