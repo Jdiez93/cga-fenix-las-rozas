@@ -303,7 +303,7 @@ function StatCard({
       </div>
       <div className="min-w-0">
         <p className="text-xs text-muted-foreground">{label}</p>
-        <p className="truncate text-sm font-semibold text-foreground">{value}</p>
+        <p className="text-sm font-semibold leading-snug text-foreground">{value}</p>
       </div>
     </div>
   );
