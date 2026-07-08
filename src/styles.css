@@ -162,3 +162,18 @@
 @utility animate-shimmer-line {
   animation: shimmer-line 3s ease-in-out infinite;
 }
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float-bob {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { rotate: -8deg; }
+  50% { rotate: 8deg; }
+}
+

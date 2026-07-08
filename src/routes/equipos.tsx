@@ -189,93 +189,109 @@ function EquiposPage() {
 
           {/* Content panel */}
           <div className="min-w-0">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTeam.id}
-                variants={contentVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8"
-              >
-                {/* Header card */}
-                <div className="mb-6 flex items-start gap-4">
-                  <div
-                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl"
-                    style={{ backgroundColor: `${activeTeam.color}15` }}
-                  >
-                    {activeTeam.emoji}
-                  </div>
-                  <div className="min-w-0">
-                    <h2 className="text-2xl font-bold tracking-tight text-foreground">
-                      {activeTeam.label}
-                    </h2>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {activeTeam.description}
-                    </p>
-                  </div>
-                </div>
+            <div className="relative">
+              {/* Animated gradient border glow */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -inset-[2px] rounded-2xl opacity-60 blur-[6px] transition-opacity"
+                style={{
+                  background: `conic-gradient(from 0deg, ${activeTeam.color}00, ${activeTeam.color}cc, ${activeTeam.color}00, ${activeTeam.color}88, ${activeTeam.color}00)`,
+                  animation: "spin-slow 8s linear infinite",
+                }}
+              />
 
-                {/* Stats row */}
-                <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                  <StatCard
-                    icon={<Users className="h-4 w-4" />}
-                    label="Edad"
-                    value={activeTeam.ageRange}
-                    color={activeTeam.color}
-                  />
-                  <StatCard
-                    icon={<Clock className="h-4 w-4" />}
-                    label="Horas semanales"
-                    value={activeTeam.hours}
-                    color={activeTeam.color}
-                  />
-                  <StatCard
-                    icon={<MapPin className="h-4 w-4" />}
-                    label="Instalación"
-                    value={activeTeam.venue}
-                    color={activeTeam.color}
-                  />
-                </div>
+              {/* Floating gymnast emojis around the border */}
+              <FloatingGymnasts key={activeTeam.id} />
 
-                {/* Schedule */}
-                <div>
-                  <div className="mb-4 flex items-center gap-2">
-                    <CalendarDays className="h-4 w-4 text-primary" />
-                    <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
-                      Horarios
-                    </h3>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTeam.id}
+                  variants={contentVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  className="relative rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8"
+                >
+                  {/* Header card */}
+                  <div className="mb-6 flex items-start gap-4">
+                    <div
+                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl"
+                      style={{ backgroundColor: `${activeTeam.color}15` }}
+                    >
+                      {activeTeam.emoji}
+                    </div>
+                    <div className="min-w-0">
+                      <h2 className="text-2xl font-bold tracking-tight text-foreground">
+                        {activeTeam.label}
+                      </h2>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {activeTeam.description}
+                      </p>
+                    </div>
                   </div>
-                  <div className="space-y-3">
-                    {activeTeam.schedule.map((dayBlock) => (
-                      <div
-                        key={dayBlock.day}
-                        className="flex flex-col gap-2 rounded-xl bg-muted/50 p-4 sm:flex-row sm:items-center sm:gap-6"
-                      >
-                        <span className="shrink-0 text-sm font-semibold text-foreground">
-                          {dayBlock.day}
-                        </span>
-                        <div className="flex flex-wrap gap-2">
-                          {dayBlock.slots.map((slot) => (
-                            <span
-                              key={slot}
-                              className="inline-flex items-center rounded-lg px-3 py-1.5 text-xs font-medium"
-                              style={{
-                                backgroundColor: `${activeTeam.color}12`,
-                                color: activeTeam.color,
-                              }}
-                            >
-                              {slot}
-                            </span>
-                          ))}
+
+                  {/* Stats row */}
+                  <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                    <StatCard
+                      icon={<Users className="h-4 w-4" />}
+                      label="Edad"
+                      value={activeTeam.ageRange}
+                      color={activeTeam.color}
+                    />
+                    <StatCard
+                      icon={<Clock className="h-4 w-4" />}
+                      label="Horas semanales"
+                      value={activeTeam.hours}
+                      color={activeTeam.color}
+                    />
+                    <StatCard
+                      icon={<MapPin className="h-4 w-4" />}
+                      label="Instalación"
+                      value={activeTeam.venue}
+                      color={activeTeam.color}
+                    />
+                  </div>
+
+                  {/* Schedule */}
+                  <div>
+                    <div className="mb-4 flex items-center gap-2">
+                      <CalendarDays className="h-4 w-4 text-primary" />
+                      <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
+                        Horarios
+                      </h3>
+                    </div>
+                    <div className="space-y-3">
+                      {activeTeam.schedule.map((dayBlock) => (
+                        <div
+                          key={dayBlock.day}
+                          className="flex flex-col gap-2 rounded-xl bg-muted/50 p-4 sm:flex-row sm:items-center sm:gap-6"
+                        >
+                          <span className="shrink-0 text-sm font-semibold text-foreground">
+                            {dayBlock.day}
+                          </span>
+                          <div className="flex flex-wrap gap-2">
+                            {dayBlock.slots.map((slot) => (
+                              <span
+                                key={slot}
+                                className="inline-flex items-center rounded-lg px-3 py-1.5 text-xs font-medium"
+                                style={{
+                                  backgroundColor: `${activeTeam.color}12`,
+                                  color: activeTeam.color,
+                                }}
+                              >
+                                {slot}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
+
         </div>
       </section>
     </div>
@@ -303,8 +319,41 @@ function StatCard({
       </div>
       <div className="min-w-0">
         <p className="text-xs text-muted-foreground">{label}</p>
-        <p className="truncate text-sm font-semibold text-foreground">{value}</p>
+        <p className="text-sm font-semibold leading-snug text-foreground">{value}</p>
       </div>
     </div>
   );
 }
+
+const CORNER_GYMNASTS = [
+  { emoji: "🤸‍♀️", pos: "-top-5 -left-5", delay: "0s" },
+  { emoji: "✨", pos: "-top-4 -right-4", delay: "0.6s" },
+  { emoji: "🤸‍♂️", pos: "-bottom-5 -right-5", delay: "1.2s" },
+  { emoji: "⭐", pos: "-bottom-4 -left-4", delay: "1.8s" },
+];
+
+const EDGE_GYMNASTS = [
+  { emoji: "💫", pos: "top-1/3 -left-6", delay: "0.4s" },
+  { emoji: "🤾‍♀️", pos: "top-2/3 -right-6", delay: "1.4s" },
+];
+
+function FloatingGymnasts() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-visible">
+      {[...CORNER_GYMNASTS, ...EDGE_GYMNASTS].map((g, i) => (
+        <span
+          key={i}
+          className={`absolute ${g.pos} text-2xl drop-shadow-md md:text-3xl`}
+          style={{
+            animation: `float-bob 3.6s ease-in-out infinite, wiggle 4s ease-in-out infinite`,
+            animationDelay: `${g.delay}, ${g.delay}`,
+          }}
+        >
+          {g.emoji}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+
