@@ -325,40 +325,35 @@ function StatCard({
   );
 }
 
-const GYMNAST_EMOJIS = ["🤸‍♀️", "🤸", "🤾‍♀️", "🧘‍♀️", "⭐", "✨", "🤸‍♂️", "💫"];
+const CORNER_GYMNASTS = [
+  { emoji: "🤸‍♀️", pos: "-top-5 -left-5", delay: "0s" },
+  { emoji: "✨", pos: "-top-4 -right-4", delay: "0.6s" },
+  { emoji: "🤸‍♂️", pos: "-bottom-5 -right-5", delay: "1.2s" },
+  { emoji: "⭐", pos: "-bottom-4 -left-4", delay: "1.8s" },
+];
+
+const EDGE_GYMNASTS = [
+  { emoji: "💫", pos: "top-1/3 -left-6", delay: "0.4s" },
+  { emoji: "🤾‍♀️", pos: "top-2/3 -right-6", delay: "1.4s" },
+];
 
 function FloatingGymnasts() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-visible">
-      {GYMNAST_EMOJIS.map((emoji, i) => {
-        const total = GYMNAST_EMOJIS.length;
-        const angle = (i / total) * 360;
-        const delay = (i / total) * 6;
-        return (
-          <div
-            key={i}
-            className="absolute left-1/2 top-1/2 h-0 w-0"
-            style={{
-              transform: `rotate(${angle}deg)`,
-              animation: `orbit 14s linear infinite`,
-              animationDelay: `-${delay}s`,
-            }}
-          >
-            <span
-              className="absolute -translate-x-1/2 -translate-y-1/2 text-xl opacity-70 drop-shadow-sm md:text-2xl"
-              style={{
-                top: "calc(-50% - 14px)",
-                left: 0,
-                animation: `counter-orbit 14s linear infinite, float-bob 3s ease-in-out infinite`,
-                animationDelay: `-${delay}s, ${delay * 0.3}s`,
-              }}
-            >
-              {emoji}
-            </span>
-          </div>
-        );
-      })}
+      {[...CORNER_GYMNASTS, ...EDGE_GYMNASTS].map((g, i) => (
+        <span
+          key={i}
+          className={`absolute ${g.pos} text-2xl drop-shadow-md md:text-3xl`}
+          style={{
+            animation: `float-bob 3.6s ease-in-out infinite, wiggle 4s ease-in-out infinite`,
+            animationDelay: `${g.delay}, ${g.delay}`,
+          }}
+        >
+          {g.emoji}
+        </span>
+      ))}
     </div>
   );
 }
+
 
