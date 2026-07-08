@@ -4,6 +4,7 @@ import { z } from "zod";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import {
+  AlertTriangle,
   ArrowLeft,
   ArrowRight,
   CalendarIcon,
