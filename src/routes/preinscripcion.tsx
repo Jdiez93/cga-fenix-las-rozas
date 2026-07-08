@@ -669,7 +669,7 @@ function StepExperiencia({ data, errors, update }: StepProps) {
             >
               <RadioGroupItem value={opt} className="sr-only" />
               <img
-                src={logoAsset}
+                src={logoAsset.url}
                 alt=""
                 className={cn(
                   "h-10 w-10 rounded-full object-cover ring-2 transition-all",
