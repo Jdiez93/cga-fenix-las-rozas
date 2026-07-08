@@ -119,14 +119,9 @@ export function SiteHeader() {
                   scrolled ? "h-11 w-11" : "h-14 w-14"
                 )}
               />
-              <div className="hidden sm:flex flex-col leading-none min-w-0">
-                <span className="font-black text-lg xl:text-xl tracking-tight uppercase truncate">
-                  CGA Fénix
-                </span>
-                <span className="mt-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.22em] truncate">
-                  Las Rozas
-                </span>
-              </div>
+              <span className="hidden sm:inline font-black text-base lg:text-lg tracking-tight uppercase whitespace-nowrap">
+                CGA Fénix Las Rozas
+              </span>
             </a>
 
             {/* Desktop nav */}
