@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Flame, Sparkles, Users, GraduationCap, Scale, ImageIcon, Shield } from "lucide-react";
+import { Flame, Sparkles, Users, GraduationCap, Scale, ImageIcon } from "lucide-react";
 
 export const Route = createFileRoute("/conocenos/historia")({
   head: () => ({
