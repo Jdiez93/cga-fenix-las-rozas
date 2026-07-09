@@ -19,7 +19,9 @@ export type Coach = {
   name: string;
   role: string;
   bio: string;
+  longBio: string[];
   initials: string;
+  photo?: string;
   highlight?: boolean;
 };
 
@@ -28,7 +30,12 @@ export const COACHES: Coach[] = [
     slug: "luis-s-rodriguez",
     name: "D. Luis S. Rodríguez",
     role: "Director Técnico",
-    bio: "Es uno de los expertos con más experiencia en la gimnasia artística masculina, con un currículum muy destacado, tanto como miembro del equipo nacional de gimnasia, como entrenador.",
+    bio: "Uno de los expertos con más experiencia en la gimnasia artística masculina, con un currículum destacado como gimnasta internacional y entrenador.",
+    longBio: [
+      "Luis es una de las figuras más reconocidas de la gimnasia artística masculina en España. Miembro del equipo nacional durante años, ha vivido la alta competición desde dentro y hoy pone toda esa experiencia al servicio del CGA Fénix Las Rozas.",
+      "Como Director Técnico, define la filosofía deportiva del club: disciplina, respeto y crecimiento personal por encima del resultado. Diseña las progresiones técnicas de cada equipo y acompaña personalmente a los gimnastas de competición.",
+      "Su trayectoria combina la exigencia del alto rendimiento con una vocación educativa clara: formar personas antes que campeones. Es el referente del cuerpo técnico y el garante de que cada niño y niña encuentre su lugar en el club.",
+    ],
     initials: "LR",
     highlight: true,
   },
@@ -36,56 +43,96 @@ export const COACHES: Coach[] = [
     slug: "miguel-alvarez",
     name: "Miguel Álvarez",
     role: "Entrenador",
-    bio: "Gimnasta durante nueve años. Juez de Gimnasia Artística Masculina nivel I.",
+    bio: "Gimnasta durante nueve años y Juez de Gimnasia Artística Masculina nivel I.",
+    longBio: [
+      "Miguel se formó como gimnasta durante nueve temporadas, pasando por todas las categorías y aparatos de la gimnasia artística masculina. Esa etapa le dio una comprensión profunda de la técnica y del esfuerzo diario que requiere el deporte.",
+      "Además de entrenador, es Juez de Gimnasia Artística Masculina de nivel I, lo que le permite trabajar en el gimnasio con una mirada muy afinada al detalle técnico y a la ejecución.",
+      "En el Fénix se encarga especialmente de los grupos de iniciación y perfeccionamiento masculino, transmitiendo la pasión que él mismo vivió como gimnasta.",
+    ],
     initials: "MA",
   },
   {
     slug: "juan-toharia",
     name: "Juan Toharia",
     role: "Entrenador",
-    bio: "Gimnasta durante nueve años.",
+    bio: "Gimnasta durante nueve años, con una amplia experiencia en gimnasia artística masculina.",
+    longBio: [
+      "Juan practicó gimnasia artística masculina durante nueve años, recorriendo el camino de gimnasta a entrenador con la misma intensidad. Conoce de primera mano lo que se siente al entrenar duro y competir.",
+      "Su estilo se basa en la cercanía y en la confianza: sabe cuándo empujar a un gimnasta y cuándo dar un paso atrás para dejarle crecer. Trabaja principalmente con los grupos de iniciación y perfeccionamiento.",
+      "Su objetivo es que cada gimnasta se marche del gimnasio habiendo aprendido algo nuevo y con ganas de volver al día siguiente.",
+    ],
     initials: "JT",
   },
   {
     slug: "lucia-navarro",
     name: "Lucía Navarro",
     role: "Entrenadora",
-    bio: "Es un valioso miembro de nuestro equipo de entrenadores, cuya trayectoria en la gimnasia artística femenina sirve de referencia para nuestros atletas.",
+    bio: "Referente del cuerpo técnico, con una amplia trayectoria en gimnasia artística femenina.",
+    longBio: [
+      "Lucía es una de las entrenadoras de referencia del CGA Fénix Las Rozas. Su trayectoria en la gimnasia artística femenina la avala como una de las técnicas más completas del club.",
+      "Trabaja tanto con los grupos base como con los equipos de competición, adaptando su método a la edad y al nivel de cada gimnasta. Cree firmemente en la técnica bien construida desde los cimientos.",
+      "Es un ejemplo de disciplina, cercanía y compromiso para las gimnastas del club, y una figura clave en la formación de las futuras competidoras del Fénix.",
+    ],
     initials: "LN",
   },
   {
     slug: "elena-faura",
     name: "Elena Faura",
     role: "Entrenadora",
-    bio: "Es una entrenadora con gran pasión por la gimnasia, con una sólida trayectoria en el deporte.",
+    bio: "Entrenadora con gran pasión por la gimnasia y una sólida trayectoria en el deporte.",
+    longBio: [
+      "Elena vive la gimnasia con una pasión contagiosa. Su sólida trayectoria como deportista y como técnica le permite trabajar con gimnastas de niveles muy distintos, siempre con la misma energía.",
+      "En el Fénix se encarga de que las sesiones sean exigentes pero divertidas, buscando que las gimnastas disfruten mientras aprenden. Da mucha importancia al calentamiento, la flexibilidad y la base física.",
+      "Su cercanía con las familias y su compromiso con el club la convierten en una pieza fundamental del cuerpo técnico.",
+    ],
     initials: "EF",
   },
   {
     slug: "manuel-inigo",
     name: "Manuel Íñigo",
     role: "Entrenador",
-    bio: "Es un entrenador con mucho que enseñar y con un corazón incomparable.",
+    bio: "Un entrenador con mucho que enseñar y con un corazón incomparable.",
+    longBio: [
+      "Manuel es de esos entrenadores que dejan huella. Une un enorme conocimiento técnico con una calidad humana difícil de igualar, y esa combinación se nota en cada sesión.",
+      "Trabaja con los gimnastas desde el respeto y el ejemplo. Sabe leer el momento de cada niño o niña y adaptar el entrenamiento a lo que realmente necesitan, tanto a nivel deportivo como personal.",
+      "En el Fénix es una figura muy querida por gimnastas y familias, y una referencia dentro del cuerpo técnico del club.",
+    ],
     initials: "MI",
   },
   {
     slug: "david-alonso",
     name: "David Alonso",
     role: "Entrenador",
-    bio: "Es un valioso miembro de nuestro equipo de entrenadores, cuya trayectoria en la gimnasia artística lo convierte en un referente dentro del club.",
+    bio: "Miembro valioso del cuerpo técnico, con una trayectoria que lo convierte en un referente dentro del club.",
+    longBio: [
+      "David aporta al Fénix una trayectoria consolidada en la gimnasia artística. Su experiencia como deportista y su recorrido como entrenador lo han convertido en uno de los referentes técnicos del club.",
+      "Es especialmente meticuloso con la técnica y la seguridad. Diseña progresiones claras y adaptadas para que cada gimnasta avance con confianza en aparatos que requieren mucha precisión.",
+      "Su presencia da estabilidad al cuerpo técnico y confianza a las familias que dejan a sus hijos e hijas en sus manos.",
+    ],
     initials: "DA",
   },
   {
     slug: "aruca-rodriguez",
     name: "Aruca Rodríguez",
     role: "Entrenadora",
-    bio: "",
+    bio: "Entrenadora del club, comprometida con la formación integral de las gimnastas.",
+    longBio: [
+      "Aruca forma parte del equipo técnico del CGA Fénix Las Rozas y trabaja día a día para que las gimnastas del club evolucionen tanto técnica como personalmente.",
+      "Combina exigencia y cariño en la misma medida. En sus sesiones se busca el trabajo bien hecho, pero también la sonrisa, el compañerismo y el disfrute del deporte.",
+      "Muy pronto ampliaremos su biografía con más detalles sobre su trayectoria y titulaciones.",
+    ],
     initials: "AR",
   },
   {
     slug: "mar-cuesta",
     name: "Mar Cuesta",
     role: "Entrenadora",
-    bio: "",
+    bio: "Entrenadora del club, cercana con las gimnastas y comprometida con su progresión.",
+    longBio: [
+      "Mar es una de las entrenadoras del Fénix. Aporta cercanía, dedicación y una gran capacidad para conectar con las gimnastas desde el primer día.",
+      "Trabaja especialmente la técnica base y la actitud en el gimnasio: puntualidad, respeto y ganas de mejorar. Cree que el buen ambiente en el grupo es la mitad del progreso.",
+      "Muy pronto ampliaremos su biografía con más detalles sobre su trayectoria y titulaciones.",
+    ],
     initials: "MC",
   },
 ];
@@ -131,6 +178,48 @@ function EquipoTecnicoPage() {
   );
 }
 
+export function CoachPortrait({ coach, className = "" }: { coach: Coach; className?: string }) {
+  if (coach.photo) {
+    return (
+      <img
+        src={coach.photo}
+        alt={coach.name}
+        className={`h-full w-full object-cover ${className}`}
+        loading="lazy"
+      />
+    );
+  }
+  // Placeholder retrato: silueta estilizada + iniciales, listo para sustituir por foto real
+  return (
+    <div className={`relative flex h-full w-full items-end justify-center overflow-hidden bg-gradient-to-b from-muted via-background to-muted ${className}`}>
+      {/* Silhouette */}
+      <svg
+        viewBox="0 0 200 240"
+        className="absolute bottom-0 h-[85%] w-auto text-foreground/85"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="silhouette-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="currentColor" stopOpacity="0.7" />
+          </linearGradient>
+        </defs>
+        {/* Head */}
+        <circle cx="100" cy="70" r="34" fill="url(#silhouette-grad)" />
+        {/* Shoulders / bust */}
+        <path
+          d="M30 240 C 30 165, 60 130, 100 130 C 140 130, 170 165, 170 240 Z"
+          fill="url(#silhouette-grad)"
+        />
+      </svg>
+      {/* Initials badge */}
+      <div className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground shadow-md">
+        {coach.initials}
+      </div>
+    </div>
+  );
+}
+
 function CoachCard({ coach, index }: { coach: Coach; index: number }) {
   const isDirector = coach.highlight;
   return (
@@ -145,16 +234,9 @@ function CoachCard({ coach, index }: { coach: Coach; index: number }) {
         params={{ slug: coach.slug }}
         className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_20px_50px_-20px_color-mix(in_oklab,hsl(var(--primary))_45%,transparent)]"
       >
-        {/* Avatar / imagen */}
-        <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-muted via-background to-muted">
-          {/* Decorative animated ring */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="absolute h-56 w-56 rounded-full border border-primary/20 transition-transform duration-700 group-hover:scale-110" />
-            <div className="absolute h-40 w-40 rounded-full border border-primary/30 transition-transform duration-700 group-hover:scale-125" />
-            <div className="relative flex h-28 w-28 items-center justify-center rounded-full bg-foreground text-3xl font-bold tracking-wider text-primary shadow-lg transition-transform duration-500 group-hover:scale-110">
-              {coach.initials}
-            </div>
-          </div>
+        {/* Foto */}
+        <div className="relative aspect-[4/5] overflow-hidden">
+          <CoachPortrait coach={coach} className="transition-transform duration-500 group-hover:scale-[1.04]" />
 
           {isDirector && (
             <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground shadow-sm">
@@ -164,7 +246,7 @@ function CoachCard({ coach, index }: { coach: Coach; index: number }) {
           )}
 
           {/* Bottom gradient */}
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-card to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card to-transparent" />
         </div>
 
         {/* Info */}
@@ -178,7 +260,7 @@ function CoachCard({ coach, index }: { coach: Coach; index: number }) {
           <div className="mt-3 h-px w-10 bg-primary/60 transition-all duration-300 group-hover:w-20" />
 
           {coach.bio && (
-            <p className="mt-4 line-clamp-4 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
               {coach.bio}
             </p>
           )}
