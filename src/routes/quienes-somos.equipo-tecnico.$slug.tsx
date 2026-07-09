@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowLeft, Medal, Construction } from "lucide-react";
-import { COACHES } from "./quienes-somos.equipo-tecnico";
+import { ArrowLeft, Medal } from "lucide-react";
+import { COACHES, CoachPortrait } from "./quienes-somos.equipo-tecnico";
 
 export const Route = createFileRoute("/quienes-somos/equipo-tecnico/$slug")({
   loader: ({ params }) => {
@@ -45,8 +45,8 @@ function CoachDetailPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <section className="relative overflow-hidden border-b border-border bg-card">
-        <div className="mx-auto max-w-5xl px-6 py-10">
+      <section className="border-b border-border bg-card">
+        <div className="mx-auto max-w-6xl px-6 py-8">
           <Link
             to="/quienes-somos/equipo-tecnico"
             className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
@@ -57,21 +57,23 @@ function CoachDetailPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-6 py-12 md:py-16">
+      <section className="mx-auto max-w-6xl px-6 py-12 md:py-16">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="grid gap-10 md:grid-cols-[280px_1fr]"
+          className="grid gap-10 md:grid-cols-[minmax(280px,380px)_1fr] md:gap-14"
         >
-          {/* Avatar column */}
-          <div className="mx-auto md:mx-0">
-            <div className="relative flex h-64 w-64 items-center justify-center rounded-3xl border border-border bg-gradient-to-br from-muted via-background to-muted shadow-sm">
-              <div className="absolute h-52 w-52 rounded-full border border-primary/20" />
-              <div className="absolute h-40 w-40 rounded-full border border-primary/30" />
-              <div className="relative flex h-28 w-28 items-center justify-center rounded-full bg-foreground text-4xl font-bold text-primary shadow-lg">
-                {coach.initials}
-              </div>
+          {/* Foto */}
+          <div>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
+              <CoachPortrait coach={coach} />
+              {isDirector && (
+                <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground shadow-sm">
+                  <Medal className="h-3 w-3" />
+                  Director
+                </div>
+              )}
             </div>
           </div>
 
@@ -92,21 +94,13 @@ function CoachDetailPage() {
               {coach.name}
             </h1>
             <div className="mt-4 h-1 w-16 rounded-full bg-primary" />
-            {coach.bio && (
-              <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                {coach.bio}
-              </p>
-            )}
 
-            {/* Placeholder for future content */}
-            <div className="mt-10 rounded-2xl border border-dashed border-border bg-muted/40 p-8 text-center">
-              <Construction className="mx-auto h-8 w-8 text-muted-foreground" />
-              <p className="mt-3 text-sm font-medium text-foreground">
-                Perfil en construcción
-              </p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Pronto publicaremos más información sobre trayectoria, titulaciones y logros de {coach.name.split(" ")[0]}.
-              </p>
+            <div className="mt-8 space-y-5">
+              {coach.longBio.map((paragraph: string, idx: number) => (
+                <p key={idx} className="text-base leading-relaxed text-muted-foreground md:text-lg">
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </div>
         </motion.div>
