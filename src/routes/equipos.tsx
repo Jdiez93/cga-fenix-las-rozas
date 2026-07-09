@@ -27,8 +27,6 @@ type Team = {
     slots: string[];
   }[];
   venue: string;
-  color: string;
-  accentBg: string;
 };
 
 const TEAMS: Team[] = [
@@ -44,8 +42,6 @@ const TEAMS: Team[] = [
       { day: "Domingos", slots: ["10:00h. – 12:00h.", "12:00h. – 14:00h."] },
     ],
     venue: "Polideportivo Entremontes",
-    color: "#4ade80",
-    accentBg: "bg-green-500/10",
   },
   {
     id: "perfeccionamiento",
@@ -59,8 +55,6 @@ const TEAMS: Team[] = [
       { day: "Domingos", slots: ["10:00h. – 12:00h.", "12:00h. – 14:00h."] },
     ],
     venue: "Polideportivo Entremontes",
-    color: "#f97316",
-    accentBg: "bg-orange-500/10",
   },
   {
     id: "competicion",
@@ -74,8 +68,6 @@ const TEAMS: Team[] = [
       { day: "Domingos", slots: ["10:00h. – 14:00h."] },
     ],
     venue: "Polideportivo Entremontes",
-    color: "#ef4444",
-    accentBg: "bg-red-500/10",
   },
   {
     id: "adultos",
@@ -88,20 +80,13 @@ const TEAMS: Team[] = [
       { day: "Domingos", slots: ["12:00h. – 14:00h."] },
     ],
     venue: "Polideportivo Entremontes",
-    color: "#8b5cf6",
-    accentBg: "bg-violet-500/10",
   },
 ];
 
 const contentVariants = {
-  hidden: { opacity: 0, x: 30 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" as const } },
-  exit: { opacity: 0, x: -20, transition: { duration: 0.25 } },
-};
-
-const tabIndicatorVariants = {
-  initial: { scaleY: 0, opacity: 0 },
-  animate: { scaleY: 1, opacity: 1, transition: { duration: 0.3, ease: "easeOut" as const } },
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.3, ease: "easeOut" as const } },
+  exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
 function EquiposPage() {
@@ -157,8 +142,7 @@ function EquiposPage() {
                   {isActive && (
                     <motion.div
                       layoutId="activeTeamIndicator"
-                      className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full"
-                      style={{ backgroundColor: team.color }}
+                      className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-primary"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
@@ -166,7 +150,7 @@ function EquiposPage() {
                   <span
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-lg transition-transform duration-200 group-hover:scale-110"
                     style={{
-                      backgroundColor: isActive ? `${team.color}18` : undefined,
+                      backgroundColor: isActive ? "color-mix(in oklab, hsl(var(--primary)) 10%, transparent)" : undefined,
                     }}
                   >
                     {team.emoji}
@@ -177,10 +161,9 @@ function EquiposPage() {
                   <ChevronRight
                     className={`h-4 w-4 shrink-0 transition-all duration-200 ${
                       isActive
-                        ? "translate-x-0 opacity-100"
+                        ? "translate-x-0 opacity-100 text-primary"
                         : "-translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-50"
                     }`}
-                    style={{ color: isActive ? team.color : undefined }}
                   />
                 </button>
               );
@@ -189,17 +172,7 @@ function EquiposPage() {
 
           {/* Content panel */}
           <div className="min-w-0">
-            <div className="relative overflow-hidden rounded-2xl p-[2px]">
-              {/* Animated rotating border */}
-              <div
-                aria-hidden
-                className="absolute inset-0"
-                style={{
-                  background: `conic-gradient(from 0deg, ${activeTeam.color}, ${activeTeam.color}30, ${activeTeam.color})`,
-                  animation: "spin-slow 3s linear infinite",
-                }}
-              />
-
+            <div className="rounded-2xl border border-border bg-card shadow-sm">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTeam.id}
@@ -207,14 +180,11 @@ function EquiposPage() {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="relative rounded-[14px] bg-card p-6 shadow-sm md:p-8"
+                  className="p-6 md:p-8"
                 >
                   {/* Header card */}
                   <div className="mb-6 flex items-start gap-4">
-                    <div
-                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl"
-                      style={{ backgroundColor: `${activeTeam.color}15` }}
-                    >
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl bg-primary/10">
                       {activeTeam.emoji}
                     </div>
                     <div className="min-w-0">
@@ -233,19 +203,16 @@ function EquiposPage() {
                       icon={<Users className="h-4 w-4" />}
                       label="Edad"
                       value={activeTeam.ageRange}
-                      color={activeTeam.color}
                     />
                     <StatCard
                       icon={<Clock className="h-4 w-4" />}
                       label="Horas semanales"
                       value={activeTeam.hours}
-                      color={activeTeam.color}
                     />
                     <StatCard
                       icon={<MapPin className="h-4 w-4" />}
                       label="Instalación"
                       value={activeTeam.venue}
-                      color={activeTeam.color}
                     />
                   </div>
 
@@ -270,11 +237,7 @@ function EquiposPage() {
                             {dayBlock.slots.map((slot) => (
                               <span
                                 key={slot}
-                                className="inline-flex items-center rounded-lg px-3 py-1.5 text-xs font-medium"
-                                style={{
-                                  backgroundColor: `${activeTeam.color}12`,
-                                  color: activeTeam.color,
-                                }}
+                                className="inline-flex items-center rounded-lg bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary"
                               >
                                 {slot}
                               </span>
@@ -299,19 +262,14 @@ function StatCard({
   icon,
   label,
   value,
-  color,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
-  color: string;
 }) {
   return (
     <div className="flex items-center gap-3 rounded-xl border border-border bg-background p-4">
-      <div
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-        style={{ backgroundColor: `${color}12`, color }}
-      >
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
         {icon}
       </div>
       <div className="min-w-0">
@@ -321,6 +279,3 @@ function StatCard({
     </div>
   );
 }
-
-
-

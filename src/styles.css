@@ -163,9 +163,6 @@
   animation: shimmer-line 3s ease-in-out infinite;
 }
 
-@keyframes spin-slow {
-  to { transform: rotate(360deg); }
-}
 
 @utility shadow-logo-glow {
   box-shadow: 0 0 20px -4px color-mix(in oklab, var(--primary) 45%, transparent);
