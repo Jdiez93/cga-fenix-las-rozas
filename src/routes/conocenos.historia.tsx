@@ -181,7 +181,7 @@ function HistoriaPage() {
             <img
               src={escudoAsset.url}
               alt="Escudo CGA Fénix Las Rozas"
-              className="w-full h-auto object-contain drop-shadow-2xl transition-all duration-500 hover:scale-105 hover:-rotate-2 hover:drop-shadow-[0_0_30px_rgba(255,140,0,0.45)]"
+              className="w-full h-auto object-contain drop-shadow-2xl transition-all duration-500 hover:scale-105 hover:-rotate-2 hover:drop-shadow-[0_0_30px_oklch(0.82_0.24_133/0.45)]"
             />
           </motion.div>
           <motion.div
