@@ -96,7 +96,7 @@ function CoachDetailPage() {
             <div className="mt-4 h-1 w-16 rounded-full bg-primary" />
 
             <div className="mt-8 space-y-5">
-              {coach.longBio.map((paragraph, idx) => (
+              {coach.longBio.map((paragraph: string, idx: number) => (
                 <p key={idx} className="text-base leading-relaxed text-muted-foreground md:text-lg">
                   {paragraph}
                 </p>
