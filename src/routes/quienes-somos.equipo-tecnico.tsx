@@ -191,29 +191,9 @@ export function CoachPortrait({ coach, className = "" }: { coach: Coach; classNa
   }
   // Placeholder retrato: silueta estilizada + iniciales, listo para sustituir por foto real
   return (
-    <div className={`relative flex h-full w-full items-end justify-center overflow-hidden bg-gradient-to-b from-muted via-background to-muted ${className}`}>
-      {/* Silhouette */}
-      <svg
-        viewBox="0 0 200 240"
-        className="absolute bottom-0 h-[85%] w-auto text-foreground/85"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id="silhouette-grad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="currentColor" stopOpacity="0.7" />
-          </linearGradient>
-        </defs>
-        {/* Head */}
-        <circle cx="100" cy="70" r="34" fill="url(#silhouette-grad)" />
-        {/* Shoulders / bust */}
-        <path
-          d="M30 240 C 30 165, 60 130, 100 130 C 140 130, 170 165, 170 240 Z"
-          fill="url(#silhouette-grad)"
-        />
-      </svg>
+    <div className={`relative flex h-full w-full items-center justify-center overflow-hidden bg-gradient-to-b from-muted via-background to-muted ${className}`}>
       {/* Initials badge */}
-      <div className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground shadow-md">
+      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary text-2xl font-bold text-primary-foreground shadow-md">
         {coach.initials}
       </div>
     </div>
