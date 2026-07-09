@@ -172,7 +172,7 @@ function EquiposPage() {
 
           {/* Content panel */}
           <div className="min-w-0">
-            <div className="rounded-2xl border border-border bg-card shadow-sm">
+            <div className="rounded-2xl border-2 border-primary/60 bg-card shadow-sm">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTeam.id}
