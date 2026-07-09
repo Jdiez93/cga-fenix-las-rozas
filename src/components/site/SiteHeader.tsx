@@ -115,7 +115,7 @@ export function SiteHeader() {
                 src={logoAsset.url}
                 alt="CGA Fénix Las Rozas"
                 className={cn(
-                  "shrink-0 transition-all duration-300 object-contain rounded-full",
+                  "shrink-0 transition-all duration-300 object-contain rounded-full shadow-logo-glow",
                   scrolled ? "h-11 w-11" : "h-14 w-14"
                 )}
               />
