@@ -27,8 +27,6 @@ type Team = {
     slots: string[];
   }[];
   venue: string;
-  color: string;
-  accentBg: string;
 };
 
 const TEAMS: Team[] = [
