@@ -20,6 +20,7 @@ import { Route as GaleriaVideosRouteImport } from './routes/galeria.videos'
 import { Route as GaleriaFotosRouteImport } from './routes/galeria.fotos'
 import { Route as ConocenosLogrosRouteImport } from './routes/conocenos.logros'
 import { Route as ConocenosHistoriaRouteImport } from './routes/conocenos.historia'
+import { Route as QuienesSomosEquipoTecnicoSlugRouteImport } from './routes/quienes-somos.equipo-tecnico.$slug'
 
 const PreinscripcionRoute = PreinscripcionRouteImport.update({
   id: '/preinscripcion',
@@ -77,6 +78,12 @@ const ConocenosHistoriaRoute = ConocenosHistoriaRouteImport.update({
   path: '/conocenos/historia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuienesSomosEquipoTecnicoSlugRoute =
+  QuienesSomosEquipoTecnicoSlugRouteImport.update({
+    id: '/$slug',
+    path: '/$slug',
+    getParentRoute: () => QuienesSomosEquipoTecnicoRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -89,7 +96,8 @@ export interface FileRoutesByFullPath {
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
-  '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRoute
+  '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
+  '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,7 +110,8 @@ export interface FileRoutesByTo {
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
-  '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRoute
+  '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
+  '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,7 +125,8 @@ export interface FileRoutesById {
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
-  '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRoute
+  '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
+  '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -132,6 +142,7 @@ export interface FileRouteTypes {
     | '/galeria/fotos'
     | '/galeria/videos'
     | '/quienes-somos/equipo-tecnico'
+    | '/quienes-somos/equipo-tecnico/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/galeria/fotos'
     | '/galeria/videos'
     | '/quienes-somos/equipo-tecnico'
+    | '/quienes-somos/equipo-tecnico/$slug'
   id:
     | '__root__'
     | '/'
@@ -158,6 +170,7 @@ export interface FileRouteTypes {
     | '/galeria/fotos'
     | '/galeria/videos'
     | '/quienes-somos/equipo-tecnico'
+    | '/quienes-somos/equipo-tecnico/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,7 +184,7 @@ export interface RootRouteChildren {
   ConocenosLogrosRoute: typeof ConocenosLogrosRoute
   GaleriaFotosRoute: typeof GaleriaFotosRoute
   GaleriaVideosRoute: typeof GaleriaVideosRoute
-  QuienesSomosEquipoTecnicoRoute: typeof QuienesSomosEquipoTecnicoRoute
+  QuienesSomosEquipoTecnicoRoute: typeof QuienesSomosEquipoTecnicoRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -253,8 +266,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConocenosHistoriaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quienes-somos/equipo-tecnico/$slug': {
+      id: '/quienes-somos/equipo-tecnico/$slug'
+      path: '/$slug'
+      fullPath: '/quienes-somos/equipo-tecnico/$slug'
+      preLoaderRoute: typeof QuienesSomosEquipoTecnicoSlugRouteImport
+      parentRoute: typeof QuienesSomosEquipoTecnicoRoute
+    }
   }
 }
+
+interface QuienesSomosEquipoTecnicoRouteChildren {
+  QuienesSomosEquipoTecnicoSlugRoute: typeof QuienesSomosEquipoTecnicoSlugRoute
+}
+
+const QuienesSomosEquipoTecnicoRouteChildren: QuienesSomosEquipoTecnicoRouteChildren =
+  {
+    QuienesSomosEquipoTecnicoSlugRoute: QuienesSomosEquipoTecnicoSlugRoute,
+  }
+
+const QuienesSomosEquipoTecnicoRouteWithChildren =
+  QuienesSomosEquipoTecnicoRoute._addFileChildren(
+    QuienesSomosEquipoTecnicoRouteChildren,
+  )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -267,7 +301,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConocenosLogrosRoute: ConocenosLogrosRoute,
   GaleriaFotosRoute: GaleriaFotosRoute,
   GaleriaVideosRoute: GaleriaVideosRoute,
-  QuienesSomosEquipoTecnicoRoute: QuienesSomosEquipoTecnicoRoute,
+  QuienesSomosEquipoTecnicoRoute: QuienesSomosEquipoTecnicoRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
