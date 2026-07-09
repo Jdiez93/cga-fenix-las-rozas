@@ -65,14 +65,16 @@ export function SiteFooter() {
             </p>
             <div className="mt-7 flex items-center gap-3">
               {[
-                { Icon: Instagram, label: "Instagram" },
-                { Icon: Facebook, label: "Facebook" },
-                { Icon: Twitter, label: "Twitter" },
-              ].map(({ Icon, label }) => (
+                { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/cgafenix_lasrozas/" },
+                { Icon: Facebook, label: "Facebook", href: "https://www.facebook.com/cgafenixlasrozas/" },
+                { Icon: Twitter, label: "Twitter", href: "https://x.com/fenixlasrozas" },
+              ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
                   aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-carbon-foreground/80 hover:bg-primary hover:text-primary-foreground hover:border-transparent hover:scale-105 transition-all"
                 >
                   <Icon className="h-4 w-4" />
