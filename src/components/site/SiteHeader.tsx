@@ -80,13 +80,13 @@ export function SiteHeader() {
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <a href="https://www.instagram.com/cgafenix_lasrozas/" aria-label="Instagram" className="hover:text-primary transition-colors">
+            <a href="https://www.instagram.com/cgafenix_lasrozas/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-primary transition-colors">
               <Instagram className="h-4 w-4" />
             </a>
-            <a href="https://www.facebook.com/cgafenixlasrozas/" aria-label="Facebook" className="hover:text-primary transition-colors">
+            <a href="https://www.facebook.com/cgafenixlasrozas/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-primary transition-colors">
               <Facebook className="h-4 w-4" />
             </a>
-            <a href="https://x.com/fenixlasrozas" aria-label="Twitter" className="hover:text-primary transition-colors">
+            <a href="https://x.com/fenixlasrozas" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-primary transition-colors">
               <Twitter className="h-4 w-4" />
             </a>
           </div>
@@ -256,13 +256,13 @@ export function SiteHeader() {
                 <Mail className="h-4 w-4 text-primary" /> info@cgafenixlasrozas.es
               </a>
               <div className="flex items-center gap-4 pt-2">
-                <a href="https://www.instagram.com/cgafenix_lasrozas/" aria-label="Instagram" className="hover:text-primary">
+                <a href="https://www.instagram.com/cgafenix_lasrozas/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-primary">
                   <Instagram className="h-5 w-5" />
                 </a>
-                <a href="https://www.facebook.com/cgafenixlasrozas/" aria-label="Facebook" className="hover:text-primary">
+                <a href="https://www.facebook.com/cgafenixlasrozas/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-primary">
                   <Facebook className="h-5 w-5" />
                 </a>
-                <a href="https://x.com/fenixlasrozas" aria-label="Twitter" className="hover:text-primary">
+                <a href="https://x.com/fenixlasrozas" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-primary">
                   <Twitter className="h-5 w-5" />
                 </a>
               </div>
