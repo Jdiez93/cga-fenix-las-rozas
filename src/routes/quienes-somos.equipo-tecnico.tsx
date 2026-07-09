@@ -189,13 +189,24 @@ export function CoachPortrait({ coach, className = "" }: { coach: Coach; classNa
       />
     );
   }
-  // Placeholder retrato: silueta estilizada + iniciales, listo para sustituir por foto real
+  // Placeholder retrato: silueta estilizada lista para sustituir por foto real
   return (
     <div className={`relative flex h-full w-full items-center justify-center overflow-hidden bg-gradient-to-b from-muted via-background to-muted ${className}`}>
-      {/* Initials badge */}
-      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary text-2xl font-bold text-primary-foreground shadow-md">
-        {coach.initials}
-      </div>
+      <svg
+        viewBox="0 0 200 240"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-4/5 w-auto opacity-40"
+      >
+        {/* Head */}
+        <circle cx="100" cy="55" r="35" fill="currentColor" className="text-primary" />
+        {/* Shoulders / Bust */}
+        <path
+          d="M100 95c-30 0-55 18-65 45-5 12-8 28-8 45v25h146v-25c0-17-3-33-8-45-10-27-35-45-65-45z"
+          fill="currentColor"
+          className="text-primary"
+        />
+      </svg>
     </div>
   );
 }
