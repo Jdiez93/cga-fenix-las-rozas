@@ -217,7 +217,7 @@ function EquipoTecnicoPage() {
 
       {/* Grid de entrenadores */}
       <section className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2">
           {COACHES.map((coach, i) => (
             <CoachCard key={coach.slug} coach={coach} index={i} />
           ))}
