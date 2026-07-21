@@ -70,7 +70,7 @@ export const COACHES: Coach[] = [
     slug: "miguel-alvarez",
     name: "Miguel Álvarez",
     role: "Entrenador",
-    bio: "Gimnasta de competición durante casi una década y Juez de Gimnasia Artística Masculina nivel I.",
+    bio: "Gimnasta durante nueve años y Juez de Gimnasia Artística Masculina nivel I.",
     longBio: [
       "Miguel Álvarez es un apasionado de la gimnasia artística masculina, no solo como juez, sino también como un experimentado gimnasta. Con una trayectoria destacada, Miguel fue competidor activo desde 2011 hasta 2020, acumulando numerosos logros en su carrera.",
       "Adicionalmente, se ha desempeñado como **Juez de Gimnasia Artística Masculina nivel I**, lo que le permite evaluar y comprender la competición desde una perspectiva técnica y objetiva. Su experiencia en el tapiz y su conocimiento del deporte son fundamentales para guiar y motivar a nuestros gimnastas hacia la excelencia.",
