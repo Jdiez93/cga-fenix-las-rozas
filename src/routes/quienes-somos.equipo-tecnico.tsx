@@ -139,7 +139,7 @@ export const COACHES: Coach[] = [
     slug: "manuel-inigo",
     name: "Manuel Íñigo",
     role: "Entrenador",
-    bio: "Formado en el CAR de Madrid y miembro del equipo nacional. Juez Nivel II y entrenador Nivel II.",
+    bio: "Un entrenador con mucho que enseñar y con un corazón incomparable.",
     longBio: [
       "Manuel Íñigo es un entrenador con mucho que enseñar y con un corazón incomparable. Desde los dos años, la gimnasia artística ha sido su vida, lo que le ha hecho llegar a entrenar en el **Centro de Alto Rendimiento (CAR) de Madrid** y así formar parte del **equipo nacional de gimnasia**, acumulando grandes resultados y experiencias que no paran de multiplicarse, dedicando años de esfuerzo, disciplina y pasión al deporte que ama desde siempre.",
       "Manuel, además de gimnasta del equipo nacional, está titulado como **Juez de Nivel II** y cuenta con la titulación de **entrenador de gimnasia artística Nivel II**.",
