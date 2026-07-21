@@ -32,9 +32,9 @@ export type Coach = {
 export const COACHES: Coach[] = [
   {
     slug: "luis-s-rodriguez",
-    name: "Luis S. Rodríguez",
-    role: "Director Deportivo",
-    bio: "Referente de la gimnasia artística masculina en España. Internacional en 34 ocasiones y entrenador desde 1971.",
+    name: "D. Luis S. Rodríguez",
+    role: "Director Técnico",
+    bio: "Uno de los expertos con más experiencia en la gimnasia artística masculina, con un currículum destacado como gimnasta internacional y entrenador.",
     longBio: [
       "Luis S. Rodríguez es un referente en la gimnasia artística masculina, reconocido por su vasta experiencia y dedicación al deporte. Con un historial impresionante, ha sido miembro del equipo nacional de gimnasia y ha representado a nuestro país en competiciones internacionales en **treinta y cuatro ocasiones**. Desde 1971, ha estado al frente como entrenador, impartiendo no solo su conocimiento técnico, sino también su pasión por la gimnasia a generaciones de atletas.",
       "Con Luis como entrenador, nuestros gimnastas tienen la oportunidad de crecer y perfeccionar sus habilidades bajo una guía experta y comprometida. Su enfoque en el desarrollo personal y deportivo es fundamental para forjar no solo grandes atletas, sino también excelentes personas.",
@@ -70,7 +70,7 @@ export const COACHES: Coach[] = [
     slug: "miguel-alvarez",
     name: "Miguel Álvarez",
     role: "Entrenador",
-    bio: "Gimnasta de competición durante casi una década y Juez de Gimnasia Artística Masculina nivel I.",
+    bio: "Gimnasta durante nueve años y Juez de Gimnasia Artística Masculina nivel I.",
     longBio: [
       "Miguel Álvarez es un apasionado de la gimnasia artística masculina, no solo como juez, sino también como un experimentado gimnasta. Con una trayectoria destacada, Miguel fue competidor activo desde 2011 hasta 2020, acumulando numerosos logros en su carrera.",
       "Adicionalmente, se ha desempeñado como **Juez de Gimnasia Artística Masculina nivel I**, lo que le permite evaluar y comprender la competición desde una perspectiva técnica y objetiva. Su experiencia en el tapiz y su conocimiento del deporte son fundamentales para guiar y motivar a nuestros gimnastas hacia la excelencia.",
@@ -92,7 +92,7 @@ export const COACHES: Coach[] = [
     slug: "juan-toharia",
     name: "Juan Toharia",
     role: "Entrenador",
-    bio: "Gimnasta en activo en Las Rozas desde 2013, con una amplia experiencia competitiva y técnica.",
+    bio: "Gimnasta durante nueve años, con una amplia experiencia en gimnasia artística masculina.",
     longBio: [
       "Juan Toharia es un valioso miembro de nuestro equipo de entrenadores, cuya trayectoria en la gimnasia artística masculina lo convierte en un referente para nuestros atletas. Como gimnasta en activo en Las Rozas desde 2013 hasta la actualidad, Juan vive intensamente el deporte, acumulando una rica experiencia competitiva y técnica a lo largo de los años.",
       "Su pasión por la gimnasia lo ha impulsado a compartir su conocimiento y amor por este deporte con los nuevos talentos. Como entrenador, Juan se enfoca en desarrollar la técnica y la mentalidad de sus gimnastas, instándolos a superarse día a día y a disfrutar del proceso.",
@@ -105,7 +105,7 @@ export const COACHES: Coach[] = [
     slug: "lucia-navarro",
     name: "Lucía Navarro",
     role: "Entrenadora",
-    bio: "Titulada Nivel I, gimnasta desde los 3 años y competidora hasta los 17.",
+    bio: "Referente del cuerpo técnico, con una amplia trayectoria en gimnasia artística femenina.",
     longBio: [
       "Lucía Navarro es un valioso miembro de nuestro equipo de entrenadores, cuya trayectoria en la gimnasia artística femenina sirve de referencia para nuestros atletas.",
       "Lucía comenzó a practicar gimnasia a los 3 años y compitió desde los 8 hasta los 17 años. Durante su carrera, ha participado en **4 campeonatos de España** y en varios torneos autonómicos de la Comunidad de Madrid. Además, cuenta con el título de **entrenadora de gimnasia artística de Nivel I** y un **Grado Superior en Educación Infantil**. Su experiencia incluye el trabajo con niños y niñas en diversos campamentos y actividades extraescolares.",
@@ -126,7 +126,7 @@ export const COACHES: Coach[] = [
     slug: "elena-faura",
     name: "Elena Faura",
     role: "Entrenadora",
-    bio: "Internacional con la selección española de gimnasia acrobática. Titulada Nivel I en acrobática y artística.",
+    bio: "Entrenadora con gran pasión por la gimnasia y una sólida trayectoria en el deporte.",
     longBio: [
       "Elena Faura es una entrenadora con gran pasión por la gimnasia y una sólida trayectoria en el deporte, que comienza en la gimnasia acrobática, donde alcanzó el máximo nivel formando parte de la **selección española**. Su experiencia en el alto rendimiento le ha permitido acumular valiosos conocimientos que ahora transmite a sus gimnastas.",
       "Más allá de su carrera como deportista, encontró en la enseñanza su verdadera vocación, y se esforzó en la consecución de los títulos de **entrenadora de gimnasia acrobática Nivel I** y de **artística Nivel I**.",
@@ -139,7 +139,7 @@ export const COACHES: Coach[] = [
     slug: "manuel-inigo",
     name: "Manuel Íñigo",
     role: "Entrenador",
-    bio: "Formado en el CAR de Madrid y miembro del equipo nacional. Juez Nivel II y entrenador Nivel II.",
+    bio: "Un entrenador con mucho que enseñar y con un corazón incomparable.",
     longBio: [
       "Manuel Íñigo es un entrenador con mucho que enseñar y con un corazón incomparable. Desde los dos años, la gimnasia artística ha sido su vida, lo que le ha hecho llegar a entrenar en el **Centro de Alto Rendimiento (CAR) de Madrid** y así formar parte del **equipo nacional de gimnasia**, acumulando grandes resultados y experiencias que no paran de multiplicarse, dedicando años de esfuerzo, disciplina y pasión al deporte que ama desde siempre.",
       "Manuel, además de gimnasta del equipo nacional, está titulado como **Juez de Nivel II** y cuenta con la titulación de **entrenador de gimnasia artística Nivel II**.",
@@ -151,7 +151,7 @@ export const COACHES: Coach[] = [
     slug: "david-alonso",
     name: "David Alonso",
     role: "Entrenador",
-    bio: "Gimnasta en Las Rozas desde 2008 hasta 2023 y actualmente en el Club Gimnástico San Blas.",
+    bio: "Miembro valioso del cuerpo técnico, con una trayectoria que lo convierte en un referente dentro del club.",
     longBio: [
       "David Alonso es un valioso miembro de nuestro equipo de entrenadores, cuya trayectoria en la gimnasia artística lo convierte en un referente dentro del club. **Gimnasta en el Club Gimnástico Las Rozas desde 2008 hasta 2023**, David ha vivido intensamente este deporte, acumulando una amplia experiencia competitiva y técnica a lo largo de los años.",
       "Su pasión por la gimnasia lo ha llevado a seguir desarrollándose y creciendo en esta disciplina formando parte del **Club Gimnástico San Blas desde 2023**, donde continúa perfeccionando su técnica y enfrentando nuevos desafíos con dedicación y esfuerzo.",
@@ -217,7 +217,7 @@ function EquipoTecnicoPage() {
 
       {/* Grid de entrenadores */}
       <section className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2">
           {COACHES.map((coach, i) => (
             <CoachCard key={coach.slug} coach={coach} index={i} />
           ))}
@@ -272,41 +272,37 @@ function CoachCard({ coach, index }: { coach: Coach; index: number }) {
       <Link
         to="/quienes-somos/equipo-tecnico/$slug"
         params={{ slug: coach.slug }}
-        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_20px_50px_-20px_color-mix(in_oklab,hsl(var(--primary))_45%,transparent)]"
+        className="group relative grid h-full grid-cols-[42%_1fr] overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_20px_50px_-20px_color-mix(in_oklab,hsl(var(--primary))_45%,transparent)]"
       >
-        {/* Foto */}
-        <div className="relative aspect-[4/5] overflow-hidden">
+        {/* Foto (izquierda) */}
+        <div className="relative overflow-hidden">
           <CoachPortrait coach={coach} className="transition-transform duration-500 group-hover:scale-[1.04]" />
-
           {isDirector && (
-            <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground shadow-sm">
+            <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground shadow-sm">
               <Medal className="h-3 w-3" />
               Director
             </div>
           )}
-
-          {/* Bottom gradient */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card to-transparent" />
         </div>
 
-        {/* Info */}
-        <div className="flex flex-1 flex-col p-6">
+        {/* Info (derecha) */}
+        <div className="flex flex-col p-5 md:p-6">
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
             {coach.role}
           </p>
-          <h3 className="mt-2 text-xl font-bold tracking-tight text-foreground">
+          <h3 className="mt-2 text-lg font-bold tracking-tight text-foreground md:text-xl">
             {coach.name}
           </h3>
           <div className="mt-3 h-px w-10 bg-primary/60 transition-all duration-300 group-hover:w-20" />
 
           {coach.bio && (
-            <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-4 line-clamp-5 text-sm leading-relaxed text-muted-foreground">
               {coach.bio}
             </p>
           )}
 
-          <div className="mt-6 flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
-            <span>Ver perfil</span>
+          <div className="mt-auto pt-5 flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+            <span>Ver más</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </div>
         </div>
