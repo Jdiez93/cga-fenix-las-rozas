@@ -92,7 +92,7 @@ export const COACHES: Coach[] = [
     slug: "juan-toharia",
     name: "Juan Toharia",
     role: "Entrenador",
-    bio: "Gimnasta en activo en Las Rozas desde 2013, con una amplia experiencia competitiva y técnica.",
+    bio: "Gimnasta durante nueve años, con una amplia experiencia en gimnasia artística masculina.",
     longBio: [
       "Juan Toharia es un valioso miembro de nuestro equipo de entrenadores, cuya trayectoria en la gimnasia artística masculina lo convierte en un referente para nuestros atletas. Como gimnasta en activo en Las Rozas desde 2013 hasta la actualidad, Juan vive intensamente el deporte, acumulando una rica experiencia competitiva y técnica a lo largo de los años.",
       "Su pasión por la gimnasia lo ha impulsado a compartir su conocimiento y amor por este deporte con los nuevos talentos. Como entrenador, Juan se enfoca en desarrollar la técnica y la mentalidad de sus gimnastas, instándolos a superarse día a día y a disfrutar del proceso.",
