@@ -105,7 +105,7 @@ export const COACHES: Coach[] = [
     slug: "lucia-navarro",
     name: "Lucía Navarro",
     role: "Entrenadora",
-    bio: "Titulada Nivel I, gimnasta desde los 3 años y competidora hasta los 17.",
+    bio: "Referente del cuerpo técnico, con una amplia trayectoria en gimnasia artística femenina.",
     longBio: [
       "Lucía Navarro es un valioso miembro de nuestro equipo de entrenadores, cuya trayectoria en la gimnasia artística femenina sirve de referencia para nuestros atletas.",
       "Lucía comenzó a practicar gimnasia a los 3 años y compitió desde los 8 hasta los 17 años. Durante su carrera, ha participado en **4 campeonatos de España** y en varios torneos autonómicos de la Comunidad de Madrid. Además, cuenta con el título de **entrenadora de gimnasia artística de Nivel I** y un **Grado Superior en Educación Infantil**. Su experiencia incluye el trabajo con niños y niñas en diversos campamentos y actividades extraescolares.",
