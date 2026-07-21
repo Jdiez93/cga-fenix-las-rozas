@@ -151,7 +151,7 @@ export const COACHES: Coach[] = [
     slug: "david-alonso",
     name: "David Alonso",
     role: "Entrenador",
-    bio: "Gimnasta en Las Rozas desde 2008 hasta 2023 y actualmente en el Club Gimnástico San Blas.",
+    bio: "Miembro valioso del cuerpo técnico, con una trayectoria que lo convierte en un referente dentro del club.",
     longBio: [
       "David Alonso es un valioso miembro de nuestro equipo de entrenadores, cuya trayectoria en la gimnasia artística lo convierte en un referente dentro del club. **Gimnasta en el Club Gimnástico Las Rozas desde 2008 hasta 2023**, David ha vivido intensamente este deporte, acumulando una amplia experiencia competitiva y técnica a lo largo de los años.",
       "Su pasión por la gimnasia lo ha llevado a seguir desarrollándose y creciendo en esta disciplina formando parte del **Club Gimnástico San Blas desde 2023**, donde continúa perfeccionando su técnica y enfrentando nuevos desafíos con dedicación y esfuerzo.",
