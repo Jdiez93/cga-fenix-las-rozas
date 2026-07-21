@@ -272,41 +272,37 @@ function CoachCard({ coach, index }: { coach: Coach; index: number }) {
       <Link
         to="/quienes-somos/equipo-tecnico/$slug"
         params={{ slug: coach.slug }}
-        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_20px_50px_-20px_color-mix(in_oklab,hsl(var(--primary))_45%,transparent)]"
+        className="group relative grid h-full grid-cols-[42%_1fr] overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_20px_50px_-20px_color-mix(in_oklab,hsl(var(--primary))_45%,transparent)]"
       >
-        {/* Foto */}
-        <div className="relative aspect-[4/5] overflow-hidden">
+        {/* Foto (izquierda) */}
+        <div className="relative overflow-hidden">
           <CoachPortrait coach={coach} className="transition-transform duration-500 group-hover:scale-[1.04]" />
-
           {isDirector && (
-            <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground shadow-sm">
+            <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground shadow-sm">
               <Medal className="h-3 w-3" />
               Director
             </div>
           )}
-
-          {/* Bottom gradient */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card to-transparent" />
         </div>
 
-        {/* Info */}
-        <div className="flex flex-1 flex-col p-6">
+        {/* Info (derecha) */}
+        <div className="flex flex-col p-5 md:p-6">
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
             {coach.role}
           </p>
-          <h3 className="mt-2 text-xl font-bold tracking-tight text-foreground">
+          <h3 className="mt-2 text-lg font-bold tracking-tight text-foreground md:text-xl">
             {coach.name}
           </h3>
           <div className="mt-3 h-px w-10 bg-primary/60 transition-all duration-300 group-hover:w-20" />
 
           {coach.bio && (
-            <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-4 line-clamp-5 text-sm leading-relaxed text-muted-foreground">
               {coach.bio}
             </p>
           )}
 
-          <div className="mt-6 flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
-            <span>Ver perfil</span>
+          <div className="mt-auto pt-5 flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+            <span>Ver más</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </div>
         </div>
