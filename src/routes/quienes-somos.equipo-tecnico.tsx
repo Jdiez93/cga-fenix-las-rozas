@@ -32,9 +32,9 @@ export type Coach = {
 export const COACHES: Coach[] = [
   {
     slug: "luis-s-rodriguez",
-    name: "Luis S. Rodríguez",
-    role: "Director Deportivo",
-    bio: "Referente de la gimnasia artística masculina en España. Internacional en 34 ocasiones y entrenador desde 1971.",
+    name: "D. Luis S. Rodríguez",
+    role: "Director Técnico",
+    bio: "Uno de los expertos con más experiencia en la gimnasia artística masculina, con un currículum destacado como gimnasta internacional y entrenador.",
     longBio: [
       "Luis S. Rodríguez es un referente en la gimnasia artística masculina, reconocido por su vasta experiencia y dedicación al deporte. Con un historial impresionante, ha sido miembro del equipo nacional de gimnasia y ha representado a nuestro país en competiciones internacionales en **treinta y cuatro ocasiones**. Desde 1971, ha estado al frente como entrenador, impartiendo no solo su conocimiento técnico, sino también su pasión por la gimnasia a generaciones de atletas.",
       "Con Luis como entrenador, nuestros gimnastas tienen la oportunidad de crecer y perfeccionar sus habilidades bajo una guía experta y comprometida. Su enfoque en el desarrollo personal y deportivo es fundamental para forjar no solo grandes atletas, sino también excelentes personas.",
