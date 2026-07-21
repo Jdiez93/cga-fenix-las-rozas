@@ -126,7 +126,7 @@ export const COACHES: Coach[] = [
     slug: "elena-faura",
     name: "Elena Faura",
     role: "Entrenadora",
-    bio: "Internacional con la selección española de gimnasia acrobática. Titulada Nivel I en acrobática y artística.",
+    bio: "Entrenadora con gran pasión por la gimnasia y una sólida trayectoria en el deporte.",
     longBio: [
       "Elena Faura es una entrenadora con gran pasión por la gimnasia y una sólida trayectoria en el deporte, que comienza en la gimnasia acrobática, donde alcanzó el máximo nivel formando parte de la **selección española**. Su experiencia en el alto rendimiento le ha permitido acumular valiosos conocimientos que ahora transmite a sus gimnastas.",
       "Más allá de su carrera como deportista, encontró en la enseñanza su verdadera vocación, y se esforzó en la consecución de los títulos de **entrenadora de gimnasia acrobática Nivel I** y de **artística Nivel I**.",
