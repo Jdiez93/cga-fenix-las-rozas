@@ -1,17 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Users, Medal } from "lucide-react";
+import { ArrowRight, Medal } from "lucide-react";
 
 export const Route = createFileRoute("/quienes-somos/equipo-tecnico")({
-  head: () => ({
-    meta: [
-      { title: "Equipo técnico · CGA Fénix Las Rozas" },
-      { name: "description", content: "Conoce al equipo técnico del club CGA Fénix Las Rozas: entrenadores con amplia trayectoria en gimnasia artística." },
-      { property: "og:title", content: "Equipo técnico · CGA Fénix Las Rozas" },
-      { property: "og:description", content: "Nuestros entrenadores: pasión, experiencia y compromiso con la gimnasia." },
-    ],
-  }),
-  component: EquipoTecnicoPage,
+  component: () => <Outlet />,
 });
 
 export type Coach = {
