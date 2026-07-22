@@ -212,7 +212,7 @@ export function CoachPortrait({ coach, className = "" }: { coach: Coach; classNa
   );
 }
 
-function CoachCard({ coach, index }: { coach: Coach; index: number }) {
+export function CoachCard({ coach, index }: { coach: Coach; index: number }) {
   const isDirector = coach.highlight;
   return (
     <motion.div
