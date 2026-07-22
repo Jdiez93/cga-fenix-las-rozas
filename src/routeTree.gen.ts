@@ -20,6 +20,7 @@ import { Route as GaleriaVideosRouteImport } from './routes/galeria.videos'
 import { Route as GaleriaFotosRouteImport } from './routes/galeria.fotos'
 import { Route as ConocenosLogrosRouteImport } from './routes/conocenos.logros'
 import { Route as ConocenosHistoriaRouteImport } from './routes/conocenos.historia'
+import { Route as QuienesSomosEquipoTecnicoIndexRouteImport } from './routes/quienes-somos.equipo-tecnico.index'
 import { Route as QuienesSomosEquipoTecnicoSlugRouteImport } from './routes/quienes-somos.equipo-tecnico.$slug'
 
 const PreinscripcionRoute = PreinscripcionRouteImport.update({
@@ -78,6 +79,12 @@ const ConocenosHistoriaRoute = ConocenosHistoriaRouteImport.update({
   path: '/conocenos/historia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuienesSomosEquipoTecnicoIndexRoute =
+  QuienesSomosEquipoTecnicoIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => QuienesSomosEquipoTecnicoRoute,
+  } as any)
 const QuienesSomosEquipoTecnicoSlugRoute =
   QuienesSomosEquipoTecnicoSlugRouteImport.update({
     id: '/$slug',
@@ -98,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/galeria/videos': typeof GaleriaVideosRoute
   '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
+  '/quienes-somos/equipo-tecnico/': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,8 +118,8 @@ export interface FileRoutesByTo {
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
-  '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
+  '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/galeria/videos': typeof GaleriaVideosRoute
   '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
+  '/quienes-somos/equipo-tecnico/': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/galeria/videos'
     | '/quienes-somos/equipo-tecnico'
     | '/quienes-somos/equipo-tecnico/$slug'
+    | '/quienes-somos/equipo-tecnico/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,8 +165,8 @@ export interface FileRouteTypes {
     | '/conocenos/logros'
     | '/galeria/fotos'
     | '/galeria/videos'
-    | '/quienes-somos/equipo-tecnico'
     | '/quienes-somos/equipo-tecnico/$slug'
+    | '/quienes-somos/equipo-tecnico'
   id:
     | '__root__'
     | '/'
@@ -171,6 +181,7 @@ export interface FileRouteTypes {
     | '/galeria/videos'
     | '/quienes-somos/equipo-tecnico'
     | '/quienes-somos/equipo-tecnico/$slug'
+    | '/quienes-somos/equipo-tecnico/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -266,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConocenosHistoriaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quienes-somos/equipo-tecnico/': {
+      id: '/quienes-somos/equipo-tecnico/'
+      path: '/'
+      fullPath: '/quienes-somos/equipo-tecnico/'
+      preLoaderRoute: typeof QuienesSomosEquipoTecnicoIndexRouteImport
+      parentRoute: typeof QuienesSomosEquipoTecnicoRoute
+    }
     '/quienes-somos/equipo-tecnico/$slug': {
       id: '/quienes-somos/equipo-tecnico/$slug'
       path: '/$slug'
@@ -278,11 +296,13 @@ declare module '@tanstack/react-router' {
 
 interface QuienesSomosEquipoTecnicoRouteChildren {
   QuienesSomosEquipoTecnicoSlugRoute: typeof QuienesSomosEquipoTecnicoSlugRoute
+  QuienesSomosEquipoTecnicoIndexRoute: typeof QuienesSomosEquipoTecnicoIndexRoute
 }
 
 const QuienesSomosEquipoTecnicoRouteChildren: QuienesSomosEquipoTecnicoRouteChildren =
   {
     QuienesSomosEquipoTecnicoSlugRoute: QuienesSomosEquipoTecnicoSlugRoute,
+    QuienesSomosEquipoTecnicoIndexRoute: QuienesSomosEquipoTecnicoIndexRoute,
   }
 
 const QuienesSomosEquipoTecnicoRouteWithChildren =
