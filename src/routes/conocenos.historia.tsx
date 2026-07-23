@@ -112,7 +112,7 @@ function HistoriaPage() {
           >
             <p>
               <span className="font-bold text-foreground">CGA Fénix Las Rozas</span> es un club de
-              gimnasia artística de reciente creación que, en apenas cinco años, ha logrado un
+              gimnasia artística de reciente creación que, en apenas seis años, ha logrado un
               impulso significativo en la práctica de este deporte en el municipio. Nuestro
               compromiso se basa en el esfuerzo y la dedicación, con el objetivo de alcanzar metas
               ambiciosas en el desarrollo de nuestros gimnastas.
@@ -146,7 +146,7 @@ function HistoriaPage() {
 
         <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {[
-            { k: "5+", v: "Años de historia" },
+            { k: "6+", v: "Años de historia" },
             { k: "100%", v: "Inclusivo" },
             { k: "4", v: "Niveles" },
             { k: "★", v: "Referente nacional" },
