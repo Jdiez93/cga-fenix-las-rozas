@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Clock, MapPin, Users, CalendarDays, ChevronRight } from "lucide-react";
+import { Clock, MapPin, Users, CalendarDays, ChevronRight, Info, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/equipos")({
   head: () => ({
     meta: [
       { title: "Nuestros equipos · CGA Fénix Las Rozas" },
-      { name: "description", content: "Descubre los equipos de gimnasia del club CGA Fénix Las Rozas: iniciación, perfeccionamiento, competición y adultos." },
+      { name: "description", content: "Descubre los equipos y horarios del club CGA Fénix Las Rozas: grupos por edad, no competición, competición y adultos." },
       { property: "og:title", content: "Nuestros equipos · CGA Fénix Las Rozas" },
-      { property: "og:description", content: "Descubre los equipos de gimnasia del club CGA Fénix Las Rozas." },
+      { property: "og:description", content: "Grupos, edades y horarios de entrenamiento del CGA Fénix Las Rozas." },
     ],
   }),
   component: EquiposPage,
@@ -18,8 +18,10 @@ export const Route = createFileRoute("/equipos")({
 type Team = {
   id: string;
   label: string;
+  shortLabel: string;
   emoji: string;
   ageRange: string;
+  category: string;
   hours: string;
   description: string;
   schedule: {
@@ -31,38 +33,89 @@ type Team = {
 
 const TEAMS: Team[] = [
   {
-    id: "iniciacion",
-    label: "Iniciación",
+    id: "peques-nc-1",
+    label: "Peques · No competición (Turno 1)",
+    shortLabel: "Peques T1",
     emoji: "🌱",
-    ageRange: "4 a 7 años",
+    ageRange: "4 a 9 años",
+    category: "No competición",
     hours: "4 horas semanales",
-    description: "Primeros pasos en la gimnasia artística. Juegos, coordinación y diversión para los más pequeños.",
+    description: "Primeros pasos en la gimnasia artística para los más pequeños. Juegos, coordinación y diversión en el turno de tarde temprana.",
     schedule: [
-      { day: "Sábados", slots: ["16:30h. – 18:30h.", "18:30h. – 20:30h."] },
-      { day: "Domingos", slots: ["10:00h. – 12:00h.", "12:00h. – 14:00h."] },
+      { day: "Sábados", slots: ["16:30h. – 18:30h."] },
+      { day: "Domingos", slots: ["10:00h. – 12:00h."] },
     ],
     venue: "Polideportivo Entremontes",
   },
   {
-    id: "perfeccionamiento",
-    label: "Perfeccionamiento",
+    id: "peques-nc-2",
+    label: "Peques · No competición (Turno 2)",
+    shortLabel: "Peques T2",
+    emoji: "🌿",
+    ageRange: "4 a 9 años",
+    category: "No competición",
+    hours: "4 horas semanales",
+    description: "Mismo enfoque lúdico y formativo que el Turno 1, pero en horario más tardío para las familias que lo prefieran.",
+    schedule: [
+      { day: "Sábados", slots: ["18:30h. – 20:30h."] },
+      { day: "Domingos", slots: ["12:00h. – 14:00h."] },
+    ],
+    venue: "Polideportivo Entremontes",
+  },
+  {
+    id: "peques-comp",
+    label: "Peques · Competición",
+    shortLabel: "Peques Comp.",
     emoji: "🔥",
-    ageRange: "8 a 11 años",
-    hours: "4 horas semanales",
-    description: "Consolidación de técnicas, desarrollo de habilidades y preparación para competición.",
+    ageRange: "4 a 9 años",
+    category: "Competición",
+    hours: "8 horas semanales",
+    description: "Iniciación a la competición para los más pequeños con talento y motivación. Trabajo técnico progresivo y preparación para sus primeros campeonatos.",
     schedule: [
-      { day: "Sábados", slots: ["16:30h. – 18:30h.", "18:30h. – 20:30h."] },
-      { day: "Domingos", slots: ["10:00h. – 12:00h.", "12:00h. – 14:00h."] },
+      { day: "Sábados", slots: ["16:30h. – 20:30h."] },
+      { day: "Domingos", slots: ["10:00h. – 14:00h."] },
     ],
     venue: "Polideportivo Entremontes",
   },
   {
-    id: "competicion",
-    label: "Competición",
+    id: "mayores-nc-1",
+    label: "Mayores · No competición (Turno 1)",
+    shortLabel: "Mayores T1",
+    emoji: "✨",
+    ageRange: "9 años o más",
+    category: "No competición",
+    hours: "4 horas semanales",
+    description: "Gimnasia formativa para gimnastas a partir de 9 años sin objetivos competitivos. Turno de tarde temprana.",
+    schedule: [
+      { day: "Sábados", slots: ["16:30h. – 18:30h."] },
+      { day: "Domingos", slots: ["10:00h. – 12:00h."] },
+    ],
+    venue: "Polideportivo Entremontes",
+  },
+  {
+    id: "mayores-nc-2",
+    label: "Mayores · No competición (Turno 2)",
+    shortLabel: "Mayores T2",
+    emoji: "🌟",
+    ageRange: "9 años o más",
+    category: "No competición",
+    hours: "4 horas semanales",
+    description: "Mismo plan de trabajo que el Turno 1 para gimnastas a partir de 9 años, en horario más tardío.",
+    schedule: [
+      { day: "Sábados", slots: ["18:30h. – 20:30h."] },
+      { day: "Domingos", slots: ["12:00h. – 14:00h."] },
+    ],
+    venue: "Polideportivo Entremontes",
+  },
+  {
+    id: "mayores-comp",
+    label: "Mayores · Competición",
+    shortLabel: "Mayores Comp.",
     emoji: "🏆",
-    ageRange: "A partir de 7 años",
+    ageRange: "9 años o más",
+    category: "Competición",
     hours: "8 horas semanales",
-    description: "Entrenamiento de alto rendimiento. Compromiso, disciplina y pasión por la gimnasia.",
+    description: "Entrenamiento de alto rendimiento. Compromiso, disciplina y pasión por la gimnasia para competir al máximo nivel.",
     schedule: [
       { day: "Sábados", slots: ["16:30h. – 20:30h."] },
       { day: "Domingos", slots: ["10:00h. – 14:00h."] },
@@ -72,8 +125,10 @@ const TEAMS: Team[] = [
   {
     id: "adultos",
     label: "Adultos",
+    shortLabel: "Adultos",
     emoji: "💪",
     ageRange: "18 años en adelante",
+    category: "Adultos",
     hours: "2 horas semanales",
     description: "Gimnasia para adultos. Flexibilidad, fuerza y diversión sin límite de edad.",
     schedule: [
@@ -110,10 +165,10 @@ function EquiposPage() {
               <span>Nuestros equipos</span>
             </div>
             <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-              Encuentra tu nivel
+              Encuentra tu grupo
             </h1>
             <p className="mt-3 text-base text-muted-foreground md:text-lg">
-              Desde los primeros pasos hasta la competición de alto rendimiento. Cada gimnasta tiene su sitio en el Fénix.
+              Los horarios se organizan según la edad y los objetivos de cada gimnasta: iniciación, formación no competitiva, competición y adultos.
             </p>
           </motion.div>
         </div>
@@ -121,7 +176,7 @@ function EquiposPage() {
 
       {/* Main content */}
       <section className="mx-auto max-w-7xl px-6 py-12 md:py-16">
-        <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
+        <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
           {/* Sidebar tabs */}
           <nav className="space-y-1" role="tablist" aria-label="Equipos">
             {TEAMS.map((team) => {
@@ -132,13 +187,12 @@ function EquiposPage() {
                   onClick={() => setActiveId(team.id)}
                   role="tab"
                   aria-selected={isActive}
-                  className={`group relative flex w-full items-center gap-3 rounded-xl px-4 py-3.5 text-left transition-all duration-200 ${
+                  className={`group relative flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition-all duration-200 ${
                     isActive
                       ? "bg-card font-semibold text-foreground shadow-sm ring-1 ring-border"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
-                  {/* Active indicator bar */}
                   {isActive && (
                     <motion.div
                       layoutId="activeTeamIndicator"
@@ -156,7 +210,12 @@ function EquiposPage() {
                     {team.emoji}
                   </span>
 
-                  <span className="flex-1">{team.label}</span>
+                  <span className="flex-1 min-w-0">
+                    <span className="block truncate text-sm">{team.shortLabel}</span>
+                    <span className="block truncate text-[11px] font-normal text-muted-foreground">
+                      {team.ageRange}
+                    </span>
+                  </span>
 
                   <ChevronRight
                     className={`h-4 w-4 shrink-0 transition-all duration-200 ${
@@ -171,7 +230,7 @@ function EquiposPage() {
           </nav>
 
           {/* Content panel */}
-          <div className="min-w-0">
+          <div className="min-w-0 space-y-6">
             <div className="rounded-2xl border-2 border-primary/60 bg-card shadow-sm">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -187,8 +246,11 @@ function EquiposPage() {
                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl bg-primary/10">
                       {activeTeam.emoji}
                     </div>
-                    <div className="min-w-0">
-                      <h2 className="text-2xl font-bold tracking-tight text-foreground">
+                    <div className="min-w-0 flex-1">
+                      <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-primary">
+                        {activeTeam.category}
+                      </span>
+                      <h2 className="mt-2 text-2xl font-bold tracking-tight text-foreground">
                         {activeTeam.label}
                       </h2>
                       <p className="mt-1 text-sm text-muted-foreground">
@@ -250,6 +312,33 @@ function EquiposPage() {
                 </motion.div>
               </AnimatePresence>
             </div>
+
+            {/* Info notice */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="relative overflow-hidden rounded-2xl border border-primary/30 bg-primary/5 p-6 md:p-7"
+            >
+              <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />
+              <div className="relative flex items-start gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                  <Sparkles className="h-5 w-5" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-base font-semibold text-foreground">
+                    Próximas novedades
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    Estamos trabajando para que el <strong className="text-foreground">Ayuntamiento de Las Rozas</strong> nos amplíe los horarios de entrenamiento. Además, hemos solicitado una <strong className="text-foreground">sala polivalente</strong> para trabajar la parte postural: preparación física y ballet.
+                  </p>
+                  <p className="mt-2 flex items-center gap-2 text-xs font-medium text-primary">
+                    <Info className="h-3.5 w-3.5" />
+                    Os iremos informando a medida que tengamos novedades.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
 
         </div>
