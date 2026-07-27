@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Sparkles, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Sparkles, ArrowRight } from "lucide-react";
 import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
 import mainLogo from "@/assets/sponsors/main.png.asset.json";
 import geniosLogo from "@/assets/sponsors/genios.png.asset.json";
