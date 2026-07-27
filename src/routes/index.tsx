@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Sparkles, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Sparkles, ArrowRight } from "lucide-react";
 import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
 import mainLogo from "@/assets/sponsors/main.png.asset.json";
 import geniosLogo from "@/assets/sponsors/genios.png.asset.json";
@@ -128,155 +128,127 @@ function Mission() {
   );
 }
 
-/* ---------------- SPONSORS CAROUSEL ---------------- */
+/* ---------------- SPONSORS CAROUSEL — infinite premium marquee ---------------- */
 function SponsorsMarquee() {
-  const [perView, setPerView] = useState(1);
-  const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState<string | null>(null);
 
-  // Responsive items per view
-  useEffect(() => {
-    const update = () => {
-      const w = window.innerWidth;
-      if (w >= 1024) setPerView(3);
-      else if (w >= 640) setPerView(2);
-      else setPerView(1);
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  const totalPages = Math.max(1, SPONSORS.length - perView + 1);
-
-  useEffect(() => {
-    if (index > totalPages - 1) setIndex(0);
-  }, [totalPages, index]);
-
-  const next = useCallback(
-    () => setIndex((i) => (i + 1) % totalPages),
-    [totalPages]
-  );
-  const prev = useCallback(
-    () => setIndex((i) => (i - 1 + totalPages) % totalPages),
-    [totalPages]
-  );
-
-  // Autoplay
-  useEffect(() => {
-    if (paused || totalPages <= 1) return;
-    const id = window.setInterval(next, 3500);
-    return () => window.clearInterval(id);
-  }, [paused, next, totalPages]);
-
-  const slideWidth = 100 / perView;
-  const translate = -(index * slideWidth);
+  // Duplicate the list so the marquee loops seamlessly
+  const track = [...SPONSORS, ...SPONSORS];
 
   return (
-    <section className="relative border-t border-border bg-muted/40 py-10 sm:py-14">
-      <div className="mx-auto max-w-7xl px-6 text-center">
+    <section className="relative overflow-hidden border-t border-border bg-gradient-to-b from-background via-muted/30 to-background py-20 sm:py-24">
+      {/* subtle ambient accents */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-24 left-1/4 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -bottom-24 right-1/4 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 text-center">
         <RevealOnScroll>
-          <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.3em] text-primary">
+          <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.3em] text-primary">
             <Sparkles className="h-3.5 w-3.5" />
             Con el apoyo de
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl font-black uppercase tracking-tight text-foreground">
-            Nuestros patrocinadores
+          <h2 className="mt-5 text-3xl sm:text-4xl xl:text-5xl font-black uppercase tracking-tight text-foreground">
+            Nuestros <span className="text-primary">patrocinadores</span>
           </h2>
           <div className="mx-auto mt-5 h-1 w-20 rounded-full bg-primary" />
-          <p className="mx-auto mt-5 max-w-xl text-sm text-muted-foreground">
-            Marcas que confían en el proyecto Fénix y hacen posible que cada gimnasta llegue
-            más lejos.
+          <p className="mx-auto mt-5 max-w-xl text-sm sm:text-base text-muted-foreground">
+            Marcas que confían en el proyecto Fénix y hacen posible que cada gimnasta
+            llegue más lejos.
           </p>
         </RevealOnScroll>
       </div>
 
+      {/* Marquee viewport */}
       <div
-        className="relative mx-auto mt-8 max-w-6xl px-4 sm:px-14"
+        className="relative mt-14"
         onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocusCapture={() => setPaused(true)}
-        onBlurCapture={() => setPaused(false)}
+        onMouseLeave={() => {
+          setPaused(false);
+          setActive(null);
+        }}
       >
-        {/* Arrows */}
-        <button
-          type="button"
-          aria-label="Anterior patrocinador"
-          onClick={prev}
-          className="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/95 p-3 text-foreground shadow-md backdrop-blur transition-all hover:scale-110 hover:border-primary hover:bg-primary hover:text-primary-foreground sm:inline-flex"
-        >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        <button
-          type="button"
-          aria-label="Siguiente patrocinador"
-          onClick={next}
-          className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/95 p-3 text-foreground shadow-md backdrop-blur transition-all hover:scale-110 hover:border-primary hover:bg-primary hover:text-primary-foreground sm:inline-flex"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
+        {/* Edge fades */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent" />
 
-        {/* Viewport */}
-        <div ref={containerRef} className="overflow-hidden">
-          <div
-            className="flex transition-transform duration-700 ease-out"
-            style={{ transform: `translateX(${translate}%)` }}
-          >
-            {SPONSORS.map((s) => (
-              <div
-                key={s.name}
-                className="shrink-0 px-3"
-                style={{ width: `${slideWidth}%` }}
+        <div
+          className="flex w-max gap-6 sm:gap-8 animate-marquee"
+          style={{ animationPlayState: paused ? "paused" : "running" }}
+        >
+          {track.map((s, i) => {
+            const key = `${s.name}-${i}`;
+            const isActive = active === key;
+            const dim = active !== null && !isActive;
+            return (
+              <a
+                key={key}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setActive(key)}
+                aria-label={`${s.name} — ${s.tag}`}
+                className={`group relative flex h-44 w-64 sm:h-48 sm:w-72 shrink-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 ease-out will-change-transform ${
+                  isActive
+                    ? "-translate-y-1.5 border-primary shadow-elegant"
+                    : dim
+                    ? "opacity-50 scale-[0.97]"
+                    : "hover:-translate-y-1"
+                }`}
               >
-                <a
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group/card relative flex h-36 w-full flex-col items-center justify-center overflow-hidden rounded-2xl border border-border bg-card px-6 py-4 transition-all duration-500 hover:-translate-y-2 hover:border-primary hover:shadow-elegant"
-                >
-                  <div className="pointer-events-none absolute -top-10 -right-10 h-24 w-24 rounded-full bg-primary/0 blur-2xl transition-all duration-500 group-hover/card:bg-primary/40" />
+                {/* corner glow */}
+                <div
+                  className={`pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full blur-3xl transition-opacity duration-500 ${
+                    isActive ? "bg-primary/30 opacity-100" : "bg-primary/0 opacity-0"
+                  }`}
+                />
 
-                  <div
-                    className={`flex h-20 w-full items-center justify-center rounded-lg ${
-                      s.dark ? "bg-carbon px-3" : ""
+                {/* logo area */}
+                <div
+                  className={`relative flex flex-1 items-center justify-center px-6 py-6 ${
+                    s.dark ? "bg-carbon" : "bg-background"
+                  }`}
+                >
+                  <img
+                    src={s.logo}
+                    alt={s.name}
+                    loading="lazy"
+                    className="max-h-20 max-w-[80%] object-contain transition-transform duration-500 ease-out group-hover:scale-[1.08]"
+                  />
+                </div>
+
+                {/* footer strip */}
+                <div className="relative flex items-center justify-between gap-3 border-t border-border bg-card px-4 py-3">
+                  <div className="flex flex-col items-start text-left">
+                    <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-foreground">
+                      {s.name}
+                    </span>
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                      {s.tag}
+                    </span>
+                  </div>
+                  <span
+                    className={`inline-flex h-7 w-7 items-center justify-center rounded-full border transition-all duration-300 ${
+                      isActive
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border text-muted-foreground group-hover:border-primary group-hover:text-primary"
                     }`}
                   >
-                    <img
-                      src={s.logo}
-                      alt={s.name}
-                      className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover/card:scale-110"
-                      loading="lazy"
-                    />
-                  </div>
-
-                  <span className="relative mt-4 text-[10px] uppercase tracking-[0.22em] text-muted-foreground transition-colors group-hover/card:text-foreground">
-                    {s.tag}
+                    <ArrowRight className="h-3.5 w-3.5" />
                   </span>
+                </div>
 
-                  <span className="absolute inset-x-6 bottom-3 h-[2px] origin-left scale-x-0 bg-primary transition-transform duration-500 group-hover/card:scale-x-100" />
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Dots */}
-        <div className="mt-8 flex items-center justify-center gap-2">
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`Ir al slide ${i + 1}`}
-              aria-current={i === index}
-              onClick={() => setIndex(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === index
-                  ? "w-8 bg-primary"
-                  : "w-2 bg-border hover:bg-muted-foreground"
-              }`}
-            />
-          ))}
+                {/* animated bottom bar */}
+                <span
+                  className={`absolute inset-x-0 bottom-0 h-[3px] origin-left bg-primary transition-transform duration-500 ease-out ${
+                    isActive ? "scale-x-100" : "scale-x-0"
+                  }`}
+                />
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
