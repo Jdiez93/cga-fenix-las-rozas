@@ -131,7 +131,6 @@ function Mission() {
 /* ---------------- SPONSORS CAROUSEL — infinite premium marquee ---------------- */
 function SponsorsMarquee() {
   const [paused, setPaused] = useState(false);
-  const [active, setActive] = useState<string | null>(null);
 
   // Duplicate the list so the marquee loops seamlessly
   const track = [...SPONSORS, ...SPONSORS];
@@ -165,10 +164,7 @@ function SponsorsMarquee() {
       <div
         className="relative mt-14"
         onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => {
-          setPaused(false);
-          setActive(null);
-        }}
+        onMouseLeave={() => setPaused(false)}
       >
         {/* Edge fades */}
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent" />
@@ -180,31 +176,15 @@ function SponsorsMarquee() {
         >
           {track.map((s, i) => {
             const key = `${s.name}-${i}`;
-            const isActive = active === key;
-            const dim = active !== null && !isActive;
             return (
               <a
                 key={key}
                 href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                onMouseEnter={() => setActive(key)}
                 aria-label={`${s.name} — ${s.tag}`}
-                className={`group relative flex h-44 w-64 sm:h-48 sm:w-72 shrink-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 ease-out will-change-transform ${
-                  isActive
-                    ? "-translate-y-1.5 border-primary shadow-elegant"
-                    : dim
-                    ? "opacity-50 scale-[0.97]"
-                    : "hover:-translate-y-1"
-                }`}
+                className="relative flex h-44 w-64 sm:h-48 sm:w-72 shrink-0 flex-col overflow-hidden rounded-2xl border border-border bg-card will-change-transform"
               >
-                {/* corner glow */}
-                <div
-                  className={`pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full blur-3xl transition-opacity duration-500 ${
-                    isActive ? "bg-primary/30 opacity-100" : "bg-primary/0 opacity-0"
-                  }`}
-                />
-
                 {/* logo area */}
                 <div
                   className={`relative flex flex-1 items-center justify-center px-6 py-6 ${
@@ -215,12 +195,12 @@ function SponsorsMarquee() {
                     src={s.logo}
                     alt={s.name}
                     loading="lazy"
-                    className="max-h-20 max-w-[80%] object-contain transition-transform duration-500 ease-out group-hover:scale-[1.08]"
+                    className="max-h-20 max-w-[80%] object-contain"
                   />
                 </div>
 
                 {/* footer strip */}
-                <div className="relative flex items-center justify-between gap-3 border-t border-border bg-card px-4 py-3">
+                <div className="relative flex items-center border-t border-border bg-card px-4 py-3">
                   <div className="flex flex-col items-start text-left">
                     <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-foreground">
                       {s.name}
@@ -229,23 +209,7 @@ function SponsorsMarquee() {
                       {s.tag}
                     </span>
                   </div>
-                  <span
-                    className={`inline-flex h-7 w-7 items-center justify-center rounded-full border transition-all duration-300 ${
-                      isActive
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border text-muted-foreground group-hover:border-primary group-hover:text-primary"
-                    }`}
-                  >
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
                 </div>
-
-                {/* animated bottom bar */}
-                <span
-                  className={`absolute inset-x-0 bottom-0 h-[3px] origin-left bg-primary transition-transform duration-500 ease-out ${
-                    isActive ? "scale-x-100" : "scale-x-0"
-                  }`}
-                />
               </a>
             );
           })}
