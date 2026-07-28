@@ -200,6 +200,8 @@ function PreinscripcionPage() {
       if (!/^\S+@\S+\.\S+$/.test(data.email || "")) stepErrors.email = "Email no válido";
       if (!data.domicilio || data.domicilio.trim().length < 5)
         stepErrors.domicilio = "Indica el domicilio completo";
+      if (!/^[0-9]{5}$/.test(data.codigoPostal || ""))
+        stepErrors.codigoPostal = "CP no válido (5 dígitos)";
     }
     if (current === 3) {
       if (!data.matriculadoAnterior) stepErrors.matriculadoAnterior = "Selecciona una opción";
