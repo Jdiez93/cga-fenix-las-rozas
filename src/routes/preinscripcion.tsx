@@ -64,6 +64,12 @@ const schema = z.object({
     .regex(/^[+0-9\s]+$/, "Sólo números y +"),
   email: z.string().trim().email("Email no válido").max(160),
   domicilio: z.string().trim().min(5, "Indica el domicilio").max(240),
+  codigoPostal: z
+    .string()
+    .trim()
+    .min(5, "CP no válido")
+    .max(5, "CP no válido")
+    .regex(/^[0-9]{5}$/, "Debe tener 5 dígitos"),
   matriculadoAnterior: z.enum(["si", "no"], {
     required_error: "Selecciona una opción",
   }),
@@ -85,6 +91,7 @@ type FormData = {
   telefono: string;
   email: string;
   domicilio: string;
+  codigoPostal: string;
   matriculadoAnterior?: "si" | "no";
   grupoAnterior: string;
   nivelPrevio: string;
@@ -99,6 +106,7 @@ const initial: FormData = {
   telefono: "",
   email: "",
   domicilio: "",
+  codigoPostal: "",
   grupoAnterior: "",
   nivelPrevio: "",
   infoAdicional: "",
@@ -192,6 +200,8 @@ function PreinscripcionPage() {
       if (!/^\S+@\S+\.\S+$/.test(data.email || "")) stepErrors.email = "Email no válido";
       if (!data.domicilio || data.domicilio.trim().length < 5)
         stepErrors.domicilio = "Indica el domicilio completo";
+      if (!/^[0-9]{5}$/.test(data.codigoPostal || ""))
+        stepErrors.codigoPostal = "CP no válido (5 dígitos)";
     }
     if (current === 3) {
       if (!data.matriculadoAnterior) stepErrors.matriculadoAnterior = "Selecciona una opción";
@@ -646,17 +656,29 @@ function StepFamilia({ data, errors, update }: StepProps) {
           </div>
         </Field>
       </div>
-      <Field label="Domicilio" required error={errors.domicilio}>
-        <div className="relative">
-          <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
+      <div className="grid gap-4 sm:grid-cols-[1fr_120px]">
+        <Field label="Domicilio" required error={errors.domicilio}>
+          <div className="relative">
+            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
+            <Input
+              value={data.domicilio}
+              onChange={(e) => update("domicilio", e.target.value)}
+              placeholder="Calle, número, piso, Las Rozas"
+              className="h-12 pl-9"
+            />
+          </div>
+        </Field>
+        <Field label="Código postal" required error={errors.codigoPostal}>
           <Input
-            value={data.domicilio}
-            onChange={(e) => update("domicilio", e.target.value)}
-            placeholder="Calle, número, piso, CP, Las Rozas"
-            className="h-12 pl-9"
+            value={data.codigoPostal}
+            onChange={(e) => update("codigoPostal", e.target.value)}
+            placeholder="28231"
+            maxLength={5}
+            inputMode="numeric"
+            className="h-12"
           />
-        </div>
-      </Field>
+        </Field>
+      </div>
     </>
   );
 }
@@ -769,6 +791,7 @@ function StepConfirmacion({ data, errors, update }: StepProps) {
     { label: "Teléfono", value: data.telefono || "—" },
     { label: "Email", value: data.email || "—" },
     { label: "Domicilio", value: data.domicilio || "—" },
+    { label: "Código postal", value: data.codigoPostal || "—" },
     {
       label: "Matriculado 25·26",
       value: data.matriculadoAnterior === "si" ? "Sí" : data.matriculadoAnterior === "no" ? "No" : "—",
