@@ -106,6 +106,7 @@ const initial: FormData = {
   telefono: "",
   email: "",
   domicilio: "",
+  codigoPostal: "",
   grupoAnterior: "",
   nivelPrevio: "",
   infoAdicional: "",
