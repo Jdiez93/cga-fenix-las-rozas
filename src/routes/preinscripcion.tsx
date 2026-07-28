@@ -656,17 +656,29 @@ function StepFamilia({ data, errors, update }: StepProps) {
           </div>
         </Field>
       </div>
-      <Field label="Domicilio" required error={errors.domicilio}>
-        <div className="relative">
-          <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
+      <div className="grid gap-4 sm:grid-cols-[1fr_120px]">
+        <Field label="Domicilio" required error={errors.domicilio}>
+          <div className="relative">
+            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
+            <Input
+              value={data.domicilio}
+              onChange={(e) => update("domicilio", e.target.value)}
+              placeholder="Calle, número, piso, Las Rozas"
+              className="h-12 pl-9"
+            />
+          </div>
+        </Field>
+        <Field label="Código postal" required error={errors.codigoPostal}>
           <Input
-            value={data.domicilio}
-            onChange={(e) => update("domicilio", e.target.value)}
-            placeholder="Calle, número, piso, CP, Las Rozas"
-            className="h-12 pl-9"
+            value={data.codigoPostal}
+            onChange={(e) => update("codigoPostal", e.target.value)}
+            placeholder="28231"
+            maxLength={5}
+            inputMode="numeric"
+            className="h-12"
           />
-        </div>
-      </Field>
+        </Field>
+      </div>
     </>
   );
 }
