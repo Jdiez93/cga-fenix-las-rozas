@@ -64,6 +64,12 @@ const schema = z.object({
     .regex(/^[+0-9\s]+$/, "Sólo números y +"),
   email: z.string().trim().email("Email no válido").max(160),
   domicilio: z.string().trim().min(5, "Indica el domicilio").max(240),
+  codigoPostal: z
+    .string()
+    .trim()
+    .min(5, "CP no válido")
+    .max(5, "CP no válido")
+    .regex(/^[0-9]{5}$/, "Debe tener 5 dígitos"),
   matriculadoAnterior: z.enum(["si", "no"], {
     required_error: "Selecciona una opción",
   }),
