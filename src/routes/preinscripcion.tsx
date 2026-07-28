@@ -791,6 +791,7 @@ function StepConfirmacion({ data, errors, update }: StepProps) {
     { label: "Teléfono", value: data.telefono || "—" },
     { label: "Email", value: data.email || "—" },
     { label: "Domicilio", value: data.domicilio || "—" },
+    { label: "Código postal", value: data.codigoPostal || "—" },
     {
       label: "Matriculado 25·26",
       value: data.matriculadoAnterior === "si" ? "Sí" : data.matriculadoAnterior === "no" ? "No" : "—",
