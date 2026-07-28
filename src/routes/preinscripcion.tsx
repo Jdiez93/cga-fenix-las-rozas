@@ -91,6 +91,7 @@ type FormData = {
   telefono: string;
   email: string;
   domicilio: string;
+  codigoPostal: string;
   matriculadoAnterior?: "si" | "no";
   grupoAnterior: string;
   nivelPrevio: string;
