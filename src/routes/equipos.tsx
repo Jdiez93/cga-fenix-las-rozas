@@ -33,106 +33,61 @@ type Team = {
 
 const TEAMS: Team[] = [
   {
-    id: "peques-nc-1",
-    label: "Peques · No competición (Turno 1)",
-    shortLabel: "Peques T1",
+    id: "iniciacion",
+    label: "Iniciación",
+    shortLabel: "Iniciación",
     emoji: "🌱",
-    ageRange: "4 a 9 años",
-    category: "No competición",
-    hours: "4 horas semanales",
-    description: "Primeros pasos en la gimnasia artística para los más pequeños. Juegos, coordinación y diversión en el turno de tarde temprana.",
+    ageRange: "3 a 5 años",
+    category: "Iniciación",
+    hours: "2 horas semanales",
+    description: "Primeros pasos en la gimnasia artística. Juegos, coordinación, ritmo y diversión para los más pequeños en dos turnos disponibles.",
     schedule: [
-      { day: "Sábados", slots: ["16:30h. – 18:30h."] },
-      { day: "Domingos", slots: ["10:00h. – 12:00h."] },
+      { day: "Sábados", slots: ["16:30 h. – 18:30 h.", "17:30 h. – 18:30 h."] },
+      { day: "Domingos", slots: ["10:00 h. – 11:00 h.", "11:00 h. – 12:00 h."] },
     ],
     venue: "Polideportivo Entremontes",
   },
   {
-    id: "peques-nc-2",
-    label: "Peques · No competición (Turno 2)",
-    shortLabel: "Peques T2",
+    id: "perfeccionamiento",
+    label: "Perfeccionamiento",
+    shortLabel: "Perfeccionamiento",
     emoji: "🌿",
-    ageRange: "4 a 9 años",
-    category: "No competición",
+    ageRange: "6 a 10 años",
+    category: "Perfeccionamiento",
     hours: "4 horas semanales",
-    description: "Mismo enfoque lúdico y formativo que el Turno 1, pero en horario más tardío para las familias que lo prefieran.",
+    description: "Formación técnica para gimnastas que buscan consolidar su base sin competir. Trabajo progresivo y adaptado en dos turnos.",
     schedule: [
-      { day: "Sábados", slots: ["18:30h. – 20:30h."] },
-      { day: "Domingos", slots: ["12:00h. – 14:00h."] },
+      { day: "Sábados", slots: ["16:30 h. – 18:30 h.", "18:30 h. – 20:30 h."] },
+      { day: "Domingos", slots: ["10:00 h. – 12:00 h.", "12:00 h. – 14:00 h."] },
     ],
     venue: "Polideportivo Entremontes",
   },
   {
-    id: "peques-comp",
-    label: "Peques · Competición",
-    shortLabel: "Peques Comp.",
-    emoji: "🔥",
-    ageRange: "4 a 9 años",
-    category: "Competición",
-    hours: "8 horas semanales",
-    description: "Iniciación a la competición para los más pequeños con talento y motivación. Trabajo técnico progresivo y preparación para sus primeros campeonatos.",
-    schedule: [
-      { day: "Sábados", slots: ["16:30h. – 20:30h."] },
-      { day: "Domingos", slots: ["10:00h. – 14:00h."] },
-    ],
-    venue: "Polideportivo Entremontes",
-  },
-  {
-    id: "mayores-nc-1",
-    label: "Mayores · No competición (Turno 1)",
-    shortLabel: "Mayores T1",
-    emoji: "✨",
-    ageRange: "9 años o más",
-    category: "No competición",
-    hours: "4 horas semanales",
-    description: "Gimnasia formativa para gimnastas a partir de 9 años sin objetivos competitivos. Turno de tarde temprana.",
-    schedule: [
-      { day: "Sábados", slots: ["16:30h. – 18:30h."] },
-      { day: "Domingos", slots: ["10:00h. – 12:00h."] },
-    ],
-    venue: "Polideportivo Entremontes",
-  },
-  {
-    id: "mayores-nc-2",
-    label: "Mayores · No competición (Turno 2)",
-    shortLabel: "Mayores T2",
-    emoji: "🌟",
-    ageRange: "9 años o más",
-    category: "No competición",
-    hours: "4 horas semanales",
-    description: "Mismo plan de trabajo que el Turno 1 para gimnastas a partir de 9 años, en horario más tardío.",
-    schedule: [
-      { day: "Sábados", slots: ["18:30h. – 20:30h."] },
-      { day: "Domingos", slots: ["12:00h. – 14:00h."] },
-    ],
-    venue: "Polideportivo Entremontes",
-  },
-  {
-    id: "mayores-comp",
-    label: "Mayores · Competición",
-    shortLabel: "Mayores Comp.",
+    id: "competicion",
+    label: "Competición",
+    shortLabel: "Competición",
     emoji: "🏆",
-    ageRange: "9 años o más",
+    ageRange: "A partir de 7 años",
     category: "Competición",
     hours: "8 horas semanales",
-    description: "Entrenamiento de alto rendimiento. Compromiso, disciplina y pasión por la gimnasia para competir al máximo nivel.",
+    description: "Entrenamiento de alto rendimiento para gimnastas con compromiso competitivo. Trabajo técnico, físico y artístico al máximo nivel.",
     schedule: [
-      { day: "Sábados", slots: ["16:30h. – 20:30h."] },
-      { day: "Domingos", slots: ["10:00h. – 14:00h."] },
+      { day: "Sábados", slots: ["16:30 h. – 20:30 h."] },
+      { day: "Domingos", slots: ["10:00 h. – 14:00 h."] },
     ],
     venue: "Polideportivo Entremontes",
   },
   {
-    id: "adultos",
-    label: "Adultos",
-    shortLabel: "Adultos",
+    id: "veteranos",
+    label: "Veteranos",
+    shortLabel: "Veteranos",
     emoji: "💪",
     ageRange: "18 años en adelante",
-    category: "Adultos",
+    category: "Veteranos",
     hours: "2 horas semanales",
-    description: "Gimnasia para adultos. Flexibilidad, fuerza y diversión sin límite de edad.",
+    description: "Gimnasia para adultos. Flexibilidad, fuerza, movilidad y diversión sin límite de edad ni experiencia previa.",
     schedule: [
-      { day: "Domingos", slots: ["12:00h. – 14:00h."] },
+      { day: "Domingos", slots: ["12:00 h. – 14:00 h."] },
     ],
     venue: "Polideportivo Entremontes",
   },
@@ -323,18 +278,18 @@ function EquiposPage() {
               <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />
               <div className="relative flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                  <Sparkles className="h-5 w-5" />
+                  <Info className="h-5 w-5" />
                 </div>
                 <div className="min-w-0">
                   <h3 className="text-base font-semibold text-foreground">
-                    Próximas novedades
+                    Información sobre la instalación municipal
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Estamos trabajando para que el <strong className="text-foreground">Ayuntamiento de Las Rozas</strong> nos amplíe los horarios de entrenamiento. Además, hemos solicitado una <strong className="text-foreground">sala polivalente</strong> para trabajar la parte postural: preparación física y ballet.
+                    Por motivos ajenos al club, solo disponemos del uso del <strong className="text-foreground">Polideportivo Municipal Entremontes</strong> los sábados por la tarde —excepto el segundo sábado de mes— y los domingos. Este reparto lo marca la Concejalía de Deportes del Ayuntamiento de Las Rozas, una decisión que hemos recurrido y denunciado, esperando que se corrija esta injusticia.
                   </p>
                   <p className="mt-2 flex items-center gap-2 text-xs font-medium text-primary">
-                    <Info className="h-3.5 w-3.5" />
-                    Os iremos informando a medida que tengamos novedades.
+                    <Sparkles className="h-3.5 w-3.5" />
+                    Os iremos informando de cualquier cambio en los horarios.
                   </p>
                 </div>
               </div>
