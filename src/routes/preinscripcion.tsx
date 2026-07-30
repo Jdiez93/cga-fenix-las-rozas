@@ -778,11 +778,11 @@ function StepConfirmacion({ data, errors, update }: StepProps) {
     { label: "Domicilio", value: data.domicilio || "—" },
     { label: "Código postal", value: data.codigoPostal || "—" },
     {
-      label: "Matriculado 25·26",
+      label: "Ha practicado gimnasia",
       value: data.matriculadoAnterior === "si" ? "Sí" : data.matriculadoAnterior === "no" ? "No" : "—",
     },
-    ...(data.grupoAnterior ? [{ label: "Grupo anterior", value: data.grupoAnterior }] : []),
-    ...(data.nivelPrevio ? [{ label: "Nivel previo", value: data.nivelPrevio }] : []),
+    ...(data.nivelPrevio ? [{ label: "Club y nivel", value: data.nivelPrevio }] : []),
+
     ...(data.infoAdicional ? [{ label: "Info adicional", value: data.infoAdicional }] : []),
   ];
 
