@@ -693,7 +693,7 @@ function StepExperiencia({ data, errors, update }: StepProps) {
       />
 
       <Field
-        label="¿Estaba matriculado/a en el curso anterior en el Club Fénix Las Rozas?"
+        label="¿Has practicado gimnasia anteriormente?"
         required
         error={errors.matriculadoAnterior}
       >
@@ -726,7 +726,7 @@ function StepExperiencia({ data, errors, update }: StepProps) {
                   {opt === "si" ? "Sí" : "No"}
                 </p>
                 <p className="text-[11px] text-muted-foreground">
-                  {opt === "si" ? "Ya soy del Fénix" : "Primera temporada"}
+                  {opt === "si" ? "Ya he practicado" : "Nunca he practicado"}
                 </p>
               </div>
               {data.matriculadoAnterior === opt && (
@@ -739,30 +739,17 @@ function StepExperiencia({ data, errors, update }: StepProps) {
 
       {yes && (
         <div className="animate-fade-in">
-          <Field
-            label="Si ya estuvo el curso pasado matriculado con nosotros, ¿en qué grupo / con qué entrenador estuvo?"
-          >
-            <Input
-              value={data.grupoAnterior}
-              onChange={(e) => update("grupoAnterior", e.target.value)}
-              placeholder="Ej. Competición 6-9 años · entrenadora Ana"
-              className="h-12"
+          <Field label="¿En qué club y a qué nivel?">
+            <Textarea
+              value={data.nivelPrevio}
+              onChange={(e) => update("nivelPrevio", e.target.value)}
+              placeholder="Club, categoría, nivel, años de práctica, competiciones..."
+              rows={3}
             />
           </Field>
         </div>
       )}
 
-      <Field
-        label="Si ha practicado en otro club, ¿a qué nivel?"
-        hint="Déjalo en blanco si nunca ha practicado gimnasia o ya era gimnasta del CGA Fénix."
-      >
-        <Textarea
-          value={data.nivelPrevio}
-          onChange={(e) => update("nivelPrevio", e.target.value)}
-          placeholder="Club, categoría, años, competiciones..."
-          rows={3}
-        />
-      </Field>
 
       <Field label="¿Alguna información adicional relevante?" hint="Problemas de salud, alergias, consideraciones para el entrenamiento…">
         <Textarea
