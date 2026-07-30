@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Medal } from "lucide-react";
 
