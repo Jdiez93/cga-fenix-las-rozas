@@ -278,18 +278,18 @@ function EquiposPage() {
               <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />
               <div className="relative flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                  <Sparkles className="h-5 w-5" />
+                  <Info className="h-5 w-5" />
                 </div>
                 <div className="min-w-0">
                   <h3 className="text-base font-semibold text-foreground">
-                    Próximas novedades
+                    Información sobre la instalación municipal
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Estamos trabajando para que el <strong className="text-foreground">Ayuntamiento de Las Rozas</strong> nos amplíe los horarios de entrenamiento. Además, hemos solicitado una <strong className="text-foreground">sala polivalente</strong> para trabajar la parte postural: preparación física y ballet.
+                    Por motivos ajenos al club, solo disponemos del uso del <strong className="text-foreground">Polideportivo Municipal Entremontes</strong> los sábados por la tarde —excepto el segundo sábado de mes— y los domingos. Este reparto lo marca la Concejalía de Deportes del Ayuntamiento de Las Rozas, una decisión que hemos recurrido y denunciado, esperando que se corrija esta injusticia.
                   </p>
                   <p className="mt-2 flex items-center gap-2 text-xs font-medium text-primary">
-                    <Info className="h-3.5 w-3.5" />
-                    Os iremos informando a medida que tengamos novedades.
+                    <Sparkles className="h-3.5 w-3.5" />
+                    Os iremos informando de cualquier cambio en los horarios.
                   </p>
                 </div>
               </div>
