@@ -221,10 +221,9 @@ export function CoachCard({ coach, index }: { coach: Coach; index: number }) {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.3) }}
     >
-      <a
-        href={`/quienes-somos/equipo-tecnico/${coach.slug}`}
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        to="/quienes-somos/equipo-tecnico/$slug"
+        params={{ slug: coach.slug }}
         className="group relative grid h-full grid-cols-[42%_1fr] overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_20px_50px_-20px_color-mix(in_oklab,hsl(var(--primary))_45%,transparent)]"
       >
         {/* Foto (izquierda) */}
