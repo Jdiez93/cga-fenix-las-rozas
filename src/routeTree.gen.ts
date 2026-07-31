@@ -15,11 +15,14 @@ import { Route as EquiposRouteImport } from './routes/equipos'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as AvisoLegalRouteImport } from './routes/aviso-legal'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as QuienesSomosEquipoTecnicoRouteImport } from './routes/quienes-somos.equipo-tecnico'
 import { Route as GaleriaVideosRouteImport } from './routes/galeria.videos'
 import { Route as GaleriaFotosRouteImport } from './routes/galeria.fotos'
 import { Route as ConocenosLogrosRouteImport } from './routes/conocenos.logros'
 import { Route as ConocenosHistoriaRouteImport } from './routes/conocenos.historia'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as QuienesSomosEquipoTecnicoIndexRouteImport } from './routes/quienes-somos.equipo-tecnico.index'
 import { Route as QuienesSomosEquipoTecnicoSlugRouteImport } from './routes/quienes-somos.equipo-tecnico.$slug'
 
@@ -53,6 +56,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const QuienesSomosEquipoTecnicoRoute =
   QuienesSomosEquipoTecnicoRouteImport.update({
     id: '/quienes-somos/equipo-tecnico',
@@ -79,6 +87,16 @@ const ConocenosHistoriaRoute = ConocenosHistoriaRouteImport.update({
   path: '/conocenos/historia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const QuienesSomosEquipoTecnicoIndexRoute =
   QuienesSomosEquipoTecnicoIndexRouteImport.update({
     id: '/',
@@ -99,11 +117,14 @@ export interface FileRoutesByFullPath {
   '/equipos': typeof EquiposRoute
   '/medios': typeof MediosRoute
   '/preinscripcion': typeof PreinscripcionRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/login': typeof AdminLoginRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
   '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
+  '/admin/': typeof AdminIndexRoute
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
   '/quienes-somos/equipo-tecnico/': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
@@ -114,10 +135,13 @@ export interface FileRoutesByTo {
   '/equipos': typeof EquiposRoute
   '/medios': typeof MediosRoute
   '/preinscripcion': typeof PreinscripcionRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/login': typeof AdminLoginRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
+  '/admin': typeof AdminIndexRoute
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
   '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
@@ -129,11 +153,14 @@ export interface FileRoutesById {
   '/equipos': typeof EquiposRoute
   '/medios': typeof MediosRoute
   '/preinscripcion': typeof PreinscripcionRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/login': typeof AdminLoginRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
   '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
+  '/admin/': typeof AdminIndexRoute
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
   '/quienes-somos/equipo-tecnico/': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
@@ -146,11 +173,14 @@ export interface FileRouteTypes {
     | '/equipos'
     | '/medios'
     | '/preinscripcion'
+    | '/admin/dashboard'
+    | '/admin/login'
     | '/conocenos/historia'
     | '/conocenos/logros'
     | '/galeria/fotos'
     | '/galeria/videos'
     | '/quienes-somos/equipo-tecnico'
+    | '/admin/'
     | '/quienes-somos/equipo-tecnico/$slug'
     | '/quienes-somos/equipo-tecnico/'
   fileRoutesByTo: FileRoutesByTo
@@ -161,10 +191,13 @@ export interface FileRouteTypes {
     | '/equipos'
     | '/medios'
     | '/preinscripcion'
+    | '/admin/dashboard'
+    | '/admin/login'
     | '/conocenos/historia'
     | '/conocenos/logros'
     | '/galeria/fotos'
     | '/galeria/videos'
+    | '/admin'
     | '/quienes-somos/equipo-tecnico/$slug'
     | '/quienes-somos/equipo-tecnico'
   id:
@@ -175,11 +208,14 @@ export interface FileRouteTypes {
     | '/equipos'
     | '/medios'
     | '/preinscripcion'
+    | '/admin/dashboard'
+    | '/admin/login'
     | '/conocenos/historia'
     | '/conocenos/logros'
     | '/galeria/fotos'
     | '/galeria/videos'
     | '/quienes-somos/equipo-tecnico'
+    | '/admin/'
     | '/quienes-somos/equipo-tecnico/$slug'
     | '/quienes-somos/equipo-tecnico/'
   fileRoutesById: FileRoutesById
@@ -191,11 +227,14 @@ export interface RootRouteChildren {
   EquiposRoute: typeof EquiposRoute
   MediosRoute: typeof MediosRoute
   PreinscripcionRoute: typeof PreinscripcionRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   ConocenosHistoriaRoute: typeof ConocenosHistoriaRoute
   ConocenosLogrosRoute: typeof ConocenosLogrosRoute
   GaleriaFotosRoute: typeof GaleriaFotosRoute
   GaleriaVideosRoute: typeof GaleriaVideosRoute
   QuienesSomosEquipoTecnicoRoute: typeof QuienesSomosEquipoTecnicoRouteWithChildren
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -242,6 +281,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/quienes-somos/equipo-tecnico': {
       id: '/quienes-somos/equipo-tecnico'
       path: '/quienes-somos/equipo-tecnico'
@@ -275,6 +321,20 @@ declare module '@tanstack/react-router' {
       path: '/conocenos/historia'
       fullPath: '/conocenos/historia'
       preLoaderRoute: typeof ConocenosHistoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/quienes-somos/equipo-tecnico/': {
@@ -317,11 +377,14 @@ const rootRouteChildren: RootRouteChildren = {
   EquiposRoute: EquiposRoute,
   MediosRoute: MediosRoute,
   PreinscripcionRoute: PreinscripcionRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminLoginRoute: AdminLoginRoute,
   ConocenosHistoriaRoute: ConocenosHistoriaRoute,
   ConocenosLogrosRoute: ConocenosLogrosRoute,
   GaleriaFotosRoute: GaleriaFotosRoute,
   GaleriaVideosRoute: GaleriaVideosRoute,
   QuienesSomosEquipoTecnicoRoute: QuienesSomosEquipoTecnicoRouteWithChildren,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

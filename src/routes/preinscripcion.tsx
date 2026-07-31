@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
 import { useMemo, useState } from "react";
 import { z } from "zod";
 import { format } from "date-fns";
@@ -242,29 +243,44 @@ function PreinscripcionPage() {
 
     setSubmitting(true);
     try {
-      const record = {
-        ...parsed.data,
-        fechaNacimiento: parsed.data.fechaNacimiento.toISOString(),
-        createdAt: new Date().toISOString(),
-        temporada: "2026-2027",
-        ref: "FNX-" + Date.now().toString(36).toUpperCase(),
-      };
-      // Persistencia local temporal — se migrará a la base de datos del panel de administración
-      if (typeof window !== "undefined") {
-        const prev = JSON.parse(localStorage.getItem("fenix_preinscripciones") || "[]");
-        prev.push(record);
-        localStorage.setItem("fenix_preinscripciones", JSON.stringify(prev));
-      }
-      await new Promise((r) => setTimeout(r, 700));
-      setDone({ ref: record.ref, nombre: parsed.data.gimnastaNombre });
+      const partes = parsed.data.gimnastaNombre.trim().split(/\s+/);
+      const nombre = partes[0];
+      const apellidos = partes.slice(1).join(" ") || "—";
+      const ref = "FNX-" + Date.now().toString(36).toUpperCase();
+      const nacimiento = parsed.data.fechaNacimiento;
+      const fechaISO = `${nacimiento.getFullYear()}-${String(nacimiento.getMonth() + 1).padStart(2, "0")}-${String(nacimiento.getDate()).padStart(2, "0")}`;
+
+      const { error } = await supabase.from("inscripciones").insert({
+        gimnasta_nombre: nombre,
+        gimnasta_apellidos: apellidos,
+        fecha_nacimiento: fechaISO,
+        padre_nombre_apellidos: parsed.data.padres,
+        madre_nombre_apellidos: null,
+        telefono: parsed.data.telefono,
+        email: parsed.data.email,
+        domicilio: parsed.data.domicilio,
+        codigo_postal: parsed.data.codigoPostal,
+        experiencia_previa: parsed.data.matriculadoAnterior === "si",
+        club_nivel_anterior: parsed.data.grupoAnterior?.trim() || null,
+        info_adicional: parsed.data.infoAdicional?.trim() || null,
+      });
+
+      if (error) throw error;
+
+      setDone({ ref, nombre: parsed.data.gimnastaNombre });
       toast.success("¡Preinscripción enviada!");
     } catch (e) {
       console.error(e);
-      toast.error("No se ha podido enviar. Inténtalo de nuevo.");
+      const message =
+        e instanceof Error && e.message
+          ? `No se ha podido enviar: ${e.message}`
+          : "No se ha podido enviar. Revisa tu conexión e inténtalo de nuevo.";
+      toast.error(message);
     } finally {
       setSubmitting(false);
     }
   }
+
 
   return (
     <div className="relative bg-gradient-to-b from-background via-background to-muted/40">
