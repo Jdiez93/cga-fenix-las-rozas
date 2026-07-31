@@ -14,7 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      inscripciones: {
+        Row: {
+          club_nivel_anterior: string | null
+          codigo_postal: string
+          created_at: string
+          domicilio: string
+          email: string
+          experiencia_previa: boolean
+          fecha_nacimiento: string
+          gimnasta_apellidos: string
+          gimnasta_nombre: string
+          id: string
+          info_adicional: string | null
+          madre_nombre_apellidos: string | null
+          padre_nombre_apellidos: string | null
+          telefono: string
+        }
+        Insert: {
+          club_nivel_anterior?: string | null
+          codigo_postal: string
+          created_at?: string
+          domicilio: string
+          email: string
+          experiencia_previa?: boolean
+          fecha_nacimiento: string
+          gimnasta_apellidos: string
+          gimnasta_nombre: string
+          id?: string
+          info_adicional?: string | null
+          madre_nombre_apellidos?: string | null
+          padre_nombre_apellidos?: string | null
+          telefono: string
+        }
+        Update: {
+          club_nivel_anterior?: string | null
+          codigo_postal?: string
+          created_at?: string
+          domicilio?: string
+          email?: string
+          experiencia_previa?: boolean
+          fecha_nacimiento?: string
+          gimnasta_apellidos?: string
+          gimnasta_nombre?: string
+          id?: string
+          info_adicional?: string | null
+          madre_nombre_apellidos?: string | null
+          padre_nombre_apellidos?: string | null
+          telefono?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
