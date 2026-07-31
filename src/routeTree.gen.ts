@@ -15,6 +15,7 @@ import { Route as EquiposRouteImport } from './routes/equipos'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as AvisoLegalRouteImport } from './routes/aviso-legal'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as QuienesSomosEquipoTecnicoRouteImport } from './routes/quienes-somos.equipo-tecnico'
 import { Route as GaleriaVideosRouteImport } from './routes/galeria.videos'
 import { Route as GaleriaFotosRouteImport } from './routes/galeria.fotos'
@@ -51,6 +52,11 @@ const AvisoLegalRoute = AvisoLegalRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QuienesSomosEquipoTecnicoRoute =
@@ -104,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
   '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
+  '/admin/': typeof AdminIndexRoute
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
   '/quienes-somos/equipo-tecnico/': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
+  '/admin': typeof AdminIndexRoute
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
   '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
   '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
+  '/admin/': typeof AdminIndexRoute
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
   '/quienes-somos/equipo-tecnico/': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/galeria/fotos'
     | '/galeria/videos'
     | '/quienes-somos/equipo-tecnico'
+    | '/admin/'
     | '/quienes-somos/equipo-tecnico/$slug'
     | '/quienes-somos/equipo-tecnico/'
   fileRoutesByTo: FileRoutesByTo
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
     | '/conocenos/logros'
     | '/galeria/fotos'
     | '/galeria/videos'
+    | '/admin'
     | '/quienes-somos/equipo-tecnico/$slug'
     | '/quienes-somos/equipo-tecnico'
   id:
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
     | '/galeria/fotos'
     | '/galeria/videos'
     | '/quienes-somos/equipo-tecnico'
+    | '/admin/'
     | '/quienes-somos/equipo-tecnico/$slug'
     | '/quienes-somos/equipo-tecnico/'
   fileRoutesById: FileRoutesById
@@ -196,6 +208,7 @@ export interface RootRouteChildren {
   GaleriaFotosRoute: typeof GaleriaFotosRoute
   GaleriaVideosRoute: typeof GaleriaVideosRoute
   QuienesSomosEquipoTecnicoRoute: typeof QuienesSomosEquipoTecnicoRouteWithChildren
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -240,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/quienes-somos/equipo-tecnico': {
@@ -322,6 +342,7 @@ const rootRouteChildren: RootRouteChildren = {
   GaleriaFotosRoute: GaleriaFotosRoute,
   GaleriaVideosRoute: GaleriaVideosRoute,
   QuienesSomosEquipoTecnicoRoute: QuienesSomosEquipoTecnicoRouteWithChildren,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
