@@ -21,6 +21,7 @@ import { Route as GaleriaVideosRouteImport } from './routes/galeria.videos'
 import { Route as GaleriaFotosRouteImport } from './routes/galeria.fotos'
 import { Route as ConocenosLogrosRouteImport } from './routes/conocenos.logros'
 import { Route as ConocenosHistoriaRouteImport } from './routes/conocenos.historia'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as QuienesSomosEquipoTecnicoIndexRouteImport } from './routes/quienes-somos.equipo-tecnico.index'
 import { Route as QuienesSomosEquipoTecnicoSlugRouteImport } from './routes/quienes-somos.equipo-tecnico.$slug'
 
@@ -85,6 +86,11 @@ const ConocenosHistoriaRoute = ConocenosHistoriaRouteImport.update({
   path: '/conocenos/historia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const QuienesSomosEquipoTecnicoIndexRoute =
   QuienesSomosEquipoTecnicoIndexRouteImport.update({
     id: '/',
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/equipos': typeof EquiposRoute
   '/medios': typeof MediosRoute
   '/preinscripcion': typeof PreinscripcionRoute
+  '/admin/login': typeof AdminLoginRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/equipos': typeof EquiposRoute
   '/medios': typeof MediosRoute
   '/preinscripcion': typeof PreinscripcionRoute
+  '/admin/login': typeof AdminLoginRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   '/equipos': typeof EquiposRoute
   '/medios': typeof MediosRoute
   '/preinscripcion': typeof PreinscripcionRoute
+  '/admin/login': typeof AdminLoginRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/equipos'
     | '/medios'
     | '/preinscripcion'
+    | '/admin/login'
     | '/conocenos/historia'
     | '/conocenos/logros'
     | '/galeria/fotos'
@@ -171,6 +181,7 @@ export interface FileRouteTypes {
     | '/equipos'
     | '/medios'
     | '/preinscripcion'
+    | '/admin/login'
     | '/conocenos/historia'
     | '/conocenos/logros'
     | '/galeria/fotos'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/equipos'
     | '/medios'
     | '/preinscripcion'
+    | '/admin/login'
     | '/conocenos/historia'
     | '/conocenos/logros'
     | '/galeria/fotos'
@@ -203,6 +215,7 @@ export interface RootRouteChildren {
   EquiposRoute: typeof EquiposRoute
   MediosRoute: typeof MediosRoute
   PreinscripcionRoute: typeof PreinscripcionRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   ConocenosHistoriaRoute: typeof ConocenosHistoriaRoute
   ConocenosLogrosRoute: typeof ConocenosLogrosRoute
   GaleriaFotosRoute: typeof GaleriaFotosRoute
@@ -297,6 +310,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConocenosHistoriaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/quienes-somos/equipo-tecnico/': {
       id: '/quienes-somos/equipo-tecnico/'
       path: '/'
@@ -337,6 +357,7 @@ const rootRouteChildren: RootRouteChildren = {
   EquiposRoute: EquiposRoute,
   MediosRoute: MediosRoute,
   PreinscripcionRoute: PreinscripcionRoute,
+  AdminLoginRoute: AdminLoginRoute,
   ConocenosHistoriaRoute: ConocenosHistoriaRoute,
   ConocenosLogrosRoute: ConocenosLogrosRoute,
   GaleriaFotosRoute: GaleriaFotosRoute,
