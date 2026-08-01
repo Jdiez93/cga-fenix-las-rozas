@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Bell,
@@ -8,6 +8,7 @@ import {
   RefreshCw,
   Search,
   Users,
+  Video,
 } from "lucide-react";
 import { Toaster, toast } from "sonner";
 
@@ -239,6 +240,13 @@ function AdminDashboardPage() {
                 {nuevas} nueva{nuevas > 1 ? "s" : ""}
               </span>
             )}
+            <Link
+              to="/admin/videos"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs font-black uppercase tracking-wider text-foreground transition-colors hover:bg-accent"
+            >
+              <Video className="h-3.5 w-3.5" />
+              Vídeos
+            </Link>
             <button
               onClick={() => void load()}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs font-black uppercase tracking-wider text-foreground transition-colors hover:bg-accent"
