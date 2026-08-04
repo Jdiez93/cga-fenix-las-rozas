@@ -11,17 +11,22 @@ import {
   CalendarIcon,
   CheckCircle2,
   ClipboardList,
+  Clock,
   Euro,
+  Gavel,
   Heart,
   Info,
   Mail,
   MapPin,
   Phone,
+  Scale,
+  ShieldCheck,
   Sparkles,
   Trophy,
   User,
   Users,
 } from "lucide-react";
+
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
