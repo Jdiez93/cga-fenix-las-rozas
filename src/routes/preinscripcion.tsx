@@ -385,10 +385,10 @@ function PreinscripcionPage() {
             </p>
             <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-wider text-white/70">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5">
-                <Sparkles className="h-3.5 w-3.5 text-primary" /> Reserva hasta 7 sept.
+                <Sparkles className="h-3.5 w-3.5 text-primary" /> Apertura 17 agosto 2026
               </span>
               <span className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5">
-                <Heart className="h-3.5 w-3.5 text-primary" /> Valores y competición
+                <Heart className="h-3.5 w-3.5 text-primary" /> Valores e integración
               </span>
               <span className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5">
                 <Trophy className="h-3.5 w-3.5 text-primary" /> Alta competición
@@ -397,6 +397,55 @@ function PreinscripcionPage() {
           </div>
         </div>
       </section>
+
+      {/* Información inicial */}
+      <section className="mx-auto max-w-6xl px-4 sm:px-6 pt-12 sm:pt-16">
+        <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+          <div className="flex items-start gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
+              <Info className="h-4 w-4" />
+            </div>
+            <div>
+              <h2 className="text-xl font-black uppercase tracking-tight text-foreground">
+                ¿Quieres más info?
+              </h2>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                El CDE CGA Fénix Las Rozas abre, a partir del 17 de agosto de 2026, el plazo de
+                inscripción una temporada más para llevar la gimnasia artística a todos los que
+                deseen practicarla, desde los 3 años en adelante. Plazas limitadas conforme se vayan
+                completando los grupos. Antes de rellenar la inscripción, te recomendamos leer toda
+                esta información inicial.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {PROJECT_POINTS.map((p) => (
+              <div
+                key={p.title}
+                className="group rounded-2xl border border-border bg-background p-5 transition-all hover:-translate-y-1 hover:border-primary/50"
+              >
+                <p.icon className="h-5 w-5 text-primary transition-transform group-hover:scale-110" />
+                <p className="mt-3 text-sm font-black uppercase tracking-wider text-foreground">
+                  {p.title}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4 flex items-start gap-3 rounded-2xl border border-primary/30 bg-primary/[0.07] p-5">
+            <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Todo alumno/a nuevo con plaza podrá realizar una{" "}
+              <strong className="text-foreground">clase gratuita</strong> antes de inscribirse. Una
+              vez confirmada la plaza, para formalizar la inscripción debe abonarse la matrícula en
+              la cuenta del club por cada gimnasta.
+            </p>
+          </div>
+        </div>
+      </section>
+
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
         {/* Form column */}
