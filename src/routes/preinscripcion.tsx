@@ -58,7 +58,79 @@ export const Route = createFileRoute("/preinscripcion")({
 
 /* -------------------------------- Schema -------------------------------- */
 
+/* --------------------------- Info de temporada ---------------------------- */
+
+const SCHEDULE: { group: string; age: string; turn?: string; slots: string[] }[] = [
+  {
+    group: "Iniciación",
+    age: "3 a 5 años",
+    turn: "1er turno",
+    slots: ["Sábados 16:30 – 17:30", "Domingos 10:00 – 11:00"],
+  },
+  {
+    group: "Iniciación",
+    age: "3 a 5 años",
+    turn: "2º turno",
+    slots: ["Sábados 17:30 – 18:30", "Domingos 11:00 – 12:00"],
+  },
+  {
+    group: "Competición",
+    age: "6 años en adelante",
+    slots: ["Sábados 16:30 – 20:30", "Domingos 10:00 – 14:00"],
+  },
+  {
+    group: "No competición",
+    age: "8 años o más",
+    turn: "1er turno",
+    slots: ["Sábados 16:30 – 18:30", "Domingos 10:00 – 12:00"],
+  },
+  {
+    group: "No competición",
+    age: "8 años o más",
+    turn: "2º turno",
+    slots: ["Sábados 18:30 – 20:30", "Domingos 12:00 – 14:00"],
+  },
+  {
+    group: "Adultos",
+    age: "+18 años",
+    slots: ["Domingos 12:00 – 14:00"],
+  },
+];
+
+const CONDITIONS: string[] = [
+  "La duración de las clases será la estipulada en el apartado “Horarios”, siendo obligatorio asistir dos días a la semana.",
+  "La inasistencia temporal, aunque esté justificada, no exime del pago total de la cuota. No se puede estar más de un mes sin asistir a clase.",
+  "No se podrán inscribir usuarios/as con recibos pendientes de pago de años anteriores.",
+  "Las bajas deben tramitarse antes del día 27 del mes anterior al que se va a dejar de asistir, mediante correo a info@cgafenixlasrozas.es.",
+  "Todo alumno/a nuevo con plaza podrá realizar una clase gratuita antes de inscribirse.",
+  "Una vez confirmada la plaza, para formalizar la inscripción debe abonarse la matrícula en la cuenta del club por cada gimnasta.",
+];
+
+const PROJECT_POINTS: { icon: typeof Heart; title: string; text: string }[] = [
+  {
+    icon: Heart,
+    title: "Gimnasia para todos",
+    text: "Nuestro proyecto es fomentar la práctica de la gimnasia en todas las especialidades a nuestro alcance, desde los 3 años en adelante.",
+  },
+  {
+    icon: Scale,
+    title: "Principio de igualdad",
+    text: "Fomentamos la libertad de elección de la especialidad a practicar sin tener en cuenta el género del gimnasta.",
+  },
+  {
+    icon: Users,
+    title: "Integración y valores",
+    text: "Integración de gimnastas con diferentes capacidades, compañerismo, respeto, esfuerzo y los valores esenciales de las personas.",
+  },
+  {
+    icon: Trophy,
+    title: "Competición",
+    text: "Por supuesto, contamos con grupos de competición y de alta competición.",
+  },
+];
+
 const schema = z.object({
+
   gimnastaNombre: z.string().trim().min(3, "Indica nombre y apellidos").max(120),
   fechaNacimiento: z.date({ required_error: "Selecciona la fecha de nacimiento" }),
   padres: z.string().trim().min(3, "Indica nombre y apellidos de padre/madre").max(200),
