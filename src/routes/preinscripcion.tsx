@@ -11,17 +11,22 @@ import {
   CalendarIcon,
   CheckCircle2,
   ClipboardList,
+  Clock,
   Euro,
+  Gavel,
   Heart,
   Info,
   Mail,
   MapPin,
   Phone,
+  Scale,
+  ShieldCheck,
   Sparkles,
   Trophy,
   User,
   Users,
 } from "lucide-react";
+
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -53,7 +58,79 @@ export const Route = createFileRoute("/preinscripcion")({
 
 /* -------------------------------- Schema -------------------------------- */
 
+/* --------------------------- Info de temporada ---------------------------- */
+
+const SCHEDULE: { group: string; age: string; turn?: string; slots: string[] }[] = [
+  {
+    group: "Iniciación",
+    age: "3 a 5 años",
+    turn: "1er turno",
+    slots: ["Sábados 16:30 – 17:30", "Domingos 10:00 – 11:00"],
+  },
+  {
+    group: "Iniciación",
+    age: "3 a 5 años",
+    turn: "2º turno",
+    slots: ["Sábados 17:30 – 18:30", "Domingos 11:00 – 12:00"],
+  },
+  {
+    group: "Competición",
+    age: "6 años en adelante",
+    slots: ["Sábados 16:30 – 20:30", "Domingos 10:00 – 14:00"],
+  },
+  {
+    group: "No competición",
+    age: "8 años o más",
+    turn: "1er turno",
+    slots: ["Sábados 16:30 – 18:30", "Domingos 10:00 – 12:00"],
+  },
+  {
+    group: "No competición",
+    age: "8 años o más",
+    turn: "2º turno",
+    slots: ["Sábados 18:30 – 20:30", "Domingos 12:00 – 14:00"],
+  },
+  {
+    group: "Adultos",
+    age: "+18 años",
+    slots: ["Domingos 12:00 – 14:00"],
+  },
+];
+
+const CONDITIONS: string[] = [
+  "La duración de las clases será la estipulada en el apartado “Horarios”, siendo obligatorio asistir dos días a la semana.",
+  "La inasistencia temporal, aunque esté justificada, no exime del pago total de la cuota. No se puede estar más de un mes sin asistir a clase.",
+  "No se podrán inscribir usuarios/as con recibos pendientes de pago de años anteriores.",
+  "Las bajas deben tramitarse antes del día 27 del mes anterior al que se va a dejar de asistir, mediante correo a info@cgafenixlasrozas.es.",
+  "Todo alumno/a nuevo con plaza podrá realizar una clase gratuita antes de inscribirse.",
+  "Una vez confirmada la plaza, para formalizar la inscripción debe abonarse la matrícula en la cuenta del club por cada gimnasta.",
+];
+
+const PROJECT_POINTS: { icon: typeof Heart; title: string; text: string }[] = [
+  {
+    icon: Heart,
+    title: "Gimnasia para todos",
+    text: "Nuestro proyecto es fomentar la práctica de la gimnasia en todas las especialidades a nuestro alcance, desde los 3 años en adelante.",
+  },
+  {
+    icon: Scale,
+    title: "Principio de igualdad",
+    text: "Fomentamos la libertad de elección de la especialidad a practicar sin tener en cuenta el género del gimnasta.",
+  },
+  {
+    icon: Users,
+    title: "Integración y valores",
+    text: "Integración de gimnastas con diferentes capacidades, compañerismo, respeto, esfuerzo y los valores esenciales de las personas.",
+  },
+  {
+    icon: Trophy,
+    title: "Competición",
+    text: "Por supuesto, contamos con grupos de competición y de alta competición.",
+  },
+];
+
 const schema = z.object({
+
   gimnastaNombre: z.string().trim().min(3, "Indica nombre y apellidos").max(120),
   fechaNacimiento: z.date({ required_error: "Selecciona la fecha de nacimiento" }),
   padres: z.string().trim().min(3, "Indica nombre y apellidos de padre/madre").max(200),
@@ -308,10 +385,10 @@ function PreinscripcionPage() {
             </p>
             <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-wider text-white/70">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5">
-                <Sparkles className="h-3.5 w-3.5 text-primary" /> Reserva hasta 7 sept.
+                <Sparkles className="h-3.5 w-3.5 text-primary" /> Apertura 17 agosto 2026
               </span>
               <span className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5">
-                <Heart className="h-3.5 w-3.5 text-primary" /> Valores y competición
+                <Heart className="h-3.5 w-3.5 text-primary" /> Valores e integración
               </span>
               <span className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5">
                 <Trophy className="h-3.5 w-3.5 text-primary" /> Alta competición
@@ -320,6 +397,55 @@ function PreinscripcionPage() {
           </div>
         </div>
       </section>
+
+      {/* Información inicial */}
+      <section className="mx-auto max-w-6xl px-4 sm:px-6 pt-12 sm:pt-16">
+        <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+          <div className="flex items-start gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
+              <Info className="h-4 w-4" />
+            </div>
+            <div>
+              <h2 className="text-xl font-black uppercase tracking-tight text-foreground">
+                ¿Quieres más info?
+              </h2>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                El CDE CGA Fénix Las Rozas abre, a partir del 17 de agosto de 2026, el plazo de
+                inscripción una temporada más para llevar la gimnasia artística a todos los que
+                deseen practicarla, desde los 3 años en adelante. Plazas limitadas conforme se vayan
+                completando los grupos. Antes de rellenar la inscripción, te recomendamos leer toda
+                esta información inicial.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {PROJECT_POINTS.map((p) => (
+              <div
+                key={p.title}
+                className="group rounded-2xl border border-border bg-background p-5 transition-all hover:-translate-y-1 hover:border-primary/50"
+              >
+                <p.icon className="h-5 w-5 text-primary transition-transform group-hover:scale-110" />
+                <p className="mt-3 text-sm font-black uppercase tracking-wider text-foreground">
+                  {p.title}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4 flex items-start gap-3 rounded-2xl border border-primary/30 bg-primary/[0.07] p-5">
+            <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Todo alumno/a nuevo con plaza podrá realizar una{" "}
+              <strong className="text-foreground">clase gratuita</strong> antes de inscribirse. Una
+              vez confirmada la plaza, para formalizar la inscripción debe abonarse la matrícula en
+              la cuenta del club por cada gimnasta.
+            </p>
+          </div>
+        </div>
+      </section>
+
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
         {/* Form column */}
@@ -508,34 +634,137 @@ function PreinscripcionPage() {
         </aside>
       </div>
 
-      {/* Legal / conditions accordion */}
-      <section className="mx-auto max-w-6xl px-4 sm:px-6 pb-20">
-        <div className="rounded-2xl border border-border bg-muted/30 p-6 sm:p-8">
-          <div className="flex items-start gap-3">
-            <Info className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-            <div className="text-sm text-muted-foreground leading-relaxed space-y-2">
-              <p>
-                <strong className="text-foreground">Condiciones generales:</strong> la duración de
-                las clases se ajusta al apartado horarios (mínimo dos días/semana). La inasistencia
-                temporal no exime del pago. Las bajas deben tramitarse antes del día 27 del mes
-                anterior mediante correo a{" "}
-                <a
-                  className="text-primary hover:underline"
-                  href="mailto:info@cgafenixlasrozas.es"
-                >
-                  info@cgafenixlasrozas.es
-                </a>
-                . Facturación del 1 al 5 de cada mes. Retraso en el abono: recargo de 3 €.
-              </p>
-              <p>
-                Conforme al Art. 13 del Reglamento (UE) 2016/679 y la LOPDGDD 3/2018, los datos
-                serán tratados bajo la responsabilidad del Club CGA Fénix Las Rozas y no se cederán
-                a terceros salvo obligación legal.
-              </p>
-            </div>
+      {/* Horarios */}
+      <section className="mx-auto max-w-6xl px-4 sm:px-6 pb-14">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 text-primary">
+            <Clock className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-xl font-black uppercase tracking-tight text-foreground">
+              Horarios temporada 2026 · 2027
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Los horarios siempre están en función de las edades y de los objetivos de cada grupo.
+            </p>
           </div>
         </div>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {SCHEDULE.map((g) => (
+            <div
+              key={g.group + g.turn}
+              className="group rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary/50"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <p className="text-sm font-black uppercase tracking-wider text-foreground">
+                  {g.group}
+                </p>
+                {g.turn && (
+                  <span className="shrink-0 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-primary">
+                    {g.turn}
+                  </span>
+                )}
+              </div>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {g.age}
+              </p>
+              <div className="mt-4 h-px w-10 bg-primary/60 transition-all group-hover:w-20" />
+              <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground">
+                {g.slots.map((s) => (
+                  <li key={s} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Licencias y tasas */}
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {[
+            {
+              title: "Tasas Ayto. Las Rozas",
+              value: "25 €",
+              note: "Temporada completa (septiembre 2026 – junio 2027)",
+            },
+            {
+              title: "Licencia autonómica",
+              value: "50 €",
+              note: "Se abona en diciembre, para todo el año 2027",
+            },
+            {
+              title: "Licencia nacional",
+              value: "75 €",
+              note: "Se abona en diciembre, para todo el año 2027",
+            },
+          ].map((l) => (
+            <div key={l.title} className="rounded-2xl border border-border bg-card p-5">
+              <p className="text-[11px] font-black uppercase tracking-[0.15em] text-muted-foreground">
+                {l.title}
+              </p>
+              <p className="mt-2 text-2xl font-black text-foreground">{l.value}</p>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{l.note}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Aviso TSJ */}
+        <div className="mt-6 flex items-start gap-3 rounded-2xl border border-primary/30 bg-primary/[0.07] p-5">
+          <Gavel className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Seguimos pendientes de la resolución del TSJ del recurso interpuesto por el
+            Ayuntamiento de Las Rozas a la sentencia estimatoria del contencioso administrativo que
+            nos daba la razón y obligaba a la Concejalía de Deportes a hacer un reparto justo y
+            equitativo de la instalación.
+          </p>
+        </div>
       </section>
+
+      {/* Condiciones generales */}
+      <section className="mx-auto max-w-6xl px-4 sm:px-6 pb-20">
+        <div className="rounded-2xl border border-border bg-muted/30 p-6 sm:p-8">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 text-primary">
+              <Scale className="h-4 w-4" />
+            </div>
+            <h2 className="text-xl font-black uppercase tracking-tight text-foreground">
+              Condiciones generales de inscripción
+            </h2>
+          </div>
+
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+            {CONDITIONS.map((c) => (
+              <li
+                key={c}
+                className="flex gap-3 rounded-xl border border-border bg-card p-4 text-sm leading-relaxed text-muted-foreground"
+              >
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <span>{c}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-4 flex items-start gap-3 rounded-xl border border-destructive/30 bg-destructive/10 p-4">
+            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+            <p className="text-sm leading-relaxed text-destructive">
+              <strong className="uppercase">Nota:</strong> la facturación de los recibos se
+              realizará <strong>del 1 al 5 de cada mes</strong> mediante transferencia bancaria a la
+              cuenta <span className="font-mono font-black">ES57 0081 0357 4200 0209 9917</span>. El
+              retraso en el abono de la cuota conlleva un recargo de <strong>tres euros</strong>.
+            </p>
+          </div>
+
+          <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
+            Conforme al Art. 13 del Reglamento (UE) 2016/679 y la LOPDGDD 3/2018, los datos serán
+            tratados bajo la responsabilidad del Club CGA Fénix Las Rozas y no se cederán a terceros
+            salvo obligación legal.
+          </p>
+        </div>
+      </section>
+
     </div>
   );
 }
