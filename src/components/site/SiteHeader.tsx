@@ -257,6 +257,15 @@ export function SiteHeader() {
               Preinscripción
             </a>
 
+            <a
+              href="/admin/login"
+              onClick={() => setMobileOpen(false)}
+              className="mt-3 flex items-center justify-center gap-2 rounded-full border border-border bg-card py-3.5 text-sm font-black uppercase tracking-[0.1em] text-foreground/80"
+            >
+              <ShieldCheck className="h-4 w-4 text-primary" /> Admin
+            </a>
+
+
             <div className="mt-8 pt-6 border-t border-border space-y-3 text-sm text-muted-foreground">
               <a href="tel:+34679980626" className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-primary" /> 679 98 06 26
