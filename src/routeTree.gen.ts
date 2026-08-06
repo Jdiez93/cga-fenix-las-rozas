@@ -21,7 +21,6 @@ import { Route as GaleriaVideosRouteImport } from './routes/galeria.videos'
 import { Route as GaleriaFotosRouteImport } from './routes/galeria.fotos'
 import { Route as ConocenosLogrosRouteImport } from './routes/conocenos.logros'
 import { Route as ConocenosHistoriaRouteImport } from './routes/conocenos.historia'
-import { Route as AdminVideosRouteImport } from './routes/admin.videos'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as QuienesSomosEquipoTecnicoIndexRouteImport } from './routes/quienes-somos.equipo-tecnico.index'
@@ -88,11 +87,6 @@ const ConocenosHistoriaRoute = ConocenosHistoriaRouteImport.update({
   path: '/conocenos/historia',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminVideosRoute = AdminVideosRouteImport.update({
-  id: '/admin/videos',
-  path: '/admin/videos',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
   path: '/admin/login',
@@ -125,7 +119,6 @@ export interface FileRoutesByFullPath {
   '/preinscripcion': typeof PreinscripcionRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
-  '/admin/videos': typeof AdminVideosRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
@@ -144,7 +137,6 @@ export interface FileRoutesByTo {
   '/preinscripcion': typeof PreinscripcionRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
-  '/admin/videos': typeof AdminVideosRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
@@ -163,7 +155,6 @@ export interface FileRoutesById {
   '/preinscripcion': typeof PreinscripcionRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
-  '/admin/videos': typeof AdminVideosRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
   '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
@@ -184,7 +175,6 @@ export interface FileRouteTypes {
     | '/preinscripcion'
     | '/admin/dashboard'
     | '/admin/login'
-    | '/admin/videos'
     | '/conocenos/historia'
     | '/conocenos/logros'
     | '/galeria/fotos'
@@ -203,7 +193,6 @@ export interface FileRouteTypes {
     | '/preinscripcion'
     | '/admin/dashboard'
     | '/admin/login'
-    | '/admin/videos'
     | '/conocenos/historia'
     | '/conocenos/logros'
     | '/galeria/fotos'
@@ -221,7 +210,6 @@ export interface FileRouteTypes {
     | '/preinscripcion'
     | '/admin/dashboard'
     | '/admin/login'
-    | '/admin/videos'
     | '/conocenos/historia'
     | '/conocenos/logros'
     | '/galeria/fotos'
@@ -241,7 +229,6 @@ export interface RootRouteChildren {
   PreinscripcionRoute: typeof PreinscripcionRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminLoginRoute: typeof AdminLoginRoute
-  AdminVideosRoute: typeof AdminVideosRoute
   ConocenosHistoriaRoute: typeof ConocenosHistoriaRoute
   ConocenosLogrosRoute: typeof ConocenosLogrosRoute
   GaleriaFotosRoute: typeof GaleriaFotosRoute
@@ -336,13 +323,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConocenosHistoriaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/videos': {
-      id: '/admin/videos'
-      path: '/admin/videos'
-      fullPath: '/admin/videos'
-      preLoaderRoute: typeof AdminVideosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin/login': {
       id: '/admin/login'
       path: '/admin/login'
@@ -399,7 +379,6 @@ const rootRouteChildren: RootRouteChildren = {
   PreinscripcionRoute: PreinscripcionRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminLoginRoute: AdminLoginRoute,
-  AdminVideosRoute: AdminVideosRoute,
   ConocenosHistoriaRoute: ConocenosHistoriaRoute,
   ConocenosLogrosRoute: ConocenosLogrosRoute,
   GaleriaFotosRoute: GaleriaFotosRoute,
