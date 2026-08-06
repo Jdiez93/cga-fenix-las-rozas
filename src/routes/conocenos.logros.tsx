@@ -774,7 +774,45 @@ function DisciplineBlock({
   );
 }
 
+function EventDisciplineBlock({
+  label,
+  title,
+  events,
+}: {
+  label: string;
+  title: string;
+  events: Event[];
+}) {
+  if (events.length === 0) return null;
+  return (
+    <div className="mt-16">
+      <motion.div
+        initial={{ opacity: 0, x: -16 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.5 }}
+        className="flex items-center gap-4"
+      >
+        <span className="rounded-xl bg-primary px-3 py-1.5 text-sm font-black tracking-widest text-primary-foreground">
+          {label}
+        </span>
+        <h3 className="text-xl font-bold tracking-tight text-foreground md:text-2xl">
+          {title}
+        </h3>
+        <div className="h-px flex-1 bg-border" />
+      </motion.div>
+
+      <div className="mt-8 grid gap-6 md:grid-cols-2">
+        {events.map((event, i) => (
+          <EventCard key={`${label}-${i}`} event={event} index={i} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function SquadCard({ squad, index }: { squad: Squad; index: number }) {
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 28 }}
