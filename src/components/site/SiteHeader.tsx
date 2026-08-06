@@ -125,7 +125,7 @@ export function SiteHeader() {
             </a>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 lg:pl-8 xl:pl-14 2xl:pl-20">
+            <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 lg:pl-14 xl:pl-24 2xl:pl-32">
               {NAV.map((item) => (
                 <div
                   key={item.label}
