@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // Using plain anchors for routes not yet created
-import { Menu, X, Phone, Mail, ChevronDown, Facebook, Instagram, Twitter } from "lucide-react";
+import { Menu, X, Phone, Mail, ChevronDown, Facebook, Instagram, Twitter, ShieldCheck } from "lucide-react";
 import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
 import { cn } from "@/lib/utils";
 
@@ -192,6 +192,15 @@ export function SiteHeader() {
               >
                 Preinscripción
               </a>
+              <a
+                href="/admin/login"
+                title="Acceso administración"
+                className="group hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 xl:px-4 py-2.5 text-[11.5px] xl:text-[12px] font-black uppercase tracking-[0.08em] text-foreground/80 hover:border-primary hover:text-primary hover:shadow-[var(--shadow-elegant)] transition-all whitespace-nowrap"
+              >
+                <ShieldCheck className="h-4 w-4 text-primary transition-transform group-hover:scale-110" />
+                <span className="hidden xl:inline">Admin</span>
+              </a>
+
               <button
                 type="button"
                 aria-label="Abrir menú"
@@ -247,6 +256,15 @@ export function SiteHeader() {
             >
               Preinscripción
             </a>
+
+            <a
+              href="/admin/login"
+              onClick={() => setMobileOpen(false)}
+              className="mt-3 flex items-center justify-center gap-2 rounded-full border border-border bg-card py-3.5 text-sm font-black uppercase tracking-[0.1em] text-foreground/80"
+            >
+              <ShieldCheck className="h-4 w-4 text-primary" /> Admin
+            </a>
+
 
             <div className="mt-8 pt-6 border-t border-border space-y-3 text-sm text-muted-foreground">
               <a href="tel:+34679980626" className="flex items-center gap-2">
