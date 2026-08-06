@@ -490,11 +490,17 @@ function LogrosPage() {
             description="Del Turnfest de Leipzig a los Campeonatos de España: medallas y momentos que ya forman parte de la historia del club."
           />
 
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
-            {SEASON_2024_25.map((event, i) => (
-              <EventCard key={i} event={event} index={i} />
-            ))}
-          </div>
+          <EventDisciplineBlock
+            label="GAF"
+            title="Gimnasia Artística Femenina"
+            events={SEASON_2024_25.filter((e) => e.discipline === "GAF")}
+          />
+          <EventDisciplineBlock
+            label="GAM"
+            title="Gimnasia Artística Masculina"
+            events={SEASON_2024_25.filter((e) => e.discipline === "GAM")}
+          />
+
         </div>
       </section>
 
