@@ -110,7 +110,7 @@ export function SiteHeader() {
             )}
           >
             {/* Logo */}
-            <a href="/" className="flex items-center gap-3 group min-w-0 mr-4 lg:mr-10 xl:mr-14">
+            <a href="/" className="flex items-center gap-3 group mr-4 lg:mr-10 xl:mr-14">
               <img
                 src={logoAsset.url}
                 alt="CGA Fénix Las Rozas"
