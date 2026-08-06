@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, useNavigate, Link } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Bell,
@@ -8,7 +8,6 @@ import {
   RefreshCw,
   Search,
   Users,
-  Video,
 } from "lucide-react";
 import { Toaster, toast } from "sonner";
 
