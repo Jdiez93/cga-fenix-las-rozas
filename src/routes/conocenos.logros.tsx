@@ -1017,10 +1017,12 @@ function ImagePlaceholder({
   aspect,
   label,
   inline = false,
+  src,
 }: {
   aspect: string;
   label: string;
   inline?: boolean;
+  src?: string;
 }) {
   return (
     <div className={inline ? "" : "mx-auto max-w-7xl px-6 py-10"}>
@@ -1029,21 +1031,40 @@ function ImagePlaceholder({
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: "-40px" }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`relative ${aspect} w-full overflow-hidden rounded-2xl border-2 border-dashed border-border bg-card`}
+        className={`group relative ${aspect} w-full overflow-hidden rounded-2xl border ${
+          src ? "border-border" : "border-2 border-dashed border-border"
+        } bg-card`}
       >
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
-          style={{ background: "var(--gradient-fire, transparent)" }}
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center">
-          <div className="rounded-full border border-border bg-background p-3">
-            <ImageIcon className="h-6 w-6 text-primary" />
-          </div>
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">
-            Espacio para foto
-          </p>
-          <p className="max-w-xs px-4 text-sm text-muted-foreground">{label}</p>
-        </div>
+        {src ? (
+          <>
+            <img
+              src={src}
+              alt={label}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-background/0 to-background/0" />
+            <p className="pointer-events-none absolute bottom-4 left-5 text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
+              {label}
+            </p>
+          </>
+        ) : (
+          <>
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.05]"
+              style={{ background: "var(--gradient-fire, transparent)" }}
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center">
+              <div className="rounded-full border border-border bg-background p-3">
+                <ImageIcon className="h-6 w-6 text-primary" />
+              </div>
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">
+                Espacio para foto
+              </p>
+              <p className="max-w-xs px-4 text-sm text-muted-foreground">{label}</p>
+            </div>
+          </>
+        )}
       </motion.div>
     </div>
   );
