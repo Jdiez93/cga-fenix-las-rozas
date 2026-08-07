@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Camera, ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 
 import p1 from "@/assets/gal-image-14-png.asset.json";
@@ -38,13 +38,10 @@ export const Route = createFileRoute("/galeria/fotos")({
   component: FotosPage,
 });
 
-type Cat = "Equipo" | "GAF" | "GAM" | "Competición" | "Entrenamiento";
-
 type Photo = {
   src: string;
   title: string;
   caption: string;
-  cats: Cat[];
   span: string;
 };
 
@@ -53,91 +50,68 @@ const PHOTOS: Photo[] = [
     src: p1.url,
     title: "Toda la familia Fénix",
     caption: "Foto de grupo de la escuela al completo en el Polideportivo Entremontes.",
-    cats: ["Equipo", "Entrenamiento"],
     span: "md:col-span-2 md:row-span-2",
   },
   {
     src: p3.url,
     title: "Barra de equilibrio",
     caption: "Concentración absoluta sobre la barra en competición internacional.",
-    cats: ["GAF", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p2.url,
     title: "Emoción compartida",
     caption: "El abrazo tras un ejercicio: el trabajo del entrenador y la gimnasta.",
-    cats: ["GAF", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p7.url,
     title: "Equipo GAF con medalla",
     caption: "Nuestras gimnastas celebrando el podio por equipos.",
-    cats: ["GAF", "Equipo", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p4.url,
     title: "Suelo",
     caption: "Elegancia y control en el ejercicio de suelo.",
-    cats: ["GAF", "Competición"],
     span: "md:col-span-2",
   },
   {
     src: p6.url,
     title: "Equipo GAM y su técnico",
     caption: "Medallas y trofeo FMG para nuestros gimnastas masculinos.",
-    cats: ["GAM", "Equipo", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p5.url,
     title: "Camino a la pista",
     caption: "Antes de competir: nervios, foco y equipo.",
-    cats: ["GAM", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p8.url,
     title: "Podio 7 Estrellas",
     caption: "Nuestro gimnasta en el podio del Trofeo 7 Estrellas.",
-    cats: ["GAM", "Competición"],
     span: "md:col-span-2",
   },
   {
     src: p9.url,
     title: "Nacional Base Masculino",
     caption: "Medalla en el Campeonato de España Base de Guadalajara.",
-    cats: ["GAM", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p10.url,
     title: "Entrenamiento en Entremontes",
     caption: "Calentamiento y flexibilidad: la base de cada temporada.",
-    cats: ["Entrenamiento", "Equipo"],
     span: "md:col-span-2",
   },
 ];
 
-const FILTERS: ("Todas" | Cat)[] = [
-  "Todas",
-  "Equipo",
-  "GAF",
-  "GAM",
-  "Competición",
-  "Entrenamiento",
-];
-
 function FotosPage() {
-  const [filter, setFilter] = useState<"Todas" | Cat>("Todas");
   const [open, setOpen] = useState<number | null>(null);
 
-  const list = useMemo(
-    () => (filter === "Todas" ? PHOTOS : PHOTOS.filter((p) => p.cats.includes(filter))),
-    [filter],
-  );
+  const list = PHOTOS;
 
   const move = useCallback(
     (dir: number) => {
@@ -179,38 +153,10 @@ function FotosPage() {
               Fotos que cuentan lo que somos
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Competiciones, podios, entrenamientos y equipo. Explora la galería por
-              categorías y abre cualquier imagen a pantalla completa.
+              Competiciones, podios, entrenamientos y equipo. Abre cualquier
+              imagen a pantalla completa y revive cada momento del club.
             </p>
           </motion.div>
-
-          {/* FILTROS */}
-          <div className="mt-10 flex flex-wrap gap-2">
-            {FILTERS.map((f) => {
-              const active = f === filter;
-              const count =
-                f === "Todas"
-                  ? PHOTOS.length
-                  : PHOTOS.filter((p) => p.cats.includes(f)).length;
-              return (
-                <button
-                  key={f}
-                  onClick={() => {
-                    setFilter(f);
-                    setOpen(null);
-                  }}
-                  className={`rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] transition-all duration-300 ${
-                    active
-                      ? "border-primary bg-primary text-primary-foreground shadow-[0_0_24px_-6px_var(--primary)]"
-                      : "border-border bg-card text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                  }`}
-                >
-                  {f}
-                  <span className="ml-2 opacity-60">{count}</span>
-                </button>
-              );
-            })}
-          </div>
         </div>
       </section>
 
@@ -238,12 +184,9 @@ function FotosPage() {
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.08]"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-95" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-5 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
-                    {photo.cats[0]}
-                  </p>
-                  <p className="mt-1 text-base font-bold leading-tight text-foreground">
+                  <p className="text-base font-bold leading-tight text-foreground drop-shadow">
                     {photo.title}
                   </p>
                 </div>
@@ -313,9 +256,6 @@ function FotosPage() {
                 className="max-h-[70vh] w-auto rounded-2xl border border-border object-contain shadow-2xl"
               />
               <figcaption className="mt-5 max-w-2xl text-center">
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-primary">
-                  {list[open].cats.join(" · ")}
-                </p>
                 <p className="mt-2 text-lg font-bold text-foreground">{list[open].title}</p>
                 <p className="mt-1 text-sm text-muted-foreground">{list[open].caption}</p>
                 <p className="mt-3 text-xs font-semibold tracking-widest text-muted-foreground">
