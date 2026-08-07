@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { Flame, Sparkles, Users, GraduationCap, Scale, ImageIcon, Shield } from "lucide-react";
 import escudoAsset from "@/assets/escudo-fenix.png.asset.json";
 
+import histClub from "@/assets/gal-image-15-png.asset.json";
+import histEntreno from "@/assets/gal-image-17-png.asset.json";
+
 export const Route = createFileRoute("/conocenos/historia")({
   head: () => ({
     meta: [
@@ -28,7 +31,16 @@ const fadeUp = {
   show: { opacity: 1, y: 0 },
 };
 
-function ImagePlaceholder({ label, aspect = "aspect-[4/3]" }: { label: string; aspect?: string }) {
+function ImagePlaceholder({ label, aspect = "aspect-[4/3]", src }: { label: string; aspect?: string; src?: string }) {
+  if (src) {
+    return (
+      <div className={`group relative ${aspect} w-full overflow-hidden rounded-2xl border border-border bg-card`}>
+        <img src={src} alt={label} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+        <span className="pointer-events-none absolute bottom-4 left-5 text-[11px] font-bold uppercase tracking-[0.22em] text-primary">{label}</span>
+      </div>
+    );
+  }
   return (
     <div
       className={`group relative ${aspect} w-full overflow-hidden rounded-2xl border border-dashed border-primary/40 bg-gradient-to-br from-muted to-background`}
@@ -140,7 +152,7 @@ function HistoriaPage() {
             variants={fadeUp}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <ImagePlaceholder label="Foto del club" aspect="aspect-[4/5]" />
+            <ImagePlaceholder label="Entrenador y gimnasta" aspect="aspect-[4/5]" src={histClub.url} />
           </motion.div>
         </div>
 
@@ -251,7 +263,7 @@ function HistoriaPage() {
               ))}
             </div>
           </div>
-          <ImagePlaceholder label="Entrenamiento" />
+          <ImagePlaceholder label="Entrenamiento diario" src={histEntreno.url} />
         </div>
       </section>
 
