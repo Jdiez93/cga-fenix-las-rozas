@@ -16,6 +16,12 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+import galGrupo from "@/assets/gal-image-14-png.asset.json";
+import galBarra from "@/assets/gal-image-16-png.asset.json";
+import galPodio from "@/assets/gal-image-2-webp.asset.json";
+import galEquipoGaf from "@/assets/gal-image-20-png.asset.json";
+import galEntreno from "@/assets/gal-image-3-webp.asset.json";
+
 export const Route = createFileRoute("/conocenos/logros")({
   head: () => ({
     meta: [
@@ -443,7 +449,7 @@ function LogrosPage() {
 
       <Hero />
 
-      <ImagePlaceholder aspect="aspect-[21/9]" label="Foto del equipo / celebración destacada" />
+      <ImagePlaceholder aspect="aspect-[21/9]" label="Toda la familia Fénix" src={galGrupo.url} />
 
       {/* TEMPORADA 2025-2026 */}
       <section id="temporada-2025-2026" className="mx-auto max-w-7xl px-6 py-20 md:py-24">
@@ -468,9 +474,9 @@ function LogrosPage() {
       {/* Galería intermedia */}
       <div className="mx-auto max-w-7xl px-6 pb-4">
         <div className="grid gap-4 md:grid-cols-3">
-          <ImagePlaceholder aspect="aspect-[4/5]" label="Gimnasta en competición" inline />
-          <ImagePlaceholder aspect="aspect-[4/5]" label="Podio / medalla" inline />
-          <ImagePlaceholder aspect="aspect-[4/5]" label="Momento del equipo" inline />
+          <ImagePlaceholder aspect="aspect-[4/5]" label="Competición · barra de equilibrio" inline src={galBarra.url} />
+          <ImagePlaceholder aspect="aspect-[4/5]" label="Podio nacional" inline src={galPodio.url} />
+          <ImagePlaceholder aspect="aspect-[4/5]" label="Equipo GAF con medalla" inline src={galEquipoGaf.url} />
         </div>
       </div>
 
@@ -522,7 +528,8 @@ function LogrosPage() {
       <div className="mx-auto max-w-7xl px-6">
         <ImagePlaceholder
           aspect="aspect-[16/6]"
-          label="Foto motivacional del club / entrenamiento"
+          label="Entrenamiento en Entremontes"
+          src={galEntreno.url}
         />
       </div>
 
