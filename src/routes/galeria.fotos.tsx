@@ -109,13 +109,9 @@ const PHOTOS: Photo[] = [
 ];
 
 function FotosPage() {
-  const [filter, setFilter] = useState<"Todas" | Cat>("Todas");
   const [open, setOpen] = useState<number | null>(null);
 
-  const list = useMemo(
-    () => (filter === "Todas" ? PHOTOS : PHOTOS.filter((p) => p.cats.includes(filter))),
-    [filter],
-  );
+  const list = PHOTOS;
 
   const move = useCallback(
     (dir: number) => {
