@@ -256,9 +256,6 @@ function FotosPage() {
                 className="max-h-[70vh] w-auto rounded-2xl border border-border object-contain shadow-2xl"
               />
               <figcaption className="mt-5 max-w-2xl text-center">
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-primary">
-                  {list[open].cats.join(" · ")}
-                </p>
                 <p className="mt-2 text-lg font-bold text-foreground">{list[open].title}</p>
                 <p className="mt-1 text-sm text-muted-foreground">{list[open].caption}</p>
                 <p className="mt-3 text-xs font-semibold tracking-widest text-muted-foreground">
