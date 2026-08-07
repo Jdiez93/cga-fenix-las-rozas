@@ -153,38 +153,10 @@ function FotosPage() {
               Fotos que cuentan lo que somos
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Competiciones, podios, entrenamientos y equipo. Explora la galería por
-              categorías y abre cualquier imagen a pantalla completa.
+              Competiciones, podios, entrenamientos y equipo. Abre cualquier
+              imagen a pantalla completa y revive cada momento del club.
             </p>
           </motion.div>
-
-          {/* FILTROS */}
-          <div className="mt-10 flex flex-wrap gap-2">
-            {FILTERS.map((f) => {
-              const active = f === filter;
-              const count =
-                f === "Todas"
-                  ? PHOTOS.length
-                  : PHOTOS.filter((p) => p.cats.includes(f)).length;
-              return (
-                <button
-                  key={f}
-                  onClick={() => {
-                    setFilter(f);
-                    setOpen(null);
-                  }}
-                  className={`rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] transition-all duration-300 ${
-                    active
-                      ? "border-primary bg-primary text-primary-foreground shadow-[0_0_24px_-6px_var(--primary)]"
-                      : "border-border bg-card text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                  }`}
-                >
-                  {f}
-                  <span className="ml-2 opacity-60">{count}</span>
-                </button>
-              );
-            })}
-          </div>
         </div>
       </section>
 
