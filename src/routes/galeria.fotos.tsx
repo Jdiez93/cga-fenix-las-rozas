@@ -38,13 +38,10 @@ export const Route = createFileRoute("/galeria/fotos")({
   component: FotosPage,
 });
 
-type Cat = "Equipo" | "GAF" | "GAM" | "Competición" | "Entrenamiento";
-
 type Photo = {
   src: string;
   title: string;
   caption: string;
-  cats: Cat[];
   span: string;
 };
 
@@ -53,81 +50,62 @@ const PHOTOS: Photo[] = [
     src: p1.url,
     title: "Toda la familia Fénix",
     caption: "Foto de grupo de la escuela al completo en el Polideportivo Entremontes.",
-    cats: ["Equipo", "Entrenamiento"],
     span: "md:col-span-2 md:row-span-2",
   },
   {
     src: p3.url,
     title: "Barra de equilibrio",
     caption: "Concentración absoluta sobre la barra en competición internacional.",
-    cats: ["GAF", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p2.url,
     title: "Emoción compartida",
     caption: "El abrazo tras un ejercicio: el trabajo del entrenador y la gimnasta.",
-    cats: ["GAF", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p7.url,
     title: "Equipo GAF con medalla",
     caption: "Nuestras gimnastas celebrando el podio por equipos.",
-    cats: ["GAF", "Equipo", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p4.url,
     title: "Suelo",
     caption: "Elegancia y control en el ejercicio de suelo.",
-    cats: ["GAF", "Competición"],
     span: "md:col-span-2",
   },
   {
     src: p6.url,
     title: "Equipo GAM y su técnico",
     caption: "Medallas y trofeo FMG para nuestros gimnastas masculinos.",
-    cats: ["GAM", "Equipo", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p5.url,
     title: "Camino a la pista",
     caption: "Antes de competir: nervios, foco y equipo.",
-    cats: ["GAM", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p8.url,
     title: "Podio 7 Estrellas",
     caption: "Nuestro gimnasta en el podio del Trofeo 7 Estrellas.",
-    cats: ["GAM", "Competición"],
     span: "md:col-span-2",
   },
   {
     src: p9.url,
     title: "Nacional Base Masculino",
     caption: "Medalla en el Campeonato de España Base de Guadalajara.",
-    cats: ["GAM", "Competición"],
     span: "md:row-span-2",
   },
   {
     src: p10.url,
     title: "Entrenamiento en Entremontes",
     caption: "Calentamiento y flexibilidad: la base de cada temporada.",
-    cats: ["Entrenamiento", "Equipo"],
     span: "md:col-span-2",
   },
-];
-
-const FILTERS: ("Todas" | Cat)[] = [
-  "Todas",
-  "Equipo",
-  "GAF",
-  "GAM",
-  "Competición",
-  "Entrenamiento",
 ];
 
 function FotosPage() {
