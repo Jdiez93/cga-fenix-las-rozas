@@ -184,12 +184,9 @@ function FotosPage() {
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.08]"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-95" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-5 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
-                    {photo.cats[0]}
-                  </p>
-                  <p className="mt-1 text-base font-bold leading-tight text-foreground">
+                  <p className="text-base font-bold leading-tight text-foreground drop-shadow">
                     {photo.title}
                   </p>
                 </div>
