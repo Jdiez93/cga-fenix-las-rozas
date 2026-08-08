@@ -12,7 +12,10 @@ import {
   CheckCircle2,
   ClipboardList,
   Clock,
+  Download,
   Euro,
+  FileSignature,
+  FileText,
   Gavel,
   Heart,
   Info,
@@ -23,8 +26,10 @@ import {
   ShieldCheck,
   Sparkles,
   Trophy,
+  Upload,
   User,
   Users,
+  X,
 } from "lucide-react";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -40,6 +45,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
+import contratoAsset from "@/assets/contrato-fenix.pdf.asset.json";
 
 export const Route = createFileRoute("/preinscripcion")({
   head: () => ({
@@ -160,6 +166,9 @@ const schema = z.object({
   aceptaPrivacidad: z.literal(true, {
     errorMap: () => ({ message: "Debes aceptar la política de privacidad" }),
   }),
+  aceptaContrato: z.literal(true, {
+    errorMap: () => ({ message: "Debes aceptar las condiciones del contrato" }),
+  }),
 });
 
 type FormData = {
@@ -176,6 +185,8 @@ type FormData = {
   infoAdicional: string;
   aceptaCondiciones: boolean;
   aceptaPrivacidad: boolean;
+  aceptaContrato: boolean;
+  contratoFile?: File | null;
 };
 
 const initial: FormData = {
@@ -190,6 +201,8 @@ const initial: FormData = {
   infoAdicional: "",
   aceptaCondiciones: false,
   aceptaPrivacidad: false,
+  aceptaContrato: false,
+  contratoFile: null,
 };
 
 const STEPS = [
@@ -289,6 +302,10 @@ function PreinscripcionPage() {
         stepErrors.aceptaCondiciones = "Debes aceptar las condiciones";
       if (!data.aceptaPrivacidad)
         stepErrors.aceptaPrivacidad = "Debes aceptar la política de privacidad";
+      if (!data.contratoFile)
+        stepErrors.contratoFile = "Sube el contrato firmado en PDF para poder enviar";
+      if (!data.aceptaContrato)
+        stepErrors.aceptaContrato = "Debes aceptar las condiciones del contrato";
     }
     setErrors(stepErrors);
     return Object.keys(stepErrors).length === 0;
@@ -327,6 +344,22 @@ function PreinscripcionPage() {
       const nacimiento = parsed.data.fechaNacimiento;
       const fechaISO = `${nacimiento.getFullYear()}-${String(nacimiento.getMonth() + 1).padStart(2, "0")}-${String(nacimiento.getDate()).padStart(2, "0")}`;
 
+      // Subida del contrato firmado
+      let contratoPath: string | null = null;
+      const file = data.contratoFile;
+      if (!file) throw new Error("Falta el contrato firmado en PDF");
+      const safeName = `${nombre}-${apellidos}`
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+      contratoPath = `${ref}-${safeName || "contrato"}.pdf`;
+      const { error: uploadError } = await supabase.storage
+        .from("contratos-firmados")
+        .upload(contratoPath, file, { contentType: "application/pdf", upsert: true });
+      if (uploadError) throw uploadError;
+
       const { error } = await supabase.from("inscripciones").insert({
         gimnasta_nombre: nombre,
         gimnasta_apellidos: apellidos,
@@ -340,6 +373,7 @@ function PreinscripcionPage() {
         experiencia_previa: parsed.data.matriculadoAnterior === "si",
         club_nivel_anterior: parsed.data.grupoAnterior?.trim() || null,
         info_adicional: parsed.data.infoAdicional?.trim() || null,
+        contrato_path: contratoPath,
       });
 
       if (error) throw error;
@@ -548,7 +582,13 @@ function PreinscripcionPage() {
                   ) : (
                     <Button
                       onClick={submit}
-                      disabled={submitting}
+                      disabled={
+                        submitting ||
+                        !data.contratoFile ||
+                        !data.aceptaContrato ||
+                        !data.aceptaCondiciones ||
+                        !data.aceptaPrivacidad
+                      }
                       className="gap-2 rounded-full bg-primary px-6 font-black uppercase tracking-wider text-primary-foreground hover:scale-[1.02] transition-transform"
                     >
                       {submitting ? "Enviando…" : "Enviar preinscripción"}
@@ -1082,7 +1122,157 @@ function StepConfirmacion({ data, errors, update }: StepProps) {
           <p className="text-[11px] font-semibold text-destructive">{errors.aceptaPrivacidad}</p>
         )}
       </div>
+
+      <ContratoBlock data={data} errors={errors} update={update} />
     </>
+  );
+}
+
+/* ------------------------------ Contrato PDF ------------------------------ */
+
+function ContratoBlock({ data, errors, update }: StepProps) {
+  const [dragging, setDragging] = useState(false);
+  const file = data.contratoFile ?? null;
+
+  function handleFile(f: File | null | undefined) {
+    if (!f) return;
+    if (f.type !== "application/pdf" && !f.name.toLowerCase().endsWith(".pdf")) {
+      toast.error("El contrato debe ser un archivo PDF");
+      return;
+    }
+    if (f.size > 10 * 1024 * 1024) {
+      toast.error("El PDF no puede superar los 10 MB");
+      return;
+    }
+    update("contratoFile", f);
+    toast.success("Contrato adjuntado correctamente");
+  }
+
+  return (
+    <div className="rounded-2xl border-2 border-primary/40 bg-primary/[0.05] p-5 sm:p-6">
+      <div className="flex items-start gap-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
+          <FileSignature className="h-5 w-5" />
+        </div>
+        <div>
+          <h3 className="text-base font-black uppercase tracking-tight text-foreground">
+            Contrato y normativa interna · obligatorio
+          </h3>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+            Para poder enviar la preinscripción es imprescindible entregar el contrato firmado.
+          </p>
+        </div>
+      </div>
+
+      <ol className="mt-5 grid gap-3 sm:grid-cols-3">
+        {[
+          { n: 1, t: "Descarga y lee", d: "Descarga el contrato con la normativa interna del club y léelo con atención." },
+          { n: 2, t: "Fírmalo", d: "Imprímelo y fírmalo (o fírmalo digitalmente) el padre/madre/tutor legal." },
+          { n: 3, t: "Súbelo en PDF", d: "Escanea o fotografía el documento firmado y súbelo aquí en formato PDF." },
+        ].map((s) => (
+          <li key={s.n} className="rounded-xl border border-border bg-card p-4">
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[11px] font-black text-primary-foreground">
+              {s.n}
+            </span>
+            <p className="mt-2 text-xs font-black uppercase tracking-wider text-foreground">{s.t}</p>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{s.d}</p>
+          </li>
+        ))}
+      </ol>
+
+      <a
+        href={contratoAsset.url}
+        download="Contrato-Normativa-CGA-Fenix-Las-Rozas-2026-2027.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-5 inline-flex items-center gap-2 rounded-full bg-carbon px-5 py-2.5 text-xs font-black uppercase tracking-wider text-carbon-foreground transition-transform hover:scale-[1.02]"
+      >
+        <Download className="h-4 w-4" />
+        Descargar contrato (PDF)
+      </a>
+
+      {/* Uploader */}
+      <div className="mt-5">
+        <p className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
+          Sube el contrato firmado
+        </p>
+        {file ? (
+          <div className="flex items-center gap-3 rounded-xl border border-primary/40 bg-card p-4">
+            <FileText className="h-5 w-5 shrink-0 text-primary" />
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-bold text-foreground">{file.name}</p>
+              <p className="text-xs text-muted-foreground">
+                {(file.size / 1024 / 1024).toFixed(2)} MB · listo para enviar
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => update("contratoFile", null)}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-destructive hover:text-destructive"
+              aria-label="Quitar archivo"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        ) : (
+          <label
+            onDragOver={(e) => {
+              e.preventDefault();
+              setDragging(true);
+            }}
+            onDragLeave={() => setDragging(false)}
+            onDrop={(e) => {
+              e.preventDefault();
+              setDragging(false);
+              handleFile(e.dataTransfer.files?.[0]);
+            }}
+            className={cn(
+              "flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-8 text-center transition-colors",
+              dragging ? "border-primary bg-primary/10" : "border-border bg-card hover:border-primary/60",
+            )}
+          >
+            <Upload className="h-6 w-6 text-primary" />
+            <span className="text-sm font-bold text-foreground">
+              Arrastra el PDF firmado o haz clic para seleccionarlo
+            </span>
+            <span className="text-xs text-muted-foreground">Solo PDF · máximo 10 MB</span>
+            <input
+              type="file"
+              accept="application/pdf,.pdf"
+              className="hidden"
+              onChange={(e) => handleFile(e.target.files?.[0])}
+            />
+          </label>
+        )}
+        {errors.contratoFile && (
+          <p className="mt-2 text-[11px] font-semibold text-destructive">{errors.contratoFile}</p>
+        )}
+      </div>
+
+      <label className="mt-4 flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-card p-3 transition-colors hover:border-primary/60">
+        <Checkbox
+          checked={data.aceptaContrato}
+          onCheckedChange={(v) => update("aceptaContrato", Boolean(v))}
+          className="mt-0.5"
+        />
+        <span className="text-sm leading-relaxed">
+          He leído, firmado y <strong>acepto las condiciones del contrato</strong> y la normativa
+          interna del CDE CGA Fénix Las Rozas para la temporada 2026-2027.
+        </span>
+      </label>
+      {errors.aceptaContrato && (
+        <p className="mt-2 text-[11px] font-semibold text-destructive">{errors.aceptaContrato}</p>
+      )}
+
+      {(!file || !data.aceptaContrato) && (
+        <div className="mt-4 flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/10 p-3">
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+          <p className="text-[11px] font-black uppercase tracking-wider text-destructive">
+            Sin el contrato firmado en PDF y la casilla de aceptación no se puede enviar el formulario
+          </p>
+        </div>
+      )}
+    </div>
   );
 }
 
