@@ -36,8 +36,7 @@ function ImagePlaceholder({ label, aspect = "aspect-[4/3]", src }: { label: stri
     return (
       <div className={`group relative ${aspect} w-full overflow-hidden rounded-2xl border border-border bg-card`}>
         <img src={src} alt={label} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-        <span className="pointer-events-none absolute bottom-4 left-5 text-[11px] font-bold uppercase tracking-[0.22em] text-primary">{label}</span>
+        <span className="pointer-events-none absolute bottom-4 left-4 rounded-full bg-background/85 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.22em] text-primary opacity-0 transition-opacity duration-500 group-hover:opacity-100">{label}</span>
       </div>
     );
   }
