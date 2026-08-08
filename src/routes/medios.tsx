@@ -156,7 +156,7 @@ function FeaturedCard({ noticia }: { noticia: Noticia }) {
           alt={noticia.alt}
           className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-carbon/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-carbon/25" />
+        
         <div className="absolute left-5 top-5 flex items-center gap-2">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-fire px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-primary-foreground">
             Destacado
