@@ -115,13 +115,12 @@ function NewsCard({ noticia, index }: { noticia: Noticia; index: number }) {
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.07]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-carbon/85 via-carbon/10 to-transparent" />
         <div className="absolute left-4 top-4">
           <CategoriaBadge categoria={noticia.categoria} />
         </div>
-        <div className="absolute inset-x-4 bottom-3 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.14em] text-carbon-foreground">
-          <span>{noticia.medio}</span>
-          <span className="inline-flex items-center gap-1 opacity-80">
+        <div className="absolute inset-x-4 bottom-3 flex items-center justify-between gap-2 text-[11px] font-semibold uppercase tracking-[0.14em]">
+          <span className="rounded-full bg-background/85 px-2.5 py-1 text-foreground">{noticia.medio}</span>
+          <span className="inline-flex items-center gap-1 rounded-full bg-background/85 px-2.5 py-1 text-muted-foreground">
             <Calendar className="h-3 w-3" aria-hidden />
             {noticia.fecha}
           </span>
@@ -157,7 +156,7 @@ function FeaturedCard({ noticia }: { noticia: Noticia }) {
           alt={noticia.alt}
           className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-carbon/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-carbon/25" />
+        
         <div className="absolute left-5 top-5 flex items-center gap-2">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-fire px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-primary-foreground">
             Destacado
