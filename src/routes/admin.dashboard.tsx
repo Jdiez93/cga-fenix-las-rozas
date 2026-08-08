@@ -307,7 +307,7 @@ function AdminDashboardPage() {
           </p>
         ) : (
           <div className="mt-6 overflow-x-auto rounded-2xl border border-primary/30 bg-card">
-            <table className="w-full min-w-[1100px] text-left text-sm">
+            <table className="w-full min-w-[1300px] text-left text-sm">
               <thead className="bg-primary/10 text-[11px] uppercase tracking-wider text-primary">
                 <tr>
                   <th className="px-4 py-3 font-black">Recibida</th>
