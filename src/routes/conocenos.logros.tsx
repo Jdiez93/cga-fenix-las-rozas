@@ -1050,8 +1050,7 @@ function ImagePlaceholder({
               loading="lazy"
               className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-background/0 to-background/0" />
-            <p className="pointer-events-none absolute bottom-4 left-5 text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
+            <p className="pointer-events-none absolute bottom-4 left-4 rounded-full bg-background/85 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.22em] text-primary opacity-0 transition-opacity duration-500 group-hover:opacity-100">
               {label}
             </p>
           </>
