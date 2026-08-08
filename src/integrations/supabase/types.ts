@@ -18,6 +18,7 @@ export type Database = {
         Row: {
           club_nivel_anterior: string | null
           codigo_postal: string
+          contrato_path: string | null
           created_at: string
           domicilio: string
           email: string
@@ -34,6 +35,7 @@ export type Database = {
         Insert: {
           club_nivel_anterior?: string | null
           codigo_postal: string
+          contrato_path?: string | null
           created_at?: string
           domicilio: string
           email: string
@@ -50,6 +52,7 @@ export type Database = {
         Update: {
           club_nivel_anterior?: string | null
           codigo_postal?: string
+          contrato_path?: string | null
           created_at?: string
           domicilio?: string
           email?: string
