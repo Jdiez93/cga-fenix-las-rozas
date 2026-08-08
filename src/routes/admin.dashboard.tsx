@@ -6,6 +6,7 @@ import {
   Loader2,
   LogOut,
   RefreshCw,
+  FileText,
   Search,
   Users,
 } from "lucide-react";
@@ -55,6 +56,7 @@ type Inscripcion = {
   experiencia_previa: boolean;
   club_nivel_anterior: string | null;
   info_adicional: string | null;
+  contrato_path: string | null;
   created_at: string;
 };
 
@@ -187,6 +189,7 @@ function AdminDashboardPage() {
         "Experiencia previa": r.experiencia_previa ? "Sí" : "No",
         "Club / nivel anterior": r.club_nivel_anterior ?? "",
         "Información adicional": r.info_adicional ?? "",
+        "Contrato firmado": r.contrato_path ? "Sí" : "No",
       }));
 
       const ws = XLSX.utils.json_to_sheet(sheetData);
@@ -316,6 +319,7 @@ function AdminDashboardPage() {
                   <th className="px-4 py-3 font-black">Domicilio</th>
                   <th className="px-4 py-3 font-black">Experiencia</th>
                   <th className="px-4 py-3 font-black">Info adicional</th>
+                  <th className="px-4 py-3 font-black">Contrato firmado</th>
                 </tr>
               </thead>
               <tbody>
@@ -372,6 +376,9 @@ function AdminDashboardPage() {
                     <td className="max-w-[260px] px-4 py-3 text-xs text-muted-foreground">
                       {r.info_adicional || "—"}
                     </td>
+                    <td className="px-4 py-3">
+                      <ContratoCell row={r} />
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -380,5 +387,46 @@ function AdminDashboardPage() {
         )}
       </div>
     </div>
+  );
+}
+
+function ContratoCell({ row }: { row: Inscripcion }) {
+  const [busy, setBusy] = useState(false);
+
+  if (!row.contrato_path) {
+    return (
+      <span className="inline-block whitespace-nowrap rounded-full bg-muted px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider text-muted-foreground">
+        Sin contrato
+      </span>
+    );
+  }
+
+  async function download() {
+    setBusy(true);
+    try {
+      const { data, error } = await supabase.storage
+        .from("contratos-firmados")
+        .createSignedUrl(row.contrato_path!, 60, { download: `contrato-${row.gimnasta_nombre}-${row.gimnasta_apellidos}.pdf` });
+      if (error || !data?.signedUrl) throw error ?? new Error("URL no disponible");
+      window.open(data.signedUrl, "_blank", "noopener,noreferrer");
+    } catch (e) {
+      console.error(e);
+      toast.error(
+        e instanceof Error ? `No se ha podido descargar: ${e.message}` : "No se ha podido descargar el contrato.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <button
+      onClick={() => void download()}
+      disabled={busy}
+      className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-primary px-3.5 py-1.5 text-[11px] font-black uppercase tracking-wider text-primary-foreground transition-transform hover:scale-[1.03] disabled:opacity-60"
+    >
+      {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <FileText className="h-3.5 w-3.5" />}
+      Descargar
+    </button>
   );
 }
