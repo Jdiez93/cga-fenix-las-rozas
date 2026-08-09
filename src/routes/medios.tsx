@@ -114,48 +114,102 @@ function CategoriaBadge({ categoria }: { categoria: Categoria }) {
   );
 }
 
+function AudioPlayer({ src, medio }: { src: string; medio: string }) {
+  const ref = useRef<HTMLAudioElement | null>(null);
+  const [playing, setPlaying] = useState(false);
+
+  const toggle = () => {
+    const el = ref.current;
+    if (!el) return;
+    if (el.paused) {
+      void el.play();
+    } else {
+      el.pause();
+    }
+  };
+
+  return (
+    <div className="mt-5 rounded-2xl border border-primary/40 bg-primary/5 p-4">
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label={playing ? "Pausar audio" : "Escuchar el audio de la noticia"}
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-fire text-primary-foreground transition-transform hover:scale-105"
+        >
+          {playing ? <Pause className="h-5 w-5" aria-hidden /> : <Play className="h-5 w-5" aria-hidden />}
+        </button>
+        <div className="min-w-0">
+          <p className="text-[11px] font-black uppercase tracking-[0.16em] text-primary">
+            {playing ? "Reproduciendo" : "Escuchar el corte"}
+          </p>
+          <p className="truncate text-xs text-muted-foreground">{medio}</p>
+        </div>
+      </div>
+      <audio
+        ref={ref}
+        src={src}
+        preload="none"
+        controls
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onEnded={() => setPlaying(false)}
+        className="mt-3 w-full"
+      />
+    </div>
+  );
+}
+
 function NewsCard({ noticia, index }: { noticia: Noticia; index: number }) {
   return (
-    <a
-      href={noticia.url}
-      target="_blank"
-      rel="noopener noreferrer"
+    <div
       style={{ animationDelay: `${index * 90}ms` }}
       className="group relative flex animate-fade-up flex-col overflow-hidden rounded-3xl border border-border bg-card opacity-0 shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/60 hover:shadow-elegant"
     >
-      <div className="relative aspect-[16/10] overflow-hidden bg-carbon">
-        <img
-          src={noticia.imagen}
-          alt={noticia.alt}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.07]"
-        />
-        <div className="absolute left-4 top-4">
-          <CategoriaBadge categoria={noticia.categoria} />
+      <a href={noticia.url} target="_blank" rel="noopener noreferrer" className="block">
+        <div className="relative aspect-[16/10] overflow-hidden bg-carbon">
+          <img
+            src={noticia.imagen}
+            alt={noticia.alt}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.07]"
+          />
+          <div className="absolute left-4 top-4">
+            <CategoriaBadge categoria={noticia.categoria} />
+          </div>
+          <div className="absolute inset-x-4 bottom-3 flex items-center justify-between gap-2 text-[11px] font-semibold uppercase tracking-[0.14em]">
+            <span className="rounded-full bg-background/85 px-2.5 py-1 text-foreground">{noticia.medio}</span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-background/85 px-2.5 py-1 text-muted-foreground">
+              <Calendar className="h-3 w-3" aria-hidden />
+              {noticia.fecha}
+            </span>
+          </div>
         </div>
-        <div className="absolute inset-x-4 bottom-3 flex items-center justify-between gap-2 text-[11px] font-semibold uppercase tracking-[0.14em]">
-          <span className="rounded-full bg-background/85 px-2.5 py-1 text-foreground">{noticia.medio}</span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-background/85 px-2.5 py-1 text-muted-foreground">
-            <Calendar className="h-3 w-3" aria-hidden />
-            {noticia.fecha}
-          </span>
-        </div>
-      </div>
+      </a>
 
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="text-base font-extrabold leading-snug text-foreground transition-colors group-hover:text-primary sm:text-lg">
-          {noticia.titulo}
-        </h3>
+        <a href={noticia.url} target="_blank" rel="noopener noreferrer">
+          <h3 className="text-base font-extrabold leading-snug text-foreground transition-colors group-hover:text-primary sm:text-lg">
+            {noticia.titulo}
+          </h3>
+        </a>
         <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{noticia.resumen}</p>
-        <span className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-carbon px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-carbon-foreground transition-all group-hover:bg-gradient-fire group-hover:text-primary-foreground">
+        {noticia.audio && <AudioPlayer src={noticia.audio} medio={noticia.medio} />}
+        <a
+          href={noticia.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-carbon px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-carbon-foreground transition-all hover:bg-gradient-fire hover:text-primary-foreground"
+        >
           Más info
-          <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
-        </span>
+          <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+        </a>
       </div>
       <span className="pointer-events-none absolute inset-x-0 bottom-0 h-[3px] origin-left scale-x-0 bg-gradient-fire transition-transform duration-500 group-hover:scale-x-100" />
-    </a>
+    </div>
   );
 }
+
 
 function FeaturedCard({ noticia }: { noticia: Noticia }) {
   return (
