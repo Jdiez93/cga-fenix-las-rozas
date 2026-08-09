@@ -1,13 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { ArrowUpRight, Calendar, Newspaper, Instagram, FileSignature, Tv } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
+import {
+  ArrowUpRight,
+  Calendar,
+  Newspaper,
+  Instagram,
+  FileSignature,
+  Tv,
+  Radio,
+  Play,
+  Pause,
+} from "lucide-react";
 
 import img10 from "@/assets/medios-image-10.png.asset.json";
 import img11 from "@/assets/medios-image-11.png.asset.json";
 import img12 from "@/assets/medios-image-12.png.asset.json";
 import img13 from "@/assets/medios-image-13.png.asset.json";
+import img21 from "@/assets/medios-image-21.png.asset.json";
+import img22 from "@/assets/medios-image-22.png.asset.json";
+import audioSer from "@/assets/medios-audio-cadena-ser.mp3.asset.json";
 
-type Categoria = "Televisión" | "Prensa" | "Redes" | "Iniciativa";
+type Categoria = "Televisión" | "Prensa" | "Redes" | "Iniciativa" | "Radio";
 
 type Noticia = {
   id: string;
@@ -20,8 +33,10 @@ type Noticia = {
   url: string;
   imagen: string;
   alt: string;
+  audio?: string;
   destacada?: boolean;
 };
+
 
 const NOTICIAS: Noticia[] = [
   {
