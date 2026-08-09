@@ -312,7 +312,7 @@ function HistoriaPage() {
       {/* Igualdad */}
       <section className="mx-auto max-w-6xl px-6 py-20">
         <div className="grid gap-12 md:grid-cols-2 md:items-center">
-          <ImagePlaceholder label="Igualdad en el deporte" aspect="aspect-[4/5]" />
+          <ImagePlaceholder label="Igualdad en el deporte" aspect="aspect-[4/5]" src={histIgualdad.url} />
           <div>
             <SectionHeading
               kicker="Misión"
