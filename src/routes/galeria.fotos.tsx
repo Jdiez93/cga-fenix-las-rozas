@@ -112,7 +112,44 @@ const PHOTOS: Photo[] = [
     caption: "Calentamiento y flexibilidad: la base de cada temporada.",
     span: "md:col-span-2",
   },
+  {
+    src: p11.url,
+    title: "Carla González en suelo",
+    caption: "Nuestra gimnasta en el Campeonato de España, lista para su ejercicio de suelo.",
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    src: p12.url,
+    title: "Fénix en la espalda",
+    caption: "El escudo bordado en el maillot y la complicidad entre compañeras.",
+    span: "md:row-span-2",
+  },
+  {
+    src: p13.url,
+    title: "Técnicos y gimnastas",
+    caption: "Cuerpo técnico junto a nuestras gimnastas en jornada de competición.",
+    span: "md:col-span-2",
+  },
+  {
+    src: p14.url,
+    title: "Abrazo en Pamplona",
+    caption: "Cto. de España GAM-GAF 2023: emoción tras el ejercicio.",
+    span: "md:row-span-2",
+  },
+  {
+    src: p15.url,
+    title: "Pino en competición FMG",
+    caption: "Ejercicio de suelo en un campeonato de la Federación Madrileña.",
+    span: "md:col-span-2",
+  },
+  {
+    src: p16.url,
+    title: "Espíritu Fénix",
+    caption: "La mirada del club: resurgir siempre, con fuego dentro.",
+    span: "md:row-span-2",
+  },
 ];
+
 
 function FotosPage() {
   const [open, setOpen] = useState<number | null>(null);
