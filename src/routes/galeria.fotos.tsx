@@ -13,6 +13,12 @@ import p7 from "@/assets/gal-image-20-png.asset.json";
 import p8 from "@/assets/gal-image-webp.asset.json";
 import p9 from "@/assets/gal-image-2-webp.asset.json";
 import p10 from "@/assets/gal-image-3-webp.asset.json";
+import p11 from "@/assets/gal-image-23-png.asset.json";
+import p12 from "@/assets/gal-image-24-png.asset.json";
+import p13 from "@/assets/gal-image-25-png.asset.json";
+import p14 from "@/assets/gal-image-26-png.asset.json";
+import p15 from "@/assets/gal-image-27-png.asset.json";
+import p16 from "@/assets/gal-image-28-png.asset.json";
 
 export const Route = createFileRoute("/galeria/fotos")({
   head: () => ({
