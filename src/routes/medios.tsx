@@ -93,6 +93,35 @@ const NOTICIAS: Noticia[] = [
     imagen: img12.url,
     alt: "Gimnasta del club entrenando sobre el tapiz",
   },
+  {
+    id: "vanguardia-discriminacion",
+    titulo:
+      "Alzan la voz contra la discriminación deportiva en el Ayuntamiento de Las Rozas",
+    resumen:
+      "La Vanguardia recoge la reivindicación del club y de las familias frente a la normativa municipal de uso de instalaciones deportivas en Las Rozas de Madrid.",
+    medio: "La Vanguardia",
+    fecha: "17 JUN 2026",
+    fechaLarga: "17 de junio de 2026",
+    categoria: "Prensa",
+    url: "https://www.lavanguardia.com/local/madrid/20260617/11566659/alzan-voz-discriminacion-deportiva-ayuntamiento-rozas-madrid.html",
+    imagen: img21.url,
+    alt: "Acto público con representantes institucionales de la Comunidad de Madrid",
+  },
+  {
+    id: "cadena-ser-normativa",
+    titulo:
+      "Un juzgado de Madrid tumba la normativa del Ayuntamiento de Las Rozas para el uso de determinadas instalaciones deportivas",
+    resumen:
+      "Radio Madrid informa de la resolución judicial que anula la normativa municipal sobre el uso de instalaciones deportivas. Escucha el corte de radio completo.",
+    medio: "Cadena SER · Radio Madrid",
+    fecha: "17 JUN 2026",
+    fechaLarga: "17 de junio de 2026",
+    categoria: "Radio",
+    url: "https://cadenaser.com/cmadrid/2026/06/17/un-juzgado-de-madrid-tumba-la-normativa-del-ayuntamiento-de-las-rozas-para-el-uso-de-determinadas-instalaciones-deportivas-radio-madrid/",
+    imagen: img22.url,
+    alt: "Fachada del Ayuntamiento de Las Rozas de Madrid con banderas",
+    audio: audioSer.url,
+  },
 ];
 
 const CATEGORIA_ICONO: Record<Categoria, typeof Newspaper> = {
@@ -100,9 +129,11 @@ const CATEGORIA_ICONO: Record<Categoria, typeof Newspaper> = {
   Prensa: Newspaper,
   Redes: Instagram,
   Iniciativa: FileSignature,
+  Radio: Radio,
 };
 
-const FILTROS = ["Todas", "Prensa", "Televisión", "Iniciativa"] as const;
+const FILTROS = ["Todas", "Prensa", "Televisión", "Radio", "Iniciativa"] as const;
+
 
 function CategoriaBadge({ categoria }: { categoria: Categoria }) {
   const Icon = CATEGORIA_ICONO[categoria];
