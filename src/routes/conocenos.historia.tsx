@@ -5,6 +5,7 @@ import escudoAsset from "@/assets/escudo-fenix.png.asset.json";
 
 import histClub from "@/assets/gal-image-15-png.asset.json";
 import histEntreno from "@/assets/gal-image-17-png.asset.json";
+import histIgualdad from "@/assets/gal-image-24-png.asset.json";
 
 export const Route = createFileRoute("/conocenos/historia")({
   head: () => ({
