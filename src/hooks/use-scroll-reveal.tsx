@@ -86,29 +86,58 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>({
 
     let timer: ReturnType<typeof setTimeout> | undefined;
     let done: ReturnType<typeof setTimeout> | undefined;
+    let cleaned = false;
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (!entry?.isIntersecting) return;
-        io.disconnect();
-        timer = setTimeout(() => {
-          setAnimating(true);
-          setRevealed(true);
-          // cleanup de will-change cuando termina la transición
-          done = setTimeout(() => setAnimating(false), 950);
-        }, delay);
-      },
-      { threshold, rootMargin },
-    );
+    const fire = () => {
+      if (cleaned) return;
+      cleaned = true;
+      io?.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      timer = setTimeout(() => {
+        setAnimating(true);
+        setRevealed(true);
+        // cleanup de will-change cuando termina la transición
+        done = setTimeout(() => setAnimating(false), 950);
+      }, delay);
+    };
 
-    io.observe(el);
+    // Fallback geométrico: garantiza el reveal aunque el IO no reporte
+    // (iframes en segundo plano, navegadores antiguos, etc.)
+    const checkRect = () => {
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || 0;
+      const visible = Math.min(rect.bottom, vh * 0.92) - Math.max(rect.top, 0);
+      if (visible > Math.min(rect.height * threshold, vh * 0.2)) fire();
+    };
+
+    const onScroll = () => checkRect();
+
+    const io =
+      typeof IntersectionObserver !== "undefined"
+        ? new IntersectionObserver(
+            (entries) => {
+              if (entries.some((e) => e.isIntersecting)) fire();
+            },
+            { threshold, rootMargin },
+          )
+        : null;
+
+    io?.observe(el);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    checkRect();
+
     return () => {
-      io.disconnect();
+      cleaned = true;
+      io?.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
       if (timer) clearTimeout(timer);
       if (done) clearTimeout(done);
     };
   }, [threshold, rootMargin, delay, reduced, immediate]);
+
 
   return { ref, revealed, animating, reduced };
 }
