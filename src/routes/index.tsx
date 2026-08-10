@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { Reveal, ParallaxLayer } from "@/hooks/use-scroll-reveal";
 import { Sparkles, ArrowRight } from "lucide-react";
 import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
 import mainLogo from "@/assets/sponsors/main.png.asset.json";
@@ -42,7 +43,7 @@ function Mission() {
   return (
     <section className="relative overflow-hidden bg-background">
       {/* Ambient background */}
-      <div className="pointer-events-none absolute inset-0">
+      <ParallaxLayer ratio={0.4} className="pointer-events-none absolute inset-0">
         <div className="absolute -top-32 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
         <div
           className="absolute inset-0 opacity-[0.04]"
@@ -56,10 +57,10 @@ function Mission() {
               "radial-gradient(ellipse at center, black 40%, transparent 75%)",
           }}
         />
-      </div>
+      </ParallaxLayer>
 
       <div className="relative mx-auto max-w-4xl px-6 py-20 text-center sm:py-24 lg:py-28">
-        <RevealOnScroll>
+        <Reveal variant="heading" duration={800}>
           {/* Logo emblem */}
           <div className="mx-auto mb-10 flex items-center justify-center">
             <div className="relative animate-float-slow">
@@ -122,7 +123,7 @@ function Mission() {
               Conócenos
             </Link>
           </div>
-        </RevealOnScroll>
+        </Reveal>
       </div>
     </section>
   );
@@ -138,13 +139,13 @@ function SponsorsMarquee() {
   return (
     <section className="relative overflow-hidden border-t border-border bg-gradient-to-b from-background via-muted/30 to-background py-20 sm:py-24">
       {/* subtle ambient accents */}
-      <div className="pointer-events-none absolute inset-0">
+      <ParallaxLayer ratio={0.3} className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 left-1/4 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute -bottom-24 right-1/4 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
-      </div>
+      </ParallaxLayer>
 
       <div className="relative mx-auto max-w-7xl px-6 text-center">
-        <RevealOnScroll>
+        <Reveal variant="heading" duration={800}>
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.3em] text-primary">
             <Sparkles className="h-3.5 w-3.5" />
             Con el apoyo de
@@ -157,7 +158,7 @@ function SponsorsMarquee() {
             Marcas que confían en el proyecto Fénix y hacen posible que cada gimnasta
             llegue más lejos.
           </p>
-        </RevealOnScroll>
+        </Reveal>
       </div>
 
       {/* Marquee viewport */}
@@ -216,45 +217,5 @@ function SponsorsMarquee() {
         </div>
       </div>
     </section>
-  );
-}
-
-/* ---------------- Reveal on scroll helper ---------------- */
-function RevealOnScroll({
-  children,
-  delay = 0,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-out ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-      }`}
-    >
-      {children}
-    </div>
   );
 }
