@@ -220,6 +220,8 @@ function SponsorsMarquee() {
           })}
         </div>
       </div>
+      </Reveal>
     </section>
+
   );
 }
