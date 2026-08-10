@@ -165,9 +165,8 @@ function SponsorsMarquee() {
       </div>
 
       {/* Marquee viewport */}
-      <Reveal
-        variant="card"
-        delay={120}
+      <Reveal variant="card" delay={120} duration={800}>
+      <div
         className="relative mt-14"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
