@@ -107,7 +107,9 @@ function Mission() {
             </span>{" "}
             que este deporte nos ofrece.
           </p>
+        </Reveal>
 
+        <Reveal variant="cta" delay={220} duration={600}>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
             <Link
               to="/preinscripcion"
@@ -124,6 +126,7 @@ function Mission() {
             </Link>
           </div>
         </Reveal>
+
       </div>
     </section>
   );
