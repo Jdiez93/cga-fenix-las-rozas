@@ -10,6 +10,7 @@ import {
   ArrowUp,
 } from "lucide-react";
 import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
+import { Reveal, RevealGroup } from "@/hooks/use-scroll-reveal";
 
 const QUICK_LINKS = [
   { label: "Nuestra historia", to: "/conocenos/historia" },
@@ -40,7 +41,7 @@ export function SiteFooter() {
       />
 
       <div className="relative mx-auto max-w-7xl px-6 pt-16 pb-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+        <RevealGroup className="grid gap-12 md:grid-cols-2 lg:grid-cols-3" stagger={110} variant="card">
           {/* Col 1 — Brand */}
           <div>
             <a href="/" className="inline-flex items-center gap-3 group">
@@ -143,11 +144,11 @@ export function SiteFooter() {
               </li>
             </ul>
           </div>
-        </div>
+        </RevealGroup>
 
 
         {/* Bottom bar */}
-        <div className="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-carbon-foreground/60">
+        <Reveal variant="fade" className="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-carbon-foreground/60">
           <p>
             © {year} <span className="font-semibold text-carbon-foreground/80">CGA Fénix Las Rozas</span>. Todos los derechos reservados.
           </p>
@@ -163,7 +164,7 @@ export function SiteFooter() {
               Volver arriba
             </button>
           </div>
-        </div>
+        </Reveal>
       </div>
     </footer>
   );
