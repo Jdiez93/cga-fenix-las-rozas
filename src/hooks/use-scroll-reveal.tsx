@@ -86,29 +86,31 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>({
 
     let timer: ReturnType<typeof setTimeout> | undefined;
     let done: ReturnType<typeof setTimeout> | undefined;
-    let cleaned = false;
 
-    const fire = () => {
-      if (cleaned) return;
-      cleaned = true;
-      io?.disconnect();
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+    const show = () => {
+      if (timer) clearTimeout(timer);
       timer = setTimeout(() => {
         setAnimating(true);
         setRevealed(true);
-        // cleanup de will-change cuando termina la transición
+        if (done) clearTimeout(done);
         done = setTimeout(() => setAnimating(false), 950);
       }, delay);
     };
 
-    // Fallback geométrico: garantiza el reveal aunque el IO no reporte
-    // (iframes en segundo plano, navegadores antiguos, etc.)
+    const hide = () => {
+      if (timer) clearTimeout(timer);
+      setAnimating(true);
+      setRevealed(false);
+      if (done) clearTimeout(done);
+      done = setTimeout(() => setAnimating(false), 950);
+    };
+
+    // Fallback geométrico (iframes en segundo plano, navegadores antiguos)
     const checkRect = () => {
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight || 0;
-      const visible = Math.min(rect.bottom, vh * 0.92) - Math.max(rect.top, 0);
-      if (visible > Math.min(rect.height * threshold, vh * 0.2)) fire();
+      const visible = Math.min(rect.bottom, vh * 0.94) - Math.max(rect.top, 0);
+      if (visible > Math.min(rect.height * threshold, vh * 0.2)) show();
     };
 
     const onScroll = () => checkRect();
@@ -117,7 +119,10 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>({
       typeof IntersectionObserver !== "undefined"
         ? new IntersectionObserver(
             (entries) => {
-              if (entries.some((e) => e.isIntersecting)) fire();
+              for (const e of entries) {
+                if (e.isIntersecting) show();
+                else hide();
+              }
             },
             { threshold, rootMargin },
           )
@@ -129,7 +134,6 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>({
     checkRect();
 
     return () => {
-      cleaned = true;
       io?.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
@@ -137,6 +141,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>({
       if (done) clearTimeout(done);
     };
   }, [threshold, rootMargin, delay, reduced, immediate]);
+
 
 
   return { ref, revealed, animating, reduced };
