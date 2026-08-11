@@ -198,7 +198,7 @@ export function SiteHeader() {
                 className="group hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 xl:px-4 py-2.5 text-[11.5px] xl:text-[12px] font-black uppercase tracking-[0.08em] text-foreground/80 hover:border-primary hover:text-primary hover:shadow-[var(--shadow-elegant)] transition-all whitespace-nowrap"
               >
                 <ShieldCheck className="h-4 w-4 text-primary transition-transform group-hover:scale-110" />
-                <span className="hidden xl:inline">Admin</span>
+                <span className="hidden lg:inline">Admin</span>
               </a>
 
               <button
