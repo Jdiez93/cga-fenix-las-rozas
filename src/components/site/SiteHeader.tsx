@@ -102,15 +102,15 @@ export function SiteHeader() {
             : "bg-background border-b border-transparent"
         )}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl px-3 sm:px-5">
           <div
             className={cn(
-              "grid grid-cols-[auto_1fr_auto] items-center gap-4 transition-all duration-300",
+              "grid grid-cols-[auto_1fr_auto] items-center gap-3 transition-all duration-300",
               scrolled ? "h-[72px]" : "h-[88px]"
             )}
           >
             {/* Logo */}
-            <a href="/" className="flex items-center gap-3 group mr-2 lg:mr-4 xl:mr-6">
+            <a href="/" className="flex items-center gap-2.5 group mr-1 lg:mr-2 xl:mr-4">
               <img
                 src={logoAsset.url}
                 alt="CGA Fénix Las Rozas"
@@ -125,7 +125,7 @@ export function SiteHeader() {
             </a>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 lg:pl-6 xl:pl-10 2xl:pl-16">
+            <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 lg:pl-4 xl:pl-6 2xl:pl-10">
               {NAV.map((item) => (
                 <div
                   key={item.label}
@@ -136,13 +136,13 @@ export function SiteHeader() {
                   {item.to ? (
                     <a
                       href={item.to}
-                      className="whitespace-nowrap px-2.5 xl:px-3 py-2 text-[11.5px] xl:text-[12.5px] font-bold uppercase tracking-[0.06em] text-foreground/85 hover:text-primary transition-colors"
+                      className="whitespace-nowrap px-2 xl:px-2.5 py-2 text-[11.5px] xl:text-[12.5px] font-bold uppercase tracking-[0.06em] text-foreground/85 hover:text-primary transition-colors"
                     >
                       {item.label}
                     </a>
                   ) : (
                     <button
-                      className="inline-flex items-center gap-1 whitespace-nowrap px-2.5 xl:px-3 py-2 text-[11.5px] xl:text-[12.5px] font-bold uppercase tracking-[0.06em] text-foreground/85 hover:text-primary transition-colors"
+                      className="inline-flex items-center gap-1 whitespace-nowrap px-2 xl:px-2.5 py-2 text-[11.5px] xl:text-[12.5px] font-bold uppercase tracking-[0.06em] text-foreground/85 hover:text-primary transition-colors"
                       aria-expanded={openMenu === item.label}
                     >
                       {item.label}
@@ -185,20 +185,20 @@ export function SiteHeader() {
             </nav>
 
             {/* CTA + mobile toggle */}
-            <div className="flex items-center gap-2 sm:gap-3 justify-end">
+            <div className="flex items-center gap-1.5 sm:gap-2 justify-end">
               <a
                 href="/preinscripcion"
-                className="hidden sm:inline-flex items-center rounded-full px-4 xl:px-5 py-2.5 text-[11.5px] xl:text-[12px] font-black uppercase tracking-[0.08em] bg-primary text-primary-foreground shadow-[var(--shadow-elegant)] hover:scale-[1.03] active:scale-[0.98] transition-transform whitespace-nowrap"
+                className="hidden sm:inline-flex items-center rounded-full px-3.5 xl:px-4 py-2 text-[11px] xl:text-[11.5px] font-black uppercase tracking-[0.08em] bg-primary text-primary-foreground shadow-[var(--shadow-elegant)] hover:scale-[1.03] active:scale-[0.98] transition-transform whitespace-nowrap"
               >
                 Preinscripción
               </a>
               <a
                 href="/admin/login"
                 title="Acceso administración"
-                className="group hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 xl:px-4 py-2.5 text-[11.5px] xl:text-[12px] font-black uppercase tracking-[0.08em] text-foreground/80 hover:border-primary hover:text-primary hover:shadow-[var(--shadow-elegant)] transition-all whitespace-nowrap"
+                className="group hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-2.5 xl:px-3 py-2 text-[11px] xl:text-[11.5px] font-black uppercase tracking-[0.08em] text-foreground/80 hover:border-primary hover:text-primary hover:shadow-[var(--shadow-elegant)] transition-all whitespace-nowrap"
               >
                 <ShieldCheck className="h-4 w-4 text-primary transition-transform group-hover:scale-110" />
-                <span className="hidden lg:inline">Admin</span>
+                <span className="hidden md:inline">Admin</span>
               </a>
 
               <button
