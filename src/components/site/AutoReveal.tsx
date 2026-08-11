@@ -50,8 +50,20 @@ function collectTargets(root: HTMLElement): HTMLElement[] {
       }
     }
   }
-  return out;
+
+  // Pasada extra: cualquier grid/flex de tarjetas a cualquier profundidad
+  const grids = Array.from(
+    root.querySelectorAll<HTMLElement>("[class*='grid-cols'], [class*='space-y'], ul"),
+  );
+  for (const grid of grids) {
+    const kids = Array.from(grid.children) as HTMLElement[];
+    if (kids.length < 2) continue;
+    kids.forEach(push);
+  }
+
+  return Array.from(new Set(out));
 }
+
 
 export function AutoReveal() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
