@@ -110,7 +110,7 @@ export function SiteHeader() {
             )}
           >
             {/* Logo */}
-            <a href="/" className="flex items-center gap-3 group mr-4 lg:mr-10 xl:mr-14">
+            <a href="/" className="flex items-center gap-3 group mr-2 lg:mr-4 xl:mr-6">
               <img
                 src={logoAsset.url}
                 alt="CGA Fénix Las Rozas"
@@ -125,7 +125,7 @@ export function SiteHeader() {
             </a>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 lg:pl-14 xl:pl-24 2xl:pl-32">
+            <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 lg:pl-6 xl:pl-10 2xl:pl-16">
               {NAV.map((item) => (
                 <div
                   key={item.label}
@@ -198,7 +198,7 @@ export function SiteHeader() {
                 className="group hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 xl:px-4 py-2.5 text-[11.5px] xl:text-[12px] font-black uppercase tracking-[0.08em] text-foreground/80 hover:border-primary hover:text-primary hover:shadow-[var(--shadow-elegant)] transition-all whitespace-nowrap"
               >
                 <ShieldCheck className="h-4 w-4 text-primary transition-transform group-hover:scale-110" />
-                <span className="hidden xl:inline">Admin</span>
+                <span className="hidden lg:inline">Admin</span>
               </a>
 
               <button
