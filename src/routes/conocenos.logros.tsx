@@ -16,11 +16,11 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import galGrupo from "@/assets/gal-image-14-png.asset.json";
-import galBarra from "@/assets/gal-image-16-png.asset.json";
-import galPodio from "@/assets/gal-image-2-webp.asset.json";
-import galEquipoGaf from "@/assets/gal-image-20-png.asset.json";
-import galEntreno from "@/assets/gal-image-3-webp.asset.json";
+import { galImage14Png as galGrupo } from "@/lib/media";
+import { galImage16Png as galBarra } from "@/lib/media";
+import { galImage2Webp as galPodio } from "@/lib/media";
+import { galImage20Png as galEquipoGaf } from "@/lib/media";
+import { galImage3Webp as galEntreno } from "@/lib/media";
 
 export const Route = createFileRoute("/conocenos/logros")({
   head: () => ({

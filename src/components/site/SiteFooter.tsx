@@ -9,7 +9,7 @@ import {
   Twitter,
   ArrowUp,
 } from "lucide-react";
-import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
+import { logoFenixJpeg as logoAsset } from "@/lib/media";
 import { Reveal, RevealGroup } from "@/hooks/use-scroll-reveal";
 
 const QUICK_LINKS = [

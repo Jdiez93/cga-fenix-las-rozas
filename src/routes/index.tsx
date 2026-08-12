@@ -2,11 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Reveal, ParallaxLayer } from "@/hooks/use-scroll-reveal";
 import { Sparkles, ArrowRight } from "lucide-react";
-import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
-import mainLogo from "@/assets/sponsors/main.png.asset.json";
-import geniosLogo from "@/assets/sponsors/genios.png.asset.json";
-import agefiLogo from "@/assets/sponsors/agefi.png.asset.json";
-import etelLogo from "@/assets/sponsors/etel.png.asset.json";
+import { logoFenixJpeg as logoAsset } from "@/lib/media";
+import { sponsorsMainPng as mainLogo } from "@/lib/media";
+import { sponsorsGeniosPng as geniosLogo } from "@/lib/media";
+import { sponsorsAgefiPng as agefiLogo } from "@/lib/media";
+import { sponsorsEtelPng as etelLogo } from "@/lib/media";
 
 export const Route = createFileRoute("/")({
   head: () => ({

@@ -44,8 +44,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
-import contratoAsset from "@/assets/contrato-fenix.pdf.asset.json";
+import { logoFenixJpeg as logoAsset } from "@/lib/media";
+import { contratoFenixPdf as contratoAsset } from "@/lib/media";
 
 export const Route = createFileRoute("/preinscripcion")({
   head: () => ({

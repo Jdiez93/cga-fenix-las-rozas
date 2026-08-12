@@ -1,0 +1,32 @@
+// Local media assets served from /public. No external CDN dependency.
+
+export const contratoFenixPdf = { url: "/files/normativa-contrato-fenix-2026-2027.pdf" };
+export const escudoFenixPng = { url: "/images/escudo-fenix.png" };
+export const galImage14Png = { url: "/images/gal-image-14.png" };
+export const galImage15Png = { url: "/images/gal-image-15.png" };
+export const galImage16Png = { url: "/images/gal-image-16.png" };
+export const galImage17Png = { url: "/images/gal-image-17.png" };
+export const galImage18Png = { url: "/images/gal-image-18.png" };
+export const galImage19Png = { url: "/images/gal-image-19.png" };
+export const galImage2Webp = { url: "/images/gal-image-2.webp" };
+export const galImage20Png = { url: "/images/gal-image-20.png" };
+export const galImage23Png = { url: "/images/gal-image-23.png" };
+export const galImage24Png = { url: "/images/gal-image-24.png" };
+export const galImage25Png = { url: "/images/gal-image-25.png" };
+export const galImage26Png = { url: "/images/gal-image-26.png" };
+export const galImage27Png = { url: "/images/gal-image-27.png" };
+export const galImage28Png = { url: "/images/gal-image-28.png" };
+export const galImage3Webp = { url: "/images/gal-image-3.webp" };
+export const galImageWebp = { url: "/images/gal-image.webp" };
+export const logoFenixJpeg = { url: "/images/logo-fenix.jpeg" };
+export const mediosAudioCadenaSerMp3 = { url: "/files/cadena-ser-las-rozas.mp3" };
+export const mediosImage10Png = { url: "/images/image-10.png" };
+export const mediosImage11Png = { url: "/images/image-11.png" };
+export const mediosImage12Png = { url: "/images/image-12.png" };
+export const mediosImage13Png = { url: "/images/image-13.png" };
+export const mediosImage21Png = { url: "/images/medios-image-21.png" };
+export const mediosImage22Png = { url: "/images/medios-image-22.png" };
+export const sponsorsAgefiPng = { url: "/images/agefi.png" };
+export const sponsorsEtelPng = { url: "/images/etel.png" };
+export const sponsorsGeniosPng = { url: "/images/genios.png" };
+export const sponsorsMainPng = { url: "/images/main.png" };
