@@ -1,6 +1,6 @@
 // Local media assets served from /public. No external CDN dependency.
 
-export const contratoFenixPdf = { url: "/files/normativa-contrato-fenix-2026-2027.pdf" };
+export const normativaFenixPdf = { url: "/files/normativa-interna-fenix-2026-2027.pdf" };
 export const escudoFenixPng = { url: "/images/escudo-fenix.png" };
 export const galImage14Png = { url: "/images/gal-image-14.png" };
 export const galImage15Png = { url: "/images/gal-image-15.png" };
