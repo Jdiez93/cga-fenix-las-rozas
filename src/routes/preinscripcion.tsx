@@ -1128,16 +1128,16 @@ function StepConfirmacion({ data, errors, update }: StepProps) {
   );
 }
 
-/* ------------------------------ Contrato PDF ------------------------------ */
+/* -------------------------- Normativa interna del club -------------------------- */
 
-function ContratoBlock({ data, errors, update }: StepProps) {
+function NormativaBlock({ data, errors, update }: StepProps) {
   const [dragging, setDragging] = useState(false);
   const file = data.contratoFile ?? null;
 
   function handleFile(f: File | null | undefined) {
     if (!f) return;
     if (f.type !== "application/pdf" && !f.name.toLowerCase().endsWith(".pdf")) {
-      toast.error("El contrato debe ser un archivo PDF");
+      toast.error("La normativa interna debe ser un archivo PDF");
       return;
     }
     if (f.size > 10 * 1024 * 1024) {
@@ -1145,7 +1145,7 @@ function ContratoBlock({ data, errors, update }: StepProps) {
       return;
     }
     update("contratoFile", f);
-    toast.success("Contrato adjuntado correctamente");
+    toast.success("Normativa interna adjunta correctamente");
   }
 
   return (
@@ -1156,19 +1156,19 @@ function ContratoBlock({ data, errors, update }: StepProps) {
         </div>
         <div>
           <h3 className="text-base font-black uppercase tracking-tight text-foreground">
-            Contrato y normativa interna · obligatorio
+            Normativa interna del club · obligatorio
           </h3>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-            Para poder enviar la preinscripción es imprescindible entregar el contrato firmado.
+            Para poder enviar la preinscripción es imprescindible entregar la normativa interna del club firmada.
           </p>
         </div>
       </div>
 
       <ol className="mt-5 grid gap-3 sm:grid-cols-3">
         {[
-          { n: 1, t: "Descarga y lee", d: "Descarga el contrato con la normativa interna del club y léelo con atención." },
-          { n: 2, t: "Fírmalo", d: "Imprímelo y fírmalo (o fírmalo digitalmente) el padre/madre/tutor legal." },
-          { n: 3, t: "Súbelo en PDF", d: "Escanea o fotografía el documento firmado y súbelo aquí en formato PDF." },
+          { n: 1, t: "Descarga y lee", d: "Descarga la normativa interna del club y léela con atención." },
+          { n: 2, t: "Fírmala", d: "Imprímela y fírmala (o fírmala digitalmente) el padre/madre/tutor legal." },
+          { n: 3, t: "Súbela en PDF", d: "Escanea o fotografía el documento firmado y súbela aquí en formato PDF." },
         ].map((s) => (
           <li key={s.n} className="rounded-xl border border-border bg-card p-4">
             <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[11px] font-black text-primary-foreground">
@@ -1181,20 +1181,20 @@ function ContratoBlock({ data, errors, update }: StepProps) {
       </ol>
 
       <a
-        href={contratoAsset.url}
-        download="Contrato-Normativa-CGA-Fenix-Las-Rozas-2026-2027.pdf"
+        href={normativaAsset.url}
+        download="Normativa-Interna-CGA-Fenix-Las-Rozas-2026-2027.pdf"
         target="_blank"
         rel="noopener noreferrer"
         className="mt-5 inline-flex items-center gap-2 rounded-full bg-carbon px-5 py-2.5 text-xs font-black uppercase tracking-wider text-carbon-foreground transition-transform hover:scale-[1.02]"
       >
         <Download className="h-4 w-4" />
-        Descargar contrato (PDF)
+        Descargar normativa interna (PDF)
       </a>
 
       {/* Uploader */}
       <div className="mt-5">
         <p className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
-          Sube el contrato firmado
+          Sube la normativa interna firmada
         </p>
         {file ? (
           <div className="flex items-center gap-3 rounded-xl border border-primary/40 bg-card p-4">
@@ -1256,8 +1256,8 @@ function ContratoBlock({ data, errors, update }: StepProps) {
           className="mt-0.5"
         />
         <span className="text-sm leading-relaxed">
-          He leído, firmado y <strong>acepto las condiciones del contrato</strong> y la normativa
-          interna del CDE CGA Fénix Las Rozas para la temporada 2026-2027.
+          He leído, firmado y <strong>acepto la normativa interna del club</strong> del CDE CGA Fénix
+          Las Rozas para la temporada 2026-2027.
         </span>
       </label>
       {errors.aceptaContrato && (
@@ -1268,7 +1268,7 @@ function ContratoBlock({ data, errors, update }: StepProps) {
         <div className="mt-4 flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/10 p-3">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
           <p className="text-[11px] font-black uppercase tracking-wider text-destructive">
-            Sin el contrato firmado en PDF y la casilla de aceptación no se puede enviar el formulario
+            Sin la normativa interna del club firmada en PDF y la casilla de aceptación no se puede enviar el formulario
           </p>
         </div>
       )}
