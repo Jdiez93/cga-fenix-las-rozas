@@ -64,15 +64,15 @@ function Mission() {
           {/* Logo emblem */}
           <div className="mx-auto mb-10 flex items-center justify-center">
             <div className="relative animate-float-slow">
-              <div className="absolute inset-0 -m-6 rounded-full bg-primary/25 blur-2xl" />
-              <div className="relative rounded-full bg-carbon p-3 ring-1 ring-primary/40">
+              <div className="absolute inset-0 -m-10 rounded-full bg-primary/25 blur-2xl" />
+              <div className="relative rounded-full bg-carbon p-5 ring-1 ring-primary/40">
                 <img
                   src={logoAsset.url}
                   alt="CGA Fénix Las Rozas"
-                  className="h-24 w-24 sm:h-28 sm:w-28 rounded-full object-cover"
+                  className="h-48 w-48 sm:h-56 sm:w-56 rounded-full object-cover"
                 />
               </div>
-              <div className="pointer-events-none absolute inset-0 -m-3 rounded-full border border-dashed border-primary/40" />
+              <div className="pointer-events-none absolute inset-0 -m-5 rounded-full border border-dashed border-primary/40" />
             </div>
           </div>
 
