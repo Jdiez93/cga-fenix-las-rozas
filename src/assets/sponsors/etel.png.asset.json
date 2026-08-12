@@ -1,11 +1,6 @@
 {
-  "version": 1,
-  "asset_id": "7815f6e8-42f1-4d80-9138-e09cea0e77c8",
-  "project_id": "461ca828-a13b-4fe4-94ec-cbb2797d5ee4",
-  "url": "/__l5e/assets-v1/7815f6e8-42f1-4d80-9138-e09cea0e77c8/etel.png",
-  "r2_key": "a/v1/461ca828-a13b-4fe4-94ec-cbb2797d5ee4/7815f6e8-42f1-4d80-9138-e09cea0e77c8/etel.png",
+  "url": "/images/etel.png",
   "original_filename": "etel.png",
   "size": 53524,
-  "content_type": "image/png",
-  "created_at": "2026-07-07T07:32:01Z"
+  "content_type": "image/png"
 }

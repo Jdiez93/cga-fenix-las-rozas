@@ -1,11 +1,6 @@
 {
-  "version": 1,
-  "asset_id": "058c92c6-a4b3-4ee2-bd18-0a96f256cfeb",
-  "project_id": "461ca828-a13b-4fe4-94ec-cbb2797d5ee4",
-  "url": "/__l5e/assets-v1/058c92c6-a4b3-4ee2-bd18-0a96f256cfeb/agefi.png",
-  "r2_key": "a/v1/461ca828-a13b-4fe4-94ec-cbb2797d5ee4/058c92c6-a4b3-4ee2-bd18-0a96f256cfeb/agefi.png",
+  "url": "/images/agefi.png",
   "original_filename": "agefi.png",
   "size": 35054,
-  "content_type": "image/png",
-  "created_at": "2026-07-07T07:31:58Z"
+  "content_type": "image/png"
 }

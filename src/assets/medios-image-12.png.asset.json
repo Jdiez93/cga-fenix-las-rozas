@@ -1,11 +1,6 @@
 {
-  "version": 1,
-  "asset_id": "c7563726-fbe1-4b56-8f32-1a02044128f2",
-  "project_id": "461ca828-a13b-4fe4-94ec-cbb2797d5ee4",
-  "url": "/__l5e/assets-v1/c7563726-fbe1-4b56-8f32-1a02044128f2/image-12.png",
-  "r2_key": "a/v1/461ca828-a13b-4fe4-94ec-cbb2797d5ee4/c7563726-fbe1-4b56-8f32-1a02044128f2/image-12.png",
+  "url": "/images/image-12.png",
   "original_filename": "image-12.png",
   "size": 452686,
-  "content_type": "image/png",
-  "created_at": "2026-08-03T08:40:21Z"
+  "content_type": "image/png"
 }

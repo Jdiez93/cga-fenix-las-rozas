@@ -1,11 +1,6 @@
 {
-  "version": 1,
-  "asset_id": "8f15fb35-102d-42e0-8090-9c6c30c2953c",
-  "project_id": "461ca828-a13b-4fe4-94ec-cbb2797d5ee4",
-  "url": "/__l5e/assets-v1/8f15fb35-102d-42e0-8090-9c6c30c2953c/gal-image-2.webp",
-  "r2_key": "a/v1/461ca828-a13b-4fe4-94ec-cbb2797d5ee4/8f15fb35-102d-42e0-8090-9c6c30c2953c/gal-image-2.webp",
+  "url": "/images/gal-image-2.webp",
   "original_filename": "gal-image-2.webp",
   "size": 112534,
-  "content_type": "image/webp",
-  "created_at": "2026-08-07T09:19:40Z"
+  "content_type": "image/webp"
 }
