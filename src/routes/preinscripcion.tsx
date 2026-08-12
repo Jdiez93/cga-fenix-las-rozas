@@ -1123,7 +1123,7 @@ function StepConfirmacion({ data, errors, update }: StepProps) {
         )}
       </div>
 
-      <ContratoBlock data={data} errors={errors} update={update} />
+      <NormativaBlock data={data} errors={errors} update={update} />
     </>
   );
 }
