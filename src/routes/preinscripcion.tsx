@@ -167,7 +167,7 @@ const schema = z.object({
     errorMap: () => ({ message: "Debes aceptar la política de privacidad" }),
   }),
   aceptaContrato: z.literal(true, {
-    errorMap: () => ({ message: "Debes aceptar las condiciones del contrato" }),
+    errorMap: () => ({ message: "Debes aceptar la normativa interna del club" }),
   }),
 });
 
