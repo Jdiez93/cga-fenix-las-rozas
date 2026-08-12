@@ -303,9 +303,9 @@ function PreinscripcionPage() {
       if (!data.aceptaPrivacidad)
         stepErrors.aceptaPrivacidad = "Debes aceptar la política de privacidad";
       if (!data.contratoFile)
-        stepErrors.contratoFile = "Sube el contrato firmado en PDF para poder enviar";
+        stepErrors.contratoFile = "Sube la normativa interna del club firmada en PDF para poder enviar";
       if (!data.aceptaContrato)
-        stepErrors.aceptaContrato = "Debes aceptar las condiciones del contrato";
+        stepErrors.aceptaContrato = "Debes aceptar la normativa interna del club";
     }
     setErrors(stepErrors);
     return Object.keys(stepErrors).length === 0;
