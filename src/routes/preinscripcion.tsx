@@ -45,7 +45,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { logoFenixJpeg as logoAsset } from "@/lib/media";
-import { contratoFenixPdf as contratoAsset } from "@/lib/media";
+import { normativaFenixPdf as normativaAsset } from "@/lib/media";
 
 export const Route = createFileRoute("/preinscripcion")({
   head: () => ({
