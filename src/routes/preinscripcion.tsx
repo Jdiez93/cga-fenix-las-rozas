@@ -344,17 +344,17 @@ function PreinscripcionPage() {
       const nacimiento = parsed.data.fechaNacimiento;
       const fechaISO = `${nacimiento.getFullYear()}-${String(nacimiento.getMonth() + 1).padStart(2, "0")}-${String(nacimiento.getDate()).padStart(2, "0")}`;
 
-      // Subida del contrato firmado
+      // Subida de la normativa interna firmada
       let contratoPath: string | null = null;
       const file = data.contratoFile;
-      if (!file) throw new Error("Falta el contrato firmado en PDF");
+      if (!file) throw new Error("Falta la normativa interna del club firmada en PDF");
       const safeName = `${nombre}-${apellidos}`
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
-      contratoPath = `${ref}-${safeName || "contrato"}.pdf`;
+      contratoPath = `${ref}-${safeName || "normativa"}.pdf`;
       const { error: uploadError } = await supabase.storage
         .from("contratos-firmados")
         .upload(contratoPath, file, { contentType: "application/pdf", upsert: true });
