@@ -3,22 +3,22 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import { Camera, ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 
-import p1 from "@/assets/gal-image-14-png.asset.json";
-import p2 from "@/assets/gal-image-15-png.asset.json";
-import p3 from "@/assets/gal-image-16-png.asset.json";
-import p4 from "@/assets/gal-image-17-png.asset.json";
-import p5 from "@/assets/gal-image-18-png.asset.json";
-import p6 from "@/assets/gal-image-19-png.asset.json";
-import p7 from "@/assets/gal-image-20-png.asset.json";
-import p8 from "@/assets/gal-image-webp.asset.json";
-import p9 from "@/assets/gal-image-2-webp.asset.json";
-import p10 from "@/assets/gal-image-3-webp.asset.json";
-import p11 from "@/assets/gal-image-23-png.asset.json";
-import p12 from "@/assets/gal-image-24-png.asset.json";
-import p13 from "@/assets/gal-image-25-png.asset.json";
-import p14 from "@/assets/gal-image-26-png.asset.json";
-import p15 from "@/assets/gal-image-27-png.asset.json";
-import p16 from "@/assets/gal-image-28-png.asset.json";
+import { galImage14Png as p1 } from "@/lib/media";
+import { galImage15Png as p2 } from "@/lib/media";
+import { galImage16Png as p3 } from "@/lib/media";
+import { galImage17Png as p4 } from "@/lib/media";
+import { galImage18Png as p5 } from "@/lib/media";
+import { galImage19Png as p6 } from "@/lib/media";
+import { galImage20Png as p7 } from "@/lib/media";
+import { galImageWebp as p8 } from "@/lib/media";
+import { galImage2Webp as p9 } from "@/lib/media";
+import { galImage3Webp as p10 } from "@/lib/media";
+import { galImage23Png as p11 } from "@/lib/media";
+import { galImage24Png as p12 } from "@/lib/media";
+import { galImage25Png as p13 } from "@/lib/media";
+import { galImage26Png as p14 } from "@/lib/media";
+import { galImage27Png as p15 } from "@/lib/media";
+import { galImage28Png as p16 } from "@/lib/media";
 
 export const Route = createFileRoute("/galeria/fotos")({
   head: () => ({

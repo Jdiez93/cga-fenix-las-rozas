@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Flame, Sparkles, Users, GraduationCap, Scale, ImageIcon, Shield } from "lucide-react";
-import escudoAsset from "@/assets/escudo-fenix.png.asset.json";
+import { escudoFenixPng as escudoAsset } from "@/lib/media";
 
-import histClub from "@/assets/gal-image-15-png.asset.json";
-import histEntreno from "@/assets/gal-image-17-png.asset.json";
-import histIgualdad from "@/assets/gal-image-24-png.asset.json";
+import { galImage15Png as histClub } from "@/lib/media";
+import { galImage17Png as histEntreno } from "@/lib/media";
+import { galImage24Png as histIgualdad } from "@/lib/media";
 
 export const Route = createFileRoute("/conocenos/historia")({
   head: () => ({

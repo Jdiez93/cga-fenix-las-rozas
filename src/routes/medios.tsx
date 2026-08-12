@@ -12,13 +12,13 @@ import {
   Pause,
 } from "lucide-react";
 
-import img10 from "@/assets/medios-image-10.png.asset.json";
-import img11 from "@/assets/medios-image-11.png.asset.json";
-import img12 from "@/assets/medios-image-12.png.asset.json";
-import img13 from "@/assets/medios-image-13.png.asset.json";
-import img21 from "@/assets/medios-image-21.png.asset.json";
-import img22 from "@/assets/medios-image-22.png.asset.json";
-import audioSer from "@/assets/medios-audio-cadena-ser.mp3.asset.json";
+import { mediosImage10Png as img10 } from "@/lib/media";
+import { mediosImage11Png as img11 } from "@/lib/media";
+import { mediosImage12Png as img12 } from "@/lib/media";
+import { mediosImage13Png as img13 } from "@/lib/media";
+import { mediosImage21Png as img21 } from "@/lib/media";
+import { mediosImage22Png as img22 } from "@/lib/media";
+import { mediosAudioCadenaSerMp3 as audioSer } from "@/lib/media";
 
 type Categoria = "Televisión" | "Prensa" | "Redes" | "Iniciativa" | "Radio";
 

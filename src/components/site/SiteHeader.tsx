@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // Using plain anchors for routes not yet created
 import { Menu, X, Phone, Mail, ChevronDown, Facebook, Instagram, Twitter, ShieldCheck } from "lucide-react";
-import logoAsset from "@/assets/logo-fenix.jpeg.asset.json";
+import { logoFenixJpeg as logoAsset } from "@/lib/media";
 import { cn } from "@/lib/utils";
 
 type NavItem = {
