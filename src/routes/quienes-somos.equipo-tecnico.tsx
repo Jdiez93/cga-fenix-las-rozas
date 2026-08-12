@@ -127,18 +127,6 @@ export const COACHES: Coach[] = [
     closingNote: "¡Bravo por ella, y gracias por formar parte de nuestro modesto club!",
     initials: "AR",
   },
-  {
-    slug: "mar-cuesta",
-    name: "Mar Cuesta",
-    role: "Entrenadora",
-    bio: "Entrenadora del club, cercana con las gimnastas y comprometida con su progresión.",
-    longBio: [
-      "Mar es una de las entrenadoras del Fénix. Aporta cercanía, dedicación y una gran capacidad para conectar con las gimnastas desde el primer día.",
-      "Trabaja especialmente la técnica base y la actitud en el gimnasio: puntualidad, respeto y ganas de mejorar. Cree que el buen ambiente en el grupo es la mitad del progreso.",
-      "Muy pronto ampliaremos su biografía con más detalles sobre su trayectoria y titulaciones.",
-    ],
-    initials: "MC",
-  },
 ];
 
 
