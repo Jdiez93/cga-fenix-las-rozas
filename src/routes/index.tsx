@@ -36,9 +36,86 @@ const SPONSORS = [
   { name: "Etel Comunicación", tag: "Arte en impresión", logo: etelLogo.url, url: "#" },
 ];
 
+const HERO_SLIDES = [
+  { src: hero5Png.url, alt: "Equipo femenino del Club Fénix Las Rozas", position: "center 35%" },
+  { src: hero1Png.url, alt: "Entrenador y gimnasta celebrando en el Campeonato de España", position: "center 30%" },
+  { src: hero3Png.url, alt: "Gimnasta en anillas durante competición", position: "center 25%" },
+  { src: hero2Png.url, alt: "Entrenador dando indicaciones a un gimnasta", position: "center 30%" },
+  { src: hero4Png.url, alt: "Gimnasta invertido en anillas", position: "center 40%" },
+];
+
+function HeroCarousel() {
+  const [index, setIndex] = useState(0);
+  const total = HERO_SLIDES.length;
+
+  const go = useCallback((dir: number) => {
+    setIndex((i) => (i + dir + total) % total);
+  }, [total]);
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % total), 4000);
+    return () => clearInterval(id);
+  }, [total, index]);
+
+  return (
+    <section
+      aria-label="Galería destacada del club"
+      className="relative w-full overflow-hidden bg-carbon"
+    >
+      <div className="relative h-[46vh] min-h-[300px] sm:h-[62vh] lg:h-[78vh]">
+        {HERO_SLIDES.map((s, i) => (
+          <img
+            key={s.src}
+            src={s.src}
+            alt={s.alt}
+            loading={i === 0 ? "eager" : "lazy"}
+            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{ objectPosition: s.position, opacity: i === index ? 1 : 0 }}
+          />
+        ))}
+
+        {/* Arrows */}
+        <button
+          type="button"
+          onClick={() => go(-1)}
+          aria-label="Foto anterior"
+          className="absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-white/25 bg-black/35 p-2.5 text-white backdrop-blur-sm transition hover:border-primary hover:text-primary sm:left-6"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          onClick={() => go(1)}
+          aria-label="Foto siguiente"
+          className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-white/25 bg-black/35 p-2.5 text-white backdrop-blur-sm transition hover:border-primary hover:text-primary sm:right-6"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+
+        {/* Dots */}
+        <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5">
+          {HERO_SLIDES.map((s, i) => (
+            <button
+              key={s.src}
+              type="button"
+              onClick={() => setIndex(i)}
+              aria-label={`Ir a la foto ${i + 1}`}
+              aria-current={i === index}
+              className={`h-1.5 rounded-full transition-all duration-500 ${
+                i === index ? "w-8 bg-primary" : "w-3 bg-white/50 hover:bg-white/80"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   return (
     <>
+      <HeroCarousel />
       <Mission />
       <SponsorsMarquee />
     </>
