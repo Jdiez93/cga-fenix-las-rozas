@@ -75,7 +75,7 @@ const NOTICIAS: Noticia[] = [
     medio: "Antena 3 Noticias",
     fecha: "5 JUL 2022",
     fechaLarga: "5 de julio de 2022",
-    categoria: "Prensa",
+    categoria: "Televisión",
     url: "https://www.antena3.com/noticias/deportes/diana-hidalgo-marca-hito-gimnasia-espanola-competir-frente-chicos_2022070562c44a677523070001145ce0.html",
     imagen: img13.url,
     alt: "Diana Hidalgo durante una entrevista en el pabellón de competición",
