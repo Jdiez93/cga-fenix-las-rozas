@@ -1,8 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Reveal, ParallaxLayer } from "@/hooks/use-scroll-reveal";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { logoFenixJpeg as logoAsset } from "@/lib/media";
+import {
+  hero1Png,
+  hero2Png,
+  hero3Png,
+  hero4Png,
+  hero5Png,
+} from "@/lib/media";
 import { sponsorsMainPng as mainLogo } from "@/lib/media";
 import { sponsorsGeniosPng as geniosLogo } from "@/lib/media";
 import { sponsorsAgefiPng as agefiLogo } from "@/lib/media";
