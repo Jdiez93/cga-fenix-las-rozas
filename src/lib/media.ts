@@ -35,3 +35,5 @@ export const sponsorsAgefiPng = { url: "/images/agefi.png" };
 export const sponsorsEtelPng = { url: "/images/etel.png" };
 export const sponsorsGeniosPng = { url: "/images/genios.png" };
 export const sponsorsMainPng = { url: "/images/main.png" };
+export const mediosVideoPitidos = { url: "/files/pitidos-igualdad-las-rozas.mp4" };
+export const mediosPitidosPoster = { url: "/images/medios-pitidos-poster.jpg" };
