@@ -1,116 +1,99 @@
-# CGA Fenix Las Rozas
+# 🤸‍♀️✨ CGA Fénix Las Rozas — Plataforma Web Oficial
 
-Actúa como un diseñador UI/UX senior especializado en clubes deportivos premium. 
+<p align="center">
+  <img src="public/images/logo-fenix.jpeg" alt="CGA Fénix Las Rozas Logo" width="160" style="border-radius: 50%;">
+</p>
 
-Vamos a rediseñar el Header y el Footer de la web de CGA Fénix Las Rozas 
+<p align="center">
+  <b>Club de Gimnasia Artística en Las Rozas de Madrid</b><br>
+  <i>Formando gimnastas desde la base hasta la alta competición con pasión, disciplina y excelencia.</i>
+</p>
 
-(club de gimnasia artística), manteniendo la identidad de marca pero elevando 
+<p align="center">
+  <a href="https://cga-fenix-las-rozas.vercel.app/"><img src="https://img.shields.io/badge/🌐_Sitio_Web-cga--fenix--las--rozas.vercel.app-2ea44f?style=for-the-badge" alt="Web"></a>
+  <img src="https://img.shields.io/badge/Deploy-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
+  <img src="https://img.shields.io/badge/Framework-Next.js_14-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js">
+  <img src="https://img.shields.io/badge/Language-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+</p>
 
-la percepción de profesionalidad a nivel de clubes deportivos de alto nivel 
+---
 
-(estilo federaciones deportivas o academias premium).
+## 📖 Tabla de Contenidos
 
-CONTEXTO DE MARCA:
+- [🌐 Sobre el Proyecto](#-sobre-el-proyecto)
+- [✨ Características y Módulos](#-características-y-módulos)
+- [🏗️ Arquitectura y Estructura](#️-arquitectura-y-estructura)
+- [🛠️ Stack Tecnológico](#️-stack-tecnológico)
+- [🚀 Instalación y Despliegue](#-instalación-y-despliegue)
+- [🛡️ Panel de Administración](#️-panel-de-administración)
+- [📍 Ubicación y Horarios](#-ubicación-y-horarios)
+- [🤝 Patrocinadores y Colaboradores](#-patrocinadores-y-colaboradores)
+- [📲 Contacto y Redes Sociales](#-contacto-y-redes-sociales)
 
-- Nombre: CGA Fénix Las Rozas
+---
 
-- Colores corporativos: extrae la paleta exacta del logo que voy a subir 
+## 🌐 Sobre el Proyecto
 
-  (tonos rojo/naranja "fuego de fénix" como color primario, combinados con 
+Esta aplicación web es el portal digital central del **Club Gimnasia Artística (CGA) Fénix Las Rozas**. Diseñada con una arquitectura moderna y orientada a la experiencia de usuario, cumple una doble función:
 
-  negro/blanco o gris oscuro como base neutra). NO inventes una paleta nueva, 
+1. **Canal Público:** Servir de escaparate institucional para dar a conocer la historia, cuerpo técnico, instalaciones, logros deportivos y permitir la preinscripción digital de nuevos atletas.
+2. **Plataforma de Gestión:** Proporcionar un área administrativa privada para coordinar solicitudes, gestionar grupos de entrenamiento y mantener actualizada la información de eventos y contenidos multimedia.
 
-  respeta fielmente los colores de marca del logo adjunto.
+---
 
-- Tipografía: usa una fuente sans-serif deportiva, fuerte, con buena legibilidad 
+## ✨ Características y Módulos
 
-  (ej. Montserrat, Poppins o similar) — nada de fuentes genéricas tipo Arial.
+### 🏠 1. Landing Page e Identidad
+* **Hero Carousel:** Muestra dinámica e interactiva con imágenes en alta resolución de entrenamientos y campeonatos.
+* **Propuesta de Valor:** Sección institucional con la misión del club centrada en el desarrollo técnico y valor humano.
 
-HEADER — requisitos:
+### 📝 2. Sistema de Preinscripción en Línea (`/preinscripcion`)
+* Formulario digital intuitivo para la captación de nuevos alumnos.
+* Validación de datos en tiempo real para agilizar el proceso de incorporación a los grupos de gimnasia.
 
-- Sticky header con transición sutil al hacer scroll (reduce altura, añade 
+### 🏆 3. Historia y Medallero (`/conocenos/historia` y `/conocenos/logros`)
+* Cronología del club desde su fundación.
+* Palmarés completo con resultados destacados en Campeonatos de España, torneos regionales y trofeos.
 
-  sombra/blur de fondo).
+### 🤸‍♂️ 4. Equipos y Fichas de Atletas (`/equipos` y `/quienes-somos/equipo-tecnico`)
+* Perfiles detallados del equipo técnico (entrenadores, preparadores físicos, fisioterapeutas).
+* Presentación de las distintas categorías deportivas (base, vía olímpica, escolar).
 
-- Logo a la izquierda, navegación centrada o a la derecha.
+### 📸 5. Galería Multimedia (`/galeria/fotos` y `/galeria/videos`)
+* Álbumes fotográficos categorizados por temporada y competición.
+* Videoteca interactiva con rutinas, exhibiciones y momentos clave.
 
-- Estructura de navegación (con dropdowns donde aplique):
+### 📰 6. Medios y Prensa (`/medios`)
+* Recopilatorio de noticias, entrevistas y menciones en medios locales y nacionales.
 
-  Conócenos (Nuestra historia / Nuestros logros) · Quiénes somos (Equipo técnico) 
+---
 
-  · Los equipos · Galería (Fotos / Vídeos) · En los medios · Preinscripción · Contacta
+## 🏗️ Arquitectura y Estructura
 
-- Preinscripción como CTA visualmente diferenciado (botón sólido con el color 
+El proyecto utiliza la estructura de carpetas estándar del **App Router de Next.js**:
 
-  primario, no como link de texto plano).
-
-- Menú responsive tipo hamburguesa en mobile con animación fluida (no un simple 
-
-  toggle brusco).
-
-- Barra superior opcional (thin top bar) con teléfono, email e iconos de redes 
-
-  sociales (Twitter/X, Instagram, Facebook) — discreta, no compite visualmente 
-
-  con el header principal.
-
-FOOTER — requisitos:
-
-- Estructura en 4 columnas: (1) Logo + descripción breve del club, 
-
-  (2) Enlaces rápidos (mismo árbol de navegación), (3) Contacto (teléfono, 
-
-  email, dirección: Polideportivo Entremontes, Calle Aristóteles 3, 28232 
-
-  Las Rozas de Madrid — horario sábados 16:30-20:30 y domingos 10:00-14:00), 
-
-  (4) Redes sociales con iconos + sección "Nuestros patrocinadores" con logos 
-
-  en grid/carrusel horizontal.
-
-- Fondo oscuro (negro o gris carbón) para dar sensación premium, con acentos 
-
-  en el color primario de marca.
-
-- Línea inferior con copyright dinámico (año actual) y link a Aviso Legal.
-
-- Añade un pequeño botón "volver arriba" flotante o integrado en el footer.
-
-CALIDAD GENERAL:
-
-- Diseño limpio, con espaciado generoso (whitespace), nada de elementos 
-
-  amontonados como en la web actual.
-
-- Micro-interacciones sutiles en hover (transform/scale ligero, no exagerado).
-
-- Debe verse bien en mobile-first: prioriza que el header/footer luzcan 
-
-  perfectos en pantallas pequeñas antes que en desktop.
-
-- No toques todavía el contenido del body/hero — nos centramos solo en 
-
-  header y footer en esta iteración.
-
-Sube el logo actual del club como referencia de color antes de generar el diseño.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/461ca828-a13b-4fe4-94ec-cbb2797d5ee4).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+```text
+cga-fenix-las-rozas/
+├── 📁 public/                    # Archivos estáticos
+│   ├── 📁 images/                # Logos, banners y fotografías de gimnastas
+│   └── 📄 favicon-fenix.ico      # Icono del sitio
+│
+├── 📁 src/
+│   ├── 📁 app/                   # Enrutamiento basado en archivos (Next.js App Router)
+│   │   ├── 📄 layout.tsx         # Root layout con Navbar y Footer integrados
+│   │   ├── 📄 page.tsx           # Página principal (Landing Page)
+│   │   ├── 📁 admin/             # Panel privado (/admin/login)
+│   │   ├── 📁 conocenos/         # Subrutas: /historia y /logros
+│   │   ├── 📁 contacto/          # Formulario e información de contacto
+│   │   ├── 📁 equipos/           # Secciones por categoría deportiva
+│   │   ├── 📁 galeria/           # Subrutas: /fotos y /videos
+│   │   ├── 📁 medios/            # Cobertura de prensa
+│   │   ├── 📁 preinscripcion/    # Formulario de alta e inscripción
+│   │   └── 📁 quienes-somos/     # Subruta: /equipo-tecnico
+│   │
+│   ├── 📁 components/            # Componentes reutilizables (Navbar, Footer, Carro, Cards)
+│   └── 📁 styles/                # Hojas de estilo globales y módulos CSS
+│
+├── 📄 next.config.js             # Configuración de Next.js
+├── 📄 package.json               # Dependencias y scripts
+└── 📄 tsconfig.json              # Configuración de TypeScript
