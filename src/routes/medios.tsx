@@ -19,6 +19,7 @@ import { mediosImage13Png as img13 } from "@/lib/media";
 import { mediosImage21Png as img21 } from "@/lib/media";
 import { mediosImage22Png as img22 } from "@/lib/media";
 import { mediosAudioCadenaSerMp3 as audioSer } from "@/lib/media";
+import { mediosVideoPitidos as videoPitidos, mediosPitidosPoster as posterPitidos } from "@/lib/media";
 
 type Categoria = "Televisión" | "Prensa" | "Redes" | "Iniciativa" | "Radio";
 
