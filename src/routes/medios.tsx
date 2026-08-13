@@ -210,32 +210,79 @@ function AudioPlayer({ src, medio }: { src: string; medio: string }) {
   );
 }
 
+function VideoPlayer({ src, poster, alt }: { src: string; poster?: string; alt: string }) {
+  const ref = useRef<HTMLVideoElement | null>(null);
+  const [started, setStarted] = useState(false);
+
+  return (
+    <div className="relative aspect-[16/10] overflow-hidden bg-carbon">
+      <video
+        ref={ref}
+        src={src}
+        poster={poster}
+        preload="none"
+        playsInline
+        controls={started}
+        aria-label={alt}
+        onPlay={() => setStarted(true)}
+        className="h-full w-full object-cover"
+      />
+      {!started && (
+        <button
+          type="button"
+          onClick={() => void ref.current?.play()}
+          aria-label="Reproducir el vídeo de la noticia"
+          className="group/play absolute inset-0 flex flex-col items-center justify-center gap-3 bg-carbon/35 transition-colors hover:bg-carbon/20"
+        >
+          <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-gradient-fire text-primary-foreground shadow-elegant transition-transform duration-300 group-hover/play:scale-110">
+            <Play className="ml-0.5 h-7 w-7" aria-hidden />
+          </span>
+          <span className="rounded-full bg-background/85 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-foreground">
+            Ver el vídeo
+          </span>
+        </button>
+      )}
+    </div>
+  );
+}
+
 function NewsCard({ noticia, index }: { noticia: Noticia; index: number }) {
+  const media = (
+    <div className="relative aspect-[16/10] overflow-hidden bg-carbon">
+      <img
+        src={noticia.imagen}
+        alt={noticia.alt}
+        loading="lazy"
+        className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.07]"
+      />
+    </div>
+  );
+
   return (
     <div
       style={{ animationDelay: `${index * 90}ms` }}
       className="group relative flex animate-fade-up flex-col overflow-hidden rounded-3xl border border-border bg-card opacity-0 shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/60 hover:shadow-elegant"
     >
-      <a href={noticia.url} target="_blank" rel="noopener noreferrer" className="block">
-        <div className="relative aspect-[16/10] overflow-hidden bg-carbon">
-          <img
-            src={noticia.imagen}
-            alt={noticia.alt}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.07]"
-          />
-          <div className="absolute left-4 top-4">
-            <CategoriaBadge categoria={noticia.categoria} />
-          </div>
-          <div className="absolute inset-x-4 bottom-3 flex items-center justify-between gap-2 text-[11px] font-semibold uppercase tracking-[0.14em]">
-            <span className="rounded-full bg-background/85 px-2.5 py-1 text-foreground">{noticia.medio}</span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-background/85 px-2.5 py-1 text-muted-foreground">
-              <Calendar className="h-3 w-3" aria-hidden />
-              {noticia.fecha}
-            </span>
-          </div>
+      <div className="relative">
+        {noticia.video ? (
+          <VideoPlayer src={noticia.video} poster={noticia.videoPoster} alt={noticia.alt} />
+        ) : (
+          <a href={noticia.url} target="_blank" rel="noopener noreferrer" className="block">
+            {media}
+          </a>
+        )}
+        <div className="pointer-events-none absolute left-4 top-4">
+          <CategoriaBadge categoria={noticia.categoria} />
         </div>
-      </a>
+        <div className="pointer-events-none absolute inset-x-4 bottom-3 flex items-center justify-between gap-2 text-[11px] font-semibold uppercase tracking-[0.14em]">
+          <span className="rounded-full bg-background/85 px-2.5 py-1 text-foreground">{noticia.medio}</span>
+          <span className="inline-flex items-center gap-1 rounded-full bg-background/85 px-2.5 py-1 text-muted-foreground">
+            <Calendar className="h-3 w-3" aria-hidden />
+            {noticia.fecha}
+          </span>
+        </div>
+      </div>
+
 
       <div className="flex flex-1 flex-col p-6">
         <a href={noticia.url} target="_blank" rel="noopener noreferrer">
