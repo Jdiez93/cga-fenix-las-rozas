@@ -35,6 +35,8 @@ type Noticia = {
   imagen: string;
   alt: string;
   audio?: string;
+  video?: string;
+  videoPoster?: string;
   destacada?: boolean;
 };
 
