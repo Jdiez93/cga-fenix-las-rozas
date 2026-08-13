@@ -125,6 +125,22 @@ const NOTICIAS: Noticia[] = [
     alt: "Fachada del Ayuntamiento de Las Rozas de Madrid con banderas",
     audio: audioSer.url,
   },
+  {
+    id: "vanguardia-pitidos",
+    titulo:
+      '"Justicia y equidad": pitidos para reivindicar la igualdad en el deporte en el Ayuntamiento de Las Rozas',
+    resumen:
+      "Familias, gimnastas y club se concentran a las puertas del pleno municipal para reclamar igualdad de acceso a las instalaciones deportivas. Reproduce el vídeo de la concentración.",
+    medio: "La Vanguardia",
+    fecha: "19 JUN 2026",
+    fechaLarga: "19 de junio de 2026",
+    categoria: "Radio",
+    url: "https://www.lavanguardia.com/local/madrid/20260619/11569018/justicia-equidad-pitidos-reivindicar-igualdad-deporte-ayuntamiento-rozas.html",
+    imagen: posterPitidos.url,
+    alt: "Concentración de familias y gimnastas del club frente al Ayuntamiento de Las Rozas",
+    video: videoPitidos.url,
+    videoPoster: posterPitidos.url,
+  },
 ];
 
 const CATEGORIA_ICONO: Record<Categoria, typeof Newspaper> = {
