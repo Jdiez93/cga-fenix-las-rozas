@@ -274,13 +274,20 @@ function NewsCard({ noticia, index }: { noticia: Noticia; index: number }) {
         <div className="pointer-events-none absolute left-4 top-4">
           <CategoriaBadge categoria={noticia.categoria} />
         </div>
-        <div className="pointer-events-none absolute inset-x-4 bottom-3 flex items-center justify-between gap-2 text-[11px] font-semibold uppercase tracking-[0.14em]">
-          <span className="rounded-full bg-background/85 px-2.5 py-1 text-foreground">{noticia.medio}</span>
+        <div
+          className={`pointer-events-none absolute inset-x-4 flex items-center justify-between gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] ${
+            noticia.video ? "top-4 justify-end" : "bottom-3"
+          }`}
+        >
+          {!noticia.video && (
+            <span className="rounded-full bg-background/85 px-2.5 py-1 text-foreground">{noticia.medio}</span>
+          )}
           <span className="inline-flex items-center gap-1 rounded-full bg-background/85 px-2.5 py-1 text-muted-foreground">
             <Calendar className="h-3 w-3" aria-hidden />
             {noticia.fecha}
           </span>
         </div>
+
       </div>
 
 
