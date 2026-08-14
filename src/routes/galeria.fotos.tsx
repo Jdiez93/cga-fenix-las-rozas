@@ -19,6 +19,12 @@ import { galImage25Png as p13 } from "@/lib/media";
 import { galImage26Png as p14 } from "@/lib/media";
 import { galImage27Png as p15 } from "@/lib/media";
 import { galImage28Png as p16 } from "@/lib/media";
+import { galImage34Png as p17 } from "@/lib/media";
+import { galImage35Png as p18 } from "@/lib/media";
+import { galImage36Png as p19 } from "@/lib/media";
+import { galImage37Png as p20 } from "@/lib/media";
+import { galImage38Png as p21 } from "@/lib/media";
+import { galImage39Png as p22 } from "@/lib/media";
 
 export const Route = createFileRoute("/galeria/fotos")({
   head: () => ({
