@@ -19,6 +19,12 @@ import { galImage25Png as p13 } from "@/lib/media";
 import { galImage26Png as p14 } from "@/lib/media";
 import { galImage27Png as p15 } from "@/lib/media";
 import { galImage28Png as p16 } from "@/lib/media";
+import { galImage34Png as p17 } from "@/lib/media";
+import { galImage35Png as p18 } from "@/lib/media";
+import { galImage36Png as p19 } from "@/lib/media";
+import { galImage37Png as p20 } from "@/lib/media";
+import { galImage38Png as p21 } from "@/lib/media";
+import { galImage39Png as p22 } from "@/lib/media";
 
 export const Route = createFileRoute("/galeria/fotos")({
   head: () => ({
@@ -147,6 +153,42 @@ const PHOTOS: Photo[] = [
     title: "Espíritu Fénix",
     caption: "La mirada del club: resurgir siempre, con fuego dentro.",
     span: "md:row-span-2",
+  },
+  {
+    src: p17.url,
+    title: "Podio veterano en Leipzig",
+    caption: "Nuestros gimnastas veteranos celebrando el segundo puesto en el World Gymnaestrada/Turnfest.",
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    src: p18.url,
+    title: "Amistad internacional",
+    caption: "Con la delegación brasileña en el pabellón de competición de Leipzig.",
+    span: "md:col-span-2",
+  },
+  {
+    src: p19.url,
+    title: "Gimnasia sin fronteras",
+    caption: "Técnicos y gimnastas Fénix junto a competidores asiáticos en categoría máster.",
+    span: "md:col-span-2",
+  },
+  {
+    src: p20.url,
+    title: "Entrega de medalla",
+    caption: "Momento del podio: la medalla al cuello tras un ejercicio impecable.",
+    span: "md:row-span-2",
+  },
+  {
+    src: p21.url,
+    title: "Reconocimiento",
+    caption: "Sonrisas en la entrega de premios de la competición internacional.",
+    span: "md:row-span-2",
+  },
+  {
+    src: p22.url,
+    title: "Apretón de manos",
+    caption: "Deportividad y respeto: felicitaciones tras la final.",
+    span: "md:col-span-2",
   },
 ];
 
