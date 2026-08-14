@@ -125,30 +125,30 @@ export function SiteHeader() {
             </a>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 lg:pl-4 xl:pl-6 2xl:pl-10">
+            <nav className="hidden lg:flex items-stretch justify-center gap-0.5 xl:gap-1 lg:pl-4 xl:pl-6 2xl:pl-10">
               {NAV.map((item) => (
                 <div
                   key={item.label}
-                  className="relative"
+                  className="relative flex items-center"
                   onMouseEnter={() => item.children && setOpenMenu(item.label)}
                   onMouseLeave={() => setOpenMenu(null)}
                 >
                   {item.to ? (
                     <a
                       href={item.to}
-                      className="whitespace-nowrap px-2 xl:px-2.5 py-2 text-[11.5px] xl:text-[12.5px] font-bold uppercase tracking-[0.06em] text-foreground/85 hover:text-primary transition-colors"
+                      className="inline-flex h-9 items-center whitespace-nowrap px-2 xl:px-2.5 text-[11.5px] xl:text-[12.5px] font-bold uppercase leading-none tracking-[0.06em] text-foreground/85 hover:text-primary transition-colors"
                     >
                       {item.label}
                     </a>
                   ) : (
                     <button
-                      className="inline-flex items-center gap-1 whitespace-nowrap px-2 xl:px-2.5 py-2 text-[11.5px] xl:text-[12.5px] font-bold uppercase tracking-[0.06em] text-foreground/85 hover:text-primary transition-colors"
+                      className="inline-flex h-9 items-center gap-1 whitespace-nowrap px-2 xl:px-2.5 text-[11.5px] xl:text-[12.5px] font-bold uppercase leading-none tracking-[0.06em] text-foreground/85 hover:text-primary transition-colors"
                       aria-expanded={openMenu === item.label}
                     >
                       {item.label}
                       <ChevronDown
                         className={cn(
-                          "h-3 w-3 transition-transform duration-200",
+                          "h-3 w-3 shrink-0 transition-transform duration-200",
                           openMenu === item.label && "rotate-180"
                         )}
                       />
