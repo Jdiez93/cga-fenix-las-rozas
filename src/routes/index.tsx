@@ -62,15 +62,15 @@ function HeroCarousel() {
       aria-label="Galería destacada del club"
       className="relative w-full overflow-hidden bg-carbon"
     >
-      <div className="relative h-[46vh] min-h-[300px] sm:h-[62vh] lg:h-[78vh]">
+      <div className="relative h-[60vh] min-h-[420px] sm:h-[74vh] lg:h-[92vh]">
         {HERO_SLIDES.map((s, i) => (
           <img
             key={s.src}
             src={s.src}
             alt={s.alt}
             loading={i === 0 ? "eager" : "lazy"}
-            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
-            style={{ objectPosition: s.position, opacity: i === index ? 1 : 0 }}
+            className="absolute inset-0 h-full w-full object-contain transition-opacity duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{ opacity: i === index ? 1 : 0 }}
           />
         ))}
 
