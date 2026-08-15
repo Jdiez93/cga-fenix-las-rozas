@@ -1,7 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useCallback } from "react";
-import { Reveal, ParallaxLayer } from "@/hooks/use-scroll-reveal";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Sparkles, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ParallaxY, ScrollZoom } from "@/components/motion/Parallax";
+import { TiltCard } from "@/components/motion/TiltCard";
+import { CursorGlow } from "@/components/motion/CursorGlow";
+import { Reveal3D, Stagger, StaggerItem, ClipReveal } from "@/components/motion/Reveal3D";
+import { APPLE_EASE, useHeavyEffectsEnabled } from "@/components/motion/motion-config";
 import { logoFenixJpeg as logoAsset } from "@/lib/media";
 import {
   hero1Png,
@@ -62,51 +67,58 @@ function HeroCarousel() {
       aria-label="Galería destacada del club"
       className="relative w-full overflow-hidden bg-background"
     >
-      <div className="relative h-[60vh] min-h-[420px] sm:h-[74vh] lg:h-[92vh]">
-        {HERO_SLIDES.map((s, i) => (
-          <img
-            key={s.src}
-            src={s.src}
-            alt={s.alt}
-            loading={i === 0 ? "eager" : "lazy"}
-            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
-            style={{ opacity: i === index ? 1 : 0, objectPosition: s.position }}
-          />
-        ))}
-
-        {/* Arrows */}
-        <button
-          type="button"
-          onClick={() => go(-1)}
-          aria-label="Foto anterior"
-          className="absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-white/25 bg-black/35 p-2.5 text-white backdrop-blur-sm transition hover:border-primary hover:text-primary sm:left-6"
-        >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        <button
-          type="button"
-          onClick={() => go(1)}
-          aria-label="Foto siguiente"
-          className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-white/25 bg-black/35 p-2.5 text-white backdrop-blur-sm transition hover:border-primary hover:text-primary sm:right-6"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
-
-        {/* Dots */}
-        <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5">
+      <ScrollZoom
+        className="relative h-[60vh] min-h-[420px] sm:h-[74vh] lg:h-[92vh]"
+        from={1.1}
+        to={1}
+        parallax={70}
+      >
+        <div className="relative h-full w-full">
           {HERO_SLIDES.map((s, i) => (
-            <button
+            <img
               key={s.src}
-              type="button"
-              onClick={() => setIndex(i)}
-              aria-label={`Ir a la foto ${i + 1}`}
-              aria-current={i === index}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === index ? "w-8 bg-primary" : "w-3 bg-white/50 hover:bg-white/80"
-              }`}
+              src={s.src}
+              alt={s.alt}
+              loading={i === 0 ? "eager" : "lazy"}
+              className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+              style={{ opacity: i === index ? 1 : 0, objectPosition: s.position }}
             />
           ))}
         </div>
+      </ScrollZoom>
+
+      {/* Arrows */}
+      <button
+        type="button"
+        onClick={() => go(-1)}
+        aria-label="Foto anterior"
+        className="absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-white/25 bg-black/35 p-2.5 text-white backdrop-blur-sm transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-110 hover:border-primary hover:text-primary sm:left-6"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        type="button"
+        onClick={() => go(1)}
+        aria-label="Foto siguiente"
+        className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-white/25 bg-black/35 p-2.5 text-white backdrop-blur-sm transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-110 hover:border-primary hover:text-primary sm:right-6"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5">
+        {HERO_SLIDES.map((s, i) => (
+          <button
+            key={s.src}
+            type="button"
+            onClick={() => setIndex(i)}
+            aria-label={`Ir a la foto ${i + 1}`}
+            aria-current={i === index}
+            className={`h-1.5 rounded-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              i === index ? "w-8 bg-primary" : "w-3 bg-white/50 hover:bg-white/80"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
@@ -115,6 +127,7 @@ function HeroCarousel() {
 function Index() {
   return (
     <>
+      <ScrollProgressBar />
       <HeroCarousel />
       <Mission />
       <SponsorsMarquee />
@@ -122,13 +135,32 @@ function Index() {
   );
 }
 
+/* ---------------- Barra de progreso de scroll ---------------- */
+function ScrollProgressBar() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 160, damping: 30, mass: 0.3 });
+  return (
+    <motion.div
+      aria-hidden
+      className="fixed inset-x-0 top-0 z-50 h-0.5 origin-left bg-primary"
+      style={{ scaleX }}
+    />
+  );
+}
+
 /* ---------------- MISSION (elevated hero) ---------------- */
 function Mission() {
+  const heavy = useHeavyEffectsEnabled(640);
+  const { scrollYProgress } = useScroll();
+  const emblemRotate = useTransform(scrollYProgress, [0, 1], [-6, 6]);
+
   return (
     <section className="relative overflow-hidden bg-background">
-      {/* Ambient background */}
-      <ParallaxLayer ratio={0.4} className="pointer-events-none absolute inset-0">
+      {/* Ambient background con profundidad */}
+      <ParallaxY distance={90} className="pointer-events-none absolute inset-0">
         <div className="absolute -top-32 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+      </ParallaxY>
+      <ParallaxY distance={40} className="pointer-events-none absolute inset-0">
         <div
           className="absolute inset-0 opacity-[0.04]"
           style={{
@@ -141,13 +173,19 @@ function Mission() {
               "radial-gradient(ellipse at center, black 40%, transparent 75%)",
           }}
         />
-      </ParallaxLayer>
+      </ParallaxY>
+      <CursorGlow size={620} intensity={10} />
 
       <div className="relative mx-auto max-w-4xl px-6 py-20 text-center sm:py-24 lg:py-28">
-        <Reveal variant="heading" duration={800}>
-          {/* Logo emblem */}
-          <div className="mx-auto mb-10 flex items-center justify-center">
-            <div className="relative animate-float-slow">
+        <Reveal3D>
+          {/* Logo emblem con profundidad 3D */}
+          <div className="mx-auto mb-10 flex items-center justify-center [perspective:1000px]">
+            <motion.div
+              className="relative animate-float-slow"
+              style={heavy ? { rotateZ: emblemRotate } : undefined}
+              whileHover={heavy ? { scale: 1.04 } : undefined}
+              transition={{ duration: 0.5, ease: APPLE_EASE }}
+            >
               <div className="absolute inset-0 -m-10 rounded-full bg-primary/25 blur-2xl" />
               <div className="relative rounded-full bg-carbon p-5 ring-1 ring-primary/40">
                 <img
@@ -157,60 +195,72 @@ function Mission() {
                 />
               </div>
               <div className="pointer-events-none absolute inset-0 -m-5 rounded-full border border-dashed border-primary/40" />
-            </div>
+            </motion.div>
           </div>
+        </Reveal3D>
 
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.25em] text-primary">
-            <Sparkles className="h-3 w-3" />
-            Nuestra esencia
-          </span>
-
-          <h1 className="mt-6 text-4xl sm:text-6xl xl:text-7xl font-black uppercase tracking-tight text-foreground leading-[0.95]">
-            Club Fénix
-            <br />
-            <span className="text-primary">Las Rozas</span>
-          </h1>
-
-          <div className="mx-auto mt-6 flex items-center justify-center gap-3">
-            <span className="h-px w-10 bg-border" />
-            <span className="text-[11px] uppercase tracking-[0.35em] text-muted-foreground">
-              Gimnasia Artística
+        <Stagger className="relative" stagger={0.1}>
+          <StaggerItem>
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.25em] text-primary">
+              <Sparkles className="h-3 w-3" />
+              Nuestra esencia
             </span>
-            <span className="h-px w-10 bg-border" />
-          </div>
+          </StaggerItem>
 
-          <p className="mx-auto mt-12 max-w-xl text-xl sm:text-2xl font-bold text-foreground leading-snug">
-            Nuestra pasión es la <span className="text-primary">gimnasia</span>.
-          </p>
-          <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
-            Queremos formar a los gimnastas de hoy y del mañana, no solo desde la{" "}
-            <span className="text-foreground font-semibold">excelencia técnica</span> sino
-            también desde el{" "}
-            <span className="text-foreground font-semibold">
-              desarrollo personal y social
-            </span>{" "}
-            que este deporte nos ofrece.
-          </p>
-        </Reveal>
+          <StaggerItem>
+            <h1 className="mt-6 text-4xl sm:text-6xl xl:text-7xl font-black uppercase tracking-tight text-foreground leading-[0.95]">
+              Club Fénix
+              <br />
+              <span className="text-primary">Las Rozas</span>
+            </h1>
+          </StaggerItem>
 
-        <Reveal variant="cta" delay={220} duration={600}>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/preinscripcion"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-primary-foreground shadow-elegant transition-all hover:scale-[1.03]"
-            >
-              Preinscripción
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link
-              to="/conocenos/historia"
-              className="group inline-flex items-center gap-2 rounded-full border border-border bg-background px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-foreground transition-colors hover:border-primary hover:text-primary"
-            >
-              Conócenos
-            </Link>
-          </div>
-        </Reveal>
+          <StaggerItem>
+            <div className="mx-auto mt-6 flex items-center justify-center gap-3">
+              <span className="h-px w-10 bg-border" />
+              <span className="text-[11px] uppercase tracking-[0.35em] text-muted-foreground">
+                Gimnasia Artística
+              </span>
+              <span className="h-px w-10 bg-border" />
+            </div>
+          </StaggerItem>
 
+          <StaggerItem>
+            <p className="mx-auto mt-12 max-w-xl text-xl sm:text-2xl font-bold text-foreground leading-snug">
+              Nuestra pasión es la <span className="text-primary">gimnasia</span>.
+            </p>
+          </StaggerItem>
+
+          <StaggerItem>
+            <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
+              Queremos formar a los gimnastas de hoy y del mañana, no solo desde la{" "}
+              <span className="text-foreground font-semibold">excelencia técnica</span> sino
+              también desde el{" "}
+              <span className="text-foreground font-semibold">
+                desarrollo personal y social
+              </span>{" "}
+              que este deporte nos ofrece.
+            </p>
+          </StaggerItem>
+
+          <StaggerItem>
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                to="/preinscripcion"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-primary-foreground shadow-elegant transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04]"
+              >
+                Preinscripción
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1" />
+              </Link>
+              <Link
+                to="/conocenos/historia"
+                className="group inline-flex items-center gap-2 rounded-full border border-border bg-background px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-foreground transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.03] hover:border-primary hover:text-primary"
+              >
+                Conócenos
+              </Link>
+            </div>
+          </StaggerItem>
+        </Stagger>
       </div>
     </section>
   );
@@ -225,87 +275,97 @@ function SponsorsMarquee() {
 
   return (
     <section className="relative overflow-hidden border-t border-border bg-gradient-to-b from-background via-muted/30 to-background py-20 sm:py-24">
-      {/* subtle ambient accents */}
-      <ParallaxLayer ratio={0.3} className="pointer-events-none absolute inset-0">
+      {/* subtle ambient accents con parallax */}
+      <ParallaxY distance={70} className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 left-1/4 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute -bottom-24 right-1/4 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
-      </ParallaxLayer>
+      </ParallaxY>
+      <CursorGlow size={520} intensity={9} />
 
       <div className="relative mx-auto max-w-7xl px-6 text-center">
-        <Reveal variant="heading" duration={800}>
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.3em] text-primary">
-            <Sparkles className="h-3.5 w-3.5" />
-            Con el apoyo de
-          </span>
-          <h2 className="mt-5 text-3xl sm:text-4xl xl:text-5xl font-black uppercase tracking-tight text-foreground">
-            Nuestros <span className="text-primary">patrocinadores</span>
-          </h2>
-          <div className="mx-auto mt-5 h-1 w-20 rounded-full bg-primary" />
-          <p className="mx-auto mt-5 max-w-xl text-sm sm:text-base text-muted-foreground">
-            Marcas que confían en el proyecto Fénix y hacen posible que cada gimnasta
-            llegue más lejos.
-          </p>
-        </Reveal>
+        <Stagger stagger={0.08}>
+          <StaggerItem>
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.3em] text-primary">
+              <Sparkles className="h-3.5 w-3.5" />
+              Con el apoyo de
+            </span>
+          </StaggerItem>
+          <StaggerItem>
+            <h2 className="mt-5 text-3xl sm:text-4xl xl:text-5xl font-black uppercase tracking-tight text-foreground">
+              Nuestros <span className="text-primary">patrocinadores</span>
+            </h2>
+          </StaggerItem>
+          <StaggerItem>
+            <div className="mx-auto mt-5 h-1 w-20 rounded-full bg-primary" />
+          </StaggerItem>
+          <StaggerItem>
+            <p className="mx-auto mt-5 max-w-xl text-sm sm:text-base text-muted-foreground">
+              Marcas que confían en el proyecto Fénix y hacen posible que cada gimnasta
+              llegue más lejos.
+            </p>
+          </StaggerItem>
+        </Stagger>
       </div>
 
       {/* Marquee viewport */}
-      <Reveal variant="card" delay={120} duration={800}>
-      <div
-        className="relative mt-14"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        {/* Edge fades */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent" />
-
+      <ClipReveal className="relative mt-14" sheen={false}>
         <div
-          className="flex w-max gap-6 sm:gap-8 animate-marquee"
-          style={{ animationPlayState: paused ? "paused" : "running" }}
+          className="relative [perspective:1200px]"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
         >
-          {track.map((s, i) => {
-            const key = `${s.name}-${i}`;
-            return (
-              <a
-                key={key}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${s.name} — ${s.tag}`}
-                className="relative flex h-44 w-64 sm:h-48 sm:w-72 shrink-0 flex-col overflow-hidden rounded-2xl border border-border bg-card will-change-transform"
-              >
-                {/* logo area */}
-                <div
-                  className={`relative flex flex-1 items-center justify-center px-6 py-6 ${
-                    s.dark ? "bg-carbon" : "bg-background"
-                  }`}
+          {/* Edge fades */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent" />
+
+          <div
+            className="flex w-max gap-6 sm:gap-8 animate-marquee py-4"
+            style={{ animationPlayState: paused ? "paused" : "running" }}
+          >
+            {track.map((s, i) => {
+              const key = `${s.name}-${i}`;
+              return (
+                <TiltCard
+                  key={key}
+                  as="a"
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${s.name} — ${s.tag}`}
+                  max={10}
+                  className="relative flex h-44 w-64 sm:h-48 sm:w-72 shrink-0 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm will-change-transform hover:border-primary/50"
                 >
-                  <img
-                    src={s.logo}
-                    alt={s.name}
-                    loading="lazy"
-                    className="max-h-20 max-w-[80%] object-contain"
-                  />
-                </div>
-
-                {/* footer strip */}
-                <div className="relative flex items-center border-t border-border bg-card px-4 py-3">
-                  <div className="flex flex-col items-start text-left">
-                    <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-foreground">
-                      {s.name}
-                    </span>
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                      {s.tag}
-                    </span>
+                  {/* logo area */}
+                  <div
+                    className={`relative flex flex-1 items-center justify-center px-6 py-6 ${
+                      s.dark ? "bg-carbon" : "bg-background"
+                    }`}
+                  >
+                    <img
+                      src={s.logo}
+                      alt={s.name}
+                      loading="lazy"
+                      className="max-h-20 max-w-[80%] object-contain"
+                    />
                   </div>
-                </div>
-              </a>
-            );
-          })}
-        </div>
-      </div>
-      </Reveal>
-    </section>
 
+                  {/* footer strip */}
+                  <div className="relative z-20 flex items-center border-t border-border bg-card px-4 py-3">
+                    <div className="flex flex-col items-start text-left">
+                      <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-foreground">
+                        {s.name}
+                      </span>
+                      <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                        {s.tag}
+                      </span>
+                    </div>
+                  </div>
+                </TiltCard>
+              );
+            })}
+          </div>
+        </div>
+      </ClipReveal>
+    </section>
   );
 }
