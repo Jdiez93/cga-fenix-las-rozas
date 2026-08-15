@@ -1,6 +1,6 @@
 import * as React from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useHeavyEffectsEnabled } from "./motion-config";
+import { APPLE_EASE, useHeavyEffectsEnabled } from "./motion-config";
 
 type TiltCardProps = {
   children: React.ReactNode;
@@ -10,8 +10,7 @@ type TiltCardProps = {
   /** brillo radial que sigue el cursor dentro de la tarjeta */
   glow?: boolean;
   as?: "div" | "a" | "article" | "li";
-} & React.HTMLAttributes<HTMLElement> &
-  Record<string, unknown>;
+} & Record<string, unknown>;
 
 /**
  * Tarjeta con inclinación 3D mouse-follow (perspective + rotateX/rotateY)
@@ -26,6 +25,7 @@ export function TiltCard({
   ...rest
 }: TiltCardProps) {
   const enabled = useHeavyEffectsEnabled();
+  const [hover, setHover] = React.useState(false);
   const rx = useMotionValue(0);
   const ry = useMotionValue(0);
   const mx = useMotionValue(50);
@@ -36,7 +36,7 @@ export function TiltCard({
   const glowBg = useTransform(
     [mx, my],
     ([x, y]: number[]) =>
-      `radial-gradient(320px circle at ${x}% ${y}%, color-mix(in oklab, var(--primary) 22%, transparent), transparent 70%)`,
+      `radial-gradient(320px circle at ${x}% ${y}%, color-mix(in oklab, var(--primary) 20%, transparent), transparent 70%)`,
   );
 
   const onMove = (e: React.MouseEvent<HTMLElement>) => {
@@ -51,6 +51,7 @@ export function TiltCard({
   };
 
   const onLeave = () => {
+    setHover(false);
     rx.set(0);
     ry.set(0);
     mx.set(50);
@@ -62,6 +63,7 @@ export function TiltCard({
   return (
     <Comp
       {...(rest as Record<string, never>)}
+      onMouseEnter={() => enabled && setHover(true)}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       className={className}
@@ -70,17 +72,17 @@ export function TiltCard({
         perspective: 900,
         ...(enabled ? { rotateX, rotateY } : {}),
       }}
-      whileHover={enabled ? { scale: 1.025, z: 30 } : undefined}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={enabled ? { scale: 1.025 } : undefined}
+      transition={{ duration: 0.4, ease: APPLE_EASE }}
     >
-      <div style={{ transform: "translateZ(28px)" }} className="contents">
-        {children}
-      </div>
+      {children}
       {glow && enabled ? (
         <motion.span
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 [.group\\/tilt:hover_&]:opacity-100"
+          className="pointer-events-none absolute inset-0 z-10"
           style={{ background: glowBg }}
+          animate={{ opacity: hover ? 1 : 0 }}
+          transition={{ duration: 0.45, ease: APPLE_EASE }}
         />
       ) : null}
     </Comp>
