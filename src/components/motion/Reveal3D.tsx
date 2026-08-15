@@ -118,17 +118,23 @@ export function ClipReveal({
   sheen?: boolean;
   once?: boolean;
 }) {
-  const [shown, setShown] = React.useState(false);
+  const ref = React.useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.15, once });
+  const shown = inView;
   return (
     <motion.div
+      ref={ref}
       data-no-reveal
       className={`relative overflow-hidden ${className ?? ""}`}
-      initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0, scale: 1.03 }}
-      whileInView={{ clipPath: "inset(0 0 0% 0)", opacity: 1, scale: 1 }}
-      viewport={{ once, amount: 0.25 }}
+      initial={false}
+      animate={
+        shown
+          ? { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, scale: 1 }
+          : { clipPath: "inset(0% 0% 100% 0%)", opacity: 0, scale: 1.03 }
+      }
       transition={{ duration: 0.9, delay, ease: APPLE_EASE }}
-      onViewportEnter={() => setShown(true)}
     >
+
       {children}
       {sheen ? (
         <motion.span
