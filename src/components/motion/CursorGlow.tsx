@@ -51,6 +51,7 @@ export function CursorGlow({
   return (
     <motion.div
       ref={ref}
+      data-no-reveal
       aria-hidden
       className={`pointer-events-none absolute inset-0 ${className ?? ""}`}
       style={enabled ? { background } : undefined}

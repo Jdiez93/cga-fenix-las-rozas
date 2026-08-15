@@ -63,6 +63,7 @@ export function TiltCard({
   return (
     <Comp
       {...(rest as Record<string, never>)}
+      data-no-reveal
       onMouseEnter={() => enabled && setHover(true)}
       onMouseMove={onMove}
       onMouseLeave={onLeave}

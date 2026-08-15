@@ -26,7 +26,7 @@ export function ParallaxY({ children, className, distance = 80, style }: Paralla
   const y = useSpring(raw, { stiffness: 120, damping: 30, mass: 0.4 });
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} data-no-reveal>
       <motion.div style={enabled ? { y, willChange: "transform", ...style } : style}>
         {children}
       </motion.div>
@@ -63,7 +63,7 @@ export function ScrollZoom({
   const opacity = useTransform(scrollYProgress, [0, 0.85, 1], [1, 1, 0.55]);
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} data-no-reveal>
       <motion.div
         className="h-full w-full"
         style={enabled ? { scale, y, opacity, willChange: "transform, opacity" } : undefined}

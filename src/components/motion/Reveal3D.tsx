@@ -23,6 +23,7 @@ export function Reveal3D({
 }) {
   return (
     <motion.div
+      data-no-reveal
       className={className}
       style={{ perspective: 1100, transformStyle: "preserve-3d" }}
       initial={{ opacity: 0, y, z, scale: 0.965 }}
@@ -69,6 +70,7 @@ export function Stagger({
   const Comp = motion[as] as typeof motion.div;
   return (
     <Comp
+      data-no-reveal
       className={className}
       variants={containerVariants}
       custom={stagger}
@@ -119,6 +121,7 @@ export function ClipReveal({
   const [shown, setShown] = React.useState(false);
   return (
     <motion.div
+      data-no-reveal
       className={`relative overflow-hidden ${className ?? ""}`}
       initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0, scale: 1.03 }}
       whileInView={{ clipPath: "inset(0 0 0% 0)", opacity: 1, scale: 1 }}
