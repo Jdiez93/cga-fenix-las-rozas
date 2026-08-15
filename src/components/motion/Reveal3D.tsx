@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useInView, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { APPLE_EASE } from "./motion-config";
 
 /**
