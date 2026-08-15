@@ -119,8 +119,36 @@ export function ClipReveal({
   once?: boolean;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { amount: 0.15, once });
-  const shown = inView;
+  // Observer propio: SSR pinta el contenido visible y solo lo ocultamos una vez
+  // que el observador está activo en cliente (nunca deja contenido invisible).
+  const [state, setState] = React.useState<"idle" | "hidden" | "shown">("idle");
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setState("shown");
+      return;
+    }
+    const rect = el.getBoundingClientRect();
+    const alreadyVisible = rect.top < window.innerHeight * 0.9 && rect.bottom > 0;
+    setState(alreadyVisible ? "shown" : "hidden");
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setState("shown");
+          else if (!once) setState("hidden");
+        }
+      },
+      { threshold: 0.12 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [once]);
+
+  const shown = state !== "hidden";
+
   return (
     <motion.div
       ref={ref}
@@ -134,6 +162,7 @@ export function ClipReveal({
       }
       transition={{ duration: 0.9, delay, ease: APPLE_EASE }}
     >
+
 
       {children}
       {sheen ? (
