@@ -150,30 +150,31 @@ export function ClipReveal({
   const shown = state !== "hidden";
 
   return (
-    <motion.div
-      ref={ref}
-      data-no-reveal
-      className={`relative overflow-hidden ${className ?? ""}`}
-      initial={false}
-      animate={
-        shown
-          ? { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, scale: 1 }
-          : { clipPath: "inset(0% 0% 100% 0%)", opacity: 0, scale: 1.03 }
-      }
-      transition={{ duration: 0.9, delay, ease: APPLE_EASE }}
-    >
-
-
-      {children}
-      {sheen ? (
-        <motion.span
-          aria-hidden
-          className="pointer-events-none absolute inset-y-0 -left-1/3 z-10 w-1/3 skew-x-[-14deg] bg-gradient-to-r from-transparent via-white/25 to-transparent"
-          initial={{ x: "-40%", opacity: 0 }}
-          animate={shown ? { x: "420%", opacity: [0, 1, 0] } : {}}
-          transition={{ duration: 1.1, delay: delay + 0.25, ease: APPLE_EASE }}
-        />
-      ) : null}
-    </motion.div>
+    // El observador va en un contenedor SIN recorte: si observáramos el
+    // elemento recortado, su área visible sería 0 y nunca se revelaría.
+    <div ref={ref} data-no-reveal className={className}>
+      <motion.div
+        className="relative overflow-hidden"
+        initial={false}
+        animate={
+          shown
+            ? { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, scale: 1 }
+            : { clipPath: "inset(0% 0% 100% 0%)", opacity: 0, scale: 1.03 }
+        }
+        transition={{ duration: 0.9, delay, ease: APPLE_EASE }}
+      >
+        {children}
+        {sheen ? (
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 -left-1/3 z-10 w-1/3 skew-x-[-14deg] bg-gradient-to-r from-transparent via-white/25 to-transparent"
+            initial={{ x: "-40%", opacity: 0 }}
+            animate={shown ? { x: "420%", opacity: [0, 1, 0] } : {}}
+            transition={{ duration: 1.1, delay: delay + 0.25, ease: APPLE_EASE }}
+          />
+        ) : null}
+      </motion.div>
+    </div>
   );
 }
+
