@@ -71,17 +71,6 @@ export const COACHES: Coach[] = [
     initials: "JT",
   },
   {
-    slug: "lucia-navarro",
-    name: "Lucía Navarro",
-    role: "Entrenadora",
-    bio: "Alumna de la histórica entrenadora “Yoli”, ha superado el nivel I de entrenadora y transmite todo lo aprendido a las nuevas gimnastas.",
-    longBio: [
-      "Gimnasta alumna de una grandísima entrenadora, **“Yoli”**, que recién superado el **nivel I de entrenadora de gimnasia artística**, quiere transmitir todos los conocimientos que su extraordinaria entrenadora le transmitió, incluso compartiendo con ella técnicas, experiencias, ¡y alguna que otra anécdota!",
-    ],
-    closingNote: "¡Un orgullo poder contar contigo!",
-    initials: "LN",
-  },
-  {
     slug: "elena-faura",
     name: "Elena Faura",
     role: "Entrenadora",
