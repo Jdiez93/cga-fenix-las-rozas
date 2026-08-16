@@ -97,9 +97,9 @@ export const COACHES: Coach[] = [
     slug: "aruca-rodriguez",
     name: "Aruca Rodríguez",
     role: "Entrenadora",
-    bio: "Formada junto a Lucía Navarro por la histórica entrenadora “Yoli”, ha superado el nivel I de entrenadora y lleva la gimnasia en el corazón.",
+    bio: "Formada por la histórica entrenadora “Yoli”, ha superado el nivel I de entrenadora y lleva la gimnasia en el corazón.",
     longBio: [
-      "Compañera inseparable de **Lucía Navarro**, alumna en su misma etapa de la histórica **“Yoli”**, que marca una etapa y un camino a seguir sembrado de conocimientos, experiencias y técnicas de entrenamiento. Gracias a ese aprendizaje, Aruca lleva la gimnasia en el corazón; también ha superado el **nivel I de entrenadora** y está entregada en cuerpo y alma a la causa.",
+      "Alumna en su etapa de la histórica **“Yoli”**, que marca un camino a seguir sembrado de conocimientos, experiencias y técnicas de entrenamiento. Gracias a ese aprendizaje, Aruca lleva la gimnasia en el corazón; también ha superado el **nivel I de entrenadora** y está entregada en cuerpo y alma a la causa.",
     ],
     closingNote: "¡Bravo por ella, y gracias por formar parte de nuestro modesto club!",
     initials: "AR",
