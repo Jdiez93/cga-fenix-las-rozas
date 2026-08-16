@@ -83,18 +83,6 @@ export const COACHES: Coach[] = [
     initials: "EF",
   },
   {
-    slug: "manuel-inigo",
-    name: "Manuel Íñigo",
-    role: "Entrenador",
-    bio: "Un entrenador con mucho que enseñar y con un corazón incomparable.",
-    longBio: [
-      "Manuel Íñigo es un entrenador con mucho que enseñar y con un corazón incomparable. Desde los dos años, la gimnasia artística ha sido su vida, lo que le ha hecho llegar a entrenar en el **Centro de Alto Rendimiento (CAR) de Madrid** y así formar parte del **equipo nacional de gimnasia**, acumulando grandes resultados y experiencias que no paran de multiplicarse, dedicando años de esfuerzo, disciplina y pasión al deporte que ama desde siempre.",
-      "Manuel, además de gimnasta del equipo nacional, está titulado como **Juez de Nivel II** y cuenta con la titulación de **entrenador de gimnasia artística Nivel II**.",
-      "Ahora su objetivo, además de entrenar para estar en la élite como gimnasta, es compartir todo lo que ha aprendido con los gimnastas nóveles, ayudándolos a desarrollar su máximo potencial y enseñarles que lo que aprendes no solo te sirve encima del aparato. Si buscas pasártelo bien sacando el gimnasta que llevas dentro y hacer el deporte más chulo del mundo, él está aquí para enseñarte todo lo que debes saber para que el arte de la gimnasia deje una huella imborrable en ti.",
-    ],
-    initials: "MI",
-  },
-  {
     slug: "david-alonso",
     name: "David Alonso",
     role: "Entrenador",
