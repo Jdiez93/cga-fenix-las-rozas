@@ -71,17 +71,6 @@ export const COACHES: Coach[] = [
     initials: "JT",
   },
   {
-    slug: "lucia-navarro",
-    name: "Lucía Navarro",
-    role: "Entrenadora",
-    bio: "Alumna de la histórica entrenadora “Yoli”, ha superado el nivel I de entrenadora y transmite todo lo aprendido a las nuevas gimnastas.",
-    longBio: [
-      "Gimnasta alumna de una grandísima entrenadora, **“Yoli”**, que recién superado el **nivel I de entrenadora de gimnasia artística**, quiere transmitir todos los conocimientos que su extraordinaria entrenadora le transmitió, incluso compartiendo con ella técnicas, experiencias, ¡y alguna que otra anécdota!",
-    ],
-    closingNote: "¡Un orgullo poder contar contigo!",
-    initials: "LN",
-  },
-  {
     slug: "elena-faura",
     name: "Elena Faura",
     role: "Entrenadora",
@@ -92,18 +81,6 @@ export const COACHES: Coach[] = [
     ],
     closingNote: "¡Estamos emocionados de tenerla en nuestro equipo!",
     initials: "EF",
-  },
-  {
-    slug: "manuel-inigo",
-    name: "Manuel Íñigo",
-    role: "Entrenador",
-    bio: "Un entrenador con mucho que enseñar y con un corazón incomparable.",
-    longBio: [
-      "Manuel Íñigo es un entrenador con mucho que enseñar y con un corazón incomparable. Desde los dos años, la gimnasia artística ha sido su vida, lo que le ha hecho llegar a entrenar en el **Centro de Alto Rendimiento (CAR) de Madrid** y así formar parte del **equipo nacional de gimnasia**, acumulando grandes resultados y experiencias que no paran de multiplicarse, dedicando años de esfuerzo, disciplina y pasión al deporte que ama desde siempre.",
-      "Manuel, además de gimnasta del equipo nacional, está titulado como **Juez de Nivel II** y cuenta con la titulación de **entrenador de gimnasia artística Nivel II**.",
-      "Ahora su objetivo, además de entrenar para estar en la élite como gimnasta, es compartir todo lo que ha aprendido con los gimnastas nóveles, ayudándolos a desarrollar su máximo potencial y enseñarles que lo que aprendes no solo te sirve encima del aparato. Si buscas pasártelo bien sacando el gimnasta que llevas dentro y hacer el deporte más chulo del mundo, él está aquí para enseñarte todo lo que debes saber para que el arte de la gimnasia deje una huella imborrable en ti.",
-    ],
-    initials: "MI",
   },
   {
     slug: "david-alonso",
@@ -120,9 +97,9 @@ export const COACHES: Coach[] = [
     slug: "aruca-rodriguez",
     name: "Aruca Rodríguez",
     role: "Entrenadora",
-    bio: "Formada junto a Lucía Navarro por la histórica entrenadora “Yoli”, ha superado el nivel I de entrenadora y lleva la gimnasia en el corazón.",
+    bio: "Formada por la histórica entrenadora “Yoli”, ha superado el nivel I de entrenadora y lleva la gimnasia en el corazón.",
     longBio: [
-      "Compañera inseparable de **Lucía Navarro**, alumna en su misma etapa de la histórica **“Yoli”**, que marca una etapa y un camino a seguir sembrado de conocimientos, experiencias y técnicas de entrenamiento. Gracias a ese aprendizaje, Aruca lleva la gimnasia en el corazón; también ha superado el **nivel I de entrenadora** y está entregada en cuerpo y alma a la causa.",
+      "Alumna en su etapa de la histórica **“Yoli”**, que marca un camino a seguir sembrado de conocimientos, experiencias y técnicas de entrenamiento. Gracias a ese aprendizaje, Aruca lleva la gimnasia en el corazón; también ha superado el **nivel I de entrenadora** y está entregada en cuerpo y alma a la causa.",
     ],
     closingNote: "¡Bravo por ella, y gracias por formar parte de nuestro modesto club!",
     initials: "AR",
