@@ -802,7 +802,9 @@ function PreinscripcionPage() {
             <p className="text-sm leading-relaxed text-destructive">
               <strong className="uppercase">Nota:</strong> la facturación de los recibos se
               realizará <strong>del 1 al 5 de cada mes</strong> mediante transferencia bancaria a la
-              cuenta <span className="font-mono font-black">ES57 0081 0357 4200 0209 9917</span>. El
+              <strong>cuenta bancaria del club</strong>{" "}
+              <span className="font-mono font-black">ES57 0081 0357 4200 0209 9917</span>. El
+
               retraso en el abono de la cuota conlleva un recargo de <strong>tres euros</strong>.
             </p>
           </div>
