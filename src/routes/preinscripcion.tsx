@@ -19,6 +19,8 @@ import {
   Gavel,
   Heart,
   Info,
+  Landmark,
+
   Mail,
   MapPin,
   Phone,
