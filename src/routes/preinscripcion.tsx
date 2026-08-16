@@ -1330,11 +1330,19 @@ function SuccessCard({
               Debes abonar la tasa para tener la plaza reservada
             </p>
           </div>
-          <div className="mt-3 rounded-lg bg-primary/10 border border-primary/20 px-3 py-2.5 text-center">
-            <p className="font-mono text-sm font-black text-foreground tracking-wide">
+          <div className="mt-3 rounded-xl border border-primary/30 bg-primary/10 p-4">
+            <p className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-primary">
+              <Landmark className="h-3.5 w-3.5" />
+              Cuenta bancaria del club
+            </p>
+            <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
+              IBAN · destino de la transferencia
+            </p>
+            <p className="mt-1 font-mono text-sm font-black tracking-wide text-foreground">
               ES57 0081 0357 4200 0209 9917
             </p>
           </div>
+
         </div>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button
