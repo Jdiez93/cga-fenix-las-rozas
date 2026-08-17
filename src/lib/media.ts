@@ -2,7 +2,6 @@
 
 export const normativaFenixPdf = { url: "/files/normativa-interna-fenix-2026-2027.pdf" };
 export const escudoFenixPng = { url: "/images/escudo-fenix.png" };
-export const hero1Png = { url: "/images/hero-1.png" };
 export const hero2Png = { url: "/images/hero-2.png" };
 export const hero3Png = { url: "/images/hero-3.png" };
 export const hero4Png = { url: "/images/hero-4.png" };
