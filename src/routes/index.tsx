@@ -9,7 +9,6 @@ import { Reveal3D, Stagger, StaggerItem, ClipReveal } from "@/components/motion/
 import { APPLE_EASE, useHeavyEffectsEnabled } from "@/components/motion/motion-config";
 import { logoFenixJpeg as logoAsset } from "@/lib/media";
 import {
-  hero1Png,
   hero2Png,
   hero3Png,
   hero4Png,
