@@ -42,7 +42,6 @@ const SPONSORS = [
 
 const HERO_SLIDES = [
   { src: hero5Png.url, alt: "Equipo femenino del Club Fénix Las Rozas", position: "center 35%" },
-  { src: hero1Png.url, alt: "Entrenador y gimnasta celebrando en el Campeonato de España", position: "center 30%" },
   { src: hero3Png.url, alt: "Gimnasta en anillas durante competición", position: "center 25%" },
   { src: hero2Png.url, alt: "Entrenador dando indicaciones a un gimnasta", position: "center 30%" },
   { src: hero4Png.url, alt: "Gimnasta invertido en anillas", position: "center 40%" },
