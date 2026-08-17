@@ -153,6 +153,9 @@ export function SiteFooter() {
             © {year} <span className="font-semibold text-carbon-foreground/80">CGA Fénix Las Rozas</span>. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-5">
+            <a href="/politica-de-privacidad" className="hover:text-primary transition-colors">
+              Política de Privacidad
+            </a>
             <a href="/aviso-legal" className="hover:text-primary transition-colors">
               Aviso Legal
             </a>
