@@ -12,7 +12,7 @@ import {
   hero2Png,
   hero3Png,
   hero4Png,
-  hero5Png,
+  hero6Png,
 } from "@/lib/media";
 import { sponsorsMainPng as mainLogo } from "@/lib/media";
 import { sponsorsGeniosPng as geniosLogo } from "@/lib/media";
@@ -41,7 +41,7 @@ const SPONSORS = [
 ];
 
 const HERO_SLIDES = [
-  { src: hero5Png.url, alt: "Equipo femenino del Club Fénix Las Rozas", position: "center 35%" },
+  { src: hero6Png.url, alt: "Gimnastas del Club Fénix Las Rozas con sus medallas en competición", position: "center 30%" },
   { src: hero3Png.url, alt: "Gimnasta en anillas durante competición", position: "center 25%" },
   { src: hero2Png.url, alt: "Entrenador dando indicaciones a un gimnasta", position: "center 30%" },
   { src: hero4Png.url, alt: "Gimnasta invertido en anillas", position: "center 40%" },
