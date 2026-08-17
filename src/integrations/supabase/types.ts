@@ -30,6 +30,7 @@ export type Database = {
           info_adicional: string | null
           madre_nombre_apellidos: string | null
           padre_nombre_apellidos: string | null
+          pagado: boolean
           telefono: string
         }
         Insert: {
@@ -47,6 +48,7 @@ export type Database = {
           info_adicional?: string | null
           madre_nombre_apellidos?: string | null
           padre_nombre_apellidos?: string | null
+          pagado?: boolean
           telefono: string
         }
         Update: {
@@ -64,6 +66,7 @@ export type Database = {
           info_adicional?: string | null
           madre_nombre_apellidos?: string | null
           padre_nombre_apellidos?: string | null
+          pagado?: boolean
           telefono?: string
         }
         Relationships: []
