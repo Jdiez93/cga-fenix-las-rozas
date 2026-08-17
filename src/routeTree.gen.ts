@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PreinscripcionRouteImport } from './routes/preinscripcion'
+import { Route as PoliticaDePrivacidadRouteImport } from './routes/politica-de-privacidad'
 import { Route as MediosRouteImport } from './routes/medios'
 import { Route as EquiposRouteImport } from './routes/equipos'
 import { Route as ContactoRouteImport } from './routes/contacto'
@@ -29,6 +30,11 @@ import { Route as QuienesSomosEquipoTecnicoSlugRouteImport } from './routes/quie
 const PreinscripcionRoute = PreinscripcionRouteImport.update({
   id: '/preinscripcion',
   path: '/preinscripcion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadRoute = PoliticaDePrivacidadRouteImport.update({
+  id: '/politica-de-privacidad',
+  path: '/politica-de-privacidad',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MediosRoute = MediosRouteImport.update({
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/contacto': typeof ContactoRoute
   '/equipos': typeof EquiposRoute
   '/medios': typeof MediosRoute
+  '/politica-de-privacidad': typeof PoliticaDePrivacidadRoute
   '/preinscripcion': typeof PreinscripcionRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
@@ -134,6 +141,7 @@ export interface FileRoutesByTo {
   '/contacto': typeof ContactoRoute
   '/equipos': typeof EquiposRoute
   '/medios': typeof MediosRoute
+  '/politica-de-privacidad': typeof PoliticaDePrivacidadRoute
   '/preinscripcion': typeof PreinscripcionRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
@@ -152,6 +160,7 @@ export interface FileRoutesById {
   '/contacto': typeof ContactoRoute
   '/equipos': typeof EquiposRoute
   '/medios': typeof MediosRoute
+  '/politica-de-privacidad': typeof PoliticaDePrivacidadRoute
   '/preinscripcion': typeof PreinscripcionRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
@@ -172,6 +181,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/equipos'
     | '/medios'
+    | '/politica-de-privacidad'
     | '/preinscripcion'
     | '/admin/dashboard'
     | '/admin/login'
@@ -190,6 +200,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/equipos'
     | '/medios'
+    | '/politica-de-privacidad'
     | '/preinscripcion'
     | '/admin/dashboard'
     | '/admin/login'
@@ -207,6 +218,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/equipos'
     | '/medios'
+    | '/politica-de-privacidad'
     | '/preinscripcion'
     | '/admin/dashboard'
     | '/admin/login'
@@ -226,6 +238,7 @@ export interface RootRouteChildren {
   ContactoRoute: typeof ContactoRoute
   EquiposRoute: typeof EquiposRoute
   MediosRoute: typeof MediosRoute
+  PoliticaDePrivacidadRoute: typeof PoliticaDePrivacidadRoute
   PreinscripcionRoute: typeof PreinscripcionRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminLoginRoute: typeof AdminLoginRoute
@@ -244,6 +257,13 @@ declare module '@tanstack/react-router' {
       path: '/preinscripcion'
       fullPath: '/preinscripcion'
       preLoaderRoute: typeof PreinscripcionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidad': {
+      id: '/politica-de-privacidad'
+      path: '/politica-de-privacidad'
+      fullPath: '/politica-de-privacidad'
+      preLoaderRoute: typeof PoliticaDePrivacidadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/medios': {
@@ -376,6 +396,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactoRoute: ContactoRoute,
   EquiposRoute: EquiposRoute,
   MediosRoute: MediosRoute,
+  PoliticaDePrivacidadRoute: PoliticaDePrivacidadRoute,
   PreinscripcionRoute: PreinscripcionRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminLoginRoute: AdminLoginRoute,

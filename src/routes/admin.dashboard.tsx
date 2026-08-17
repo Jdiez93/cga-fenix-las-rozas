@@ -9,6 +9,9 @@ import {
   FileText,
   Search,
   Users,
+  Euro,
+  Check,
+  X,
 } from "lucide-react";
 import { Toaster, toast } from "sonner";
 
@@ -57,6 +60,7 @@ type Inscripcion = {
   club_nivel_anterior: string | null;
   info_adicional: string | null;
   contrato_path: string | null;
+  pagado: boolean;
   created_at: string;
 };
 
@@ -97,6 +101,7 @@ function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [pagoFilter, setPagoFilter] = useState<"todos" | "pagado" | "pendiente">("todos");
   const [exporting, setExporting] = useState(false);
   const [nuevas, setNuevas] = useState(0);
   const firstLoad = useRef(true);
@@ -154,11 +159,35 @@ function AdminDashboardPage() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return rows;
-    return rows.filter((r) =>
-      `${r.gimnasta_nombre} ${r.gimnasta_apellidos}`.toLowerCase().includes(q),
+    return rows.filter((r) => {
+      const matchName = q
+        ? `${r.gimnasta_nombre} ${r.gimnasta_apellidos}`.toLowerCase().includes(q)
+        : true;
+      const matchPago =
+        pagoFilter === "todos" ? true : pagoFilter === "pagado" ? r.pagado : !r.pagado;
+      return matchName && matchPago;
+    });
+  }, [rows, query, pagoFilter]);
+
+  const totalPagados = useMemo(() => rows.filter((r) => r.pagado).length, [rows]);
+
+  const togglePagado = useCallback(async (row: Inscripcion, value: boolean) => {
+    setRows((prev) => prev.map((r) => (r.id === row.id ? { ...r, pagado: value } : r)));
+    const { error } = await supabase
+      .from("inscripciones")
+      .update({ pagado: value })
+      .eq("id", row.id);
+    if (error) {
+      setRows((prev) => prev.map((r) => (r.id === row.id ? { ...r, pagado: !value } : r)));
+      toast.error(`No se ha podido guardar el pago: ${error.message}`);
+      return;
+    }
+    toast.success(
+      value
+        ? `Pago marcado para ${row.gimnasta_nombre} ${row.gimnasta_apellidos}`
+        : `Pago desmarcado para ${row.gimnasta_nombre} ${row.gimnasta_apellidos}`,
     );
-  }, [rows, query]);
+  }, []);
 
   async function handleSignOut() {
     await supabase.auth.signOut();
@@ -190,13 +219,14 @@ function AdminDashboardPage() {
         "Club / nivel anterior": r.club_nivel_anterior ?? "",
         "Información adicional": r.info_adicional ?? "",
         "Contrato firmado": r.contrato_path ? "Sí" : "No",
+        Pagado: r.pagado ? "Sí" : "No",
       }));
 
       const ws = XLSX.utils.json_to_sheet(sheetData);
       ws["!cols"] = [
         { wch: 18 }, { wch: 16 }, { wch: 22 }, { wch: 18 }, { wch: 7 },
         { wch: 26 }, { wch: 26 }, { wch: 14 }, { wch: 28 }, { wch: 34 },
-        { wch: 14 }, { wch: 16 }, { wch: 28 }, { wch: 40 },
+        { wch: 14 }, { wch: 16 }, { wch: 28 }, { wch: 40 }, { wch: 10 },
       ];
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, "Inscripciones");
@@ -231,7 +261,7 @@ function AdminDashboardPage() {
               Preinscripciones
             </h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              {rows.length} solicitudes registradas · ordenadas de más reciente a más antigua
+              {rows.length} solicitudes registradas · {totalPagados} con pago confirmado
             </p>
           </div>
 
@@ -271,20 +301,43 @@ function AdminDashboardPage() {
           </div>
         </div>
 
-        {/* Buscador */}
-        <div className="mt-6 flex items-center gap-2 rounded-2xl border border-border bg-card px-4 py-2.5">
-          <Search className="h-4 w-4 text-muted-foreground" />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Buscar por nombre del gimnasta…"
-            className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
-          />
-          {query && (
-            <span className="shrink-0 text-xs font-bold text-muted-foreground">
-              {filtered.length} resultado{filtered.length === 1 ? "" : "s"}
-            </span>
-          )}
+        {/* Buscador y filtro de pago */}
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="flex flex-1 items-center gap-2 rounded-2xl border border-border bg-card px-4 py-2.5">
+            <Search className="h-4 w-4 text-muted-foreground" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Buscar por nombre del gimnasta…"
+              className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+            />
+            {(query || pagoFilter !== "todos") && (
+              <span className="shrink-0 text-xs font-bold text-muted-foreground">
+                {filtered.length} resultado{filtered.length === 1 ? "" : "s"}
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center gap-1 rounded-2xl border border-border bg-card p-1">
+            <Euro className="mx-2 h-4 w-4 shrink-0 text-muted-foreground" />
+            {([
+              { value: "todos", label: "Todos" },
+              { value: "pagado", label: "Pagado" },
+              { value: "pendiente", label: "No pagado" },
+            ] as const).map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => setPagoFilter(opt.value)}
+                className={`rounded-xl px-3 py-1.5 text-[11px] font-black uppercase tracking-wider transition-colors ${
+                  pagoFilter === opt.value
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:bg-accent"
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Contenido */}
@@ -320,6 +373,7 @@ function AdminDashboardPage() {
                   <th className="px-4 py-3 font-black">Experiencia</th>
                   <th className="px-4 py-3 font-black">Info adicional</th>
                   <th className="px-4 py-3 font-black">Contrato firmado</th>
+                  <th className="px-4 py-3 font-black">¿Pagado?</th>
                 </tr>
               </thead>
               <tbody>
@@ -379,6 +433,9 @@ function AdminDashboardPage() {
                     <td className="px-4 py-3">
                       <ContratoCell row={r} />
                     </td>
+                    <td className="px-4 py-3">
+                      <PagadoCell row={r} onChange={togglePagado} />
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -428,5 +485,58 @@ function ContratoCell({ row }: { row: Inscripcion }) {
       {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <FileText className="h-3.5 w-3.5" />}
       Descargar
     </button>
+  );
+}
+
+function PagadoCell({
+  row,
+  onChange,
+}: {
+  row: Inscripcion;
+  onChange: (row: Inscripcion, value: boolean) => Promise<void>;
+}) {
+  const [busy, setBusy] = useState(false);
+
+  async function set(value: boolean) {
+    if (busy || row.pagado === value) return;
+    setBusy(true);
+    try {
+      await onChange(row, value);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="flex items-center gap-1">
+      <button
+        onClick={() => void set(true)}
+        disabled={busy}
+        aria-pressed={row.pagado}
+        title="Marcar como pagado"
+        className={`inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-wider transition-colors disabled:opacity-60 ${
+          row.pagado
+            ? "bg-primary text-primary-foreground"
+            : "border border-border bg-background text-muted-foreground hover:bg-accent"
+        }`}
+      >
+        {busy && !row.pagado ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
+        Sí
+      </button>
+      <button
+        onClick={() => void set(false)}
+        disabled={busy}
+        aria-pressed={!row.pagado}
+        title="Marcar como no pagado"
+        className={`inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-wider transition-colors disabled:opacity-60 ${
+          !row.pagado
+            ? "bg-destructive text-destructive-foreground"
+            : "border border-border bg-background text-muted-foreground hover:bg-accent"
+        }`}
+      >
+        {busy && row.pagado ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <X className="h-3.5 w-3.5" />}
+        No
+      </button>
+    </div>
   );
 }
