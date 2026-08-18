@@ -18,6 +18,8 @@ export type Coach = {
   closingNote?: string;
   initials: string;
   photo?: string;
+  /** CSS object-position para encuadrar bien el retrato */
+  photoPosition?: string;
   highlight?: boolean;
 };
 
@@ -34,6 +36,8 @@ export const COACHES: Coach[] = [
     ],
     closingNote: "¡Estamos emocionados de contar con su liderazgo en el camino hacia el éxito!",
     initials: "LR",
+    photo: "/images/coaches/luis-rodriguez.jpg",
+    photoPosition: "50% 20%",
     highlight: true,
   },
   {
@@ -56,6 +60,8 @@ export const COACHES: Coach[] = [
     ],
     closingNote: "¡Con Miguel en el equipo, nuestros gimnastas tienen la oportunidad de aprender de un verdadero campeón!",
     initials: "MA",
+    photo: "/images/coaches/miguel-alvarez.jpg",
+    photoPosition: "40% 25%",
   },
   {
     slug: "juan-toharia",
@@ -69,6 +75,8 @@ export const COACHES: Coach[] = [
       "Todo esto lo ha conseguido sin abandonar sus estudios de ingeniería de caminos, equilibrando ambas responsabilidades con una disciplina admirable. La gimnasia tiene ese poder: cuando te atrapa, lo hace a tope.",
     ],
     initials: "JT",
+    photo: "/images/coaches/juan-toharia.jpg",
+    photoPosition: "50% 45%",
   },
   {
     slug: "elena-faura",
@@ -81,6 +89,8 @@ export const COACHES: Coach[] = [
     ],
     closingNote: "¡Estamos emocionados de tenerla en nuestro equipo!",
     initials: "EF",
+    photo: "/images/coaches/elena-faura.jpg",
+    photoPosition: "50% 30%",
   },
   {
     slug: "david-alonso",
@@ -92,6 +102,8 @@ export const COACHES: Coach[] = [
       "Las niñas que entrena han avanzado con él de manera notable; incluso algunas han llegado a competir, un reto que David ha afrontado con dedicación, responsabilidad y una ilusión que contagia a todo el equipo.",
     ],
     initials: "DA",
+    photo: "/images/coaches/david-alonso.jpg",
+    photoPosition: "30% 30%",
   },
 ];
 
@@ -103,7 +115,9 @@ export function CoachPortrait({ coach, className = "" }: { coach: Coach; classNa
         src={coach.photo}
         alt={coach.name}
         className={`h-full w-full object-cover ${className}`}
+        style={{ objectPosition: coach.photoPosition ?? "50% 30%" }}
         loading="lazy"
+        decoding="async"
       />
     );
   }
