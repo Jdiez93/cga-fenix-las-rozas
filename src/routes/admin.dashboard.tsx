@@ -421,9 +421,10 @@ function AdminDashboardPage() {
                       >
                         {r.experiencia_previa ? "Sí" : "No"}
                       </span>
-                      {r.club_nivel_anterior && (
-                        <span className="mt-1 block max-w-[220px] text-xs text-muted-foreground">
-                          {r.club_nivel_anterior}
+                      {r.experiencia_previa && (
+                        <span className="mt-1 block max-w-[220px] whitespace-pre-wrap text-xs text-muted-foreground">
+                          <span className="block font-semibold text-foreground/70">Club / nivel</span>
+                          {r.club_nivel_anterior || "No indicado"}
                         </span>
                       )}
                     </td>
