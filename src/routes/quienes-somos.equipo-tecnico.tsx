@@ -61,7 +61,7 @@ export const COACHES: Coach[] = [
     closingNote: "¡Con Miguel en el equipo, nuestros gimnastas tienen la oportunidad de aprender de un verdadero campeón!",
     initials: "MA",
     photo: "/images/coaches/miguel-alvarez.jpg",
-    photoPosition: "50% 45%",
+    photoPosition: "40% 25%",
   },
   {
     slug: "juan-toharia",
