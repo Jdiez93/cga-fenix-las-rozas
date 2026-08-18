@@ -373,7 +373,8 @@ function PreinscripcionPage() {
         domicilio: parsed.data.domicilio,
         codigo_postal: parsed.data.codigoPostal,
         experiencia_previa: parsed.data.matriculadoAnterior === "si",
-        club_nivel_anterior: parsed.data.grupoAnterior?.trim() || null,
+        club_nivel_anterior:
+          parsed.data.nivelPrevio?.trim() || parsed.data.grupoAnterior?.trim() || null,
         info_adicional: parsed.data.infoAdicional?.trim() || null,
         contrato_path: contratoPath,
       });
