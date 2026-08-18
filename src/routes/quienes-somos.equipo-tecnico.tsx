@@ -18,6 +18,8 @@ export type Coach = {
   closingNote?: string;
   initials: string;
   photo?: string;
+  /** CSS object-position para encuadrar bien el retrato */
+  photoPosition?: string;
   highlight?: boolean;
 };
 
