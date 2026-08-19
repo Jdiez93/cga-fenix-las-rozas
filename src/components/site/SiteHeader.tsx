@@ -290,7 +290,6 @@ export function SiteHeader() {
             </div>
           </div>
         </div>
-      </header>
     </>
   );
 }
