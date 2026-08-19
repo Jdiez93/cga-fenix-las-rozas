@@ -233,12 +233,11 @@ export function SiteHeader() {
         className={cn(
           "lg:hidden fixed inset-x-0 bottom-0 z-40 bg-background transition-all duration-300 origin-top",
           scrolled ? "top-[72px]" : "top-[88px]",
-
-            mobileOpen
-              ? "opacity-100 translate-y-0 pointer-events-auto"
-              : "opacity-0 -translate-y-2 pointer-events-none"
-          )}
-        >
+          mobileOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-2 pointer-events-none"
+        )}
+      >
           <div className="h-full overflow-y-auto px-6 py-6">
             <nav className="flex flex-col divide-y divide-border">
               {NAV.map((item, i) => (
