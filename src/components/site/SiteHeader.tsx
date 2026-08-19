@@ -230,6 +230,7 @@ export function SiteHeader() {
 
       {/* Mobile drawer (outside <header> so backdrop-blur doesn't trap the fixed positioning) */}
       <div
+        data-no-reveal
         className={cn(
           "lg:hidden fixed inset-x-0 bottom-0 z-40 bg-background transition-all duration-300 origin-top",
           scrolled ? "top-[72px]" : "top-[88px]",
