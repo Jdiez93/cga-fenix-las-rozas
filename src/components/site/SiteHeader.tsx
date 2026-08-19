@@ -226,11 +226,14 @@ export function SiteHeader() {
             </div>
           </div>
         </div>
+      </header>
 
-        {/* Mobile drawer */}
-        <div
-          className={cn(
-            "lg:hidden fixed inset-x-0 top-[64px] bottom-0 z-40 bg-background transition-all duration-300 origin-top",
+      {/* Mobile drawer (outside <header> so backdrop-blur doesn't trap the fixed positioning) */}
+      <div
+        className={cn(
+          "lg:hidden fixed inset-x-0 bottom-0 z-40 bg-background transition-all duration-300 origin-top",
+          scrolled ? "top-[72px]" : "top-[88px]",
+
             mobileOpen
               ? "opacity-100 translate-y-0 pointer-events-auto"
               : "opacity-0 -translate-y-2 pointer-events-none"
