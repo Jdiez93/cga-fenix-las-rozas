@@ -99,8 +99,10 @@ export function SiteHeader() {
           "sticky top-0 z-50 w-full transition-all duration-300",
           scrolled
             ? "bg-background/85 backdrop-blur-lg shadow-[var(--shadow-header)] border-b border-border"
-            : "bg-background border-b border-transparent"
+            : "bg-background border-b border-transparent",
+          mobileOpen && "bg-background backdrop-blur-none"
         )}
+
       >
         <div className="mx-auto max-w-7xl px-3 sm:px-5">
           <div
