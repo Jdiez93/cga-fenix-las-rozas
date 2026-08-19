@@ -99,8 +99,10 @@ export function SiteHeader() {
           "sticky top-0 z-50 w-full transition-all duration-300",
           scrolled
             ? "bg-background/85 backdrop-blur-lg shadow-[var(--shadow-header)] border-b border-border"
-            : "bg-background border-b border-transparent"
+            : "bg-background border-b border-transparent",
+          mobileOpen && "bg-background backdrop-blur-none"
         )}
+
       >
         <div className="mx-auto max-w-7xl px-3 sm:px-5">
           <div
@@ -226,16 +228,19 @@ export function SiteHeader() {
             </div>
           </div>
         </div>
+      </header>
 
-        {/* Mobile drawer */}
-        <div
-          className={cn(
-            "lg:hidden fixed inset-x-0 top-[64px] bottom-0 z-40 bg-background transition-all duration-300 origin-top",
-            mobileOpen
-              ? "opacity-100 translate-y-0 pointer-events-auto"
-              : "opacity-0 -translate-y-2 pointer-events-none"
-          )}
-        >
+      {/* Mobile drawer (outside <header> so backdrop-blur doesn't trap the fixed positioning) */}
+      <div
+        data-no-reveal
+        className={cn(
+          "lg:hidden fixed inset-x-0 bottom-0 z-40 bg-background transition-all duration-300 origin-top",
+          scrolled ? "top-[72px]" : "top-[88px]",
+          mobileOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-2 pointer-events-none"
+        )}
+      >
           <div className="h-full overflow-y-auto px-6 py-6">
             <nav className="flex flex-col divide-y divide-border">
               {NAV.map((item, i) => (
@@ -287,7 +292,6 @@ export function SiteHeader() {
             </div>
           </div>
         </div>
-      </header>
     </>
   );
 }
