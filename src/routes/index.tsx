@@ -19,6 +19,7 @@ import { sponsorsMainPng as mainLogo } from "@/lib/media";
 import { sponsorsGeniosPng as geniosLogo } from "@/lib/media";
 import { sponsorsAgefiPng as agefiLogo } from "@/lib/media";
 import { sponsorsEtelPng as etelLogo } from "@/lib/media";
+import { HomeFaq, FAQ_JSONLD } from "@/components/site/HomeFaq";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,7 +30,16 @@ export const Route = createFileRoute("/")({
         content:
           "Club de Gimnasia Artística Fénix Las Rozas. Formamos gimnastas desde la excelencia técnica y el desarrollo personal.",
       },
+      { property: "og:title", content: "CGA Fénix Las Rozas · Club de Gimnasia Artística" },
+      {
+        property: "og:description",
+        content:
+          "Grupos desde 3 años, competición y adultos en el Polideportivo Entremontes. Horarios, cuotas y preinscripción.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    scripts: [{ type: "application/ld+json", children: FAQ_JSONLD }],
   }),
   component: Index,
 });
