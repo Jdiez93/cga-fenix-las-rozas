@@ -141,6 +141,7 @@ function Index() {
       <HeroCarousel />
       <Mission />
       <SponsorsMarquee />
+      <HomeFaq />
     </>
   );
 }
