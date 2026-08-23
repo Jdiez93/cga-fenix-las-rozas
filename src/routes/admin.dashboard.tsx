@@ -353,9 +353,6 @@ function AdminDashboardPage() {
                   Marcador de inscripciones
                 </h2>
               </div>
-              <p className="text-xs text-muted-foreground">
-                Haz clic en una alumna para cambiar su estado de pago
-              </p>
             </div>
 
             {/* KPIs */}
@@ -399,54 +396,6 @@ function AdminDashboardPage() {
                 />
               </div>
             </div>
-
-            {/* Tarjetas por alumna */}
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {filtered.map((r) => (
-                <button
-                  key={`card-${r.id}`}
-                  onClick={() => void togglePagado(r, !r.pagado)}
-                  className={`group flex items-center justify-between gap-3 rounded-2xl border p-4 text-left transition-all hover:scale-[1.02] ${
-                    r.pagado
-                      ? "border-emerald-500/50 bg-emerald-500/10 hover:bg-emerald-500/20"
-                      : "border-red-500/50 bg-red-500/10 hover:bg-red-500/20"
-                  }`}
-                >
-                  <span className="min-w-0">
-                    <span className="block truncate text-sm font-black uppercase tracking-tight text-foreground">
-                      {r.gimnasta_nombre} {r.gimnasta_apellidos}
-                    </span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">
-                      {calcularEdad(r.fecha_nacimiento)} años · {fmtFecha(r.fecha_nacimiento)}
-                    </span>
-                    <span
-                      className={`mt-2 inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${
-                        r.pagado
-                          ? "bg-emerald-500 text-background"
-                          : "bg-red-500 text-background"
-                      }`}
-                    >
-                      {r.pagado ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
-                      {r.pagado ? "Pagado" : "Pendiente"}
-                    </span>
-                  </span>
-                  <span
-                    className={`grid h-10 w-10 shrink-0 place-items-center rounded-full border ${
-                      r.pagado
-                        ? "border-emerald-500/50 text-emerald-500"
-                        : "border-red-500/50 text-red-500"
-                    }`}
-                  >
-                    {r.pagado ? <Check className="h-5 w-5" /> : <X className="h-5 w-5" />}
-                  </span>
-                </button>
-              ))}
-            </div>
-            {filtered.length === 0 && (
-              <p className="mt-6 text-center text-sm text-muted-foreground">
-                Ninguna inscripción coincide con los filtros actuales.
-              </p>
-            )}
           </section>
         )}
 
