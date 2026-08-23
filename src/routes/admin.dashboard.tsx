@@ -340,7 +340,118 @@ function AdminDashboardPage() {
           </div>
         </div>
 
+        {/* Panel visual de pagos */}
+        {!loading && rows.length > 0 && (
+          <section className="mt-8 rounded-3xl border border-primary/30 bg-card p-5 sm:p-6">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <p className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-primary">
+                  <Euro className="h-3.5 w-3.5" />
+                  Estado de pagos
+                </p>
+                <h2 className="mt-3 text-xl font-black uppercase tracking-tight text-foreground">
+                  Marcador de inscripciones
+                </h2>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Haz clic en una alumna para cambiar su estado de pago
+              </p>
+            </div>
+
+            {/* KPIs */}
+            <div className="mt-5 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-2xl border border-border bg-background/60 p-4">
+                <p className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">
+                  Total inscripciones
+                </p>
+                <p className="mt-1 text-3xl font-black text-foreground">{rows.length}</p>
+              </div>
+              <div className="rounded-2xl border border-emerald-500/40 bg-emerald-500/10 p-4">
+                <p className="text-[11px] font-black uppercase tracking-wider text-emerald-500">
+                  Pagados
+                </p>
+                <p className="mt-1 text-3xl font-black text-emerald-500">{totalPagados}</p>
+              </div>
+              <div className="rounded-2xl border border-red-500/40 bg-red-500/10 p-4">
+                <p className="text-[11px] font-black uppercase tracking-wider text-red-500">
+                  Pendientes de pago
+                </p>
+                <p className="mt-1 text-3xl font-black text-red-500">
+                  {rows.length - totalPagados}
+                </p>
+              </div>
+            </div>
+
+            {/* Barra de progreso */}
+            <div className="mt-5">
+              <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-wider text-muted-foreground">
+                <span>Progreso de cobro</span>
+                <span>
+                  {rows.length ? Math.round((totalPagados / rows.length) * 100) : 0}%
+                </span>
+              </div>
+              <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-red-500/20">
+                <div
+                  className="h-full rounded-full bg-emerald-500 transition-all duration-700"
+                  style={{
+                    width: `${rows.length ? (totalPagados / rows.length) * 100 : 0}%`,
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Tarjetas por alumna */}
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {filtered.map((r) => (
+                <button
+                  key={`card-${r.id}`}
+                  onClick={() => void togglePagado(r, !r.pagado)}
+                  className={`group flex items-center justify-between gap-3 rounded-2xl border p-4 text-left transition-all hover:scale-[1.02] ${
+                    r.pagado
+                      ? "border-emerald-500/50 bg-emerald-500/10 hover:bg-emerald-500/20"
+                      : "border-red-500/50 bg-red-500/10 hover:bg-red-500/20"
+                  }`}
+                >
+                  <span className="min-w-0">
+                    <span className="block truncate text-sm font-black uppercase tracking-tight text-foreground">
+                      {r.gimnasta_nombre} {r.gimnasta_apellidos}
+                    </span>
+                    <span className="mt-0.5 block text-xs text-muted-foreground">
+                      {calcularEdad(r.fecha_nacimiento)} años · {fmtFecha(r.fecha_nacimiento)}
+                    </span>
+                    <span
+                      className={`mt-2 inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${
+                        r.pagado
+                          ? "bg-emerald-500 text-background"
+                          : "bg-red-500 text-background"
+                      }`}
+                    >
+                      {r.pagado ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                      {r.pagado ? "Pagado" : "Pendiente"}
+                    </span>
+                  </span>
+                  <span
+                    className={`grid h-10 w-10 shrink-0 place-items-center rounded-full border ${
+                      r.pagado
+                        ? "border-emerald-500/50 text-emerald-500"
+                        : "border-red-500/50 text-red-500"
+                    }`}
+                  >
+                    {r.pagado ? <Check className="h-5 w-5" /> : <X className="h-5 w-5" />}
+                  </span>
+                </button>
+              ))}
+            </div>
+            {filtered.length === 0 && (
+              <p className="mt-6 text-center text-sm text-muted-foreground">
+                Ninguna inscripción coincide con los filtros actuales.
+              </p>
+            )}
+          </section>
+        )}
+
         {/* Contenido */}
+
         {error && (
           <p className="mt-6 rounded-2xl border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm font-semibold text-destructive">
             {error}
