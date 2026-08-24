@@ -15,7 +15,6 @@ import {
   Clock,
   Euro,
   ClipboardList,
-  MapPin,
   ArrowRight,
   Phone,
   Mail,
