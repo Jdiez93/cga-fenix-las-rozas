@@ -46,12 +46,20 @@ export function SplashScreen() {
             <motion.div
               animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.6, 0.4] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-1/2 left-1/2 h-[120%] w-[120%] -translate-x-1/2 rounded-full bg-gradient-radial from-primary/30 via-primary/5 to-transparent blur-3xl"
+              className="absolute -top-1/2 left-1/2 h-[120%] w-[120%] -translate-x-1/2 rounded-full blur-3xl"
+              style={{
+                background:
+                  "radial-gradient(circle, color-mix(in oklab, var(--primary) 30%, transparent) 0%, color-mix(in oklab, var(--primary) 5%, transparent) 60%, transparent 100%)",
+              }}
             />
             <motion.div
               animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.35, 0.2] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-              className="absolute -bottom-1/2 left-1/2 h-[120%] w-[120%] -translate-x-1/2 rounded-full bg-gradient-radial from-orange-500/20 via-orange-500/5 to-transparent blur-3xl"
+              className="absolute -bottom-1/2 left-1/2 h-[120%] w-[120%] -translate-x-1/2 rounded-full blur-3xl"
+              style={{
+                background:
+                  "radial-gradient(circle, color-mix(in oklab, oklch(0.7 0.18 55) 20%, transparent) 0%, color-mix(in oklab, oklch(0.7 0.18 55) 5%, transparent) 60%, transparent 100%)",
+              }}
             />
           </div>
 
@@ -103,7 +111,13 @@ export function SplashScreen() {
             />
 
             <div className="relative">
-              <div className="rounded-full bg-black p-3 ring-2 ring-primary/40 shadow-[0_0_60px_-15px_rgba(var(--primary-rgb),0.5)]">
+              <div
+                className="rounded-full bg-black p-3 ring-2 ring-primary/40"
+                style={{
+                  boxShadow:
+                    "0 0 60px -15px color-mix(in oklab, var(--primary) 50%, transparent)",
+                }}
+              >
                 <img
                   src={logoFenixJpeg.url}
                   alt="CGA Fénix Las Rozas"
@@ -172,3 +186,4 @@ export function SplashScreen() {
     </AnimatePresence>
   );
 }
+
