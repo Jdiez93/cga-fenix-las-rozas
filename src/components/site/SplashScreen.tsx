@@ -10,7 +10,11 @@ const PHRASES = [
   "¡Listos para volar!",
 ];
 
-export function SplashScreen() {
+interface SplashScreenProps {
+  onComplete?: () => void;
+}
+
+export function SplashScreen({ onComplete }: SplashScreenProps) {
   const [show, setShow] = useState(true);
   const [phase, setPhase] = useState(0);
 
@@ -32,7 +36,11 @@ export function SplashScreen() {
   }, []);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence
+      onExitComplete={() => {
+        onComplete?.();
+      }}
+    >
       {show && (
         <motion.div
           initial={{ opacity: 1 }}
@@ -41,6 +49,7 @@ export function SplashScreen() {
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-carbon"
           aria-label="Pantalla de carga"
         >
+
           {/* Fondo dinámico con partículas de fuego */}
           <div className="pointer-events-none absolute inset-0">
             <motion.div
