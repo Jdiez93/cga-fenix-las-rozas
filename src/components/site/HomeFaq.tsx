@@ -274,51 +274,6 @@ export const FAQ_GROUPS: FaqGroup[] = [
       },
     ],
   },
-  {
-    id: "contacto",
-    label: "Contacto",
-    icon: MapPin,
-    items: [
-      {
-        q: "¿Cómo puedo contactar con el club?",
-        plain:
-          "Por email en info@cgafenixlasrozas.es o por teléfono en el 679 980 626 y el 695 299 885.",
-        a: (
-          <>
-            Escríbenos a{" "}
-            <a
-              href="mailto:info@cgafenixlasrozas.es"
-              className="font-semibold text-primary hover:underline"
-            >
-              info@cgafenixlasrozas.es
-            </a>{" "}
-            o llámanos al{" "}
-            <a href="tel:+34679980626" className="font-semibold text-primary hover:underline">
-              679 980 626
-            </a>{" "}
-            /{" "}
-            <a href="tel:+34695299885" className="font-semibold text-primary hover:underline">
-              695 299 885
-            </a>
-            .
-          </>
-        ),
-      },
-      {
-        q: "¿Qué pasa con el reparto de la instalación deportiva?",
-        plain:
-          "Seguimos pendientes de la resolución del TSJ del recurso interpuesto por el Ayuntamiento de Las Rozas a la sentencia estimatoria del contencioso administrativo que nos daba la razón y obligaba a la Concejalía de Deportes a hacer un reparto justo y equitativo de la instalación.",
-        a: (
-          <>
-            Seguimos pendientes de la resolución del <strong>TSJ</strong> del recurso interpuesto por
-            el Ayuntamiento de Las Rozas a la sentencia estimatoria del contencioso administrativo
-            que nos daba la razón y obligaba a la Concejalía de Deportes a hacer un{" "}
-            <strong>reparto justo y equitativo de la instalación</strong>.
-          </>
-        ),
-      },
-    ],
-  },
 ];
 
 export function HomeFaq() {
