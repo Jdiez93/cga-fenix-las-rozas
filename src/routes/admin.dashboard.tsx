@@ -628,3 +628,89 @@ function PagadoCell({
     </div>
   );
 }
+
+function Pagination({
+  page,
+  totalPages,
+  totalItems,
+  pageSize,
+  onChange,
+}: {
+  page: number;
+  totalPages: number;
+  totalItems: number;
+  pageSize: number;
+  onChange: (p: number) => void;
+}) {
+  const start = (page - 1) * pageSize + 1;
+  const end = Math.min(page * pageSize, totalItems);
+
+  const pages = useMemo(() => {
+    const arr: (number | "ellipsis")[] = [];
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) arr.push(i);
+      return arr;
+    }
+    arr.push(1);
+    if (page > 3) arr.push("ellipsis");
+    const left = Math.max(2, page - 1);
+    const right = Math.min(totalPages - 1, page + 1);
+    for (let i = left; i <= right; i++) arr.push(i);
+    if (page < totalPages - 2) arr.push("ellipsis");
+    arr.push(totalPages);
+    return arr;
+  }, [page, totalPages]);
+
+  return (
+    <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+      <p className="text-xs font-semibold text-muted-foreground">
+        Mostrando <span className="text-foreground">{start}</span>–<span className="text-foreground">{end}</span> de{" "}
+        <span className="text-foreground">{totalItems}</span> inscripciones
+      </p>
+
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => onChange(page - 1)}
+          disabled={page <= 1}
+          aria-label="Página anterior"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/40 text-primary transition-colors hover:bg-primary/10 disabled:opacity-40"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </button>
+
+        <div className="flex items-center gap-2">
+          {pages.map((p, idx) =>
+            p === "ellipsis" ? (
+              <span key={`ellipsis-${idx}`} className="px-1 text-xs font-black text-muted-foreground">
+                …
+              </span>
+            ) : (
+              <button
+                key={p}
+                onClick={() => onChange(p)}
+                aria-label={`Ir a la página ${p}`}
+                aria-current={p === page ? "page" : undefined}
+                className={`flex h-9 w-9 items-center justify-center rounded-full text-xs font-black transition-all ${
+                  p === page
+                    ? "border-2 border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(var(--primary-rgb),0.45)]"
+                    : "border-2 border-primary/40 text-primary hover:border-primary hover:bg-primary/10"
+                }`}
+              >
+                {p}
+              </button>
+            ),
+          )}
+        </div>
+
+        <button
+          onClick={() => onChange(page + 1)}
+          disabled={page >= totalPages}
+          aria-label="Página siguiente"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/40 text-primary transition-colors hover:bg-primary/10 disabled:opacity-40"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </button>
+      </div>
+    </div>
+  );
+}
