@@ -7,14 +7,14 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { AutoReveal } from "@/components/site/AutoReveal";
-import { SplashScreen } from "@/components/site/SplashScreen";
+
 
 
 function NotFoundComponent() {
@@ -131,21 +131,10 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const [showSplash, setShowSplash] = useState(false);
-
-  useEffect(() => {
-    // Solo mostrar splash en carga inicial del cliente
-    const alreadySeen = sessionStorage.getItem("fenix-splash-seen");
-    if (!alreadySeen) {
-      setShowSplash(true);
-      sessionStorage.setItem("fenix-splash-seen", "1");
-    }
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col">
-        {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
         <AutoReveal />
         <SiteHeader />
         <main className="flex-1">
@@ -156,4 +145,5 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
 
