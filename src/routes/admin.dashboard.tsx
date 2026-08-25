@@ -104,7 +104,10 @@ function AdminDashboardPage() {
   const [pagoFilter, setPagoFilter] = useState<"todos" | "pagado" | "pendiente">("todos");
   const [exporting, setExporting] = useState(false);
   const [nuevas, setNuevas] = useState(0);
+  const [page, setPage] = useState(1);
   const firstLoad = useRef(true);
+
+  const PAGE_SIZE = 10;
 
   const load = useCallback(async (silent = false) => {
     if (!silent) setLoading(true);
@@ -156,6 +159,11 @@ function AdminDashboardPage() {
   useEffect(() => {
     if (firstLoad.current) firstLoad.current = false;
   }, []);
+
+  // Resetear página cuando cambian filtros o búsqueda
+  useEffect(() => {
+    setPage(1);
+  }, [query, pagoFilter]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
