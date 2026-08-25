@@ -12,6 +12,8 @@ import {
   Euro,
   Check,
   X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { Toaster, toast } from "sonner";
 
@@ -104,7 +106,10 @@ function AdminDashboardPage() {
   const [pagoFilter, setPagoFilter] = useState<"todos" | "pagado" | "pendiente">("todos");
   const [exporting, setExporting] = useState(false);
   const [nuevas, setNuevas] = useState(0);
+  const [page, setPage] = useState(1);
   const firstLoad = useRef(true);
+
+  const PAGE_SIZE = 10;
 
   const load = useCallback(async (silent = false) => {
     if (!silent) setLoading(true);
@@ -157,6 +162,11 @@ function AdminDashboardPage() {
     if (firstLoad.current) firstLoad.current = false;
   }, []);
 
+  // Resetear página cuando cambian filtros o búsqueda
+  useEffect(() => {
+    setPage(1);
+  }, [query, pagoFilter]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return rows.filter((r) => {
@@ -170,6 +180,13 @@ function AdminDashboardPage() {
   }, [rows, query, pagoFilter]);
 
   const totalPagados = useMemo(() => rows.filter((r) => r.pagado).length, [rows]);
+
+  const totalPages = useMemo(() => Math.max(1, Math.ceil(filtered.length / PAGE_SIZE)), [filtered]);
+
+  const pageRows = useMemo(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    return filtered.slice(start, start + PAGE_SIZE);
+  }, [filtered, page]);
 
   const togglePagado = useCallback(async (row: Inscripcion, value: boolean) => {
     setRows((prev) => prev.map((r) => (r.id === row.id ? { ...r, pagado: value } : r)));
@@ -419,89 +436,99 @@ function AdminDashboardPage() {
               : "Ningún gimnasta coincide con la búsqueda."}
           </p>
         ) : (
-          <div className="mt-6 overflow-x-auto rounded-2xl border border-primary/30 bg-card">
-            <table className="w-full min-w-[1300px] text-left text-sm">
-              <thead className="bg-primary/10 text-[11px] uppercase tracking-wider text-primary">
-                <tr>
-                  <th className="px-4 py-3 font-black">Recibida</th>
-                  <th className="px-4 py-3 font-black">Gimnasta</th>
-                  <th className="px-4 py-3 font-black">Nacimiento</th>
-                  <th className="px-4 py-3 font-black">Edad</th>
-                  <th className="px-4 py-3 font-black">Padre / Madre</th>
-                  <th className="px-4 py-3 font-black">Contacto</th>
-                  <th className="px-4 py-3 font-black">Domicilio</th>
-                  <th className="px-4 py-3 font-black">Experiencia</th>
-                  <th className="px-4 py-3 font-black">Info adicional</th>
-                  <th className="px-4 py-3 font-black">Normativa interna</th>
-                  <th className="px-4 py-3 font-black">¿Pagado?</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map((r) => (
-                  <tr
-                    key={r.id}
-                    className="border-t border-border/60 align-top transition-colors hover:bg-primary/5"
-                  >
-                    <td className="whitespace-nowrap px-4 py-3 text-xs text-muted-foreground">
-                      {fmtFechaHora(r.created_at)}
-                    </td>
-                    <td className="px-4 py-3 font-bold text-foreground">
-                      {r.gimnasta_nombre} {r.gimnasta_apellidos}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">
-                      {fmtFecha(r.fecha_nacimiento)}
-                    </td>
-                    <td className="px-4 py-3 font-black text-primary">
-                      {calcularEdad(r.fecha_nacimiento)}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {[r.padre_nombre_apellidos, r.madre_nombre_apellidos]
-                        .filter(Boolean)
-                        .join(" · ") || "—"}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      <a href={`tel:${r.telefono}`} className="block hover:text-primary">
-                        {r.telefono}
-                      </a>
-                      <a href={`mailto:${r.email}`} className="block hover:text-primary">
-                        {r.email}
-                      </a>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {r.domicilio}
-                      <span className="block text-xs">CP {r.codigo_postal}</span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider ${
-                          r.experiencia_previa
-                            ? "bg-primary/15 text-primary"
-                            : "bg-muted text-muted-foreground"
-                        }`}
-                      >
-                        {r.experiencia_previa ? "Sí" : "No"}
-                      </span>
-                      {r.experiencia_previa && (
-                        <span className="mt-1 block max-w-[220px] whitespace-pre-wrap text-xs text-muted-foreground">
-                          <span className="block font-semibold text-foreground/70">Club / nivel</span>
-                          {r.club_nivel_anterior || "No indicado"}
-                        </span>
-                      )}
-                    </td>
-                    <td className="max-w-[260px] px-4 py-3 text-xs text-muted-foreground">
-                      {r.info_adicional || "—"}
-                    </td>
-                    <td className="px-4 py-3">
-                      <NormativaCell row={r} />
-                    </td>
-                    <td className="px-4 py-3">
-                      <PagadoCell row={r} onChange={togglePagado} />
-                    </td>
+          <>
+            <div className="mt-6 overflow-x-auto rounded-2xl border border-primary/30 bg-card">
+              <table className="w-full min-w-[1300px] text-left text-sm">
+                <thead className="bg-primary/10 text-[11px] uppercase tracking-wider text-primary">
+                  <tr>
+                    <th className="px-4 py-3 font-black">Recibida</th>
+                    <th className="px-4 py-3 font-black">Gimnasta</th>
+                    <th className="px-4 py-3 font-black">Nacimiento</th>
+                    <th className="px-4 py-3 font-black">Edad</th>
+                    <th className="px-4 py-3 font-black">Padre / Madre</th>
+                    <th className="px-4 py-3 font-black">Contacto</th>
+                    <th className="px-4 py-3 font-black">Domicilio</th>
+                    <th className="px-4 py-3 font-black">Experiencia</th>
+                    <th className="px-4 py-3 font-black">Info adicional</th>
+                    <th className="px-4 py-3 font-black">Normativa interna</th>
+                    <th className="px-4 py-3 font-black">¿Pagado?</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {pageRows.map((r) => (
+                    <tr
+                      key={r.id}
+                      className="border-t border-border/60 align-top transition-colors hover:bg-primary/5"
+                    >
+                      <td className="whitespace-nowrap px-4 py-3 text-xs text-muted-foreground">
+                        {fmtFechaHora(r.created_at)}
+                      </td>
+                      <td className="px-4 py-3 font-bold text-foreground">
+                        {r.gimnasta_nombre} {r.gimnasta_apellidos}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">
+                        {fmtFecha(r.fecha_nacimiento)}
+                      </td>
+                      <td className="px-4 py-3 font-black text-primary">
+                        {calcularEdad(r.fecha_nacimiento)}
+                      </td>
+                      <td className="px-4 py-3 text-muted-foreground">
+                        {[r.padre_nombre_apellidos, r.madre_nombre_apellidos]
+                          .filter(Boolean)
+                          .join(" · ") || "—"}
+                      </td>
+                      <td className="px-4 py-3 text-muted-foreground">
+                        <a href={`tel:${r.telefono}`} className="block hover:text-primary">
+                          {r.telefono}
+                        </a>
+                        <a href={`mailto:${r.email}`} className="block hover:text-primary">
+                          {r.email}
+                        </a>
+                      </td>
+                      <td className="px-4 py-3 text-muted-foreground">
+                        {r.domicilio}
+                        <span className="block text-xs">CP {r.codigo_postal}</span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider ${
+                            r.experiencia_previa
+                              ? "bg-primary/15 text-primary"
+                              : "bg-muted text-muted-foreground"
+                          }`}
+                        >
+                          {r.experiencia_previa ? "Sí" : "No"}
+                        </span>
+                        {r.experiencia_previa && (
+                          <span className="mt-1 block max-w-[220px] whitespace-pre-wrap text-xs text-muted-foreground">
+                            <span className="block font-semibold text-foreground/70">Club / nivel</span>
+                            {r.club_nivel_anterior || "No indicado"}
+                          </span>
+                        )}
+                      </td>
+                      <td className="max-w-[260px] px-4 py-3 text-xs text-muted-foreground">
+                        {r.info_adicional || "—"}
+                      </td>
+                      <td className="px-4 py-3">
+                        <NormativaCell row={r} />
+                      </td>
+                      <td className="px-4 py-3">
+                        <PagadoCell row={r} onChange={togglePagado} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              totalItems={filtered.length}
+              pageSize={PAGE_SIZE}
+              onChange={setPage}
+            />
+          </>
         )}
       </div>
     </div>
@@ -598,6 +625,92 @@ function PagadoCell({
         {busy && row.pagado ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <X className="h-3.5 w-3.5" />}
         No
       </button>
+    </div>
+  );
+}
+
+function Pagination({
+  page,
+  totalPages,
+  totalItems,
+  pageSize,
+  onChange,
+}: {
+  page: number;
+  totalPages: number;
+  totalItems: number;
+  pageSize: number;
+  onChange: (p: number) => void;
+}) {
+  const start = (page - 1) * pageSize + 1;
+  const end = Math.min(page * pageSize, totalItems);
+
+  const pages = useMemo(() => {
+    const arr: (number | "ellipsis")[] = [];
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) arr.push(i);
+      return arr;
+    }
+    arr.push(1);
+    if (page > 3) arr.push("ellipsis");
+    const left = Math.max(2, page - 1);
+    const right = Math.min(totalPages - 1, page + 1);
+    for (let i = left; i <= right; i++) arr.push(i);
+    if (page < totalPages - 2) arr.push("ellipsis");
+    arr.push(totalPages);
+    return arr;
+  }, [page, totalPages]);
+
+  return (
+    <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+      <p className="text-xs font-semibold text-muted-foreground">
+        Mostrando <span className="text-foreground">{start}</span>–<span className="text-foreground">{end}</span> de{" "}
+        <span className="text-foreground">{totalItems}</span> inscripciones
+      </p>
+
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => onChange(page - 1)}
+          disabled={page <= 1}
+          aria-label="Página anterior"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/40 text-primary transition-colors hover:bg-primary/10 disabled:opacity-40"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </button>
+
+        <div className="flex items-center gap-2">
+          {pages.map((p, idx) =>
+            p === "ellipsis" ? (
+              <span key={`ellipsis-${idx}`} className="px-1 text-xs font-black text-muted-foreground">
+                …
+              </span>
+            ) : (
+              <button
+                key={p}
+                onClick={() => onChange(p)}
+                aria-label={`Ir a la página ${p}`}
+                aria-current={p === page ? "page" : undefined}
+                className={`flex h-9 w-9 items-center justify-center rounded-full text-xs font-black transition-all ${
+                  p === page
+                    ? "border-2 border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(var(--primary-rgb),0.45)]"
+                    : "border-2 border-primary/40 text-primary hover:border-primary hover:bg-primary/10"
+                }`}
+              >
+                {p}
+              </button>
+            ),
+          )}
+        </div>
+
+        <button
+          onClick={() => onChange(page + 1)}
+          disabled={page >= totalPages}
+          aria-label="Página siguiente"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/40 text-primary transition-colors hover:bg-primary/10 disabled:opacity-40"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </button>
+      </div>
     </div>
   );
 }
