@@ -108,6 +108,7 @@ function AdminDashboardPage() {
   const [nuevas, setNuevas] = useState(0);
   const [page, setPage] = useState(1);
   const firstLoad = useRef(true);
+  const tableRef = useRef<HTMLDivElement>(null);
 
   const PAGE_SIZE = 10;
 
@@ -166,6 +167,11 @@ function AdminDashboardPage() {
   useEffect(() => {
     setPage(1);
   }, [query, pagoFilter]);
+
+  // Al cambiar de página, subir el scroll hasta la tabla de inscripciones
+  useEffect(() => {
+    tableRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [page]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -437,7 +443,7 @@ function AdminDashboardPage() {
           </p>
         ) : (
           <>
-            <div className="mt-6 overflow-x-auto rounded-2xl border border-primary/30 bg-card">
+            <div ref={tableRef} className="mt-6 overflow-x-auto rounded-2xl border border-primary/30 bg-card">
               <table className="w-full min-w-[1300px] text-left text-sm">
                 <thead className="bg-primary/10 text-[11px] uppercase tracking-wider text-primary">
                   <tr>
