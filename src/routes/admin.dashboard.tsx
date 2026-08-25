@@ -436,89 +436,99 @@ function AdminDashboardPage() {
               : "Ningún gimnasta coincide con la búsqueda."}
           </p>
         ) : (
-          <div className="mt-6 overflow-x-auto rounded-2xl border border-primary/30 bg-card">
-            <table className="w-full min-w-[1300px] text-left text-sm">
-              <thead className="bg-primary/10 text-[11px] uppercase tracking-wider text-primary">
-                <tr>
-                  <th className="px-4 py-3 font-black">Recibida</th>
-                  <th className="px-4 py-3 font-black">Gimnasta</th>
-                  <th className="px-4 py-3 font-black">Nacimiento</th>
-                  <th className="px-4 py-3 font-black">Edad</th>
-                  <th className="px-4 py-3 font-black">Padre / Madre</th>
-                  <th className="px-4 py-3 font-black">Contacto</th>
-                  <th className="px-4 py-3 font-black">Domicilio</th>
-                  <th className="px-4 py-3 font-black">Experiencia</th>
-                  <th className="px-4 py-3 font-black">Info adicional</th>
-                  <th className="px-4 py-3 font-black">Normativa interna</th>
-                  <th className="px-4 py-3 font-black">¿Pagado?</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map((r) => (
-                  <tr
-                    key={r.id}
-                    className="border-t border-border/60 align-top transition-colors hover:bg-primary/5"
-                  >
-                    <td className="whitespace-nowrap px-4 py-3 text-xs text-muted-foreground">
-                      {fmtFechaHora(r.created_at)}
-                    </td>
-                    <td className="px-4 py-3 font-bold text-foreground">
-                      {r.gimnasta_nombre} {r.gimnasta_apellidos}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">
-                      {fmtFecha(r.fecha_nacimiento)}
-                    </td>
-                    <td className="px-4 py-3 font-black text-primary">
-                      {calcularEdad(r.fecha_nacimiento)}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {[r.padre_nombre_apellidos, r.madre_nombre_apellidos]
-                        .filter(Boolean)
-                        .join(" · ") || "—"}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      <a href={`tel:${r.telefono}`} className="block hover:text-primary">
-                        {r.telefono}
-                      </a>
-                      <a href={`mailto:${r.email}`} className="block hover:text-primary">
-                        {r.email}
-                      </a>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {r.domicilio}
-                      <span className="block text-xs">CP {r.codigo_postal}</span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider ${
-                          r.experiencia_previa
-                            ? "bg-primary/15 text-primary"
-                            : "bg-muted text-muted-foreground"
-                        }`}
-                      >
-                        {r.experiencia_previa ? "Sí" : "No"}
-                      </span>
-                      {r.experiencia_previa && (
-                        <span className="mt-1 block max-w-[220px] whitespace-pre-wrap text-xs text-muted-foreground">
-                          <span className="block font-semibold text-foreground/70">Club / nivel</span>
-                          {r.club_nivel_anterior || "No indicado"}
-                        </span>
-                      )}
-                    </td>
-                    <td className="max-w-[260px] px-4 py-3 text-xs text-muted-foreground">
-                      {r.info_adicional || "—"}
-                    </td>
-                    <td className="px-4 py-3">
-                      <NormativaCell row={r} />
-                    </td>
-                    <td className="px-4 py-3">
-                      <PagadoCell row={r} onChange={togglePagado} />
-                    </td>
+          <>
+            <div className="mt-6 overflow-x-auto rounded-2xl border border-primary/30 bg-card">
+              <table className="w-full min-w-[1300px] text-left text-sm">
+                <thead className="bg-primary/10 text-[11px] uppercase tracking-wider text-primary">
+                  <tr>
+                    <th className="px-4 py-3 font-black">Recibida</th>
+                    <th className="px-4 py-3 font-black">Gimnasta</th>
+                    <th className="px-4 py-3 font-black">Nacimiento</th>
+                    <th className="px-4 py-3 font-black">Edad</th>
+                    <th className="px-4 py-3 font-black">Padre / Madre</th>
+                    <th className="px-4 py-3 font-black">Contacto</th>
+                    <th className="px-4 py-3 font-black">Domicilio</th>
+                    <th className="px-4 py-3 font-black">Experiencia</th>
+                    <th className="px-4 py-3 font-black">Info adicional</th>
+                    <th className="px-4 py-3 font-black">Normativa interna</th>
+                    <th className="px-4 py-3 font-black">¿Pagado?</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {pageRows.map((r) => (
+                    <tr
+                      key={r.id}
+                      className="border-t border-border/60 align-top transition-colors hover:bg-primary/5"
+                    >
+                      <td className="whitespace-nowrap px-4 py-3 text-xs text-muted-foreground">
+                        {fmtFechaHora(r.created_at)}
+                      </td>
+                      <td className="px-4 py-3 font-bold text-foreground">
+                        {r.gimnasta_nombre} {r.gimnasta_apellidos}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">
+                        {fmtFecha(r.fecha_nacimiento)}
+                      </td>
+                      <td className="px-4 py-3 font-black text-primary">
+                        {calcularEdad(r.fecha_nacimiento)}
+                      </td>
+                      <td className="px-4 py-3 text-muted-foreground">
+                        {[r.padre_nombre_apellidos, r.madre_nombre_apellidos]
+                          .filter(Boolean)
+                          .join(" · ") || "—"}
+                      </td>
+                      <td className="px-4 py-3 text-muted-foreground">
+                        <a href={`tel:${r.telefono}`} className="block hover:text-primary">
+                          {r.telefono}
+                        </a>
+                        <a href={`mailto:${r.email}`} className="block hover:text-primary">
+                          {r.email}
+                        </a>
+                      </td>
+                      <td className="px-4 py-3 text-muted-foreground">
+                        {r.domicilio}
+                        <span className="block text-xs">CP {r.codigo_postal}</span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider ${
+                            r.experiencia_previa
+                              ? "bg-primary/15 text-primary"
+                              : "bg-muted text-muted-foreground"
+                          }`}
+                        >
+                          {r.experiencia_previa ? "Sí" : "No"}
+                        </span>
+                        {r.experiencia_previa && (
+                          <span className="mt-1 block max-w-[220px] whitespace-pre-wrap text-xs text-muted-foreground">
+                            <span className="block font-semibold text-foreground/70">Club / nivel</span>
+                            {r.club_nivel_anterior || "No indicado"}
+                          </span>
+                        )}
+                      </td>
+                      <td className="max-w-[260px] px-4 py-3 text-xs text-muted-foreground">
+                        {r.info_adicional || "—"}
+                      </td>
+                      <td className="px-4 py-3">
+                        <NormativaCell row={r} />
+                      </td>
+                      <td className="px-4 py-3">
+                        <PagadoCell row={r} onChange={togglePagado} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              totalItems={filtered.length}
+              pageSize={PAGE_SIZE}
+              onChange={setPage}
+            />
+          </>
         )}
       </div>
     </div>
