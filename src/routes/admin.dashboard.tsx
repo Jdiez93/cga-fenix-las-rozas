@@ -12,6 +12,8 @@ import {
   Euro,
   Check,
   X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { Toaster, toast } from "sonner";
 
@@ -178,6 +180,13 @@ function AdminDashboardPage() {
   }, [rows, query, pagoFilter]);
 
   const totalPagados = useMemo(() => rows.filter((r) => r.pagado).length, [rows]);
+
+  const totalPages = useMemo(() => Math.max(1, Math.ceil(filtered.length / PAGE_SIZE)), [filtered]);
+
+  const pageRows = useMemo(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    return filtered.slice(start, start + PAGE_SIZE);
+  }, [filtered, page]);
 
   const togglePagado = useCallback(async (row: Inscripcion, value: boolean) => {
     setRows((prev) => prev.map((r) => (r.id === row.id ? { ...r, pagado: value } : r)));
