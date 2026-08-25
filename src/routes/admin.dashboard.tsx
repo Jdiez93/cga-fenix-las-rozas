@@ -218,7 +218,7 @@ function AdminDashboardPage() {
         "Experiencia previa": r.experiencia_previa ? "Sí" : "No",
         "Club / nivel anterior": r.club_nivel_anterior ?? "",
         "Información adicional": r.info_adicional ?? "",
-        "Contrato firmado": r.contrato_path ? "Sí" : "No",
+        "Normativa interna firmada": r.contrato_path ? "Sí" : "No",
         Pagado: r.pagado ? "Sí" : "No",
       }));
 
@@ -432,7 +432,7 @@ function AdminDashboardPage() {
                   <th className="px-4 py-3 font-black">Domicilio</th>
                   <th className="px-4 py-3 font-black">Experiencia</th>
                   <th className="px-4 py-3 font-black">Info adicional</th>
-                  <th className="px-4 py-3 font-black">Contrato firmado</th>
+                  <th className="px-4 py-3 font-black">Normativa interna</th>
                   <th className="px-4 py-3 font-black">¿Pagado?</th>
                 </tr>
               </thead>
@@ -492,7 +492,7 @@ function AdminDashboardPage() {
                       {r.info_adicional || "—"}
                     </td>
                     <td className="px-4 py-3">
-                      <ContratoCell row={r} />
+                      <NormativaCell row={r} />
                     </td>
                     <td className="px-4 py-3">
                       <PagadoCell row={r} onChange={togglePagado} />
