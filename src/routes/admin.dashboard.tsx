@@ -508,13 +508,13 @@ function AdminDashboardPage() {
   );
 }
 
-function ContratoCell({ row }: { row: Inscripcion }) {
+function NormativaCell({ row }: { row: Inscripcion }) {
   const [busy, setBusy] = useState(false);
 
   if (!row.contrato_path) {
     return (
       <span className="inline-block whitespace-nowrap rounded-full bg-muted px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider text-muted-foreground">
-        Sin contrato
+        Sin normativa
       </span>
     );
   }
@@ -524,13 +524,13 @@ function ContratoCell({ row }: { row: Inscripcion }) {
     try {
       const { data, error } = await supabase.storage
         .from("contratos-firmados")
-        .createSignedUrl(row.contrato_path!, 60, { download: `contrato-${row.gimnasta_nombre}-${row.gimnasta_apellidos}.pdf` });
+        .createSignedUrl(row.contrato_path!, 60, { download: `normativa-${row.gimnasta_nombre}-${row.gimnasta_apellidos}.pdf` });
       if (error || !data?.signedUrl) throw error ?? new Error("URL no disponible");
       window.open(data.signedUrl, "_blank", "noopener,noreferrer");
     } catch (e) {
       console.error(e);
       toast.error(
-        e instanceof Error ? `No se ha podido descargar: ${e.message}` : "No se ha podido descargar el contrato.",
+        e instanceof Error ? `No se ha podido descargar: ${e.message}` : "No se ha podido descargar la normativa.",
       );
     } finally {
       setBusy(false);
