@@ -356,10 +356,14 @@ function PreinscripcionPage() {
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
-      contratoPath = `${ref}-${safeName || "normativa"}.pdf`;
+      const uniqueId =
+        typeof crypto !== "undefined" && "randomUUID" in crypto
+          ? crypto.randomUUID()
+          : Math.random().toString(36).slice(2) + Date.now().toString(36);
+      contratoPath = `${uniqueId}/${ref}-${safeName || "normativa"}.pdf`;
       const { error: uploadError } = await supabase.storage
         .from("contratos-firmados")
-        .upload(contratoPath, file, { contentType: "application/pdf", upsert: true });
+        .upload(contratoPath, file, { contentType: "application/pdf", upsert: false });
       if (uploadError) throw uploadError;
 
       const { error } = await supabase.from("inscripciones").insert({
