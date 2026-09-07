@@ -6,6 +6,7 @@ import {
   Loader2,
   LogOut,
   RefreshCw,
+  ListOrdered,
   FileText,
   Search,
   Users,
@@ -236,8 +237,16 @@ function AdminDashboardPage() {
     setExporting(true);
     try {
       // Fetch fresco en el momento del click
-      const fresh = await fetchInscripciones();
-      setRows(fresh);
+      const all = await fetchInscripciones();
+      setRows(all);
+      const enEspera = vista === "espera";
+      const fresh = all
+        .filter((r) => Boolean(r.lista_espera) === enEspera)
+        .sort((a, b) =>
+          enEspera
+            ? new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+            : new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+        );
       setNuevas(0);
 
       const XLSX = await import("xlsx");
@@ -267,11 +276,11 @@ function AdminDashboardPage() {
         { wch: 14 }, { wch: 16 }, { wch: 28 }, { wch: 40 }, { wch: 10 },
       ];
       const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Inscripciones");
+      XLSX.utils.book_append_sheet(wb, ws, vista === "espera" ? "Lista de espera" : "Inscripciones");
 
       const hoy = new Date();
       const stamp = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, "0")}-${String(hoy.getDate()).padStart(2, "0")}`;
-      XLSX.writeFile(wb, `inscripciones_cga_fenix_${stamp}.xlsx`);
+      XLSX.writeFile(wb, `${vista === "espera" ? "lista_espera" : "inscripciones"}_cga_fenix_${stamp}.xlsx`);
       toast.success(`Excel generado con ${fresh.length} inscripciones`);
     } catch (e) {
       console.error(e);
@@ -296,10 +305,10 @@ function AdminDashboardPage() {
               Panel interno
             </p>
             <h1 className="mt-3 text-3xl font-black uppercase tracking-tight text-foreground sm:text-4xl">
-              Preinscripciones
+              {vista === "espera" ? "Lista de espera" : "Preinscripciones"}
             </h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              {rows.length} solicitudes registradas · {totalPagados} con pago confirmado
+              {viewRows.length} solicitudes registradas · {totalPagados} con pago confirmado
             </p>
           </div>
 
@@ -310,6 +319,17 @@ function AdminDashboardPage() {
                 {nuevas} nueva{nuevas > 1 ? "s" : ""}
               </span>
             )}
+            <button
+              onClick={() =>
+                setVista((v) => (v === "espera" ? "preinscripciones" : "espera"))
+              }
+              className="inline-flex items-center gap-2 rounded-full border border-primary/50 bg-primary/10 px-4 py-2 text-xs font-black uppercase tracking-wider text-primary transition-colors hover:bg-primary/20"
+            >
+              <ListOrdered className="h-3.5 w-3.5" />
+              {vista === "espera"
+                ? "Ver preinscripciones"
+                : `Ver lista de espera${totalEspera ? ` (${totalEspera})` : ""}`}
+            </button>
             <button
               onClick={() => void load()}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs font-black uppercase tracking-wider text-foreground transition-colors hover:bg-accent"
@@ -379,7 +399,7 @@ function AdminDashboardPage() {
         </div>
 
         {/* Panel visual de pagos */}
-        {!loading && rows.length > 0 && (
+        {!loading && viewRows.length > 0 && (
           <section className="mt-8 rounded-3xl border border-primary/30 bg-card p-5 sm:p-6">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
@@ -399,7 +419,7 @@ function AdminDashboardPage() {
                 <p className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">
                   Total inscripciones
                 </p>
-                <p className="mt-1 text-3xl font-black text-foreground">{rows.length}</p>
+                <p className="mt-1 text-3xl font-black text-foreground">{viewRows.length}</p>
               </div>
               <div className="rounded-2xl border border-emerald-500/40 bg-emerald-500/10 p-4">
                 <p className="text-[11px] font-black uppercase tracking-wider text-emerald-500">
@@ -412,7 +432,7 @@ function AdminDashboardPage() {
                   Pendientes de pago
                 </p>
                 <p className="mt-1 text-3xl font-black text-red-500">
-                  {rows.length - totalPagados}
+                  {viewRows.length - totalPagados}
                 </p>
               </div>
             </div>
@@ -422,14 +442,14 @@ function AdminDashboardPage() {
               <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-wider text-muted-foreground">
                 <span>Progreso de cobro</span>
                 <span>
-                  {rows.length ? Math.round((totalPagados / rows.length) * 100) : 0}%
+                  {viewRows.length ? Math.round((totalPagados / viewRows.length) * 100) : 0}%
                 </span>
               </div>
               <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-red-500/20">
                 <div
                   className="h-full rounded-full bg-emerald-500 transition-all duration-700"
                   style={{
-                    width: `${rows.length ? (totalPagados / rows.length) * 100 : 0}%`,
+                    width: `${viewRows.length ? (totalPagados / viewRows.length) * 100 : 0}%`,
                   }}
                 />
               </div>
@@ -452,8 +472,10 @@ function AdminDashboardPage() {
           </div>
         ) : filtered.length === 0 ? (
           <p className="mt-16 text-center text-sm text-muted-foreground">
-            {rows.length === 0
-              ? "Todavía no hay preinscripciones registradas."
+            {viewRows.length === 0
+              ? vista === "espera"
+                ? "Todavía no hay solicitudes en lista de espera."
+                : "Todavía no hay preinscripciones registradas."
               : "Ningún gimnasta coincide con la búsqueda."}
           </p>
         ) : (
