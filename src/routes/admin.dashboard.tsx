@@ -63,6 +63,7 @@ type Inscripcion = {
   info_adicional: string | null;
   contrato_path: string | null;
   pagado: boolean;
+  lista_espera: boolean;
   created_at: string;
 };
 
