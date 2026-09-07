@@ -108,6 +108,7 @@ function AdminDashboardPage() {
   const [exporting, setExporting] = useState(false);
   const [nuevas, setNuevas] = useState(0);
   const [page, setPage] = useState(1);
+  const [vista, setVista] = useState<"preinscripciones" | "espera">("preinscripciones");
   const firstLoad = useRef(true);
   const tableRef = useRef<HTMLDivElement>(null);
 
