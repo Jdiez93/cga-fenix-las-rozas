@@ -177,6 +177,19 @@
   animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+@keyframes neon-pulse-red {
+  0%, 100% {
+    box-shadow: 0 0 6px 0px oklch(0.55 0.22 25), 0 0 14px 0px oklch(0.55 0.22 25 / 0.6), inset 0 0 8px 0px oklch(0.55 0.22 25 / 0.15);
+  }
+  50% {
+    box-shadow: 0 0 12px 2px oklch(0.55 0.22 25), 0 0 26px 4px oklch(0.55 0.22 25 / 0.75), inset 0 0 14px 2px oklch(0.55 0.22 25 / 0.25);
+  }
+}
+
+@utility neon-red {
+  animation: neon-pulse-red 1.8s ease-in-out infinite;
+}
+
 
 
 /* ---- Scroll reveal global (bidireccional) ---- */

@@ -859,7 +859,7 @@ function Field({
 function StepGimnasta({ data, errors, update }: StepProps) {
   return (
     <>
-      <div className="rounded-2xl border-2 border-red-500/60 bg-red-500/10 p-4">
+      <div className="rounded-2xl border-2 border-red-500/60 bg-red-500/10 p-4 neon-red">
         <div className="flex items-start gap-3">
           <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
           <div>
