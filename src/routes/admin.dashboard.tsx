@@ -165,19 +165,32 @@ function AdminDashboardPage() {
     if (firstLoad.current) firstLoad.current = false;
   }, []);
 
-  // Resetear página cuando cambian filtros o búsqueda
+  // Resetear página cuando cambian filtros, búsqueda o lista activa
   useEffect(() => {
     setPage(1);
-  }, [query, pagoFilter]);
+  }, [query, pagoFilter, vista]);
 
   // Al cambiar de página, subir el scroll hasta la tabla de inscripciones
   useEffect(() => {
     tableRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [page]);
 
+  // Lista activa: preinscripciones (más recientes primero) o lista de espera (más antiguas primero)
+  const viewRows = useMemo(() => {
+    const enEspera = vista === "espera";
+    const subset = rows.filter((r) => Boolean(r.lista_espera) === enEspera);
+    return subset.sort((a, b) =>
+      enEspera
+        ? new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+        : new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+    );
+  }, [rows, vista]);
+
+  const totalEspera = useMemo(() => rows.filter((r) => r.lista_espera).length, [rows]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return rows.filter((r) => {
+    return viewRows.filter((r) => {
       const matchName = q
         ? `${r.gimnasta_nombre} ${r.gimnasta_apellidos}`.toLowerCase().includes(q)
         : true;
@@ -185,9 +198,9 @@ function AdminDashboardPage() {
         pagoFilter === "todos" ? true : pagoFilter === "pagado" ? r.pagado : !r.pagado;
       return matchName && matchPago;
     });
-  }, [rows, query, pagoFilter]);
+  }, [viewRows, query, pagoFilter]);
 
-  const totalPagados = useMemo(() => rows.filter((r) => r.pagado).length, [rows]);
+  const totalPagados = useMemo(() => viewRows.filter((r) => r.pagado).length, [viewRows]);
 
   const totalPages = useMemo(() => Math.max(1, Math.ceil(filtered.length / PAGE_SIZE)), [filtered]);
 
