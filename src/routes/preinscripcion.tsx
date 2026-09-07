@@ -377,6 +377,7 @@ function PreinscripcionPage() {
           parsed.data.nivelPrevio?.trim() || parsed.data.grupoAnterior?.trim() || null,
         info_adicional: parsed.data.infoAdicional?.trim() || null,
         contrato_path: contratoPath,
+        lista_espera: true,
       });
 
       if (error) throw error;
@@ -858,6 +859,21 @@ function Field({
 function StepGimnasta({ data, errors, update }: StepProps) {
   return (
     <>
+      <div className="rounded-2xl border-2 border-red-500/60 bg-red-500/10 p-4">
+        <div className="flex items-start gap-3">
+          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
+          <div>
+            <p className="text-sm font-black uppercase tracking-wider text-red-500">
+              Cierre de plazas finalizado
+            </p>
+            <p className="mt-1 text-sm font-semibold text-red-600 dark:text-red-400">
+              El plazo de inscripción para la temporada ya está cerrado. Las nuevas
+              solicitudes pasarán automáticamente a una <strong>lista de espera</strong> y
+              te avisaremos si queda una plaza libre.
+            </p>
+          </div>
+        </div>
+      </div>
       <SectionTitle
         icon={User}
         eyebrow="Paso 1"
