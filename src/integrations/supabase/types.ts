@@ -28,6 +28,7 @@ export type Database = {
           gimnasta_nombre: string
           id: string
           info_adicional: string | null
+          lista_espera: boolean
           madre_nombre_apellidos: string | null
           padre_nombre_apellidos: string | null
           pagado: boolean
@@ -46,6 +47,7 @@ export type Database = {
           gimnasta_nombre: string
           id?: string
           info_adicional?: string | null
+          lista_espera?: boolean
           madre_nombre_apellidos?: string | null
           padre_nombre_apellidos?: string | null
           pagado?: boolean
@@ -64,6 +66,7 @@ export type Database = {
           gimnasta_nombre?: string
           id?: string
           info_adicional?: string | null
+          lista_espera?: boolean
           madre_nombre_apellidos?: string | null
           padre_nombre_apellidos?: string | null
           pagado?: boolean

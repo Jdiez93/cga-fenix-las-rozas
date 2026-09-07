@@ -1,0 +1,1 @@
+ALTER TABLE public.inscripciones ADD COLUMN IF NOT EXISTS lista_espera boolean NOT NULL DEFAULT false;
