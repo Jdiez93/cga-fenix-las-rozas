@@ -9,9 +9,9 @@ export const Route = createFileRoute("/quienes-somos/equipo-tecnico")({
 export type Coach = {
   slug: string;
   name: string;
-  role: string;
-  bio: string;
-  longBio: string[];
+  role?: string;
+  bio?: string;
+  longBio?: string[];
   achievements?: string[] | undefined;
   achievementsTitle?: string | undefined;
   extraSections?: { title: string; body: string[] }[] | undefined;
