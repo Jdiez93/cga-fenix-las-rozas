@@ -5,6 +5,7 @@ export const escudoFenixPng = { url: "/images/escudo-fenix.png" };
 export const hero2Png = { url: "/images/hero-2.png" };
 export const hero3Png = { url: "/images/hero-3.png" };
 export const hero4Png = { url: "/images/hero-4.png" };
+export const hero8Png = { url: "/images/hero-8.png" };
 export const hero6Png = { url: "/images/hero-6.png" };
 export const hero7Png = { url: "/images/hero-7.png" };
 export const galImage14Png = { url: "/images/gal-image-14.png" };

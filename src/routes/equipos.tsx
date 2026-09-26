@@ -42,7 +42,7 @@ const TEAMS: Team[] = [
     hours: "2 horas semanales",
     description: "Primeros pasos en la gimnasia artística. Juegos, coordinación, ritmo y diversión para los más pequeños en dos turnos disponibles.",
     schedule: [
-      { day: "Sábados", slots: ["16:30 h. – 18:30 h.", "17:30 h. – 18:30 h."] },
+      { day: "Sábados", slots: ["16:30 h. – 17:30 h.", "17:30 h. – 18:30 h."] },
       { day: "Domingos", slots: ["10:00 h. – 11:00 h.", "11:00 h. – 12:00 h."] },
     ],
     venue: "Polideportivo Entremontes",
