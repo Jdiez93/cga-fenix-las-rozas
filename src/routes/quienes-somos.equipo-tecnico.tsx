@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Medal } from "lucide-react";
+import { ArrowRight, Medal, Clock } from "lucide-react";
 
 export const Route = createFileRoute("/quienes-somos/equipo-tecnico")({
   component: () => <Outlet />,
