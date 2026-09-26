@@ -12,10 +12,10 @@ export type Coach = {
   role: string;
   bio: string;
   longBio: string[];
-  achievements?: string[];
-  achievementsTitle?: string;
-  extraSections?: { title: string; body: string[] }[];
-  closingNote?: string;
+  achievements?: string[] | undefined;
+  achievementsTitle?: string | undefined;
+  extraSections?: { title: string; body: string[] }[] | undefined;
+  closingNote?: string | undefined;
   initials: string;
   photo?: string;
   /** CSS object-position para encuadrar bien el retrato */
