@@ -110,30 +110,35 @@ export const COACHES: Coach[] = [
   {
     slug: "maria-alonso",
     name: "María Alonso",
+    role: "Entrenador",
     initials: "MA",
     upcoming: true,
   },
   {
     slug: "claudia",
     name: "Claudia",
+    role: "Entrenador",
     initials: "C",
     upcoming: true,
   },
   {
     slug: "tadea",
     name: "Tadea",
+    role: "Entrenador",
     initials: "T",
     upcoming: true,
   },
   {
     slug: "jimena",
     name: "Jimena",
+    role: "Entrenador",
     initials: "J",
     upcoming: true,
   },
   {
     slug: "carlos",
     name: "Carlos",
+    role: "Entrenador",
     initials: "C",
     upcoming: true,
   },
@@ -188,6 +193,9 @@ export function CoachCard({ coach, index }: { coach: Coach; index: number }) {
 
       {/* Info (derecha) */}
       <div className="flex flex-col p-5 md:p-6">
+        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+          {coach.role}
+        </p>
         <h3 className="mt-2 text-lg font-bold tracking-tight text-foreground md:text-xl">
           {coach.name}
         </h3>
