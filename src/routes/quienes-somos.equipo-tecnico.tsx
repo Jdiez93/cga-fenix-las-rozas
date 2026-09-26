@@ -21,6 +21,8 @@ export type Coach = {
   /** CSS object-position para encuadrar bien el retrato */
   photoPosition?: string;
   highlight?: boolean;
+  /** Tarjeta pendiente de completar: solo nombre, sin foto ni biografía */
+  upcoming?: boolean;
 };
 
 export const COACHES: Coach[] = [
@@ -104,6 +106,36 @@ export const COACHES: Coach[] = [
     initials: "DA",
     photo: "/images/coaches/david-alonso.jpg",
     photoPosition: "30% 30%",
+  },
+  {
+    slug: "maria-alonso",
+    name: "María Alonso",
+    initials: "MA",
+    upcoming: true,
+  },
+  {
+    slug: "claudia",
+    name: "Claudia",
+    initials: "C",
+    upcoming: true,
+  },
+  {
+    slug: "tadea",
+    name: "Tadea",
+    initials: "T",
+    upcoming: true,
+  },
+  {
+    slug: "jimena",
+    name: "Jimena",
+    initials: "J",
+    upcoming: true,
+  },
+  {
+    slug: "carlos",
+    name: "Carlos",
+    initials: "C",
+    upcoming: true,
   },
 ];
 
