@@ -37,7 +37,7 @@ const TEAMS: Team[] = [
     label: "Iniciación",
     shortLabel: "Iniciación",
     emoji: "🌱",
-    ageRange: "3 a 5 años",
+    ageRange: "3 a 6 años",
     category: "Iniciación",
     hours: "2 horas semanales",
     description: "Primeros pasos en la gimnasia artística. Juegos, coordinación, ritmo y diversión para los más pequeños en dos turnos disponibles.",
