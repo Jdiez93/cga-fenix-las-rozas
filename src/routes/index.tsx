@@ -12,6 +12,7 @@ import {
   hero2Png,
   hero3Png,
   hero4Png,
+  hero8Png,
   hero6Png,
   hero7Png,
 } from "@/lib/media";
@@ -52,6 +53,7 @@ const SPONSORS = [
 ];
 
 const HERO_SLIDES = [
+  { src: hero8Png.url, alt: "Fotografía histórica de gimnastas de la selección española con una medalla", position: "center 30%" },
   { src: hero6Png.url, alt: "Gimnastas del Club Fénix Las Rozas con sus medallas en competición", position: "center 30%" },
   { src: hero7Png.url, alt: "Equipo del Club Fénix Las Rozas celebrando con sus medallas en el tapiz de competición", position: "center 35%" },
   { src: hero3Png.url, alt: "Gimnasta en anillas durante competición", position: "center 25%" },
