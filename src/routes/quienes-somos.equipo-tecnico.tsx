@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Medal } from "lucide-react";
+import { ArrowRight, Medal, Clock } from "lucide-react";
 
 export const Route = createFileRoute("/quienes-somos/equipo-tecnico")({
   component: () => <Outlet />,
@@ -9,18 +9,20 @@ export const Route = createFileRoute("/quienes-somos/equipo-tecnico")({
 export type Coach = {
   slug: string;
   name: string;
-  role: string;
-  bio: string;
-  longBio: string[];
-  achievements?: string[];
-  achievementsTitle?: string;
-  extraSections?: { title: string; body: string[] }[];
-  closingNote?: string;
+  role?: string;
+  bio?: string;
+  longBio?: string[];
+  achievements?: string[] | undefined;
+  achievementsTitle?: string | undefined;
+  extraSections?: { title: string; body: string[] }[] | undefined;
+  closingNote?: string | undefined;
   initials: string;
   photo?: string;
   /** CSS object-position para encuadrar bien el retrato */
   photoPosition?: string;
   highlight?: boolean;
+  /** Tarjeta pendiente de completar: solo nombre, sin foto ni biografía */
+  upcoming?: boolean;
 };
 
 export const COACHES: Coach[] = [
@@ -105,6 +107,36 @@ export const COACHES: Coach[] = [
     photo: "/images/coaches/david-alonso.jpg",
     photoPosition: "30% 30%",
   },
+  {
+    slug: "maria-alonso",
+    name: "María Alonso",
+    initials: "MA",
+    upcoming: true,
+  },
+  {
+    slug: "claudia",
+    name: "Claudia",
+    initials: "C",
+    upcoming: true,
+  },
+  {
+    slug: "tadea",
+    name: "Tadea",
+    initials: "T",
+    upcoming: true,
+  },
+  {
+    slug: "jimena",
+    name: "Jimena",
+    initials: "J",
+    upcoming: true,
+  },
+  {
+    slug: "carlos",
+    name: "Carlos",
+    initials: "C",
+    upcoming: true,
+  },
 ];
 
 
@@ -145,51 +177,77 @@ export function CoachPortrait({ coach, className = "" }: { coach: Coach; classNa
 
 export function CoachCard({ coach, index }: { coach: Coach; index: number }) {
   const isDirector = coach.highlight;
+  const isUpcoming = coach.upcoming;
+
+  const inner = isUpcoming ? (
+    <div className="grid h-full grid-cols-[42%_1fr] overflow-hidden rounded-2xl border border-border/60 bg-card/50">
+      {/* Foto (izquierda) */}
+      <div className="relative overflow-hidden">
+        <CoachPortrait coach={coach} />
+      </div>
+
+      {/* Info (derecha) */}
+      <div className="flex flex-col p-5 md:p-6">
+        <h3 className="mt-2 text-lg font-bold tracking-tight text-foreground md:text-xl">
+          {coach.name}
+        </h3>
+        <div className="mt-3 h-px w-10 bg-primary/60" />
+        <div className="mt-auto pt-5 flex items-center gap-2 text-sm font-medium italic text-muted-foreground">
+          <Clock className="h-4 w-4 text-primary" />
+          <span>Más información próximamente</span>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <Link
+      to="/quienes-somos/equipo-tecnico/$slug"
+      params={{ slug: coach.slug }}
+      className="group relative grid h-full grid-cols-[42%_1fr] overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_20px_50px_-20px_color-mix(in_oklab,hsl(var(--primary))_45%,transparent)]"
+    >
+      {/* Foto (izquierda) */}
+      <div className="relative overflow-hidden">
+        <CoachPortrait coach={coach} className="transition-transform duration-500 group-hover:scale-[1.04]" />
+        {isDirector && (
+          <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground shadow-sm">
+            <Medal className="h-3 w-3" />
+            Director
+          </div>
+        )}
+      </div>
+
+      {/* Info (derecha) */}
+      <div className="flex flex-col p-5 md:p-6">
+        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+          {coach.role}
+        </p>
+        <h3 className="mt-2 text-lg font-bold tracking-tight text-foreground md:text-xl">
+          {coach.name}
+        </h3>
+        <div className="mt-3 h-px w-10 bg-primary/60 transition-all duration-300 group-hover:w-20" />
+
+        {coach.bio && (
+          <p className="mt-4 line-clamp-5 text-sm leading-relaxed text-muted-foreground">
+            {coach.bio}
+          </p>
+        )}
+
+        <div className="mt-auto pt-5 flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+          <span>Ver más</span>
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </div>
+      </div>
+    </Link>
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.3) }}
+      className={isUpcoming ? "h-full" : undefined}
     >
-      <Link
-        to="/quienes-somos/equipo-tecnico/$slug"
-        params={{ slug: coach.slug }}
-        className="group relative grid h-full grid-cols-[42%_1fr] overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_20px_50px_-20px_color-mix(in_oklab,hsl(var(--primary))_45%,transparent)]"
-      >
-        {/* Foto (izquierda) */}
-        <div className="relative overflow-hidden">
-          <CoachPortrait coach={coach} className="transition-transform duration-500 group-hover:scale-[1.04]" />
-          {isDirector && (
-            <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground shadow-sm">
-              <Medal className="h-3 w-3" />
-              Director
-            </div>
-          )}
-        </div>
-
-        {/* Info (derecha) */}
-        <div className="flex flex-col p-5 md:p-6">
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
-            {coach.role}
-          </p>
-          <h3 className="mt-2 text-lg font-bold tracking-tight text-foreground md:text-xl">
-            {coach.name}
-          </h3>
-          <div className="mt-3 h-px w-10 bg-primary/60 transition-all duration-300 group-hover:w-20" />
-
-          {coach.bio && (
-            <p className="mt-4 line-clamp-5 text-sm leading-relaxed text-muted-foreground">
-              {coach.bio}
-            </p>
-          )}
-
-          <div className="mt-auto pt-5 flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
-            <span>Ver más</span>
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </div>
-        </div>
-      </Link>
+      {inner}
     </motion.div>
   );
 }

@@ -143,28 +143,30 @@ function CoachDetailPage() {
 
             {/* Header text */}
             <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-primary">
-                  {coach.role}
-                </span>
-                {isDirector && (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary-foreground">
-                    <Medal className="h-3 w-3" />
-                    Director
+              {coach.role && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-primary">
+                    {coach.role}
                   </span>
-                )}
-              </div>
+                  {isDirector && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary-foreground">
+                      <Medal className="h-3 w-3" />
+                      Director
+                    </span>
+                  )}
+                </div>
+              )}
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground md:text-6xl">
                 {coach.name}
               </h1>
               <div className="mt-5 h-1 w-20 rounded-full bg-primary" />
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-                {coach.bio}
+                {coach.bio ?? "Más información próximamente."}
               </p>
 
               {/* Biography */}
               <div className="mt-10 space-y-5">
-                {coach.longBio.map((paragraph, idx) => (
+                {coach.longBio?.map((paragraph, idx) => (
                   <RichParagraph key={idx} text={paragraph} />
                 ))}
               </div>
