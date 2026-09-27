@@ -33,7 +33,9 @@ export function ChatAssistant() {
   ]);
   const endRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth" }), [messages, loading, open]);
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading, open]);
 
   if (pathname.startsWith("/admin")) return null;
 
