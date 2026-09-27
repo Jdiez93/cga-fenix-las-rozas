@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { AutoReveal } from "@/components/site/AutoReveal";
+import { ChatAssistant } from "@/components/site/ChatAssistant";
 
 
 
@@ -141,6 +142,7 @@ function RootComponent() {
           <Outlet />
         </main>
         <SiteFooter />
+        <ChatAssistant />
       </div>
     </QueryClientProvider>
   );
