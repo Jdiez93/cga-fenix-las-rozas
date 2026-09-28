@@ -22,7 +22,7 @@ import { galImage2Webp as galPodio } from "@/lib/media";
 import { galImage20Png as galEquipoGaf } from "@/lib/media";
 import { galImage3Webp as galEntreno } from "@/lib/media";
 
-export const Route = createFileRoute("/conocenos/logros")({
+export const Route = createFileRoute("/conocenos/logros/")({
   head: () => ({
     meta: [
       { title: "Nuestros logros · CGA Fénix Las Rozas" },

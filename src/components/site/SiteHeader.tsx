@@ -16,6 +16,7 @@ const NAV: NavItem[] = [
     children: [
       { label: "Nuestra historia", to: "/conocenos/historia" },
       { label: "Nuestros logros", to: "/conocenos/logros" },
+      { label: "Calendario de competición", to: "/conocenos/logros/calendario" },
     ],
   },
   {
