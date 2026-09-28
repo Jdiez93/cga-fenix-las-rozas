@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useSpring, useTransform, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -535,34 +535,37 @@ function LogrosPage() {
 
       {/* CALENDARIO */}
       <section className="mx-auto max-w-4xl px-6 pb-4">
-        <motion.a
-          href="/conocenos/logros/calendario"
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="group flex flex-col items-center gap-5 rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/10 via-background to-background p-10 text-center transition-all hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_24px_60px_-28px_color-mix(in_oklab,hsl(var(--primary))_50%,transparent)] md:flex-row md:p-12"
         >
-          <div className="rounded-2xl border border-primary/40 bg-primary/10 p-4">
-            <Calendar className="h-8 w-8 text-primary" />
-          </div>
-          <div className="flex-1">
-            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-              Próximamente
-            </p>
-            <h3 className="mt-1 text-xl font-bold tracking-tight text-foreground md:text-2xl">
-              Calendario de competición 2026 · 2027
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
-              En cuanto la federación publique el calendario oficial, encontrarás aquí
-              todas las fechas, sedes y horarios.
-            </p>
-          </div>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-all group-hover:gap-2.5">
-            Ver calendario
-            <ChevronRight className="h-4 w-4" />
-          </span>
-        </motion.a>
+          <Link
+            to="/conocenos/logros/calendario"
+            className="group flex flex-col items-center gap-5 rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/10 via-background to-background p-10 text-center transition-all hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_24px_60px_-28px_color-mix(in_oklab,hsl(var(--primary))_50%,transparent)] md:flex-row md:p-12"
+          >
+            <div className="rounded-2xl border border-primary/40 bg-primary/10 p-4">
+              <Calendar className="h-8 w-8 text-primary" />
+            </div>
+            <div className="flex-1">
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
+                Próximamente
+              </p>
+              <h3 className="mt-1 text-xl font-bold tracking-tight text-foreground md:text-2xl">
+                Calendario de competición 2026 · 2027
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
+                En cuanto la federación publique el calendario oficial, encontrarás aquí
+                todas las fechas, sedes y horarios.
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-all group-hover:gap-2.5">
+              Ver calendario
+              <ChevronRight className="h-4 w-4" />
+            </span>
+          </Link>
+        </motion.div>
       </section>
 
       {/* CITA FINAL */}
