@@ -119,14 +119,16 @@ export const COACHES: Coach[] = [
     name: "Claudia",
     role: "Entrenador",
     initials: "C",
-    upcoming: true,
+    photo: "/images/coaches/claudia.jpg",
+    photoPosition: "68% 28%",
   },
   {
     slug: "tadea",
     name: "Tadea",
     role: "Entrenador",
     initials: "T",
-    upcoming: true,
+    photo: "/images/coaches/tadea.jpg",
+    photoPosition: "18% 30%",
   },
   {
     slug: "jimena",
