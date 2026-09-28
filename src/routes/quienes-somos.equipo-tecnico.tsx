@@ -112,7 +112,8 @@ export const COACHES: Coach[] = [
     name: "María Alonso",
     role: "Entrenador",
     initials: "MA",
-    upcoming: true,
+    photo: "/images/coaches/maria-alonso.jpg",
+    photoPosition: "25% 38%",
   },
   {
     slug: "claudia",
