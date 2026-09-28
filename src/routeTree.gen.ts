@@ -20,11 +20,11 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as QuienesSomosEquipoTecnicoRouteImport } from './routes/quienes-somos.equipo-tecnico'
 import { Route as GaleriaVideosRouteImport } from './routes/galeria.videos'
 import { Route as GaleriaFotosRouteImport } from './routes/galeria.fotos'
-import { Route as ConocenosLogrosRouteImport } from './routes/conocenos.logros'
 import { Route as ConocenosHistoriaRouteImport } from './routes/conocenos.historia'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as QuienesSomosEquipoTecnicoIndexRouteImport } from './routes/quienes-somos.equipo-tecnico.index'
+import { Route as ConocenosLogrosIndexRouteImport } from './routes/conocenos.logros.index'
 import { Route as QuienesSomosEquipoTecnicoSlugRouteImport } from './routes/quienes-somos.equipo-tecnico.$slug'
 
 const PreinscripcionRoute = PreinscripcionRouteImport.update({
@@ -83,11 +83,6 @@ const GaleriaFotosRoute = GaleriaFotosRouteImport.update({
   path: '/galeria/fotos',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ConocenosLogrosRoute = ConocenosLogrosRouteImport.update({
-  id: '/conocenos/logros',
-  path: '/conocenos/logros',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ConocenosHistoriaRoute = ConocenosHistoriaRouteImport.update({
   id: '/conocenos/historia',
   path: '/conocenos/historia',
@@ -109,6 +104,11 @@ const QuienesSomosEquipoTecnicoIndexRoute =
     path: '/',
     getParentRoute: () => QuienesSomosEquipoTecnicoRoute,
   } as any)
+const ConocenosLogrosIndexRoute = ConocenosLogrosIndexRouteImport.update({
+  id: '/conocenos/logros/',
+  path: '/conocenos/logros/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const QuienesSomosEquipoTecnicoSlugRoute =
   QuienesSomosEquipoTecnicoSlugRouteImport.update({
     id: '/$slug',
@@ -127,12 +127,12 @@ export interface FileRoutesByFullPath {
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
-  '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
   '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
+  '/conocenos/logros/': typeof ConocenosLogrosIndexRoute
   '/quienes-somos/equipo-tecnico/': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
 export interface FileRoutesByTo {
@@ -146,11 +146,11 @@ export interface FileRoutesByTo {
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
-  '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
   '/admin': typeof AdminIndexRoute
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
+  '/conocenos/logros': typeof ConocenosLogrosIndexRoute
   '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
 export interface FileRoutesById {
@@ -165,12 +165,12 @@ export interface FileRoutesById {
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/conocenos/historia': typeof ConocenosHistoriaRoute
-  '/conocenos/logros': typeof ConocenosLogrosRoute
   '/galeria/fotos': typeof GaleriaFotosRoute
   '/galeria/videos': typeof GaleriaVideosRoute
   '/quienes-somos/equipo-tecnico': typeof QuienesSomosEquipoTecnicoRouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/quienes-somos/equipo-tecnico/$slug': typeof QuienesSomosEquipoTecnicoSlugRoute
+  '/conocenos/logros/': typeof ConocenosLogrosIndexRoute
   '/quienes-somos/equipo-tecnico/': typeof QuienesSomosEquipoTecnicoIndexRoute
 }
 export interface FileRouteTypes {
@@ -186,12 +186,12 @@ export interface FileRouteTypes {
     | '/admin/dashboard'
     | '/admin/login'
     | '/conocenos/historia'
-    | '/conocenos/logros'
     | '/galeria/fotos'
     | '/galeria/videos'
     | '/quienes-somos/equipo-tecnico'
     | '/admin/'
     | '/quienes-somos/equipo-tecnico/$slug'
+    | '/conocenos/logros/'
     | '/quienes-somos/equipo-tecnico/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -205,11 +205,11 @@ export interface FileRouteTypes {
     | '/admin/dashboard'
     | '/admin/login'
     | '/conocenos/historia'
-    | '/conocenos/logros'
     | '/galeria/fotos'
     | '/galeria/videos'
     | '/admin'
     | '/quienes-somos/equipo-tecnico/$slug'
+    | '/conocenos/logros'
     | '/quienes-somos/equipo-tecnico'
   id:
     | '__root__'
@@ -223,12 +223,12 @@ export interface FileRouteTypes {
     | '/admin/dashboard'
     | '/admin/login'
     | '/conocenos/historia'
-    | '/conocenos/logros'
     | '/galeria/fotos'
     | '/galeria/videos'
     | '/quienes-somos/equipo-tecnico'
     | '/admin/'
     | '/quienes-somos/equipo-tecnico/$slug'
+    | '/conocenos/logros/'
     | '/quienes-somos/equipo-tecnico/'
   fileRoutesById: FileRoutesById
 }
@@ -243,11 +243,11 @@ export interface RootRouteChildren {
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminLoginRoute: typeof AdminLoginRoute
   ConocenosHistoriaRoute: typeof ConocenosHistoriaRoute
-  ConocenosLogrosRoute: typeof ConocenosLogrosRoute
   GaleriaFotosRoute: typeof GaleriaFotosRoute
   GaleriaVideosRoute: typeof GaleriaVideosRoute
   QuienesSomosEquipoTecnicoRoute: typeof QuienesSomosEquipoTecnicoRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
+  ConocenosLogrosIndexRoute: typeof ConocenosLogrosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -329,13 +329,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GaleriaFotosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/conocenos/logros': {
-      id: '/conocenos/logros'
-      path: '/conocenos/logros'
-      fullPath: '/conocenos/logros'
-      preLoaderRoute: typeof ConocenosLogrosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/conocenos/historia': {
       id: '/conocenos/historia'
       path: '/conocenos/historia'
@@ -363,6 +356,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/quienes-somos/equipo-tecnico/'
       preLoaderRoute: typeof QuienesSomosEquipoTecnicoIndexRouteImport
       parentRoute: typeof QuienesSomosEquipoTecnicoRoute
+    }
+    '/conocenos/logros/': {
+      id: '/conocenos/logros/'
+      path: '/conocenos/logros'
+      fullPath: '/conocenos/logros/'
+      preLoaderRoute: typeof ConocenosLogrosIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/quienes-somos/equipo-tecnico/$slug': {
       id: '/quienes-somos/equipo-tecnico/$slug'
@@ -401,11 +401,11 @@ const rootRouteChildren: RootRouteChildren = {
   AdminDashboardRoute: AdminDashboardRoute,
   AdminLoginRoute: AdminLoginRoute,
   ConocenosHistoriaRoute: ConocenosHistoriaRoute,
-  ConocenosLogrosRoute: ConocenosLogrosRoute,
   GaleriaFotosRoute: GaleriaFotosRoute,
   GaleriaVideosRoute: GaleriaVideosRoute,
   QuienesSomosEquipoTecnicoRoute: QuienesSomosEquipoTecnicoRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
+  ConocenosLogrosIndexRoute: ConocenosLogrosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
