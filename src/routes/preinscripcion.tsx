@@ -1,3 +1,4 @@
+import { createContratoUpload } from "@/lib/contrato-upload.functions";
 import { createFileRoute } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { useMemo, useState } from "react";
@@ -356,14 +357,13 @@ function PreinscripcionPage() {
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
-      const uniqueId =
-        typeof crypto !== "undefined" && "randomUUID" in crypto
-          ? crypto.randomUUID()
-          : Math.random().toString(36).slice(2) + Date.now().toString(36);
-      contratoPath = `${uniqueId}/${ref}-${safeName || "normativa"}.pdf`;
+      const upload = await createContratoUpload({
+        data: { ref, safeName: safeName.slice(0, 80) },
+      });
+      contratoPath = upload.path;
       const { error: uploadError } = await supabase.storage
         .from("contratos-firmados")
-        .upload(contratoPath, file, { contentType: "application/pdf", upsert: false });
+        .uploadToSignedUrl(upload.path, upload.token, file, { contentType: "application/pdf" });
       if (uploadError) throw uploadError;
 
       const { error } = await supabase.from("inscripciones").insert({

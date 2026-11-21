@@ -1,0 +1,1 @@
+drop policy if exists "Anyone can upload signed PDF contratos" on storage.objects;
